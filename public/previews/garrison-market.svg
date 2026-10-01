@@ -1,15 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
-<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#14261f"/><stop offset="1" stop-color="#071017"/></linearGradient></defs>
-<rect width="1400" height="900" fill="#050a10"/><rect x="70" y="55" width="1260" height="790" rx="28" fill="url(#b)" stroke="#24392f"/>
-<rect x="70" y="55" width="1260" height="72" rx="28" fill="#0b1713"/><text x="108" y="100" fill="#7cf29a" font-size="25" font-family="Arial" font-weight="700">Garrison Market</text><text x="1100" y="98" fill="#91a5b4" font-size="17" font-family="Arial">OWNER DASHBOARD</text>
-<text x="110" y="175" fill="#7cf29a" font-size="14" font-family="Arial" font-weight="700" letter-spacing="3">SHOP OPERATIONS</text><text x="110" y="212" fill="#f4f8fb" font-size="32" font-family="Arial" font-weight="700">Everything in one place.</text>
-<rect x="110" y="250" width="250" height="118" rx="18" fill="#0a1813" stroke="#254135"/><text x="138" y="285" fill="#8fa0b3" font-size="14" font-family="Arial">STOCK ITEMS</text><text x="138" y="328" fill="#f4f8fb" font-size="30" font-family="Arial" font-weight="700">842</text><text x="138" y="350" fill="#7cf29a" font-size="13" font-family="Arial">+6.4% this month</text>
-<rect x="380" y="250" width="250" height="118" rx="18" fill="#0a1813" stroke="#254135"/><text x="408" y="285" fill="#8fa0b3" font-size="14" font-family="Arial">TODAY'S SALES</text><text x="408" y="328" fill="#f4f8fb" font-size="30" font-family="Arial" font-weight="700">₦184k</text><text x="408" y="350" fill="#7cf29a" font-size="13" font-family="Arial">17 transactions</text>
-<rect x="650" y="250" width="250" height="118" rx="18" fill="#0a1813" stroke="#254135"/><text x="678" y="285" fill="#8fa0b3" font-size="14" font-family="Arial">TEAM</text><text x="678" y="328" fill="#f4f8fb" font-size="30" font-family="Arial" font-weight="700">08</text><text x="678" y="350" fill="#7cf29a" font-size="13" font-family="Arial">active staff</text>
-<rect x="920" y="250" width="360" height="118" rx="18" fill="#0c1d16" stroke="#7cf29a"/><text x="950" y="285" fill="#dbe6ee" font-size="14" font-family="Arial">QUICK ACTION</text><text x="950" y="328" fill="#f4f8fb" font-size="23" font-family="Arial" font-weight="700">Add inventory item</text><text x="950" y="350" fill="#7cf29a" font-size="13" font-family="Arial">Open workflow →</text>
-<rect x="110" y="395" width="1170" height="275" rx="20" fill="#0a1813" stroke="#243a31"/><text x="140" y="435" fill="#8fa0b3" font-size="14" font-family="Arial">INVENTORY SNAPSHOT</text>
-<text x="140" y="480" fill="#dbe6ee" font-size="15" font-family="Arial" font-weight="700">Item</text><text x="700" y="480" fill="#dbe6ee" font-size="15" font-family="Arial" font-weight="700">Stock</text><text x="860" y="480" fill="#dbe6ee" font-size="15" font-family="Arial" font-weight="700">Status</text><text x="1040" y="480" fill="#dbe6ee" font-size="15" font-family="Arial" font-weight="700">Action</text>
-<line x1="140" y1="498" x2="1250" y2="498" stroke="#22372e"/><text x="140" y="535" fill="#f4f8fb" font-size="15" font-family="Arial">Product A</text><text x="700" y="535" fill="#c9d8d0" font-size="15" font-family="Arial">142</text><text x="860" y="535" fill="#7cf29a" font-size="14" font-family="Arial">In stock</text><text x="1040" y="535" fill="#7cf29a" font-size="14" font-family="Arial">Edit →</text>
-<text x="140" y="585" fill="#f4f8fb" font-size="15" font-family="Arial">Product B</text><text x="700" y="585" fill="#c9d8d0" font-size="15" font-family="Arial">23</text><text x="860" y="585" fill="#ffcd6b" font-size="14" font-family="Arial">Low stock</text><text x="1040" y="585" fill="#7cf29a" font-size="14" font-family="Arial">Edit →</text>
-<text x="140" y="635" fill="#f4f8fb" font-size="15" font-family="Arial">Product C</text><text x="700" y="635" fill="#c9d8d0" font-size="15" font-family="Arial">0</text><text x="860" y="635" fill="#ff7c90" font-size="14" font-family="Arial">Out of stock</text><text x="1040" y="635" fill="#7cf29a" font-size="14" font-family="Arial">Edit →</text>
-<text x="110" y="757" fill="#6e8595" font-size="12" font-family="Arial">UI PREVIEW · representative portfolio visual</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071910"/><stop offset="1" stop-color="#06151a"/></linearGradient>
+  <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#65ff9b"/><stop offset="1" stop-color="#10c8a5"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="20" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1200" height="900" rx="48" fill="url(#bg)"/>
+<circle cx="1050" cy="100" r="250" fill="#36f77f" opacity=".12" filter="url(#glow)"/><circle cx="120" cy="760" r="230" fill="#19c7ff" opacity=".08" filter="url(#glow)"/>
+<rect x="66" y="64" width="220" height="48" rx="24" fill="#07120d" stroke="#2d593e"/><text x="96" y="96" fill="#7cf29a" font-family="Arial" font-size="18" font-weight="700">● LIVE</text>
+<text x="74" y="205" fill="#fff" font-family="Arial" font-size="63" font-weight="800">Garrison Market</text>
+<text x="78" y="254" fill="#7cf29a" font-family="Arial" font-size="21" font-weight="700">INVENTORY &amp; BUSINESS MANAGEMENT</text>
+<text x="80" y="304" fill="#9fb9ab" font-family="Arial" font-size="21">Inventory, staff, sales and daily operations in one place.</text>
+<g transform="translate(74 372)">
+  <rect x="0" y="0" width="1050" height="400" rx="28" fill="#091a12" stroke="#274b35" stroke-width="3"/>
+  <text x="34" y="48" fill="#8ca797" font-family="Arial" font-size="15" font-weight="700">OWNER DASHBOARD</text>
+  <rect x="34" y="75" width="220" height="108" rx="20" fill="#0d2518" stroke="#244c33"/><text x="58" y="111" fill="#8ba194" font-family="Arial" font-size="14">STOCK ITEMS</text><text x="58" y="156" fill="#fff" font-family="Arial" font-size="31" font-weight="800">842</text>
+  <rect x="270" y="75" width="220" height="108" rx="20" fill="#0d2518" stroke="#244c33"/><text x="294" y="111" fill="#8ba194" font-family="Arial" font-size="14">TODAY'S SALES</text><text x="294" y="156" fill="#fff" font-family="Arial" font-size="31" font-weight="800">₦184k</text>
+  <rect x="506" y="75" width="220" height="108" rx="20" fill="#0d2518" stroke="#244c33"/><text x="530" y="111" fill="#8ba194" font-family="Arial" font-size="14">ACTIVE STAFF</text><text x="530" y="156" fill="#fff" font-family="Arial" font-size="31" font-weight="800">08</text>
+  <rect x="742" y="75" width="274" height="108" rx="20" fill="url(#green)"/><text x="770" y="111" fill="#052014" font-family="Arial" font-size="14" font-weight="700">QUICK ACTION</text><text x="770" y="156" fill="#052014" font-family="Arial" font-size="23" font-weight="800">Add inventory →</text>
+  <rect x="34" y="212" width="982" height="152" rx="20" fill="#0b2116" stroke="#1f3c2b"/>
+  <text x="62" y="248" fill="#8ba194" font-family="Arial" font-size="14">INVENTORY SNAPSHOT</text><line x1="62" y1="270" x2="988" y2="270" stroke="#214031"/>
+  <text x="62" y="302" fill="#e2ece6" font-family="Arial" font-size="16" font-weight="700">Product A</text><text x="630" y="302" fill="#7cf29a" font-family="Arial" font-size="15">142 · In stock</text><text x="840" y="302" fill="#7cf29a" font-family="Arial" font-size="15">Edit →</text>
+  <text x="62" y="336" fill="#e2ece6" font-family="Arial" font-size="16" font-weight="700">Product B</text><text x="630" y="336" fill="#ffcd6b" font-family="Arial" font-size="15">23 · Low stock</text><text x="840" y="336" fill="#7cf29a" font-family="Arial" font-size="15">Edit →</text>
+</g>
+</svg>
