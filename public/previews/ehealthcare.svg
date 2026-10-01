@@ -1,13 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
-<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0c2730"/><stop offset="1" stop-color="#071017"/></linearGradient></defs>
-<rect width="1400" height="900" fill="#050a10"/><rect x="70" y="55" width="1260" height="790" rx="28" fill="url(#b)" stroke="#1b3941"/>
-<rect x="70" y="55" width="1260" height="72" rx="28" fill="#091722"/><text x="108" y="100" fill="#20d9ff" font-size="25" font-family="Arial" font-weight="700">eHealthcare</text><text x="1110" y="98" fill="#91a5b4" font-size="17" font-family="Arial">CARE DASHBOARD</text>
-<text x="110" y="175" fill="#20d9ff" font-size="14" font-family="Arial" font-weight="700" letter-spacing="3">HEALTH PORTAL</text><text x="110" y="212" fill="#f4f8fb" font-size="32" font-family="Arial" font-weight="700">Your care, organized.</text>
-<rect x="110" y="250" width="410" height="170" rx="20" fill="#0a1820" stroke="#203b43"/><text x="140" y="292" fill="#8fa0b3" font-size="15" font-family="Arial">UPCOMING APPOINTMENT</text><text x="140" y="332" fill="#f4f8fb" font-size="24" font-family="Arial" font-weight="700">General consultation</text><text x="140" y="363" fill="#20d9ff" font-size="16" font-family="Arial">Tomorrow · 10:30 AM</text><rect x="140" y="383" width="156" height="25" rx="12" fill="#123444"/><text x="164" y="401" fill="#c5d4de" font-size="12" font-family="Arial">Confirmed</text>
-<rect x="545" y="250" width="735" height="350" rx="20" fill="#0a1820" stroke="#203b43"/><text x="580" y="292" fill="#8fa0b3" font-size="15" font-family="Arial">CARE OVERVIEW</text><text x="580" y="337" fill="#f4f8fb" font-size="24" font-family="Arial" font-weight="700">Recent activity</text>
-<rect x="580" y="370" width="650" height="52" rx="12" fill="#0d2029"/><text x="600" y="403" fill="#dbe6ee" font-size="15" font-family="Arial">Lab result uploaded</text><text x="1130" y="403" fill="#8fa0b3" font-size="13" font-family="Arial">2h ago</text>
-<rect x="580" y="436" width="650" height="52" rx="12" fill="#0d2029"/><text x="600" y="469" fill="#dbe6ee" font-size="15" font-family="Arial">Prescription updated</text><text x="1128" y="469" fill="#8fa0b3" font-size="13" font-family="Arial">Yesterday</text>
-<rect x="580" y="502" width="650" height="52" rx="12" fill="#0d2029"/><text x="600" y="535" fill="#dbe6ee" font-size="15" font-family="Arial">Doctor message received</text><text x="1125" y="535" fill="#8fa0b3" font-size="13" font-family="Arial">2d ago</text>
-<rect x="110" y="445" width="410" height="155" rx="20" fill="#0a1820" stroke="#203b43"/><text x="140" y="485" fill="#8fa0b3" font-size="15" font-family="Arial">CARE TEAM</text><text x="140" y="525" fill="#f4f8fb" font-size="20" font-family="Arial" font-weight="700">Your care contacts</text><text x="140" y="554" fill="#20d9ff" font-size="15" font-family="Arial">View clinicians →</text>
-<rect x="110" y="630" width="1170" height="80" rx="18" fill="#0c212b" stroke="#1d414d"/><text x="140" y="680" fill="#cce0e8" font-size="17" font-family="Arial">Secure · organized · easy to navigate</text><text x="1040" y="680" fill="#20d9ff" font-size="15" font-family="Arial">Explore →</text>
-<text x="110" y="757" fill="#6e8595" font-size="12" font-family="Arial">UI PREVIEW · representative portfolio visual</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#061722"/><stop offset="1" stop-color="#0b1e2b"/></linearGradient>
+  <linearGradient id="aqua" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#20d9ff"/><stop offset="1" stop-color="#6d7dff"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="18" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1200" height="900" rx="48" fill="url(#bg)"/>
+<circle cx="980" cy="90" r="280" fill="#20d9ff" opacity=".12" filter="url(#glow)"/><circle cx="180" cy="700" r="240" fill="#5664ff" opacity=".1" filter="url(#glow)"/>
+<rect x="66" y="64" width="190" height="48" rx="24" fill="#07111b" stroke="#2b5768"/><text x="96" y="96" fill="#7cf29a" font-family="Arial" font-size="18" font-weight="700">● LIVE</text>
+<text x="74" y="208" fill="#fff" font-family="Arial" font-size="68" font-weight="800">eHealthcare</text>
+<text x="78" y="258" fill="#20d9ff" font-family="Arial" font-size="21" font-weight="700">HEALTHCARE PLATFORM</text>
+<text x="80" y="310" fill="#9fb5c6" font-family="Arial" font-size="21">Care, appointments and patient information in one clear flow.</text>
+<g transform="translate(76 394)">
+  <rect x="0" y="0" width="460" height="310" rx="30" fill="#09151e" stroke="#234a5e" stroke-width="3"/>
+  <text x="34" y="46" fill="#7c95a8" font-family="Arial" font-size="15" font-weight="700">CARE OVERVIEW</text>
+  <rect x="34" y="70" width="392" height="56" rx="16" fill="#0d2634"/><circle cx="64" cy="98" r="13" fill="#20d9ff"/><text x="92" y="103" fill="#d9e7ef" font-family="Arial" font-size="16">Upcoming appointment</text>
+  <rect x="34" y="142" width="392" height="56" rx="16" fill="#0d2634"/><circle cx="64" cy="170" r="13" fill="#7cf29a"/><text x="92" y="175" fill="#d9e7ef" font-family="Arial" font-size="16">Lab result uploaded</text>
+  <rect x="34" y="214" width="392" height="56" rx="16" fill="url(#aqua)"/><text x="104" y="249" fill="#041017" font-family="Arial" font-size="16" font-weight="800">OPEN CARE DASHBOARD →</text>
+</g>
+<g transform="translate(610 150) rotate(6)">
+  <rect x="0" y="0" width="400" height="590" rx="42" fill="#081019" stroke="#2c6277" stroke-width="4"/>
+  <rect x="24" y="24" width="352" height="542" rx="28" fill="#0c1b24"/>
+  <circle cx="200" cy="122" r="56" fill="#143b47"/><path d="M168 122h64 M200 90v64" stroke="#20d9ff" stroke-width="12" stroke-linecap="round"/>
+  <rect x="52" y="218" width="296" height="58" rx="16" fill="#102836"/><rect x="52" y="292" width="296" height="58" rx="16" fill="#102836"/><rect x="52" y="366" width="296" height="58" rx="16" fill="#102836"/>
+  <rect x="52" y="452" width="170" height="54" rx="16" fill="#20d9ff"/><text x="72" y="487" fill="#041017" font-family="Arial" font-size="16" font-weight="800">BOOK APPOINTMENT</text>
+</g>
+</svg>
