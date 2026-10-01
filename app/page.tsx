@@ -11,8 +11,6 @@ const featured = [
     type: 'Multiplayer Gaming Platform',
     desc: 'A real-time multiplayer game with missions, tournaments, shop systems and player-facing experiences.',
     tags: ['Next.js', 'TypeScript', 'Tailwind', 'PostgreSQL'],
-    live: 'https://ludo-live.up.railway.app/dbase/shop',
-    liveLabel: 'Live App',
     accent: 'ludo',
   },
   {
