@@ -40,13 +40,6 @@ const featured = [
 
 const others = [
   { name: 'Security Assessment Platform', href: 'https://github.com/MrDan001/security-assessment-platform' },
-  { name: 'GURU-Ai', href: 'https://github.com/MrDan001/GURU-Ai' },
-  { name: 'VAJIRA-MD-NEW', href: 'https://github.com/search?q=user%3AMrDan001+VAJIRA-MD-NEW&type=repositories' },
-  { name: 'BMW-MD', href: 'https://github.com/search?q=user%3AMrDan001+BMW-MD&type=repositories' },
-  { name: 'NORMAL-BOT', href: 'https://github.com/MrDan001/NORMAL-BOT' },
-  { name: 'Levanter', href: 'https://github.com/MrDan001/levanter' },
-  { name: 'Suhail-Md-Media', href: 'https://github.com/MrDan001/Suhail-Md-Media' },
-  { name: 'ReverseKing', href: 'https://github.com/MrDan001/ReverseKing' },
   { name: 'Banking System', href: 'https://github.com/MrDan001/Banking-System' },
   { name: 'one-drop', href: 'https://github.com/MrDan001/one-drop' },
 ];
