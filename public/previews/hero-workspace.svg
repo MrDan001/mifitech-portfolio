@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520">
+<defs>
+  <linearGradient id="room" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#09152a"/><stop offset="1" stop-color="#190b2c"/></linearGradient>
+  <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0d2943"/><stop offset="1" stop-color="#101735"/></linearGradient>
+  <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#20d9ff"/><stop offset="1" stop-color="#7a69ff"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="20" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1000" height="520" fill="url(#room)"/>
+<circle cx="810" cy="80" r="190" fill="#20d9ff" opacity=".11" filter="url(#glow)"/><circle cx="240" cy="390" r="190" fill="#7f55ff" opacity=".1" filter="url(#glow)"/>
+<rect x="474" y="58" width="395" height="266" rx="22" fill="#070d16" stroke="#315b75" stroke-width="4" transform="rotate(-4 474 58)"/>
+<rect x="495" y="78" width="351" height="219" rx="12" fill="url(#screen)" transform="rotate(-4 495 78)"/>
+<g transform="rotate(-4 510 90)" fill="none" stroke-linecap="round">
+  <path d="M520 118h120" stroke="#20d9ff" stroke-width="5"/><path d="M520 141h210" stroke="#7cf29a" stroke-width="4"/><path d="M520 162h170" stroke="#ff68d2" stroke-width="4"/><path d="M520 184h230" stroke="#7d78ff" stroke-width="4"/><path d="M520 206h146" stroke="#20d9ff" stroke-width="4"/><path d="M520 228h192" stroke="#ffca67" stroke-width="4"/><path d="M520 250h165" stroke="#7cf29a" stroke-width="4"/>
+</g>
+<path d="M420 322 L890 322 L938 430 L360 430 Z" fill="#0a1118" stroke="#2c5167" stroke-width="4"/><rect x="575" y="430" width="190" height="20" rx="10" fill="#253949"/>
+<rect x="770" y="132" width="128" height="256" rx="25" fill="#070d15" stroke="#2c5872" stroke-width="4" transform="rotate(6 770 132)"/>
+<rect x="786" y="151" width="96" height="214" rx="16" fill="#0c1822" transform="rotate(6 786 151)"/>
+<circle cx="835" cy="242" r="32" fill="url(#cyan)" opacity=".85"/><text x="807" y="196" fill="#fff" font-family="Arial" font-size="12" font-weight="700" transform="rotate(6 807 196)">Mifi.</text>
+<text x="84" y="84" fill="#20d9ff" font-family="Arial" font-size="18" font-weight="700" letter-spacing="3">IDEAS → CODE → REAL PRODUCTS</text>
+<path d="M92 126 C160 112 210 128 268 162" fill="none" stroke="#20d9ff" stroke-width="4" opacity=".8"/>
+<text x="84" y="178" fill="#dce8ee" font-family="Arial" font-size="25" font-weight="700">Build. Ship. Improve.</text>
+<rect x="96" y="354" width="112" height="56" rx="16" fill="#0b151d" stroke="#2e5267"/><text x="130" y="389" fill="#dce8ee" font-family="Arial" font-size="15" font-weight="700">Mifi.</text>
+<rect x="222" y="354" width="112" height="56" rx="16" fill="url(#cyan)"/><text x="248" y="389" fill="#051017" font-family="Arial" font-size="15" font-weight="800">SHIP →</text>
+</svg>
