@@ -1,12 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
-<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#241721"/><stop offset="1" stop-color="#071017"/></linearGradient></defs>
-<rect width="1400" height="900" fill="#050a10"/><rect x="70" y="55" width="1260" height="790" rx="28" fill="url(#b)" stroke="#3b2937"/>
-<rect x="70" y="55" width="1260" height="72" rx="28" fill="#0d1719"/><text x="108" y="100" fill="#20d9ff" font-size="25" font-family="Arial" font-weight="700">The African Plug</text><text x="1100" y="98" fill="#91a5b4" font-size="17" font-family="Arial">MEDIA HUB</text>
-<text x="110" y="175" fill="#20d9ff" font-size="14" font-family="Arial" font-weight="700" letter-spacing="3">FEATURED MEDIA</text><text x="110" y="212" fill="#f4f8fb" font-size="32" font-family="Arial" font-weight="700">Stories, video and publishing.</text>
-<rect x="110" y="250" width="760" height="380" rx="20" fill="#0a1319" stroke="#2b3541"/><rect x="135" y="275" width="710" height="250" rx="16" fill="#111e28"/><polygon points="470,350 470,450 555,400" fill="#20d9ff"/><rect x="135" y="545" width="480" height="18" rx="9" fill="#20323e"/><text x="135" y="598" fill="#f4f8fb" font-size="22" font-family="Arial" font-weight="700">Featured story / video title</text><text x="135" y="625" fill="#8fa0b3" font-size="14" font-family="Arial">Fresh media · 08 min watch</text>
-<rect x="900" y="250" width="380" height="380" rx="20" fill="#0a1319" stroke="#2b3541"/><text x="930" y="292" fill="#8fa0b3" font-size="14" font-family="Arial">PUBLISHING DESK</text>
-<rect x="930" y="325" width="320" height="56" rx="12" fill="#10212b"/><text x="953" y="360" fill="#dbe6ee" font-size="15" font-family="Arial">New article</text><text x="1180" y="360" fill="#20d9ff" font-size="16" font-family="Arial">+</text>
-<rect x="930" y="395" width="320" height="56" rx="12" fill="#10212b"/><text x="953" y="430" fill="#dbe6ee" font-size="15" font-family="Arial">Upload video</text><text x="1180" y="430" fill="#20d9ff" font-size="16" font-family="Arial">+</text>
-<rect x="930" y="465" width="320" height="56" rx="12" fill="#20d9ff"/><text x="982" y="500" fill="#041017" font-size="15" font-family="Arial" font-weight="700">Manage content →</text>
-<text x="110" y="690" fill="#8fa0b3" font-size="15" font-family="Arial">Latest updates</text><rect x="110" y="715" width="1170" height="44" rx="12" fill="#0d1b22"/><text x="135" y="743" fill="#c8d6de" font-size="13" font-family="Arial">Video publishing workflow · media section · content updates</text>
-<text x="110" y="790" fill="#6e8595" font-size="12" font-family="Arial">UI PREVIEW · representative portfolio visual</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#16091e"/><stop offset="1" stop-color="#06111c"/></linearGradient>
+  <linearGradient id="pink" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff2dbf"/><stop offset="1" stop-color="#6b63ff"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="20" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1200" height="900" rx="48" fill="url(#bg)"/>
+<circle cx="1020" cy="130" r="260" fill="#ff2dbf" opacity=".14" filter="url(#glow)"/><circle cx="180" cy="720" r="250" fill="#6c5cff" opacity=".11" filter="url(#glow)"/>
+<rect x="66" y="64" width="190" height="48" rx="24" fill="#0b111a" stroke="#563456"/><text x="96" y="96" fill="#7cf29a" font-family="Arial" font-size="18" font-weight="700">● LIVE</text>
+<text x="74" y="206" fill="#fff" font-family="Arial" font-size="65" font-weight="800">The African Plug</text>
+<text x="78" y="255" fill="#ff68d2" font-family="Arial" font-size="21" font-weight="700">MEDIA &amp; CONTENT PLATFORM</text>
+<text x="80" y="305" fill="#c1a8bf" font-family="Arial" font-size="21">Stories, video and publishing built for a modern media experience.</text>
+<g transform="translate(72 372)">
+  <rect x="0" y="0" width="640" height="404" rx="28" fill="#0a141e" stroke="#4b3551" stroke-width="3"/>
+  <rect x="28" y="28" width="584" height="240" rx="22" fill="#131d29"/>
+  <circle cx="320" cy="148" r="52" fill="url(#pink)" filter="url(#glow)"/><polygon points="306,120 306,176 356,148" fill="#fff"/>
+  <text x="34" y="314" fill="#fff" font-family="Arial" font-size="27" font-weight="800">Featured story / video</text>
+  <text x="34" y="350" fill="#a89ab0" font-family="Arial" font-size="17">Fresh media · video · culture · publishing</text>
+</g>
+<g transform="translate(746 372)">
+  <rect x="0" y="0" width="382" height="404" rx="28" fill="#0a141e" stroke="#4b3551" stroke-width="3"/>
+  <text x="32" y="48" fill="#9e8da3" font-family="Arial" font-size="14" font-weight="700">PUBLISHING DESK</text>
+  <rect x="32" y="74" width="318" height="58" rx="16" fill="#171f2b"/><text x="58" y="110" fill="#dce4ea" font-family="Arial" font-size="16">New article</text><text x="306" y="110" fill="#ff68d2" font-family="Arial" font-size="20">+</text>
+  <rect x="32" y="148" width="318" height="58" rx="16" fill="#171f2b"/><text x="58" y="184" fill="#dce4ea" font-family="Arial" font-size="16">Upload video</text><text x="306" y="184" fill="#ff68d2" font-family="Arial" font-size="20">+</text>
+  <rect x="32" y="222" width="318" height="58" rx="16" fill="url(#pink)"/><text x="80" y="258" fill="#fff" font-family="Arial" font-size="16" font-weight="800">MANAGE CONTENT →</text>
+</g>
+</svg>
