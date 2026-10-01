@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import SiteNav from '../../components/SiteNav';
 
 const projects: Record<string, {
-  icon: string;
+  image: string;
   title: string;
   type: string;
   intro: string;
@@ -12,7 +12,7 @@ const projects: Record<string, {
   features: string[];
 }> = {
   'ludo-live': {
-    icon: '🎲',
+    image: '/previews/ludo-live.svg',
     title: 'Ludo Live',
     type: 'Multiplayer Gaming Platform',
     intro: 'A production multiplayer game platform with player experiences and a substantial admin/product ecosystem.',
@@ -28,10 +28,10 @@ const projects: Record<string, {
     ],
   },
   'ehealthcare': {
-    icon: '🩺',
+    image: '/previews/ehealthcare.svg',
     title: 'eHealthcare',
     type: 'Healthcare Platform',
-    intro: 'A healthcare-focused digital product represented in the portfolio with verified repository-level information.',
+    intro: 'A healthcare-focused digital product represented in the portfolio with repository-backed project information.',
     repo: 'https://github.com/MrDan001/ehealthcare-system',
     stack: ['Next.js', 'TypeScript', 'PostgreSQL'],
     features: [
@@ -42,7 +42,7 @@ const projects: Record<string, {
     ],
   },
   'garrison-market': {
-    icon: '📦',
+    image: '/previews/garrison-market.svg',
     title: 'Garrison Market',
     type: 'Inventory & Business Management',
     intro: 'A business operations app for shop owners and staff to manage inventory, staff, sales and day-to-day operations from one place.',
@@ -57,7 +57,7 @@ const projects: Record<string, {
     ],
   },
   'the-africa-plug': {
-    icon: '▶',
+    image: '/previews/the-africa-plug.svg',
     title: 'The African Plug',
     type: 'Media & Content Platform',
     intro: 'A content platform focused on media and publishing, including video content and production content updates.',
@@ -80,7 +80,9 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
   const { slug } = await params;
   const project = projects[slug];
 
-  if (!project) notFound();
+  if (!project) {
+    return null;
+  }
 
   return (
     <>
@@ -92,7 +94,7 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
         <div className="case-hero">
           <div>
             <div className="eyebrow">CASE STUDY · {project.type.toUpperCase()}</div>
-            <h1>{project.icon} {project.title}</h1>
+            <h1>{project.title}</h1>
             <p className="case-intro">{project.intro}</p>
             <div className="actions">
               <a className="btn primary" href={project.repo} target="_blank" rel="noreferrer">
@@ -104,9 +106,8 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
             </div>
           </div>
 
-          <div className="case-visual">
-            <div className="case-visual-icon">{project.icon}</div>
-            <span>PRODUCT CASE STUDY</span>
+          <div className="case-preview">
+            <Image src={project.image} alt={`${project.title} preview`} fill sizes="(max-width: 800px) 100vw, 45vw" />
           </div>
         </div>
 
