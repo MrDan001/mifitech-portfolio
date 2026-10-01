@@ -1,10 +1,12 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import SiteNav from './components/SiteNav';
+import ContactForm from './components/ContactForm';
 
 const featured = [
   {
     slug: 'ludo-live',
-    icon: '🎲',
+    image: '/previews/ludo-live.svg',
     title: 'Ludo Live',
     type: 'Multiplayer Gaming Platform',
     desc: 'A real-time multiplayer game platform with game modes, missions, tournaments, shop systems, admin tools and player-facing experiences.',
@@ -12,7 +14,7 @@ const featured = [
   },
   {
     slug: 'ehealthcare',
-    icon: '🩺',
+    image: '/previews/ehealthcare.svg',
     title: 'eHealthcare',
     type: 'Healthcare Platform',
     desc: 'A modern healthcare product focused on making healthcare services and information more accessible through a digital experience.',
@@ -20,7 +22,7 @@ const featured = [
   },
   {
     slug: 'garrison-market',
-    icon: '📦',
+    image: '/previews/garrison-market.svg',
     title: 'Garrison Market',
     type: 'Inventory & Business Management',
     desc: 'A business operations app for shop owners and staff to manage inventory, staff, sales and day-to-day operations from one place.',
@@ -28,7 +30,7 @@ const featured = [
   },
   {
     slug: 'the-africa-plug',
-    icon: '▶',
+    image: '/previews/the-africa-plug.svg',
     title: 'The African Plug',
     type: 'Media & Content Platform',
     desc: 'A content platform built around media, video and publishing workflows, with production deployment and content updates.',
@@ -67,7 +69,7 @@ export default function Home() {
             </p>
             <div className="actions">
               <a className="btn primary" href="#work">View my work →</a>
-              <a className="btn" href="#contact">Contact me</a>
+              <a className="btn" href="#contact">Start a project</a>
             </div>
           </div>
 
@@ -102,25 +104,34 @@ export default function Home() {
               <h2>Products worth showing.</h2>
             </div>
             <p>
-              Real products first, then smaller experiments and supporting work
-              with direct links to the code.
+              Start with the products. Open a case study to see the build, scope and source.
             </p>
           </div>
 
           <div className="grid">
             {featured.map((project) => (
               <Link className="card" key={project.slug} href={`/projects/${project.slug}`}>
-                <div className="icon">{project.icon}</div>
-                <h3>{project.title}</h3>
-                <p>
-                  <b className="card-type">{project.type}</b>
-                  <br />
-                  {project.desc}
-                </p>
-                <div className="tags">
-                  {project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}
+                <div className="project-image">
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} product preview`}
+                    fill
+                    sizes="(max-width: 800px) 100vw, 50vw"
+                  />
+                  <span className="preview-badge">PRODUCT PREVIEW</span>
                 </div>
-                <span className="card-link">View case study →</span>
+                <div className="card-copy">
+                  <h3>{project.title}</h3>
+                  <p>
+                    <b className="card-type">{project.type}</b>
+                    <br />
+                    {project.desc}
+                  </p>
+                  <div className="tags">
+                    {project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}
+                  </div>
+                  <span className="card-link">View case study →</span>
+                </div>
               </Link>
             ))}
           </div>
@@ -132,7 +143,7 @@ export default function Home() {
               <div className="eyebrow">OTHER WORK</div>
               <h2>More from the GitHub shelf.</h2>
             </div>
-            <p>Every project here is now a real link instead of a decorative label.</p>
+            <p>Smaller projects are still accessible with one tap.</p>
           </div>
 
           <div className="work-links">
@@ -181,34 +192,31 @@ export default function Home() {
         <section id="contact" className="section wrap">
           <div className="contact-shell">
             <div className="contact-copy">
-              <div className="eyebrow">GET IN TOUCH</div>
-              <h2>Have an idea? Let&apos;s turn it into something real.</h2>
+              <div className="eyebrow">START A PROJECT</div>
+              <h2>Tell me what you’re trying to build.</h2>
               <p>
-                Whether it&apos;s a product, a business system, a collaboration or a
-                technical build, email me directly and I&apos;ll get back to you.
+                Give me the idea, the outcome you want, and the stage you’re at.
+                I’ll use the brief to understand the project before we talk next steps.
               </p>
-              <div className="contact-actions">
-                <a className="btn primary contact-cta" href={`mailto:${email}?subject=Project%20Inquiry%20for%20Mifitech`}>
-                  Send me an email ↗
-                </a>
-                <a className="btn" href="https://github.com/MrDan001" target="_blank" rel="noreferrer">
-                  View GitHub ↗
-                </a>
+              <div className="contact-mini">
+                <span>Direct email</span>
+                <a href={`mailto:${email}`}>{email} ↗</a>
+              </div>
+              <div className="contact-note-card">
+                <span className="contact-note-icon">01</span>
+                <div>
+                  <strong>Be specific</strong>
+                  <p>Features, audience, timeline and expectations help me understand the build.</p>
+                </div>
               </div>
             </div>
 
-            <div className="contact-card">
+            <div className="contact-card form-card">
               <div className="contact-card-top">
-                <span className="contact-status"><span className="status-dot" /> OPEN TO PROJECTS</span>
+                <span className="contact-status"><span className="status-dot" /> PROJECT INQUIRY</span>
                 <span className="contact-arrow">↗</span>
               </div>
-              <span className="contact-label">EMAIL</span>
-              <a className="contact-email" href={`mailto:${email}?subject=Project%20Inquiry%20for%20Mifitech`}>
-                {email}
-              </a>
-              <span className="contact-note">
-                Tap the address to open your email app with a ready-to-send project inquiry.
-              </span>
+              <ContactForm />
             </div>
           </div>
         </section>
@@ -217,7 +225,7 @@ export default function Home() {
       <footer>
         <div className="wrap footer-inner">
           <span>© 2026 Mifitech · Full-stack developer</span>
-          <a href="mailto:officialsafebase@gmail.com">officialsafebase@gmail.com ↗</a>
+          <a href={`mailto:${email}`}>{email} ↗</a>
         </div>
       </footer>
     </>
