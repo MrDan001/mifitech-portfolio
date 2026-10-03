@@ -38,7 +38,7 @@ export default function SiteNav() {
     <nav className="nav">
       <div className="wrap nav-inner">
         <Link className="brand" href="/" onClick={close} aria-label="Mifitech home">
-          <img src="/mifi-logo.svg" alt="Mifitech" width="188" height="48" />
+          <span className="brand-word">Mifi<span>.</span></span>
         </Link>
 
         <div className="links desktop-links">
