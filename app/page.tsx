@@ -12,6 +12,7 @@ const featured = [
     desc: 'A real-time multiplayer game with missions, tournaments, shop systems and player-facing experiences.',
     tags: ['Next.js', 'TypeScript', 'Tailwind', 'PostgreSQL'],
     accent: 'ludo',
+    preview: 'https://image.thum.io/get/width/1200/crop/800/https://ludo-live.up.railway.app',
   },
   {
     slug: 'ehealthcare',
@@ -21,6 +22,7 @@ const featured = [
     desc: 'A digital healthcare experience focused on clear patient, appointment and care workflows.',
     tags: ['Next.js', 'TypeScript', 'Tailwind', 'PostgreSQL'],
     accent: 'health',
+    preview: 'https://image.thum.io/get/width/1200/crop/800/https://ehealthcare-system-g81n5o9i5-mifi-tech.vercel.app',
   },
   {
     slug: 'garrison-market',
@@ -29,9 +31,10 @@ const featured = [
     type: 'Inventory & Business Management',
     desc: 'A business operations app for shop owners and staff to manage inventory, staff, sales and daily operations.',
     tags: ['Next.js', 'TypeScript', 'Tailwind', 'Database'],
-    live: 'https://gmstock.co',
+    live: 'https://garrison-market-u5a8-jhx5iffyr-mifi-tech.vercel.app',
     liveLabel: 'Live Website',
     accent: 'market',
+    preview: 'https://image.thum.io/get/width/1200/crop/800/https://garrison-market-u5a8-jhx5iffyr-mifi-tech.vercel.app',
   },
   {
     slug: 'the-africa-plug',
@@ -41,6 +44,7 @@ const featured = [
     desc: 'A media platform built around video, publishing and content updates for a modern audience.',
     tags: ['Next.js', 'TypeScript', 'Tailwind', 'Media'],
     accent: 'africa',
+    preview: 'https://image.thum.io/get/width/1200/crop/800/https://the-africa-plug-2g1gc0rli-mifi-tech.vercel.app',
   },
 ];
 
@@ -166,8 +170,8 @@ export default function Home() {
                 <Link href={`/projects/${project.slug}`} className="project-media-link" aria-label={`Open ${project.title} case study`}>
                   <div className="project-media">
                     <Image
-                      src={project.image}
-                      alt={`${project.title} project preview`}
+                      src={project.preview || project.image}
+                      alt={`${project.title} live website preview`}
                       fill
                       sizes="(max-width: 800px) 100vw, 25vw"
                     />
