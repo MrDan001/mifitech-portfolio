@@ -1,12 +1,3 @@
 import type { NextConfig } from 'next';
-
-const nextConfig: NextConfig = {
-  reactStrictMode: true,
-  images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: 'image.thum.io' },
-    ],
-  },
-};
-
+const nextConfig: NextConfig = { reactStrictMode: true };
 export default nextConfig;
