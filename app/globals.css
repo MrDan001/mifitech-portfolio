@@ -184,6 +184,19 @@ button{font:inherit}
   overflow:hidden;
 }
 .hero-art img{object-fit:cover;object-position:center}
+.hero-profile-photo{
+  position:absolute;
+  z-index:2;
+  right:8%;
+  bottom:0;
+  width:min(38%,230px);
+  aspect-ratio:5/6;
+  border:1px solid rgba(32,217,255,.35);
+  border-radius:18px 18px 0 0;
+  overflow:hidden;
+  box-shadow:0 18px 45px rgba(0,0,0,.45);
+}
+.hero-profile-photo img{object-fit:cover;object-position:center}
 .hero-art::before{
   content:'';
   position:absolute;
@@ -508,6 +521,7 @@ footer{border-top:1px solid rgba(30,78,99,.65);padding:25px 0;color:var(--muted)
   .hero-actions{margin-top:24px}
   .hero-art{height:260px;min-height:260px;border-left:0;border-top:1px solid rgba(32,217,255,.08)}
   .hero-art::before{background:linear-gradient(180deg,#04101a 0%,transparent 18%,transparent 82%,#06111e 100%)}
+  .hero-profile-photo{right:7%;width:min(44%,210px);border-radius:16px 16px 0 0}
 
   .section{padding:40px 0 62px}
   .section-head{display:block;margin-bottom:20px}
