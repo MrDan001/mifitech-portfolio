@@ -39,7 +39,7 @@ img{max-width:100%}
 .nav{position:sticky;top:0;z-index:80;height:76px;border-bottom:1px solid var(--line);background:var(--header);backdrop-filter:blur(18px)}
 .nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between}
 .brand{display:inline-flex;align-items:center;height:52px}
-.brand img{width:162px;height:44px;object-fit:contain;object-position:left center;filter:none}
+.brand-word{font:700 25px 'Space Grotesk',sans-serif;letter-spacing:-1.4px}.brand-word span{color:var(--accent)}
 .links{display:flex;gap:26px;align-items:center;font-size:11px;font-weight:700;letter-spacing:1.4px;color:var(--muted)}
 .links a:hover{color:var(--text)}
 .nav-social{display:flex;align-items:center;gap:7px}
@@ -80,7 +80,7 @@ img{max-width:100%}
 .portrait-stage{min-height:610px;position:relative;display:flex;align-items:center;justify-content:center}
 .portrait-glow{position:absolute;width:72%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 15%,transparent),transparent 65%);filter:blur(7px)}
 .portrait-frame{position:relative;width:min(430px,86%);aspect-ratio:4/5;border-radius:24px;overflow:hidden;border:1px solid var(--line-2);box-shadow:0 30px 90px rgba(0,0,0,.32);background:var(--surface)}
-.portrait-frame img{object-fit:cover;object-position:center}
+.portrait-photo{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
 .portrait-frame:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.28) 100%);pointer-events:none}
 .portrait-label{position:absolute;left:8%;bottom:7%;z-index:2;display:grid;gap:4px;padding:14px 15px;border:1px solid rgba(255,255,255,.15);background:rgba(7,10,14,.72);backdrop-filter:blur(12px);border-radius:11px;max-width:280px}
 html[data-theme="light"] .portrait-label{background:rgba(255,255,255,.78);border-color:var(--line)}
@@ -220,7 +220,7 @@ html[data-theme="light"] .portrait-label small{color:var(--muted)}
 }
 @media(max-width:650px){
   .wrap{width:min(100% - 26px,1180px)}
-  .nav,.nav-inner{height:68px}.mobile-menu{top:68px}.brand img{width:145px}
+  .nav,.nav-inner{height:68px}.mobile-menu{top:68px}.brand-word{font-size:23px}
   .nav-social .nav-icon{display:none}
   .hero-copy-new h1{letter-spacing:-3px}.hero-metrics{gap:14px;flex-wrap:wrap}.hero-metrics div{min-width:105px}
   .portrait-stage{min-height:475px}.portrait-frame{width:78%;border-radius:18px}.floating-chip{font-size:9px;padding:7px 9px}
