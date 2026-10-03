@@ -9,7 +9,6 @@ const projects: Record<string, {
   intro: string;
   repo: string;
   live?: string;
-  preview: string;
   stack: string[];
   features: string[];
 }> = {
@@ -19,8 +18,7 @@ const projects: Record<string, {
     type: 'Multiplayer Gaming Platform',
     intro: 'A production multiplayer game platform with player experiences and a substantial admin/product ecosystem.',
     repo: 'https://github.com/MrDan001/ludo-live',
-    
-    preview: 'https://image.thum.io/get/width/1200/crop/800/https://ludo-live.up.railway.app',
+    live: 'https://ludo-live.up.railway.app',
     stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Railway'],
     features: [
       'Multiplayer game experiences',
@@ -38,7 +36,6 @@ const projects: Record<string, {
     intro: 'A healthcare-focused digital product represented in the portfolio with repository-backed project information.',
     repo: 'https://github.com/MrDan001/ehealthcare-system',
     live: 'https://ehealthcare-system-g81n5o9i5-mifi-tech.vercel.app',
-    preview: 'https://image.thum.io/get/width/1200/crop/800/https://ehealthcare-system-g81n5o9i5-mifi-tech.vercel.app',
     stack: ['Next.js', 'TypeScript', 'PostgreSQL'],
     features: [
       'Healthcare-focused digital experience',
@@ -53,8 +50,7 @@ const projects: Record<string, {
     type: 'Inventory & Business Management',
     intro: 'A business operations app for shop owners and staff to manage inventory, staff, sales and day-to-day operations from one place.',
     repo: 'https://github.com/MrDan001/garrison-market',
-    live: 'https://garrison-market-u5a8-jhx5iffyr-mifi-tech.vercel.app',
-    preview: 'https://image.thum.io/get/width/1200/crop/800/https://garrison-market-u5a8-jhx5iffyr-mifi-tech.vercel.app',
+    live: 'https://gmstock.co',
     stack: ['Next.js', 'TypeScript', 'Database'],
     features: [
       'Inventory management',
@@ -71,7 +67,6 @@ const projects: Record<string, {
     intro: 'A content platform focused on media and publishing, including video content and production content updates.',
     repo: 'https://github.com/MrDan001/the-africa-plug',
     live: 'https://the-africa-plug-2g1gc0rli-mifi-tech.vercel.app',
-    preview: 'https://image.thum.io/get/width/1200/crop/800/https://the-africa-plug-2g1gc0rli-mifi-tech.vercel.app',
     stack: ['Next.js', 'TypeScript', 'Media'],
     features: [
       'Video and media section',
@@ -118,7 +113,7 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
           </div>
 
           <div className="case-preview">
-            <Image src={project.preview} alt={`${project.title} website preview`} fill sizes="(max-width: 800px) 100vw, 45vw" />
+            <Image src={project.image} alt={`${project.title} preview`} fill sizes="(max-width: 800px) 100vw, 45vw" />
           </div>
         </div>
 
