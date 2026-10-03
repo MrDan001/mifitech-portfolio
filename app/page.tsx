@@ -144,6 +144,14 @@ export default function Home() {
                 priority
                 sizes="(max-width: 800px) 100vw, 55vw"
               />
+              <div className="hero-profile-photo">
+                <Image
+                  src="/profile-photo.svg"
+                  alt="Mifitech profile photo"
+                  fill
+                  sizes="220px"
+                />
+              </div>
             </div>
           </div>
         </section>
