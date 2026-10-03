@@ -553,3 +553,9 @@ footer{border-top:1px solid rgba(30,78,99,.65);padding:25px 0;color:var(--muted)
   .card-actions{display:grid;grid-template-columns:1fr 1fr}
   .card-btn:last-child{grid-column:1/-1}
 }
+
+
+/* Brand + future portrait treatment */
+.brand{display:inline-flex;align-items:center;min-height:48px}
+.brand img{display:block;width:188px;height:48px;object-fit:contain;object-position:left center}
+@media(max-width:800px){.brand img{width:160px;height:42px}.brand{min-height:42px}}
