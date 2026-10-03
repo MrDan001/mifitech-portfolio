@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import ThemeToggle from './ThemeToggle';
 
 function GithubIcon() {
   return (
@@ -54,6 +55,7 @@ export default function SiteNav() {
           <a className="nav-icon" href={mailto} aria-label="Email">
             <MailIcon />
           </a>
+          <ThemeToggle />
           <button
             className="menu-button"
             type="button"
@@ -78,6 +80,7 @@ export default function SiteNav() {
             <a href="/#contact" onClick={close}>CONTACT</a>
             <a href="https://github.com/MrDan001" target="_blank" rel="noreferrer" onClick={close}>GITHUB ↗</a>
             <a href={mailto} onClick={close}>EMAIL ↗</a>
+            <div className="mobile-theme"><ThemeToggle /></div>
           </div>
         </div>
       )}
