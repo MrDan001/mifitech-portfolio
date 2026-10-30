@@ -12,154 +12,49 @@ export default function ContactForm() {
     event.preventDefault();
     setStatus('sending');
     setMessage('');
-
     const form = event.currentTarget;
     const formData = new FormData(form);
-    formData.set('_subject', 'New project inquiry from Mifitech portfolio');
+    formData.set('_subject', 'New website enquiry from MifiTech');
     formData.set('_template', 'table');
     formData.set('_url', window.location.href);
-    formData.set('_honey', '');
-
     const payload = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${email}`, {
+      const response = await fetch('https://formsubmit.co/ajax/' + email, {
         method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-
       const result = await response.json();
-
-      if (!response.ok || result.success === false) {
-        throw new Error(result.message || 'Unable to send your message right now.');
-      }
-
+      if (!response.ok || result.success === false) throw new Error(result.message || 'Unable to send your enquiry.');
       form.reset();
       setStatus('success');
-      setMessage('Your project details have been sent. I’ll get back to you by email.');
+      setMessage('Your enquiry has been sent. We will get back to you by email.');
     } catch {
       setStatus('error');
-      setMessage(
-        'The message could not be sent. Please try again, or email me directly at officialsafebase@gmail.com.'
-      );
+      setMessage('We could not send the form just now. Please email officialsafebase@gmail.com directly.');
     }
   }
 
   if (status === 'success') {
-    return (
-      <div className="form-success">
-        <div className="success-icon">✓</div>
-        <div>
-          <div className="eyebrow">MESSAGE SENT</div>
-          <h3>Thanks — I’ve got the brief.</h3>
-          <p>{message}</p>
-          <a className="btn primary" href={`mailto:${email}`}>
-            Open email ↗
-          </a>
-        </div>
-      </div>
-    );
+    return <div className="form-success" role="status"><span className="success-mark">✓</span><div><span className="form-kicker">MESSAGE RECEIVED</span><h3>Thanks for reaching out.</h3><p>{message}</p><a href={'mailto:' + email}>Send another email ↗</a></div></div>;
   }
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit} noValidate>
-      <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hp" aria-hidden="true" />
-
+    <form className="contact-form" onSubmit={handleSubmit}>
+      <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="honeypot" aria-hidden="true" />
       <div className="form-row">
-        <label>
-          <span>Full name</span>
-          <input name="name" type="text" placeholder="Your name" autoComplete="name" required />
-        </label>
-        <label>
-          <span>Email address</span>
-          <input name="email" type="email" placeholder="you@example.com" autoComplete="email" required />
-        </label>
+        <label><span>Your name</span><input name="name" type="text" placeholder="Name" autoComplete="name" required /></label>
+        <label><span>Email address</span><input name="email" type="email" placeholder="you@example.com" autoComplete="email" required /></label>
       </div>
-
       <div className="form-row">
-        <label>
-          <span>What are you building?</span>
-          <select name="project_type" defaultValue="" required>
-            <option value="" disabled>Select a project type</option>
-            <option>Business website</option>
-            <option>Web application</option>
-            <option>Mobile application</option>
-            <option>Business management system</option>
-            <option>E-commerce platform</option>
-            <option>AI / automation product</option>
-            <option>Other</option>
-          </select>
-        </label>
-        <label>
-          <span>Target timeline</span>
-          <select name="timeline" defaultValue="">
-            <option value="">Choose a timeline</option>
-            <option>As soon as possible</option>
-            <option>Within 1 month</option>
-            <option>1–3 months</option>
-            <option>3–6 months</option>
-            <option>Still planning</option>
-          </select>
-        </label>
+        <label><span>Business name</span><input name="business" type="text" placeholder="Your business" autoComplete="organization" /></label>
+        <label><span>What do you need?</span><select name="project_type" defaultValue="Business website"><option>Business website</option><option>Online store or catalogue</option><option>Booking or enquiry website</option><option>Custom web application</option><option>Redesign an existing website</option><option>Not sure yet</option></select></label>
       </div>
-
-      <label>
-        <span>What should the product do?</span>
-        <textarea
-          name="project_details"
-          rows={4}
-          placeholder="Tell me what you want to build, the main features, and who it is for."
-          required
-        />
-      </label>
-
-      <label>
-        <span>What are you expecting from me?</span>
-        <textarea
-          name="expectations"
-          rows={3}
-          placeholder="For example: UI design, full development, database, payments, deployment, maintenance..."
-          required
-        />
-      </label>
-
-      <div className="form-row">
-        <label>
-          <span>Approx. budget</span>
-          <select name="budget" defaultValue="">
-            <option value="">Prefer not to say</option>
-            <option>Under ₦250,000</option>
-            <option>₦250,000 – ₦500,000</option>
-            <option>₦500,000 – ₦1,000,000</option>
-            <option>₦1,000,000+</option>
-            <option>We need to discuss it</option>
-          </select>
-        </label>
-        <label>
-          <span>Current stage</span>
-          <select name="stage" defaultValue="">
-            <option value="">Choose one</option>
-            <option>Just an idea</option>
-            <option>Planning / design</option>
-            <option>Already started</option>
-            <option>Existing product needs work</option>
-          </select>
-        </label>
-      </div>
-
-      <button className="form-submit btn primary" type="submit" disabled={status === 'sending'}>
-        {status === 'sending' ? 'Sending brief…' : 'Send project brief ↗'}
-      </button>
-
+      <label><span>Tell us a little about it</span><textarea name="project_details" rows={5} placeholder="What does your business do, and what would you like your website to help with?" required /></label>
+      <button className="form-submit" type="submit" disabled={status === 'sending'}>{status === 'sending' ? 'Sending enquiry…' : 'Send project enquiry'} <span>↗</span></button>
       {status === 'error' && <p className="form-error" role="alert">{message}</p>}
-
-      <p className="form-footnote">
-        Your details go directly to <a href={`mailto:${email}`}>{email}</a>.
-      </p>
+      <p className="form-footnote">Your enquiry goes directly to <a href={'mailto:' + email}>{email}</a>.</p>
     </form>
   );
 }
