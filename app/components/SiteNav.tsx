@@ -36,7 +36,7 @@ export default function SiteNav() {
           <Link href="/how-to-build-a-website-in-nigeria">Website guide</Link>
         </nav>
         <div className="studio-nav-actions">
-          <a href="/#contact">Start a project <span>↗</span></a>
+          <a href="/#contact">Start a project</a>
           <button
             type="button"
             className="studio-menu-button"
@@ -51,9 +51,9 @@ export default function SiteNav() {
       </div>
       {open && (
         <nav className="studio-mobile-nav" id="studio-mobile-navigation" aria-label="Mobile navigation">
-          {links.map((link) => <Link href={link.href} key={link.label} onClick={() => setOpen(false)}>{link.label}<span>↗</span></Link>)}
-          <Link href="/how-to-build-a-website-in-nigeria" onClick={() => setOpen(false)}>Website guide <span>↗</span></Link>
-          <Link href="/#contact" onClick={() => setOpen(false)}>Start a project <span>↗</span></Link>
+          {links.map((link) => <Link href={link.href} key={link.label} onClick={() => setOpen(false)}>{link.label}</Link>)}
+          <Link href="/how-to-build-a-website-in-nigeria" onClick={() => setOpen(false)}>Website guide </Link>
+          <Link href="/#contact" onClick={() => setOpen(false)}>Start a project</Link>
         </nav>
       )}
     </header>
