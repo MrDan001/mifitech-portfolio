@@ -492,3 +492,13 @@
 @media (prefers-reduced-motion:reduce) {
   .studio-shell * { scroll-behavior:auto!important; transition:none!important; }
 }
+
+/* Resolve inherited artwork styles from the previous homepage. */
+.studio-visual:before { content:none; }
+.studio-visual { height:535px; max-width:600px; padding:0; }
+.studio-demo-card { grid-column:auto; }
+.studio-demo-card:nth-child(4),.studio-demo-card:nth-child(5) { grid-column:auto; }
+@media (max-width:760px) {
+  .studio-visual { height:370px; max-width:none; padding:0; }
+  .studio-visual:before { content:""; }
+}
