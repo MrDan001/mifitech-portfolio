@@ -2,9 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 
-const email = 'officialsafebase@gmail.com';
-
-export default function ContactForm() {
+export default function ContactForm({ email = 'officialsafebase@gmail.com' }: { email?: string }) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
 

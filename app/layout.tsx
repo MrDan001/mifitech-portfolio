@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getSeo } from '@/lib/backend';
+import { getBusinessSettings } from '@/lib/site-content';
 import './globals.css';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -16,15 +17,17 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const business = await getBusinessSettings();
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
-    name: 'MifiTech',
+    name: business.businessName,
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech-portfolio.vercel.app',
-    email: 'officialsafebase@gmail.com',
-    description: 'Website design, web development, ecommerce and custom web application services for businesses in Nigeria.',
-    areaServed: { '@type': 'Country', name: 'Nigeria' },
+    email: business.contactEmail,
+    telephone: business.phone || undefined,
+    description: business.tagline + ' Website design, web development, ecommerce and custom web application services.',
+    areaServed: { '@type': 'Country', name: business.location || 'Nigeria' },
     serviceType: ['Website design', 'Website development', 'Ecommerce website development', 'Custom web applications'],
   };
   return <html lang="en"><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />{children}</body></html>;
