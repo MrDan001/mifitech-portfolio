@@ -1,0 +1,2 @@
+import type {MetadataRoute} from 'next';
+export default function sitemap():MetadataRoute.Sitemap{const root='https://mifitech-portfolio.vercel.app';return ['','/how-to-build-a-website-in-nigeria','/demos/event-planner','/demos/fashion-boutique','/demos/restaurant','/demos/beauty-salon','/demos/printing','/projects/ludo-live','/projects/ehealthcare','/projects/garrison-market','/projects/the-africa-plug'].map(p=>({url:root+p,changeFrequency:p===''?'weekly':'monthly',priority:p===''?1:p.startsWith('/how-to')?.9:.7}));}
