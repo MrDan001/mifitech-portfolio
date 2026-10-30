@@ -1,14 +1,14 @@
 'use client';
-import {useEffect,useState} from 'react';
+import {useEffect,useState,type CSSProperties,type FormEvent} from 'react';
 type Row=Record<string,any>;
-const box:React.CSSProperties={background:'#fff',border:'1px solid #e5e1d9',borderRadius:12,padding:18};
+const box:CSSProperties={background:'#fff',border:'1px solid #e5e1d9',borderRadius:12,padding:18};
 const field:React.CSSProperties={width:'100%',padding:11,border:'1px solid #d7d3ca',borderRadius:7,marginTop:6,font:'inherit'};
 export default function AdminPanel(){
  const [tab,setTab]=useState('leads'),[leads,setLeads]=useState<Row[]>([]),[proposals,setProposals]=useState<Row[]>([]),[seo,setSeo]=useState<any>({title:'',description:'',keywords:[],canonicalUrl:'https://mifitech-portfolio.vercel.app',ogTitle:'',ogDescription:''}),[msg,setMsg]=useState(''),[link,setLink]=useState('');
  async function load(){const [a,b,c]=await Promise.all(['leads','proposals','seo'].map(x=>fetch('/api/admin/'+x)));const [x,y,z]=await Promise.all([a.json(),b.json(),c.json()]);if(a.ok)setLeads(x.leads||[]);if(b.ok)setProposals(y.proposals||[]);if(c.ok)setSeo(z.settings);}
  useEffect(()=>{load().catch(()=>setMsg('Database setup is required.'))},[]);
  async function update(type:string,id:string,status:string){const r=await fetch('/api/admin/'+type,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,status})});if(r.ok)load();else setMsg((await r.json()).error||'Update failed');}
- async function submitProposal(e:React.FormEvent<HTMLFormElement>){e.preventDefault();const f=e.currentTarget;const r=await fetch('/api/admin/proposals',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(f)))});const d=await r.json();if(!r.ok){setMsg(d.error);return;}setLink(location.origin+'/proposal/'+d.token);f.reset();load();}
+ async function submitProposal(e:FormEvent<HTMLFormElement>){e.preventDefault();const f=e.currentTarget;const r=await fetch('/api/admin/proposals',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(f)))});const d=await r.json();if(!r.ok){setMsg(d.error);return;}setLink(location.origin+'/proposal/'+d.token);f.reset();load();}
  async function saveSeo(e:React.FormEvent){e.preventDefault();const r=await fetch('/api/admin/seo',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...seo,keywords:typeof seo.keywords==='string'?seo.keywords.split(',').map((x:string)=>x.trim()):seo.keywords})});const d=await r.json();setMsg(r.ok?'SEO settings saved.':d.error||'Could not save.');}
  async function logout(){await fetch('/api/admin/logout',{method:'POST'});location.reload();}
  const input=(name:string,value:any,onChange:(v:string)=>void,area=false)=><label className="admin-field">{name}{area?<textarea rows={4} value={value||''} onChange={e=>onChange(e.target.value)}/>:<input value={value||''} onChange={e=>onChange(e.target.value)}/>}</label>;

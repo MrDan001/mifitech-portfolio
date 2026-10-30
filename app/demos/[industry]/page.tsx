@@ -122,7 +122,7 @@ export default async function IndustryDemo({ params }: { params: Promise<{ indus
 
   const subject = encodeURIComponent('Website concept for my business');
   const body = encodeURIComponent('Hello MifiTech,\n\nI viewed the ' + demo.name + ' demo and would like to discuss a website for my business.\n\nBusiness name:\nWhat I need:\n');
-  const contactHref = '/#contact';
+  const contactHref = '/?demo=' + encodeURIComponent(industry) + '#contact';
 
   return (
     <main className={'demo-page demo-' + industry}>
