@@ -126,18 +126,18 @@ export default async function IndustryDemo({ params }: { params: Promise<{ indus
 
   return (
     <main className={'demo-page demo-' + industry}>
-      <div className="demo-disclaimer-bar"><span>CONCEPT PREVIEW</span><span>FICTIONAL BRAND · ILLUSTRATIVE CONTENT · NOT A CLIENT WEBSITE</span><Link href="/#showcase">← All demos</Link></div>
+      <div className="demo-disclaimer-bar"><span>CONCEPT PREVIEW</span><span>FICTIONAL BRAND · ILLUSTRATIVE CONTENT · NOT A CLIENT WEBSITE</span><Link href="/#showcase">All demos</Link></div>
       <header className="demo-header">
         <div className="demo-brand"><Link href="/">{demo.name}</Link><span>{demo.descriptor}</span></div>
         <nav><a href="#story">The experience</a><a href="#offer">Explore</a><a href="#contact">Enquiries</a></nav>
-        <a className="demo-header-cta" href="#contact">{demo.primaryAction} ↗</a>
+        <a className="demo-header-cta" href="#contact">{demo.primaryAction}</a>
       </header>
       <section className="demo-hero">
         <div className="demo-hero-copy">
           <span className="demo-overline">{demo.descriptor}</span>
           <h1>{demo.title}</h1>
           <p>{demo.intro}</p>
-          <a className="demo-button" href="#offer">{demo.primaryAction} <span>↗</span></a>
+          <a className="demo-button" href="#offer">{demo.primaryAction}</a>
           <span className="demo-hero-foot">A SAMPLE WEBSITE EXPERIENCE · MADE FOR MOBILE AND DESKTOP</span>
         </div>
         <div className="demo-hero-image" role="img" aria-label={demo.cards[0].alt} style={{ backgroundImage: 'linear-gradient(180deg, transparent 50%, rgba(0,0,0,.36)), url(' + demo.cards[0].image + ')' }}>
@@ -149,8 +149,8 @@ export default async function IndustryDemo({ params }: { params: Promise<{ indus
         <div className="demo-offer-heading"><span>DISCOVER THE EXPERIENCE</span><h2>Made to be explored.</h2></div>
         <div className="demo-feature-grid">{demo.cards.map((card, index) => <article className="demo-feature" key={card.title}><div className="demo-feature-image" role="img" aria-label={card.alt} style={{ backgroundImage: 'url(' + card.image + ')' }}><span>0{index + 1}</span></div><div className="demo-feature-copy"><span>{card.label}</span><h3>{card.title}</h3><p>{card.description}</p></div></article>)}</div>
       </section>
-      <section className="demo-quote" id="contact"><span>LET'S MAKE THIS YOURS</span><h2>{demo.closingTitle}</h2><p>{demo.closingText}</p><a className="demo-button" href={contactHref}>Build a website like this <span>↗</span></a><a className="demo-email-link" href={'mailto:officialsafebase@gmail.com?subject=' + subject + '&body=' + body}>Email MifiTech directly ↗</a></section>
-      <footer className="demo-footer"><Link href="/" className="demo-powered">A CONCEPT BY <strong>MIFITECH.</strong></Link><span>Illustrative design preview · Not a live business</span><Link href="/#showcase">Explore other demos ↗</Link></footer>
+      <section className="demo-quote" id="contact"><span>LET'S MAKE THIS YOURS</span><h2>{demo.closingTitle}</h2><p>{demo.closingText}</p><a className="demo-button" href={contactHref}>Build a website like this</a><a className="demo-email-link" href={'mailto:officialsafebase@gmail.com?subject=' + subject + '&body=' + body}>Email MifiTech directly</a></section>
+      <footer className="demo-footer"><Link href="/" className="demo-powered">A CONCEPT BY <strong>MIFITECH.</strong></Link><span>Illustrative design preview · Not a live business</span><Link href="/#showcase">Explore other demos</Link></footer>
     </main>
   );
 }
