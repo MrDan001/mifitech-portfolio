@@ -158,14 +158,14 @@ export default function AdminPanel() {
   }
 
   function updateField(section: 'hero' | 'sections' | 'contact', key: string, value: string) {
-    setContent(previous => ({ ...previous, [section]: { ...previous[section], [key]: value } }));
+    setContent(previous => ({ ...previous, [section]: { ...previous[section], [key]: value } } as HomepageContent));
   }
   function updateCard(list: 'services' | 'projects' | 'demos', id: string, key: string, value: string | boolean) {
     setContent(previous => ({ ...previous, [list]: (previous[list] as unknown as Array<Record<string, any>>).map(item => item.id === id ? { ...item, [key]: value } : item) } as HomepageContent));
   }
   function reorder(list: 'services' | 'projects' | 'demos', index: number, direction: -1 | 1) {
     setContent(previous => {
-      const next = [...previous[list]];
+      const next = [...previous[list]] as unknown as Array<Record<string, any>>;
       const target = index + direction;
       if (target < 0 || target >= next.length) return previous;
       [next[index], next[target]] = [next[target], next[index]];

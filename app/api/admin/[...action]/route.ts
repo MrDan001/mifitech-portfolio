@@ -4,6 +4,7 @@ import { db, isAdmin, passwordOK, sessionValue, seoDefaults } from '@/lib/backen
 import { defaultBusinessSettings, getHomepageContent } from '@/lib/site-content';
 
 type Ctx = { params: Promise<{ action: string[] }> };
+type MediaAsset = { id: string; file_name: string; storage_path: string; public_url: string; content_type: string; size_bytes: number; created_at: string };
 type Payment = { proposal_id: string | null; amount: number; status: string };
 const leadStatuses = ['new','interested','consultation','proposal_sent','awaiting_payment','converted','lost'];
 const proposalStatuses = ['draft','sent','accepted','declined','awaiting_payment','paid','in_progress','completed'];
@@ -193,14 +194,14 @@ export async function GET(_req: Request, ctx: Ctx) {
   if (!await isAdmin()) return NextResponse.json({ error: 'Unauthorised.' }, { status: 401 });
 
   try {
-    if (route === 'leads') return NextResponse.json({ leads: await db('leads?select=*&order=created_at.desc') });
-    if (route === 'proposals') return NextResponse.json({ proposals: await db('proposals?select=*&order=created_at.desc') });
+    if (route === 'leads') return NextResponse.json({ leads: await db<Array<Record<string, any>>>('leads?select=*&order=created_at.desc') });
+    if (route === 'proposals') return NextResponse.json({ proposals: await db<Array<Record<string, any>>>('proposals?select=*&order=created_at.desc') });
     if (route === 'payments') {
       const [payments, proposals] = await Promise.all([
         db<Array<Record<string, any>>>('payments?select=*&order=created_at.desc'),
         db<Array<{ id: string; business_name: string }>>('proposals?select=id,business_name'),
       ]);
-      const names = new Map(proposals.map(p => [p.id, p.business_name]));
+      const names = new Map<string, string>(proposals.map(p => [p.id, p.business_name] as const));
       return NextResponse.json({ payments: payments.map(p => ({ ...p, business_name: p.proposal_id ? names.get(p.proposal_id) || 'Proposal' : 'Unlinked payment' })) });
     }
     if (route === 'dashboard') {
@@ -217,7 +218,7 @@ export async function GET(_req: Request, ctx: Ctx) {
       });
     }
     if (route === 'website') return NextResponse.json({ content: await getHomepageContent() });
-    if (route === 'media') return NextResponse.json({ assets: await db('media_assets?select=*&order=created_at.desc') });
+    if (route === 'media') return NextResponse.json({ assets: await db<Array<MediaAsset>>('media_assets?select=*&order=created_at.desc') });
     if (route === 'seo') {
       const rows = await db<Array<{ value: object }>>('site_settings?key=eq.seo&select=value&limit=1');
       return NextResponse.json({ settings: { ...seoDefaults, ...(rows[0]?.value || {}) } });
