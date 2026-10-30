@@ -1,0 +1,6 @@
+create extension if not exists pgcrypto;
+create table if not exists public.leads(id uuid primary key default gen_random_uuid(),name text not null,email text not null,business text,project_type text,details text not null,source_url text,demo text,status text not null default 'new',created_at timestamptz not null default now(),updated_at timestamptz not null default now());
+create table if not exists public.proposals(id uuid primary key default gen_random_uuid(),token text not null unique,client_name text not null,client_email text not null,business_name text not null,scope text not null,timeline text not null,amount numeric(14,2) not null,currency text not null default 'NGN',payment_terms text,payment_instructions text,status text not null default 'sent',accepted_at timestamptz,created_at timestamptz not null default now(),updated_at timestamptz not null default now());
+create table if not exists public.site_settings(key text primary key,value jsonb not null,updated_at timestamptz not null default now());
+alter table public.leads enable row level security; alter table public.proposals enable row level security; alter table public.site_settings enable row level security;
+-- No public policies: server-only service-role access is gated by signed admin sessions.
