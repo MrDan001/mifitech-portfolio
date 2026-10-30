@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { getHomepageContent } from '@/lib/site-content';
 
 type DemoCard = { title: string; description: string; image: string; alt: string; label: string };
 
@@ -106,18 +107,40 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ industry: string }> }): Promise<Metadata> {
   const { industry } = await params;
+  const website = await getHomepageContent();
+  const listing = website.demos.find((item) => item.slug === industry && item.active);
   const demo = demos[industry];
-  if (!demo) return { title: 'Website demo' };
+  if (!demo && !listing) return { title: 'Website demo' };
   return {
-    title: demo.name + ' — Website concept',
-    description: demo.intro,
+    title: (listing?.brand || demo?.name || 'Website demo') + ' — Website concept',
+    description: listing?.text || demo?.intro || 'An illustrative website concept by MifiTech.',
     robots: { index: false, follow: false },
   };
 }
 
 export default async function IndustryDemo({ params }: { params: Promise<{ industry: string }> }) {
   const { industry } = await params;
-  const demo = demos[industry];
+  const website = await getHomepageContent();
+  const listing = website.demos.find((item) => item.slug === industry && item.active);
+  const template = demos[industry];
+  const demo: DemoSite | undefined = template ? {
+    ...template,
+    name: listing?.brand || template.name,
+    descriptor: listing?.title?.toUpperCase() || template.descriptor,
+    intro: listing?.text || template.intro,
+    cards: listing?.image ? [{ ...template.cards[0], image: listing.image }] : template.cards,
+  } : listing ? {
+    name: listing.brand || listing.title,
+    descriptor: listing.title.toUpperCase(),
+    title: 'A website concept for ' + listing.title.toLowerCase() + '.',
+    intro: listing.text,
+    primaryAction: 'Discuss this website',
+    sectionTitle: 'A digital home built around your business.',
+    sectionIntro: 'This industry concept is a starting point. We will shape the full website around your brand, services and customers.',
+    cards: [{ title: listing.title, description: listing.text, image: listing.image, alt: listing.title + ' concept image', label: listing.tags || 'WEBSITE CONCEPT' }],
+    closingTitle: 'Let’s make this concept yours.',
+    closingText: 'Tell us what your business needs and we will shape the right website around it.',
+  } : undefined;
   if (!demo) notFound();
 
   const subject = encodeURIComponent('Website concept for my business');
