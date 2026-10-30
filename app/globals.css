@@ -396,3 +396,30 @@ img{max-width:100%}
   .demo-footer{display:grid;gap:10px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* Admin workspace, proposal pages and search guide */
+.admin-shell,.admin-login,.proposal-page,.guide-page{min-height:100vh;background:#f4f2ed;color:#242522;font-family:Arial,sans-serif}
+.admin-shell>header,.guide-page>header{display:flex;align-items:center;justify-content:space-between;padding:18px clamp(18px,5vw,64px);background:#fff;border-bottom:1px solid #e5e1d9}
+.admin-shell>header button,.admin-content button,.admin-login button,.proposal-page button{padding:11px 16px;border:0;border-radius:8px;background:#20211f;color:#fff;font-weight:700;cursor:pointer}
+.admin-brand{font-size:24px;font-weight:900;color:#242522;text-decoration:none}.admin-brand span{color:#b24c70}.admin-brand small{font-size:10px;letter-spacing:2px;color:#888}
+.admin-content{max-width:1240px;margin:auto;padding:38px clamp(18px,4vw,48px)}
+.admin-kicker{color:#b24c70;font-size:11px;font-weight:800;letter-spacing:2px}
+.admin-content>h1{font-size:clamp(30px,4vw,44px);margin:8px 0}.admin-content>p{color:#696a65}
+.admin-content nav{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0}
+.admin-content nav button{background:#fff;color:#333;border:1px solid #e1ddd5}.admin-content nav button.active{background:#22231f;color:#fff}
+.admin-notice{background:#fff;padding:14px;border:1px solid #d8c6a4;border-radius:9px}
+.admin-content section>h2{font-size:22px}.admin-content article{margin-bottom:12px}
+.admin-row{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.admin-row h3{margin:0 0 5px}.admin-row p{font-size:12px;color:#777}
+.admin-content select{padding:10px;border:1px solid #d7d3ca;border-radius:7px;background:white}
+.admin-columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:18px;align-items:start}
+.admin-field{display:block;margin:14px 0;font-size:13px;font-weight:700;text-transform:capitalize}
+.admin-field input,.admin-field textarea{display:block;width:100%;padding:11px;border:1px solid #d7d3ca;border-radius:7px;margin-top:6px;font:inherit;background:white}
+.admin-login{display:grid;place-items:center;padding:24px}.admin-login form{width:min(100%,440px);background:white;border:1px solid #e5e1d9;border-radius:18px;padding:36px;box-shadow:0 20px 70px #28251d12}
+.admin-login .admin-kicker{margin-top:38px}.admin-login form>p:not(.admin-kicker){color:#666;line-height:1.6}.admin-login label{display:grid;gap:8px;margin:25px 0 15px;font-size:13px;font-weight:700}
+.admin-login input{padding:14px;border:1px solid #d8d5ce;border-radius:9px}.admin-login button{width:100%;padding:15px}.admin-login output{display:block;color:#b42318;margin-top:12px;font-size:13px}
+.proposal-page{padding:35px 18px}.proposal-page article{max-width:780px;margin:30px auto;background:#fff;border:1px solid #e5e1d9;border-radius:15px;padding:clamp(22px,5vw,55px)}
+.proposal-page h1{font-size:clamp(32px,5vw,52px);margin:14px 0}.proposal-page h2{font-size:19px;margin-top:30px}.proposal-page p{white-space:pre-wrap;line-height:1.75;color:#555}.proposal-price{font-size:30px;font-weight:800;margin:25px 0;padding:20px;background:#f4f2ed}
+.proposal-page button{margin-top:15px}.proposal-page a:not(.admin-brand){color:#16786f}
+.guide-page>header{position:sticky;top:0;z-index:2}.guide-page>header>a:last-child{background:#20211f;color:white;padding:12px 15px;border-radius:7px;font-size:12px}
+.guide-page article{max-width:800px;margin:60px auto;padding:0 22px 50px}.guide-page h1{font-size:clamp(36px,6vw,58px);line-height:1.04;letter-spacing:-2px;margin:18px 0}.guide-lead{font-size:19px;line-height:1.7;color:#555}.guide-page article h2{font-size:25px;margin:38px 0 10px}.guide-page article p,.guide-page li{font-size:16px;line-height:1.85;color:#515650}.guide-page li{margin:8px 0}.guide-page article a{color:#16786f;text-decoration:underline}.guide-page footer{text-align:center;padding:24px;border-top:1px solid #e5e1d9;color:#777}
+@media(max-width:650px){.admin-content{padding-top:25px}.admin-login form{padding:25px}.guide-page article{margin:35px auto}.guide-page article p,.guide-page li{font-size:15px}}

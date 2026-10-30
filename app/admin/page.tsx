@@ -1,5 +1,7 @@
 import { isAdmin } from '@/lib/backend';
 import AdminPanel from './panel';
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Admin', robots: { index: false, follow: false } };
 export const dynamic='force-dynamic';
 export default async function AdminPage() { return await isAdmin() ? <AdminPanel/> : <Login/>; }
 function Login() { return <div className="admin-login"><form id="admin-login-form"><a className="admin-brand" href="/">MifiTech<span>.</span></a><p className="admin-kicker">PRIVATE WORKSPACE</p><h1>Admin sign in</h1><p>Manage leads, proposals, payments and search visibility.</p><label>Admin password<input type="password" name="password" required autoComplete="current-password"/></label><button>Sign in →</button><output id="login-error"></output></form><script dangerouslySetInnerHTML={{__html:`document.getElementById('admin-login-form').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget;const r=await fetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:new FormData(f).get('password')})});const d=await r.json();if(r.ok)location.reload();else document.getElementById('login-error').textContent=d.error||'Sign in failed';});`}}/></div>; }
