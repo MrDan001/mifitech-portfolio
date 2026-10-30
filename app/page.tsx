@@ -4,126 +4,123 @@ import SiteNav from './components/SiteNav';
 import ContactForm from './components/ContactForm';
 
 const demos = [
-  { slug: 'event-planner', number: '01', name: 'Event & Experiences', brand: 'Gather & Grace', desc: 'A visual home for planners, decorators and event teams. Show the atmosphere, packages and make enquiries simple.', style: 'demo-card-event', tags: ['Portfolio', 'Packages', 'Enquiries'] },
-  { slug: 'fashion-boutique', number: '02', name: 'Fashion & Boutique', brand: 'NAYA / STYLE HOUSE', desc: 'A polished digital storefront for collections, lookbooks and direct customer orders.', style: 'demo-card-fashion', tags: ['Lookbook', 'Catalogue', 'Orders'] },
-  { slug: 'restaurant', number: '03', name: 'Restaurant & Catering', brand: 'MESA / kitchen', desc: 'Put your menu, atmosphere and reservations in one easy-to-use place.', style: 'demo-card-food', tags: ['Menu', 'Gallery', 'Bookings'] },
-  { slug: 'beauty-salon', number: '04', name: 'Beauty & Salon', brand: 'AUREL / beauty studio', desc: 'Showcase your services, results and team while making appointment requests effortless.', style: 'demo-card-beauty', tags: ['Services', 'Gallery', 'Appointments'] },
-  { slug: 'printing', number: '05', name: 'Printing & Creative', brand: 'FORM / print studio', desc: 'Present your print services, finished work and a clear path for customers to request a quote.', style: 'demo-card-print', tags: ['Services', 'Portfolio', 'Quotes'] },
+  { slug: 'event-planner', n: '01', title: 'Events & experiences', brand: 'Gather & Grace', text: 'A beautiful way to present your work, packages and event enquiries.', tags: ['Portfolio', 'Packages', 'Enquiries'], tone: 'sand' },
+  { slug: 'fashion-boutique', n: '02', title: 'Fashion & retail', brand: 'NAYA / STYLE HOUSE', text: 'Collections, product stories and a smoother route from browsing to ordering.', tags: ['Lookbook', 'Catalogue', 'Orders'], tone: 'rose' },
+  { slug: 'restaurant', n: '03', title: 'Restaurant & catering', brand: 'MESA / kitchen', text: 'Menus, atmosphere, location and reservations in one welcoming place.', tags: ['Menu', 'Gallery', 'Bookings'], tone: 'olive' },
+  { slug: 'beauty-salon', n: '04', title: 'Beauty & wellness', brand: 'AUREL / beauty studio', text: 'Services, results and appointment requests presented with care.', tags: ['Services', 'Gallery', 'Appointments'], tone: 'lilac' },
+  { slug: 'printing', n: '05', title: 'Printing & creative', brand: 'FORM / print studio', text: 'Show your capabilities, completed work and make quote requests easier.', tags: ['Services', 'Portfolio', 'Quotes'], tone: 'blue' },
 ];
 
 const projects = [
-  { slug: 'ludo-live', image: '/previews/ludo-live.svg', title: 'Ludo Live', type: 'MULTIPLAYER GAMING', desc: 'A real-time multiplayer game platform with player experiences, missions, tournaments and product systems.' },
-  { slug: 'ehealthcare', image: '/previews/ehealthcare.svg', title: 'eHealthcare', type: 'HEALTHCARE PLATFORM', desc: 'A digital healthcare experience shaped around clear patient, appointment and care workflows.' },
-  { slug: 'garrison-market', image: '/previews/garrison-market.svg', title: 'Garrison Market', type: 'BUSINESS OPERATIONS', desc: 'An operations platform for inventory, staff, sales and everyday business management.', live: 'https://gmstock.co' },
-  { slug: 'the-africa-plug', image: '/previews/the-africa-plug.svg', title: 'The Africa Plug', type: 'MEDIA & PUBLISHING', desc: 'A content platform built around publishing, video and media experiences.' },
+  { slug: 'ludo-live', image: '/previews/ludo-live.svg', name: 'Ludo Live', type: 'GAMING PLATFORM', text: 'A multiplayer gaming experience with player journeys, missions and tournaments.' },
+  { slug: 'ehealthcare', image: '/previews/ehealthcare.svg', name: 'eHealthcare', type: 'HEALTHCARE TECHNOLOGY', text: 'A digital healthcare platform built around patient access and care workflows.' },
+  { slug: 'garrison-market', image: '/previews/garrison-market.svg', name: 'Garrison Market', type: 'BUSINESS OPERATIONS', text: 'An operations platform for inventory, staff, sales and everyday business management.', live: 'https://gmstock.co' },
+  { slug: 'the-africa-plug', image: '/previews/the-africa-plug.svg', name: 'The Africa Plug', type: 'MEDIA & PUBLISHING', text: 'A publishing experience for stories, video and African media.' },
 ];
 
 const services = [
-  { number: '01', title: 'Business websites', text: 'A clear, credible online home that explains what you do and gives customers a reason to choose you.' },
-  { number: '02', title: 'Online stores & catalogues', text: 'Show products, organise collections and make it easier for customers to place an order.' },
-  { number: '03', title: 'Bookings & enquiries', text: 'Turn interest into action with appointment requests, booking forms and direct contact paths.' },
-  { number: '04', title: 'Custom web applications', text: 'Purpose-built tools for the workflows, people and operations that make your business run.' },
+  { n: '01', name: 'Business websites', body: 'A confident online home that explains what you do and turns interest into enquiries.' },
+  { n: '02', name: 'Online stores', body: 'Product catalogues, shopping journeys and ordering experiences shaped around your customers.' },
+  { n: '03', name: 'Bookings & enquiries', body: 'Practical forms and booking flows that make it easier for customers to take action.' },
+  { n: '04', name: 'Custom web applications', body: 'Purpose-built digital tools for the real work happening inside your business.' },
 ];
 
-const steps = [
-  { number: '01', title: 'We learn your business', text: 'We understand your customers, services and what you need the website to achieve.' },
-  { number: '02', title: 'We shape the experience', text: 'You review the structure and visual direction before the full build moves ahead.' },
-  { number: '03', title: 'We build & refine', text: 'We develop the website, check it across screen sizes and refine the details with you.' },
-  { number: '04', title: 'We launch together', text: 'We help get your website online and show you how to keep its content up to date.' },
+const stages = [
+  { n: '01', title: 'Understand', body: 'We get to know your business, your customers and the result you need.' },
+  { n: '02', title: 'Shape', body: 'We agree the structure, visual direction, scope and project plan before building.' },
+  { n: '03', title: 'Build', body: 'We develop the experience, test the details and refine it with your feedback.' },
+  { n: '04', title: 'Launch', body: 'We take your website live and walk you through what happens next.' },
 ];
 
 export default function Home() {
   return (
-    <>
+    <div className="studio-shell">
       <SiteNav />
       <main>
-        <section className="hero" id="top">
-          <div className="wrap hero-layout">
-            <div className="hero-copy">
-              <div className="eyebrow"><span className="eyebrow-dot" /> DIGITAL STUDIO · NIGERIA</div>
-              <p className="hero-overline">YOUR BUSINESS DESERVES MORE THAN A SOCIAL PAGE.</p>
-              <h1>Make your business <em>impossible to overlook.</em></h1>
-              <p className="hero-intro">We design and build modern websites that help people understand your business, trust what you offer and take the next step.</p>
-              <div className="hero-actions">
-                <a className="button button-dark" href="#showcase">Explore website demos <span>↘</span></a>
-                <a className="button button-light" href="#contact">Discuss your project <span>↗</span></a>
+        <section className="studio-hero">
+          <div className="studio-container studio-hero-grid">
+            <div className="studio-hero-copy">
+              <div className="studio-eyebrow"><span /> WEB DESIGN · DEVELOPMENT · DIGITAL PRODUCTS</div>
+              <p className="studio-kicker">YOUR BUSINESS, WITH A BETTER DIGITAL PRESENCE.</p>
+              <h1>Make your next move <em>online.</em></h1>
+              <p className="studio-lead">We build thoughtful websites and useful digital products that help businesses look credible, reach customers and move work forward.</p>
+              <div className="studio-actions">
+                <a href="#contact" className="studio-button studio-button-dark">Let's discuss your project <span>↗</span></a>
+                <a href="#demos" className="studio-text-button">Explore website concepts <span>↓</span></a>
               </div>
-              <div className="hero-proof">
-                <span>MADE FOR REAL BUSINESSES</span>
-                <i />
-                <span>DESIGNED FOR EVERY SCREEN</span>
-                <i />
-                <span>BUILT TO CONVERT INTEREST INTO ACTION</span>
-              </div>
+              <div className="studio-hero-foot"><span>BUILT AROUND YOUR BUSINESS</span><i /> <span>MADE FOR REAL PEOPLE</span><i /> <span>READY FOR EVERY SCREEN</span></div>
             </div>
-            <div className="hero-art" aria-label="Preview of a modern business website">
-              <div className="hero-art-top"><span className="browser-dots"><i /><i /><i /></span><span>YOUR NEXT WEBSITE</span><span className="browser-status">LIVE CONCEPT</span></div>
-              <div className="hero-browser">
-                <div className="browser-side">
-                  <span className="browser-brand">STUDIO<span>.</span></span>
-                  <span className="browser-menu">COLLECTIONS<br />ABOUT<br />CONTACT</span>
-                  <span className="browser-small">DESIGNED TO<br />BE REMEMBERED.</span>
-                </div>
-                <div className="browser-main">
-                  <div className="browser-photo">
-                    <div className="photo-label">MADE FOR<br />YOUR MOMENT.</div>
-                    <span className="photo-number">01 / 05</span>
+            <div className="studio-visual" aria-label="Illustrative preview of a MifiTech business website">
+              <div className="studio-visual-label"><span>SELECTED DIGITAL EXPERIENCE</span><span>01 / 04</span></div>
+              <div className="studio-browser">
+                <div className="studio-browser-bar"><span><i/><i/><i/></span><small>YOURBRAND.COM</small><b>↗</b></div>
+                <div className="studio-browser-body">
+                  <div className="studio-browser-nav"><strong>YOUR<span>.</span> BRAND</strong><span>ABOUT&nbsp;&nbsp; SERVICES&nbsp;&nbsp; CONTACT</span></div>
+                  <div className="studio-browser-image">
+                    <div><small>MADE FOR WHAT'S NEXT</small><strong>Give your<br/>business room<br/>to grow.</strong><span>DISCOVER MORE ↗</span></div>
                   </div>
-                  <div className="browser-caption"><strong>A clearer way to show what you do.</strong><span>Thoughtful design. Useful details. Easy contact.</span></div>
+                  <div className="studio-browser-bottom"><strong>A clearer way to show what you do.</strong><span>Thoughtful design · Useful details · Easy contact</span></div>
                 </div>
               </div>
-              <div className="floating-note note-top"><span className="note-icon">↗</span><span><strong>Built around you</strong><small>Your brand, your story</small></span></div>
-              <div className="floating-note note-bottom"><span className="note-pulse" /><span><strong>Phone-first experience</strong><small>Ready for the way people browse</small></span></div>
-              <div className="hero-art-index">MIFITECH / DIGITAL PARTNER</div>
+              <div className="studio-float studio-float-one"><b>↗</b><span><strong>Built around you</strong><small>Not another template</small></span></div>
+              <div className="studio-float studio-float-two"><b className="studio-online-dot" /><span><strong>Ready for mobile</strong><small>From first tap to enquiry</small></span></div>
+              <div className="studio-visual-caption">MIFITECH / DIGITAL STUDIO</div>
             </div>
           </div>
-          <div className="hero-bottom-band"><div className="wrap band-inner"><span>WE CAN HELP YOU BUILD</span><div>BUSINESS WEBSITES <b>✳</b> ONLINE STORES <b>✳</b> BOOKING EXPERIENCES <b>✳</b> CUSTOM WEB APPS</div></div></div>
+          <div className="studio-ribbon"><div className="studio-container studio-ribbon-inner"><span>FROM FIRST IDEA TO LIVE WEBSITE</span><b>STRATEGY <i>✳</i> DESIGN <i>✳</i> DEVELOPMENT <i>✳</i> LAUNCH</b></div></div>
         </section>
 
-        <section className="intro-section section-pad" id="about">
-          <div className="wrap intro-grid">
-            <div><p className="section-label">01 / THE OPPORTUNITY</p><h2>Your next customer is already looking for you.</h2></div>
-            <div className="intro-copy"><p>Social media is a useful place to be discovered. Your website gives interested customers one place to understand your business, explore what you offer and contact you with confidence.</p><p>MifiTech turns that opportunity into a thoughtful digital experience — clear on a phone, easy to navigate and designed around the way your business works.</p><a className="text-link" href="#contact">Let's talk about your business <span>↗</span></a></div>
+        <section className="studio-intro studio-section" id="about">
+          <div className="studio-container studio-intro-grid">
+            <div><p className="studio-label">01 / WHY MIFITECH</p><h2>Your website should work as hard as <em>you do.</em></h2></div>
+            <div><p>People discover businesses in many places. When they're ready to know more, your website should make the next step obvious.</p><p>We bring your story, services and customer journey together in one considered digital experience — so people can understand what you offer and feel confident getting in touch.</p><a className="studio-inline-link" href="#process">See how we work <span>↗</span></a></div>
           </div>
         </section>
 
-        <section className="services-section section-pad" id="services">
-          <div className="wrap">
-            <div className="section-heading"><div><p className="section-label">02 / WHAT WE BUILD</p><h2>Useful by design.<br /><em>Made for your goals.</em></h2></div><p className="section-aside">From a first business website to a custom digital product, we focus on the features that make a real difference to your customers.</p></div>
-            <div className="service-grid">{services.map((service) => <article className="service-card" key={service.number}><span className="service-number">{service.number}</span><div className="service-arrow">↗</div><h3>{service.title}</h3><p>{service.text}</p></article>)}</div>
+        <section className="studio-services studio-section" id="services">
+          <div className="studio-container">
+            <div className="studio-section-head"><div><p className="studio-label">02 / WHAT WE DO</p><h2>Digital tools for <em>real business.</em></h2></div><p>Start with what your customers need. We'll help shape the right website, features and experience around it.</p></div>
+            <div className="studio-service-grid">{services.map(s => <article className="studio-service" key={s.n}><div><span>{s.n}</span><b>↗</b></div><h3>{s.name}</h3><p>{s.body}</p></article>)}</div>
           </div>
         </section>
 
-        <section className="showcase-section section-pad" id="showcase">
-          <div className="wrap">
-            <div className="section-heading showcase-heading"><div><p className="section-label">03 / WEBSITE DEMO STUDIO</p><h2>See what your business<br /><em>could look like online.</em></h2></div><p className="section-aside">Choose an industry to explore a sample website. These are concept previews — we customise the real experience around your business.</p></div>
-            <div className="demo-grid">{demos.map((demo) => <article className={'demo-card ' + demo.style} key={demo.slug}>
-              <Link className="demo-card-visual" href={'/demos/' + demo.slug} aria-label={'Preview ' + demo.name}>
-                <div className="demo-card-window"><div className="mini-window-top"><i /><i /><i /><span>PREVIEW / {demo.number}</span></div><div className="mini-window-content"><small>{demo.brand}</small><strong>{demo.slug === 'event-planner' ? 'Make room for moments.' : demo.slug === 'fashion-boutique' ? 'A style of your own.' : demo.slug === 'restaurant' ? 'Gather around good food.' : demo.slug === 'beauty-salon' ? 'Feel like your best.' : 'Make every detail count.'}</strong><span className="mini-window-cta">EXPLORE THE CONCEPT ↗</span><div className="mini-window-blocks"><i /><i /><i /></div></div></div>
-                <span className="demo-card-open">View demo ↗</span>
+        <section className="studio-demos studio-section" id="demos">
+          <div className="studio-container">
+            <div className="studio-section-head"><div><p className="studio-label">03 / DEMO STUDIO</p><h2>Picture your business <em>online.</em></h2></div><p>Explore a concept for an industry like yours. These previews show what's possible — the final website is shaped around your brand.</p></div>
+            <div className="studio-demo-grid">{demos.map(d => <article className="studio-demo-card" key={d.slug}>
+              <Link className={'studio-demo-art tone-' + d.tone} href={'/demos/' + d.slug} aria-label={'Explore ' + d.title + ' website concept'}>
+                <div className="studio-demo-window"><div className="studio-demo-windowbar"><i/><i/><i/><small>CONCEPT / {d.n}</small></div><div className="studio-demo-windowbody"><span>{d.brand}</span><strong>{d.slug === 'event-planner' ? 'Make room for moments.' : d.slug === 'fashion-boutique' ? 'Find your own kind of style.' : d.slug === 'restaurant' ? 'Gather around good food.' : d.slug === 'beauty-salon' ? 'A little time for your best.' : 'Make every detail count.'}</strong><b>EXPLORE THE WEBSITE ↗</b></div></div>
+                <span className="studio-demo-open">OPEN CONCEPT ↗</span>
               </Link>
-              <div className="demo-card-body"><div className="demo-card-title"><span>{demo.number} / {demo.name}</span><Link href={'/demos/' + demo.slug} aria-label={'Open ' + demo.name}>↗</Link></div><h3>{demo.brand}</h3><p>{demo.desc}</p><div className="tag-list">{demo.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></div>
+              <div className="studio-demo-info"><div><span>{d.n} / {d.title}</span><Link href={'/demos/' + d.slug} aria-label={'Open ' + d.title}>↗</Link></div><h3>{d.brand}</h3><p>{d.text}</p><small>{d.tags.join('  ·  ')}</small></div>
             </article>)}</div>
-            <p className="demo-disclaimer"><span>NOTE</span> All five demos use fictional sample brands and illustrative content. They are starting points, not finished client websites.</p>
+            <div className="studio-demo-note"><span>GOOD TO KNOW</span> These are fictional sample brands. We use them to explore direction before tailoring a website to your own business.</div>
           </div>
         </section>
 
-        <section className="work-section section-pad" id="work">
-          <div className="wrap">
-            <div className="section-heading"><div><p className="section-label">04 / SELECTED BUILDS</p><h2>More than a pretty screen.<br /><em>Products that do the work.</em></h2></div><p className="section-aside">A selection of software and digital products from the MifiTech portfolio. Explore each project for more context.</p></div>
-            <div className="work-grid">{projects.map((project, index) => <article className="work-card" key={project.slug}><Link href={'/projects/' + project.slug} className="work-image"><Image src={project.image} alt={project.title + ' preview'} fill sizes="(max-width: 760px) 100vw, 50vw" /><span className="work-image-index">0{index + 1}</span><span className="work-image-link">EXPLORE PROJECT ↗</span></Link><div className="work-content"><p className="section-label">{project.type}</p><div className="work-title-row"><h3>{project.title}</h3><Link href={'/projects/' + project.slug} aria-label={'Read about ' + project.title}>↗</Link></div><p>{project.desc}</p><div className="work-bottom"><Link href={'/projects/' + project.slug}>Project details <span>↗</span></Link>{project.live ? <a href={project.live} target="_blank" rel="noreferrer">Visit live site ↗</a> : <span>Portfolio project</span>}</div></div></article>)}</div>
+        <section className="studio-work studio-section" id="work">
+          <div className="studio-container">
+            <div className="studio-section-head"><div><p className="studio-label">04 / SELECTED WORK</p><h2>Built to do more than <em>look good.</em></h2></div><p>Digital products and platforms from the MifiTech portfolio. Explore the thinking and experience behind each build.</p></div>
+            <div className="studio-work-grid">{projects.map((p,i)=><article className="studio-work-card" key={p.slug}><Link className="studio-work-image" href={'/projects/' + p.slug}><Image src={p.image} alt={p.name + ' project preview'} fill sizes="(max-width: 760px) 100vw, 50vw"/><span>0{i+1}</span><b>VIEW PROJECT ↗</b></Link><div className="studio-work-copy"><small>{p.type}</small><div><h3>{p.name}</h3><Link href={'/projects/' + p.slug} aria-label={'View ' + p.name + ' project'}>↗</Link></div><p>{p.text}</p><footer><Link href={'/projects/' + p.slug}>Project details ↗</Link>{p.live ? <a href={p.live} target="_blank" rel="noreferrer">Visit live site ↗</a> : <span>Portfolio project</span>}</footer></div></article>)}</div>
           </div>
         </section>
 
-        <section className="process-section section-pad" id="process">
-          <div className="wrap process-layout"><div className="process-intro"><p className="section-label">05 / HOW WE WORK</p><h2>Clear steps.<br /><em>No guesswork.</em></h2><p>You'll know what we're creating, why it matters and what happens next. We keep the process collaborative and practical.</p><a className="button button-dark" href="#contact">Start a conversation <span>↗</span></a></div><div className="process-list">{steps.map((step) => <article className="process-step" key={step.number}><span>{step.number}</span><div><h3>{step.title}</h3><p>{step.text}</p></div><b>↗</b></article>)}</div></div>
+        <section className="studio-process studio-section" id="process">
+          <div className="studio-container studio-process-grid">
+            <div className="studio-process-intro"><p className="studio-label">05 / THE APPROACH</p><h2>Good work.<br/><em>Clear process.</em></h2><p>No unnecessary complexity. You'll know what we're making, what it costs and what happens next.</p><a href="#contact" className="studio-button studio-button-dark">Start a conversation <span>↗</span></a></div>
+            <div className="studio-stages">{stages.map(s=><article key={s.n}><span>{s.n}</span><div><h3>{s.title}</h3><p>{s.body}</p></div><b>↗</b></article>)}</div>
+          </div>
         </section>
 
-        <section className="contact-section section-pad" id="contact">
-          <div className="wrap contact-layout"><div className="contact-copy"><p className="section-label">06 / LET'S BUILD</p><h2>Have a business in mind?<br /><em>Let's put it online.</em></h2><p>Tell us a little about your business and what you want your website to do. We'll take it from there.</p><div className="contact-direct"><span>DIRECT EMAIL</span><a href="mailto:officialsafebase@gmail.com">officialsafebase@gmail.com ↗</a></div><div className="contact-note">No complicated brief needed. A few sentences are enough to get started.</div></div><div className="contact-form-wrap"><div className="form-topline"><span>PROJECT ENQUIRY</span><span>LET'S START WITH THE BASICS ↘</span></div><ContactForm /></div></div>
+        <section className="studio-guide">
+          <div className="studio-container studio-guide-inner"><div><p className="studio-label">A GOOD PLACE TO START</p><h2>Planning your first business website?</h2><p>Our practical guide covers domains, hosting, content, features, costs and the basics of SEO for Nigerian businesses.</p><Link href="/how-to-build-a-website-in-nigeria">Read: How to build a website in Nigeria <span>↗</span></Link></div><div className="studio-guide-mark">01<span> / FIELD GUIDE</span></div></div>
+        </section>
+
+        <section className="studio-contact studio-section" id="contact">
+          <div className="studio-container studio-contact-grid"><div className="studio-contact-copy"><p className="studio-label">06 / YOUR PROJECT</p><h2>Let's make something <em>useful.</em></h2><p>Tell us about your business and what you want your website to achieve. We'll help you work out the right next step.</p><div className="studio-contact-email"><small>EMAIL THE STUDIO</small><a href="mailto:officialsafebase@gmail.com">officialsafebase@gmail.com ↗</a></div><div className="studio-contact-note">A few details are enough to begin. No complicated brief required.</div></div><div className="studio-form-card"><div><span>PROJECT ENQUIRY</span><small>LET'S START HERE ↘</small></div><ContactForm/></div></div>
         </section>
       </main>
-      <footer className="footer"><div className="wrap footer-main"><Link href="/" className="footer-brand"><span className="brand-mark">M</span><span>MifiTech<span className="brand-period">.</span></span></Link><p>Thoughtful websites. Useful digital products.</p><div className="footer-links"><a href="#services">Services</a><a href="#showcase">Demo studio</a><a href="#work">Selected work</a><a href="/how-to-build-a-website-in-nigeria">Website guide</a><a href="mailto:officialsafebase@gmail.com">Email ↗</a><a href="https://github.com/MrDan001" target="_blank" rel="noreferrer">GitHub ↗</a></div></div><div className="wrap footer-bottom"><span>© {new Date().getFullYear()} MifiTech. All rights reserved.</span><span>DESIGNED WITH INTENTION. BUILT FOR BUSINESS.</span></div></footer>
-    </>
+      <footer className="studio-footer"><div className="studio-container"><div className="studio-footer-main"><Link href="/" className="studio-footer-brand"><b>M</b> MifiTech<span>.</span></Link><p>Thoughtful websites. Useful digital products.</p><nav><a href="#services">Services</a><a href="#demos">Demo studio</a><a href="#work">Selected work</a><Link href="/how-to-build-a-website-in-nigeria">Website guide</Link><a href="#contact">Contact</a></nav></div><div className="studio-footer-bottom"><span>© {new Date().getFullYear()} MifiTech. All rights reserved.</span><span>MADE WITH INTENTION. BUILT FOR BUSINESS.</span></div></div></footer>
+    </div>
   );
 }
