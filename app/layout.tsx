@@ -10,8 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: String(seo.description),
     applicationName: 'MifiTech',
     keywords: Array.isArray(seo.keywords) ? seo.keywords.map(String) : [],
-    alternates: { canonical: '/' },
-    openGraph: { title: String(seo.ogTitle), description: String(seo.ogDescription), siteName: 'MifiTech', type: 'website', url: '/' },
+    openGraph: { title: String(seo.ogTitle), description: String(seo.ogDescription), siteName: 'MifiTech', type: 'website' },
     twitter: { card: 'summary_large_image', title: String(seo.ogTitle), description: String(seo.ogDescription) },
     icons: { icon: '/icon.svg', apple: '/apple-icon.svg' },
   };
