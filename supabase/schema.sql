@@ -48,3 +48,18 @@ grant usage on schema public to service_role;
 grant all privileges on table public.leads to service_role;
 grant all privileges on table public.proposals to service_role;
 grant all privileges on table public.site_settings to service_role;
+
+ 
+-- Publicly readable image bucket; writes happen only through the authenticated server API.
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values (
+  'mifitech-media',
+  'mifitech-media',
+  true,
+  5242880,
+  array['image/jpeg', 'image/png', 'image/webp', 'image/avif', 'image/gif']
+)
+on conflict (id) do update set
+  public = excluded.public,
+  file_size_limit = excluded.file_size_limit,
+  allowed_mime_types = excluded.allowed_mime_types;

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { randomBytes } from 'node:crypto';
-import { db, isAdmin, passwordOK, sessionValue, seoDefaults } from '@/lib/backend';
+import { db, isAdmin, passwordOK, sessionValue, seoDefaults, uploadPublicImage } from '@/lib/backend';
 import { defaultSiteContent, getSiteContent, type SiteContent } from '@/lib/site-content';
 
 type Ctx = { params: Promise<{ action: string[] }> };
@@ -46,6 +46,19 @@ export async function POST(req: Request, ctx: Ctx) {
   }
 
   if (!await isAdmin()) return NextResponse.json({ error: 'Unauthorised.' }, { status: 401 });
+
+  if (route === 'upload') {
+    try {
+      const form = await req.formData();
+      const file = form.get('file');
+      if (!(file instanceof File)) return NextResponse.json({ error: 'Choose an image file to upload.' }, { status: 400 });
+      const url = await uploadPublicImage(file);
+      return NextResponse.json({ ok: true, url });
+    } catch (error) {
+      return NextResponse.json({ error: error instanceof Error ? error.message : 'Image upload failed.' }, { status: 400 });
+    }
+  }
+
   const body = await req.json().catch(() => ({}));
 
   try {

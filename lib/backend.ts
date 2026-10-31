@@ -1,4 +1,4 @@
-import { createHmac, timingSafeEqual } from 'node:crypto';
+import { createHmac, timingSafeEqual, randomUUID } from 'node:crypto';
 import { cookies } from 'next/headers';
 
 const base = (process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL)?.replace(/\/$/, '');
@@ -60,4 +60,33 @@ export async function getSeo() {
   } catch {
     return seoDefaults;
   }
+}
+
+export async function uploadPublicImage(file: File): Promise<string> {
+  if (!base || !key) throw new Error('Configure the portfolio Supabase URL and server-only secret key first.');
+  const mimeToExtension: Record<string, string> = {
+    'image/jpeg': 'jpg',
+    'image/png': 'png',
+    'image/webp': 'webp',
+    'image/avif': 'avif',
+    'image/gif': 'gif',
+  };
+  const extension = mimeToExtension[file.type];
+  if (!extension) throw new Error('Use a JPG, PNG, WebP, AVIF or GIF image.');
+  if (file.size <= 0 || file.size > 5 * 1024 * 1024) throw new Error('Image must be 5 MB or smaller.');
+  const objectPath = 'website/' + randomUUID() + '.' + extension;
+  const response = await fetch(`${base}/storage/v1/object/mifitech-media/${objectPath}`, {
+    method: 'POST',
+    headers: {
+      apikey: key,
+      Authorization: `Bearer ${key}`,
+      'Content-Type': file.type,
+      'x-upsert': 'false',
+    },
+    body: await file.arrayBuffer(),
+    cache: 'no-store',
+  });
+  const body = await response.text();
+  if (!response.ok) throw new Error(body || 'Image upload failed.');
+  return `${base}/storage/v1/object/public/mifitech-media/${objectPath}`;
 }

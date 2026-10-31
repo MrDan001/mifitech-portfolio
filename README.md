@@ -56,7 +56,7 @@ The Website Content tab manages:
 - Portfolio cards, live website URLs and GitHub repository links.
 - Process steps and footer copy.
 
-To remove a project's live website button, clear its Live website URL. Garrison Market is preconfigured with `https://gmstock.co`; other project live-site fields are blank. Image fields accept an existing local asset path or an HTTPS image URL. The admin can change those URLs, but uploading image files needs a separately configured media-storage bucket.
+To remove a project's live website button, clear its Live website URL. Garrison Market is preconfigured with `https://gmstock.co`; other project live-site fields are blank. Image fields accept an existing local asset path or an HTTPS image URL. The Website Content tab can also upload JPG, PNG, WebP, AVIF and GIF files up to 5 MB into the portfolio's public Supabase Storage bucket; uploaded media is served from that bucket.
 
 ## Run locally
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, type CSSProperties, type FormEvent } from 'react';
-import { defaultSiteContent } from '@/lib/site-content';
+import { defaultSiteContent } from '@/lib/site-content-defaults';
 
 type Row = Record<string, any>;
 const box: CSSProperties = { background: '#fff', border: '1px solid #e5e1d9', borderRadius: 12, padding: 18 };
@@ -69,6 +69,23 @@ export default function AdminPanel() {
     setContent((old: any) => ({ ...old, [collection]: old[collection].map((item: any, i: number) => i === index ? { ...item, [field]: value } : item) }));
   }
 
+
+  async function uploadImage(collection: string, index: number, field: string, file: File) {
+    const form = new FormData();
+    form.append('file', file);
+    setMsg('Uploading image…');
+    try {
+      const response = await fetch('/api/admin/upload', { method: 'POST', body: form });
+      const result = await response.json();
+      if (!response.ok || !result.url) throw new Error(result.error || 'Image upload failed.');
+      if (collection === 'hero') updateGroup('hero', field, result.url);
+      else updateItem(collection, index, field, result.url);
+      setMsg('Image uploaded. Save all website changes to publish it.');
+    } catch (error) {
+      setMsg(error instanceof Error ? error.message : 'Image upload failed.');
+    }
+  }
+
   function addItem(collection: string) {
     const templates: Record<string, any> = {
       navigation: { label: 'New link', href: '/#contact' },
@@ -117,7 +134,10 @@ export default function AdminPanel() {
       {(content[collection] || []).map((item: any, index: number) => (
         <div key={collection + index} style={{ borderTop: '1px solid #eee8df', paddingTop: 12, display: 'grid', gap: 8 }}>
           <div style={actionRow}><strong>{item.name || item.title || item.label || item.brand || item.slug || ('Item ' + (index + 1))}</strong><button type="button" style={dangerButton} onClick={() => removeItem(collection, index)}>Delete</button></div>
-          {fields.map((field) => input(field.label, field.list ? (Array.isArray(item[field.key]) ? item[field.key].join(', ') : item[field.key] || '') : item[field.key], (v) => updateItem(collection, index, field.key, field.list ? v.split(',').map((s: string) => s.trim()).filter(Boolean) : v), field.area))}
+          {fields.map((field) => <div key={field.key} style={{ display: 'grid', gap: 6 }}>
+            {input(field.label, field.list ? (Array.isArray(item[field.key]) ? item[field.key].join(', ') : item[field.key] || '') : item[field.key], (v) => updateItem(collection, index, field.key, field.list ? v.split(',').map((s: string) => s.trim()).filter(Boolean) : v), field.area)}
+            {field.key === 'image' && <label className="admin-field">Upload image (max 5 MB)<input type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/gif" onChange={(e) => { const file = e.target.files?.[0]; if (file) uploadImage(collection, index, field.key, file); e.currentTarget.value = ''; }} /></label>}
+          </div>)}
           {collection === 'demos' && <label className="admin-field">Show on homepage<select value={item.visible === false ? 'no' : 'yes'} onChange={(e) => updateItem(collection, index, 'visible', e.target.value === 'yes')}><option value="yes">Visible</option><option value="no">Hidden</option></select></label>}
           {collection === 'projects' && <>
             <label className="admin-field">Show on homepage<select value={item.visible === false ? 'no' : 'yes'} onChange={(e) => updateItem(collection, index, 'visible', e.target.value === 'yes')}><option value="yes">Visible</option><option value="no">Hidden</option></select></label>
@@ -152,7 +172,8 @@ export default function AdminPanel() {
             <div style={cmsCard}>
               <h3 style={{ margin: 0 }}>Hero / first impression</h3>
               {(['eyebrow', 'kicker', 'title', 'emphasis', 'lead', 'primaryLabel', 'primaryHref', 'secondaryLabel', 'secondaryHref', 'visualNote', 'visualIndex', 'ribbonLead'] as string[]).map((key) => input(key.replace(/[A-Z]/g, (m) => ' ' + m).replace(/^./, (m) => m.toUpperCase()), content.hero[key], (v) => updateGroup('hero', key, v), ['lead', 'visualNote'].includes(key)))}
-              {input('Ribbon items (comma separated)', content.hero.ribbonItems.join(', '), (v) => updateGroup('hero', 'ribbonItems', v.split(',').map((x: string) => x.trim()).filter(Boolean)))}
+              {input('Ribbon items (comma separated)', content.hero.ribbonItems.join(', '), (v) => updateGroup('hero', 'ribbonItems', v.split(',').map((x: string) => x.trim()).filter(Boolean))}
+              <label className="admin-field">Upload hero image (JPG, PNG, WebP, AVIF or GIF · max 5 MB)<input type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/gif" onChange={(e) => { const file = e.target.files?.[0]; if (file) uploadImage('hero', 0, 'visualImage', file); e.currentTarget.value = ''; }} /></label>
             </div>
             <div style={cmsCard}>
               <h3 style={{ margin: 0 }}>Section headings and contact details</h3>

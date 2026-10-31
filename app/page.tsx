@@ -36,7 +36,7 @@ export default async function Home() {
               </div>
               <div className="studio-hero-foot"><span>BUILT AROUND YOUR BUSINESS</span><i /><span>MADE FOR REAL PEOPLE</span><i /><span>READY FOR EVERY SCREEN</span></div>
             </div>
-            <div className="studio-visual" role="img" aria-label="A business owner working on her laptop in a bright, welcoming workspace">
+            <div className="studio-visual" role="img" aria-label="A business owner working on her laptop in a bright, welcoming workspace" style={content.hero.visualImage ? { backgroundImage: "linear-gradient(180deg, transparent 55%, rgba(0,0,0,.3)), url(" + content.hero.visualImage + ")" } : undefined}>
               <span className="studio-photo-note">{content.hero.visualNote.split('\\n').map((line, i) => <span key={i}>{line}{i === 0 ? <br /> : null}</span>)} <b>↙</b></span>
               <span className="studio-photo-index">{content.hero.visualIndex}</span>
             </div>
