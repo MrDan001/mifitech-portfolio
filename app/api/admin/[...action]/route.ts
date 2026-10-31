@@ -111,7 +111,7 @@ export async function POST(req: Request, ctx: Ctx) {
       }
 
       const content = { ...defaultSiteContent, ...raw } as SiteContent;
-      if (!Array.isArray(content.navigation) || !Array.isArray(content.services) || !Array.isArray(content.demos) || !Array.isArray(content.projects) || !Array.isArray(content.stages) || !Array.isArray(content.trustPoints) || !Array.isArray(content.faqs) || !Array.isArray(content.testimonials)) {
+      if (!Array.isArray(content.navigation) || !Array.isArray(content.services) || !Array.isArray(content.demos) || !Array.isArray(content.projects) || !Array.isArray(content.stages) || !Array.isArray(content.trustPoints) || !Array.isArray(content.faqs) || !Array.isArray(content.testimonials) || !Array.isArray(content.guideSections)) {
         return NextResponse.json({ error: 'One of the website content lists is invalid.' }, { status: 400 });
       }
       if (content.projects.some((item) => !safeUrl(item.websiteUrl) || !safeUrl(item.repoUrl) || !safeUrl(item.caseStudy?.flyer) || (item.caseStudy?.gallery || []).some((url) => !safeUrl(url)))) {
