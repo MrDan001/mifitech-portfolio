@@ -12,7 +12,7 @@ export type ProjectCaseStudy = {
 export type ProjectItem = {
   slug: string; image: string; name: string; type: string; text: string;
   websiteUrl: string; repoUrl: string; visible?: boolean;
-  stack: string[]; features: string[]; caseStudy?: ProjectCaseStudy;
+  stack: string[]; features: string[]; flyer?: string; caseStudy?: ProjectCaseStudy;
 };
 export type FAQItem = { question: string; answer: string };
 export type TestimonialItem = { quote: string; name: string; role: string; company: string };
