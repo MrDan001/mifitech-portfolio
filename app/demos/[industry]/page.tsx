@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getSiteContent, type DemoItem } from '@/lib/site-content';
+import { getSiteContent, type DemoItem, type SiteContent } from '@/lib/site-content';
+import ThemeToggle from '../../components/ThemeToggle';
 
 type DemoCard = { title: string; description: string; image: string; alt: string; label: string };
 
@@ -124,6 +125,25 @@ function demoFromCard(card?: DemoItem): DemoSite | undefined {
   };
 }
 
+function resolveDemo(industry: string, content: SiteContent): DemoSite | undefined {
+  const editable = content.demos.find((item) => item.slug === industry && item.visible !== false);
+  const base = demos[industry] || demoFromCard(editable);
+  if (!base) return undefined;
+  const cards = editable?.image ? base.cards.map((card, index) => index === 0 ? { ...card, image: editable.image, title: editable.title || card.title } : card) : base.cards;
+  return {
+    ...base,
+    name: editable?.brand || base.name,
+    descriptor: editable?.title ? editable.title.toUpperCase() : base.descriptor,
+    title: editable?.pageTitle || base.title,
+    intro: editable?.pageIntro || editable?.text || base.intro,
+    sectionTitle: editable?.pageSectionTitle || base.sectionTitle,
+    sectionIntro: editable?.pageSectionIntro || base.sectionIntro,
+    closingTitle: editable?.pageClosingTitle || base.closingTitle,
+    closingText: editable?.pageClosingText || base.closingText,
+    cards,
+  };
+}
+
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
 
@@ -132,7 +152,7 @@ export function generateStaticParams() { return Object.keys(demos).map((industry
 export async function generateMetadata({ params }: { params: Promise<{ industry: string }> }): Promise<Metadata> {
   const { industry } = await params;
   const content = await getSiteContent();
-  const demo = demos[industry] || demoFromCard(content.demos.find((item) => item.slug === industry));
+  const demo = resolveDemo(industry, content);
   if (!demo) return { title: 'Website demo' };
   return { title: demo.name + ' — Website concept', description: demo.intro, robots: { index: false, follow: false } };
 }
@@ -140,20 +160,20 @@ export async function generateMetadata({ params }: { params: Promise<{ industry:
 export default async function IndustryDemo({ params }: { params: Promise<{ industry: string }> }) {
   const { industry } = await params;
   const content = await getSiteContent();
-  const demo = demos[industry] || demoFromCard(content.demos.find((item) => item.slug === industry));
+  const demo = resolveDemo(industry, content);
   if (!demo) notFound();
   const subject = encodeURIComponent('Website concept for my business');
   const body = encodeURIComponent('Hello MifiTech,\n\nI viewed the ' + demo.name + ' demo and would like to discuss a website for my business.\n\nBusiness name:\nWhat I need:\n');
   const contactHref = '/?demo=' + encodeURIComponent(industry) + '#contact';
   return (
     <main className={'demo-page demo-' + industry}>
-      <div className="demo-disclaimer-bar"><span>CONCEPT PREVIEW</span><span>FICTIONAL BRAND · ILLUSTRATIVE CONTENT · NOT A CLIENT WEBSITE</span><Link href="/#showcase">All demos</Link></div>
-      <header className="demo-header"><div className="demo-brand"><Link href="/">{demo.name}</Link><span>{demo.descriptor}</span></div><nav><a href="#story">The experience</a><a href="#offer">Explore</a><a href="#contact">Enquiries</a></nav><a className="demo-header-cta" href="#contact">{demo.primaryAction}</a></header>
+      <div className="demo-disclaimer-bar"><span>CONCEPT PREVIEW</span><span>FICTIONAL BRAND · ILLUSTRATIVE CONTENT · NOT A CLIENT WEBSITE</span><Link href="/#demos">All demos</Link></div>
+      <header className="demo-header"><div className="demo-brand"><Link href="/">{demo.name}</Link><span>{demo.descriptor}</span></div><nav><a href="#story">The experience</a><a href="#offer">Explore</a><a href="#contact">Enquiries</a></nav><div className="demo-header-actions"><ThemeToggle /><a className="demo-header-cta" href="#contact">{demo.primaryAction}</a></div></header>
       <section className="demo-hero"><div className="demo-hero-copy"><span className="demo-overline">{demo.descriptor}</span><h1>{demo.title}</h1><p>{demo.intro}</p><a className="demo-button" href="#offer">{demo.primaryAction}</a><span className="demo-hero-foot">A SAMPLE WEBSITE EXPERIENCE · MADE FOR MOBILE AND DESKTOP</span></div><div className="demo-hero-image" role="img" aria-label={demo.cards[0].alt} style={{ backgroundImage: 'linear-gradient(180deg, transparent 50%, rgba(0,0,0,.36)), url(' + demo.cards[0].image + ')' }}><span className="demo-image-caption">{demo.cards[0].label}</span><span className="demo-image-index">01 — 03</span></div></section>
       <section className="demo-story" id="story"><span className="demo-section-kicker">A DIGITAL HOME THAT FEELS LIKE YOU</span><h2>{demo.sectionTitle}</h2><p>{demo.sectionIntro}</p></section>
       <section className="demo-offer" id="offer"><div className="demo-offer-heading"><span>DISCOVER THE EXPERIENCE</span><h2>Made to be explored.</h2></div><div className="demo-feature-grid">{demo.cards.map((card, index) => <article className="demo-feature" key={card.title}><div className="demo-feature-image" role="img" aria-label={card.alt} style={{ backgroundImage: 'url(' + card.image + ')' }}><span>0{index + 1}</span></div><div className="demo-feature-copy"><span>{card.label}</span><h3>{card.title}</h3><p>{card.description}</p></div></article>)}</div></section>
       <section className="demo-quote" id="contact"><span>LET'S MAKE THIS YOURS</span><h2>{demo.closingTitle}</h2><p>{demo.closingText}</p><a className="demo-button" href={contactHref}>Build a website like this</a><a className="demo-email-link" href={'mailto:officialsafebase@gmail.com?subject=' + subject + '&body=' + body}>Email MifiTech directly</a></section>
-      <footer className="demo-footer"><Link href="/" className="demo-powered">A CONCEPT BY <strong>MIFITECH.</strong></Link><span>Illustrative design preview · Not a live business</span><Link href="/#showcase">Explore other demos</Link></footer>
+      <footer className="demo-footer"><Link href="/" className="demo-powered">A CONCEPT BY <strong>MIFITECH.</strong></Link><span>Illustrative design preview · Not a live business</span><Link href="/#demos">Explore other demos</Link></footer>
     </main>
   );
 }
