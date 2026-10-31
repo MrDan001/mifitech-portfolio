@@ -27,8 +27,18 @@ export async function getSiteContent(): Promise<SiteContent> {
       footer: { ...defaultSiteContent.footer, ...(saved.footer || {}) },
       navigation: Array.isArray(saved.navigation) ? saved.navigation : defaultSiteContent.navigation,
       services: Array.isArray(saved.services) ? saved.services : defaultSiteContent.services,
-      demos: Array.isArray(saved.demos) ? saved.demos : defaultSiteContent.demos,
-      projects: Array.isArray(saved.projects) ? saved.projects : defaultSiteContent.projects,
+      demos: Array.isArray(saved.demos) ? saved.demos.map((demo) => ({ ...defaultSiteContent.demos.find((item) => item.slug === demo.slug), ...demo })) : defaultSiteContent.demos,
+      projects: Array.isArray(saved.projects) ? saved.projects.map((project) => {
+        const fallback = defaultSiteContent.projects.find((item) => item.slug === project.slug);
+        const caseStudy = project.caseStudy || fallback?.caseStudy;
+        return { ...fallback, ...project, ...(caseStudy ? { caseStudy: { ...(fallback?.caseStudy || {}), ...(project.caseStudy || {}), gallery: Array.isArray(project.caseStudy?.gallery) ? project.caseStudy.gallery : (fallback?.caseStudy?.gallery || []) } } : {}) };
+      }) : defaultSiteContent.projects,
+      guideArticle: { ...defaultSiteContent.guideArticle, ...(saved.guideArticle || {}) },
+      studioProfile: { ...defaultSiteContent.studioProfile, ...(saved.studioProfile || {}), highlights: Array.isArray(saved.studioProfile?.highlights) ? saved.studioProfile.highlights : defaultSiteContent.studioProfile.highlights },
+      guideSections: Array.isArray(saved.guideSections) ? saved.guideSections : defaultSiteContent.guideSections,
+      trustPoints: Array.isArray(saved.trustPoints) ? saved.trustPoints : defaultSiteContent.trustPoints,
+      faqs: Array.isArray(saved.faqs) ? saved.faqs : defaultSiteContent.faqs,
+      testimonials: Array.isArray(saved.testimonials) ? saved.testimonials : defaultSiteContent.testimonials,
       stages: Array.isArray(saved.stages) ? saved.stages : defaultSiteContent.stages,
     };
     return content;

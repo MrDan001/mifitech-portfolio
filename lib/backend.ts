@@ -62,6 +62,46 @@ export async function getSeo() {
   }
 }
 
+export async function listPublicImages() {
+  if (!base || !key) throw new Error('Configure the portfolio Supabase URL and server-only secret key first.');
+  const response = await fetch(`${base}/storage/v1/object/list/mifitech-media`, {
+    method: 'POST',
+    headers: {
+      apikey: key,
+      ...(key.startsWith('sb_secret_') ? {} : { Authorization: `Bearer ${key}` }),
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ prefix: 'website', limit: 100, offset: 0, sortBy: { column: 'created_at', order: 'desc' } }),
+    cache: 'no-store',
+  });
+  const body = await response.text();
+  if (!response.ok) throw new Error(body || 'Could not list uploaded media.');
+  const objects = body ? JSON.parse(body) as Array<{ name?: string; created_at?: string; updated_at?: string; metadata?: { mimetype?: string; size?: number } }> : [];
+  return objects.filter((item) => item.name).map((item) => ({
+    path: 'website/' + item.name,
+    name: item.name,
+    url: `${base}/storage/v1/object/public/mifitech-media/website/${encodeURIComponent(item.name || '')}`,
+    created_at: item.created_at || item.updated_at || null,
+    content_type: item.metadata?.mimetype || '',
+    size: item.metadata?.size || 0,
+  }));
+}
+
+export async function deletePublicImage(objectPath: string) {
+  if (!base || !key) throw new Error('Configure the portfolio Supabase URL and server-only secret key first.');
+  if (!/^website\/[A-Za-z0-9._-]+$/.test(objectPath)) throw new Error('Only files inside the website media folder can be deleted.');
+  const response = await fetch(`${base}/storage/v1/object/mifitech-media/${objectPath.split('/').map(encodeURIComponent).join('/')}`, {
+    method: 'DELETE',
+    headers: {
+      apikey: key,
+      ...(key.startsWith('sb_secret_') ? {} : { Authorization: `Bearer ${key}` }),
+    },
+    cache: 'no-store',
+  });
+  const body = await response.text();
+  if (!response.ok) throw new Error(body || 'Could not delete this media file.');
+}
+
 export async function uploadPublicImage(file: File): Promise<string> {
   if (!base || !key) throw new Error('Configure the portfolio Supabase URL and server-only secret key first.');
   const mimeToExtension: Record<string, string> = {

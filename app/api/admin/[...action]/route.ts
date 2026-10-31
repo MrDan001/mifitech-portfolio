@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { randomBytes } from 'node:crypto';
-import { db, isAdmin, passwordOK, sessionValue, seoDefaults, uploadPublicImage } from '@/lib/backend';
+import { db, deletePublicImage, isAdmin, listPublicImages, passwordOK, sessionValue, seoDefaults, uploadPublicImage } from '@/lib/backend';
 import { defaultSiteContent, getSiteContent, type SiteContent } from '@/lib/site-content';
 
 type Ctx = { params: Promise<{ action: string[] }> };
@@ -111,11 +111,15 @@ export async function POST(req: Request, ctx: Ctx) {
       }
 
       const content = { ...defaultSiteContent, ...raw } as SiteContent;
-      if (!Array.isArray(content.navigation) || !Array.isArray(content.services) || !Array.isArray(content.demos) || !Array.isArray(content.projects) || !Array.isArray(content.stages)) {
+      if (!Array.isArray(content.navigation) || !Array.isArray(content.services) || !Array.isArray(content.demos) || !Array.isArray(content.projects) || !Array.isArray(content.stages) || !Array.isArray(content.trustPoints) || !Array.isArray(content.faqs) || !Array.isArray(content.testimonials) || !Array.isArray(content.guideSections)) {
         return NextResponse.json({ error: 'One of the website content lists is invalid.' }, { status: 400 });
       }
-      if (content.projects.some((item) => !safeUrl(item.websiteUrl) || !safeUrl(item.repoUrl))) {
-        return NextResponse.json({ error: 'Project website and repository links must use http:// or https://.' }, { status: 400 });
+      if (content.projects.some((item) => !safeUrl(item.websiteUrl) || !safeUrl(item.repoUrl) || !safeUrl(item.caseStudy?.flyer) || (item.caseStudy?.gallery || []).some((url) => !safeUrl(url)))) {
+        return NextResponse.json({ error: 'Project website, repository, flyer and gallery links must use http:// or https://.' }, { status: 400 });
+      }
+      const whatsappUrl = content.sections?.contact?.whatsappUrl || '';
+      if (whatsappUrl && !/^https:\/\/wa\.me\/\d+$/.test(whatsappUrl)) {
+        return NextResponse.json({ error: 'WhatsApp must be a wa.me link with the international phone number.' }, { status: 400 });
       }
       if (content.navigation.some((item) => !safeUrl(item.href, true))) {
         return NextResponse.json({ error: 'Navigation links must be a local path, section anchor or http(s) URL.' }, { status: 400 });
@@ -150,11 +154,33 @@ export async function GET(_req: Request, ctx: Ctx) {
       return NextResponse.json({ settings: { ...seoDefaults, ...(rows[0]?.value || {}) } });
     }
     if (route === 'content') return NextResponse.json({ content: await getSiteContent() });
+    if (route === 'media') return NextResponse.json({ media: await listPublicImages() });
   } catch (e) {
     return NextResponse.json({ error: e instanceof Error ? e.message : 'Database unavailable.' }, { status: 503 });
   }
 
   return NextResponse.json({ error: 'Unknown action.' }, { status: 404 });
+}
+
+export async function DELETE(req: Request, ctx: Ctx) {
+  const { action } = await ctx.params;
+  const route = action.join('/');
+  if (!await isAdmin()) return NextResponse.json({ error: 'Unauthorised.' }, { status: 401 });
+  const body = await req.json().catch(() => ({}));
+
+  try {
+    if (route === 'leads' && body.id) {
+      await db('leads?id=eq.' + encodeURIComponent(String(body.id)), { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
+      return NextResponse.json({ ok: true });
+    }
+    if (route === 'media' && typeof body.path === 'string') {
+      await deletePublicImage(body.path);
+      return NextResponse.json({ ok: true });
+    }
+  } catch (e) {
+    return NextResponse.json({ error: e instanceof Error ? e.message : 'Delete failed.' }, { status: 503 });
+  }
+  return NextResponse.json({ error: 'Invalid delete request.' }, { status: 400 });
 }
 
 export async function PATCH(req: Request, ctx: Ctx) {
