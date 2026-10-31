@@ -153,6 +153,7 @@ export default async function Home() {
               <span className="studio-footer-nav-label">{content.footer.projectLabel}</span>
               <a href="#contact">{content.footer.projectCta}</a>
               <a href={'mailto:' + section.contact.email}>{section.contact.email}</a>
+              <Link href="/privacy">Privacy policy</Link>
             </nav>
           </div>
           <div className="studio-footer-bottom">
