@@ -91,11 +91,11 @@ export const defaultSiteContent: SiteContent = {
     },
     about: {
       label: '04 / WHY MIFITECH',
-      title: 'Your website should work as hard as',
-      emphasis: 'you do.',
+      title: 'A hands-on digital studio for',
+      emphasis: 'real-world work.',
       paragraphs: [
-        "People discover businesses in many places. When they're ready to know more, your website should make the next step obvious.",
-        'We bring your story, services and customer journey together in one considered digital experience — so people can understand what you offer and feel confident getting in touch.',
+        'MifiTech is a development-led digital studio building websites and software around the problems businesses and their customers actually need to solve.',
+        'The work is practical by design: understand the goal, agree the scope, build carefully, test the details and make the next step clear. No inflated claims or unnecessary complexity.',
       ],
       linkLabel: 'See how we work',
     },
