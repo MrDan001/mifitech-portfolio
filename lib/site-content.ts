@@ -31,7 +31,9 @@ export async function getSiteContent(): Promise<SiteContent> {
       projects: Array.isArray(saved.projects) ? saved.projects.map((project) => {
         const fallback = defaultSiteContent.projects.find((item) => item.slug === project.slug);
         const caseStudy = project.caseStudy || fallback?.caseStudy;
-        return { ...fallback, ...project, ...(caseStudy ? { caseStudy: { ...(fallback?.caseStudy || {}), ...(project.caseStudy || {}), gallery: Array.isArray(project.caseStudy?.gallery) ? project.caseStudy.gallery : (fallback?.caseStudy?.gallery || []) } } : {}) };
+        const legacyPreviewPath = '/previews/' + project.slug + '.svg';
+        const image = project.image === legacyPreviewPath || !project.image ? (fallback?.image || project.image) : project.image;
+        return { ...fallback, ...project, image, ...(caseStudy ? { caseStudy: { ...(fallback?.caseStudy || {}), ...(project.caseStudy || {}), gallery: Array.isArray(project.caseStudy?.gallery) ? project.caseStudy.gallery : (fallback?.caseStudy?.gallery || []) } } : {}) };
       }) : defaultSiteContent.projects,
       guideArticle: { ...defaultSiteContent.guideArticle, ...(saved.guideArticle || {}) },
       studioProfile: { ...defaultSiteContent.studioProfile, ...(saved.studioProfile || {}), highlights: Array.isArray(saved.studioProfile?.highlights) ? saved.studioProfile.highlights : defaultSiteContent.studioProfile.highlights },
