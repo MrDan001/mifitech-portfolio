@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const project = content.projects.find((item) => item.slug === slug && item.visible !== false);
   if (!project) return { title: 'Project not found | MifiTech' };
   return {
-    title: project.name + ' | MifiTech Case Study',
+    title: project.name + ' Case Study',
     description: project.text,
     openGraph: { title: project.name + ' | MifiTech', description: project.text, images: project.caseStudy?.flyer ? [project.caseStudy.flyer] : [project.image], type: 'article' },
   };
