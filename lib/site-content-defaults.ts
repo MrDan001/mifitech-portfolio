@@ -19,6 +19,7 @@ export type FAQItem = { question: string; answer: string };
 export type TestimonialItem = { quote: string; name: string; role: string; company: string };
 export type GuideArticle = { eyebrow: string; title: string; intro: string; closingTitle: string; closingText: string };
 export type GuideSection = { heading: string; body: string };
+export type StudioProfile = { name: string; role: string; headline: string; bio: string; image: string; highlights: string[] };
 export type StageItem = { n: string; title: string; body: string };
 export type SiteContent = {
   navigation: NavigationItem[];
@@ -41,6 +42,7 @@ export type SiteContent = {
   projects: ProjectItem[];
   guideArticle: GuideArticle;
   guideSections: GuideSection[];
+  studioProfile: StudioProfile;
   trustPoints: Array<{ title: string; body: string }>;
   faqs: FAQItem[];
   testimonials: TestimonialItem[];
@@ -163,6 +165,7 @@ export const defaultSiteContent: SiteContent = {
     { slug: 'garrison-market', image: '/previews/garrison-market.svg', flyer: '/flyers/garrison-market.svg', name: 'Garrison Market', type: 'BUSINESS OPERATIONS', text: 'An inventory and operations app for shop owners and staff to manage stock, sales and day-to-day work.', websiteUrl: 'https://gmstock.co', repoUrl: 'https://github.com/MrDan001/garrison-market', stack: ['Next.js', 'TypeScript', 'Database'], features: ['Inventory and stock management', 'Staff operations and permissions', 'Sales, orders and reporting workflows', 'Business records and everyday operations', 'Owner and staff workspaces'], caseStudy: { challenge: 'Help shop owners and staff manage the moving parts of daily retail operations without relying on disconnected records.', approach: 'Build an owner-and-staff operations workspace that brings inventory, sales and day-to-day business tasks into one place.', delivery: 'An inventory and business operations application covering stock, staff, sales and supporting workflows. It is an operations tool, not a consumer shopping marketplace.', role: 'MifiTech product build and implementation.', outcome: 'A single operations workspace for shop owners and staff, with the live product available at gmstock.co.', gallery: [], flyer: '/flyers/garrison-market.svg' } },
     { slug: 'the-africa-plug', image: '/previews/the-africa-plug.svg', flyer: '/flyers/the-africa-plug.svg', name: 'The Africa Plug', type: 'MEDIA & PUBLISHING', text: 'A media and publishing experience for African stories, video and editorial content.', websiteUrl: '', repoUrl: 'https://github.com/MrDan001/the-africa-plug', stack: ['Next.js', 'TypeScript', 'Media publishing'], features: ['Editorial and story publishing', 'Video and media content', 'Admin content management', 'Responsive media experience'], caseStudy: { challenge: 'Create a digital home where African stories and media can be presented through a clear, editorial experience.', approach: 'Bring publishing, video content and an admin workflow together so content can be managed without changing the public presentation.', delivery: 'A media and publishing website with story and video sections plus an administration workflow for content updates.', role: 'MifiTech product build and implementation.', outcome: 'A publishing-focused digital experience designed to present African stories, media and editorial content.', gallery: [], flyer: '/flyers/the-africa-plug.svg' } },
   ],
+  studioProfile: { name: '', role: 'Founder & Developer', headline: 'The person behind the work', bio: '', image: '', highlights: [] },
   guideArticle: {
     eyebrow: 'MIFITECH FIELD GUIDE',
     title: 'How to build a website in Nigeria: a practical guide for your business',
