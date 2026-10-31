@@ -3,8 +3,9 @@ import Link from 'next/link';
 import ThemeToggle from '../components/ThemeToggle';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | MifiTech',
+  title: 'Privacy Policy',
   description: 'Learn how MifiTech handles information submitted through the website enquiry form.',
+  openGraph: { title: 'MifiTech Privacy Policy', description: 'How MifiTech handles information submitted through the website enquiry form.', type: 'website' },
 };
 
 export default function PrivacyPage() {
