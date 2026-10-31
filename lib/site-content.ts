@@ -33,6 +33,7 @@ export async function getSiteContent(): Promise<SiteContent> {
         return { ...fallback, ...project, caseStudy: { ...(fallback?.caseStudy || {}), ...(project.caseStudy || {}), gallery: Array.isArray(project.caseStudy?.gallery) ? project.caseStudy.gallery : (fallback?.caseStudy?.gallery || []) } };
       }) : defaultSiteContent.projects,
       guideArticle: { ...defaultSiteContent.guideArticle, ...(saved.guideArticle || {}) },
+      studioProfile: { ...defaultSiteContent.studioProfile, ...(saved.studioProfile || {}), highlights: Array.isArray(saved.studioProfile?.highlights) ? saved.studioProfile.highlights : defaultSiteContent.studioProfile.highlights },
       guideSections: Array.isArray(saved.guideSections) ? saved.guideSections : defaultSiteContent.guideSections,
       trustPoints: Array.isArray(saved.trustPoints) ? saved.trustPoints : defaultSiteContent.trustPoints,
       faqs: Array.isArray(saved.faqs) ? saved.faqs : defaultSiteContent.faqs,
