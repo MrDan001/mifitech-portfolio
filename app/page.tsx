@@ -36,7 +36,7 @@ export default async function Home() {
               </div>
               <div className="studio-hero-foot"><span>BUILT AROUND YOUR BUSINESS</span><i /><span>MADE FOR REAL PEOPLE</span><i /><span>READY FOR EVERY SCREEN</span></div>
             </div>
-            <div className="studio-visual" role="img" aria-label="A business owner working on her laptop in a bright, welcoming workspace" style={content.hero.visualImage ? { backgroundImage: "linear-gradient(180deg, transparent 55%, rgba(0,0,0,.3)), url(" + content.hero.visualImage + ")" } : undefined}>
+            <div className="studio-visual" role="img" aria-label="MifiTech creative workspace and digital product concept" style={{ backgroundImage: "linear-gradient(180deg, transparent 55%, rgba(0,0,0,.3)), url(" + (content.hero.visualImage || '/previews/hero-workspace.svg') + ")", backgroundSize: 'cover', backgroundPosition: 'center' }}>
               <span className="studio-photo-note">{content.hero.visualNote.split('\\n').map((line, i) => <span key={i}>{line}{i === 0 ? <br /> : null}</span>)} <b>↙</b></span>
               <span className="studio-photo-index">{content.hero.visualIndex}</span>
             </div>
@@ -89,6 +89,29 @@ export default async function Home() {
           <div>{section.about.paragraphs.map((paragraph, i) => <p key={i}>{paragraph}</p>)}<a className="studio-inline-link" href="#process">{section.about.linkLabel} <span></span></a></div>
         </div></section>
 
+        <section className="studio-proof studio-section" id="why-mifitech">
+          <div className="studio-container">
+            <div className="studio-section-head">
+              <div><p className="studio-label">HOW WE THINK</p><h2>Thoughtful work. <em>Practical outcomes.</em></h2></div>
+              <p>MifiTech is a hands-on digital studio focused on useful websites and software, with clear expectations from the first conversation through launch.</p>
+            </div>
+            <div className="studio-proof-grid">
+              {content.trustPoints.map((point, index) => <article className="studio-proof-card" key={point.title + index}>
+                <span>{String(index + 1).padStart(2, '0')}</span><h3>{point.title}</h3><p>{point.body}</p>
+              </article>)}
+            </div>
+          </div>
+        </section>
+        {content.testimonials.length > 0 && <section className="studio-testimonials studio-section" aria-label="Client feedback">
+          <div className="studio-container">
+            <div className="studio-section-head"><div><p className="studio-label">CLIENT FEEDBACK</p><h2>What people <em>say.</em></h2></div><p>Feedback is published only when a client has approved the wording and attribution.</p></div>
+            <div className="studio-testimonial-grid">
+              {content.testimonials.map((item, index) => <blockquote className="studio-testimonial" key={item.name + index}>
+                <p>“{item.quote}”</p><footer><strong>{item.name}</strong><span>{[item.role, item.company].filter(Boolean).join(' · ')}</span></footer>
+              </blockquote>)}
+            </div>
+          </div>
+        </section>}
         <section className="studio-process studio-section" id="process"><div className="studio-container studio-process-grid">
           <div className="studio-process-intro"><p className="studio-label">{section.process.label}</p><h2>{section.process.title}<br/><em>{section.process.emphasis}</em></h2><p>{section.process.intro}</p><a href="#contact" className="studio-button studio-button-primary">{section.process.buttonLabel}</a></div>
           <div className="studio-stages">{content.stages.map((stage) => <article key={stage.n + stage.title}><span>{stage.n}</span><div><h3>{stage.title}</h3><p>{stage.body}</p></div><b></b></article>)}</div>
@@ -96,9 +119,22 @@ export default async function Home() {
 
         <section className="studio-guide"><div className="studio-container studio-guide-inner"><div><p className="studio-label">{section.guide.label}</p><h2>{section.guide.title}</h2><p>{section.guide.intro}</p><Link href={section.guide.href}>{section.guide.linkLabel}</Link></div><div className="studio-guide-mark">01<span> / FIELD GUIDE</span></div></div></section>
 
+        <section className="studio-faq studio-section" id="faqs">
+          <div className="studio-container studio-faq-grid">
+            <div><p className="studio-label">GOOD TO KNOW</p><h2>Questions, <em>answered.</em></h2><p>Still unsure about what your project needs? Send a brief enquiry and we can discuss the right next step.</p><a className="studio-inline-link" href="#contact">Ask about your project <span>↗</span></a></div>
+            <div className="studio-faq-list">
+              {content.faqs.map((item, index) => <details key={item.question + index}>
+                <summary><span>{item.question}</span><b aria-hidden="true">+</b></summary>
+                <p>{item.answer}</p>
+              </details>)}
+            </div>
+          </div>
+        </section>
         <section className="studio-contact studio-section" id="contact"><div className="studio-container studio-contact-grid">
           <div className="studio-contact-copy"><p className="studio-label">{section.contact.label}</p><h2>{section.contact.title} <em>{section.contact.emphasis}</em></h2><p>{section.contact.intro}</p>
-            <div className="studio-contact-email"><small>{section.contact.emailLabel}</small><a href={'mailto:' + section.contact.email}>{section.contact.email}</a></div><div className="studio-contact-note">{section.contact.note}</div>
+            <div className="studio-contact-email"><small>{section.contact.emailLabel}</small><a href={'mailto:' + section.contact.email}>{section.contact.email}</a></div>
+            {section.contact.whatsappUrl?.startsWith('https://wa.me/') && <a className="studio-whatsapp-link" href={section.contact.whatsappUrl} target="_blank" rel="noreferrer">Message MifiTech on WhatsApp ↗</a>}
+            <div className="studio-contact-note">{section.contact.note}</div>
           </div>
           <div className="studio-form-card"><div><span>{section.contact.formTitle}</span><small>{section.contact.formKicker}</small></div><ContactForm email={section.contact.email}/></div>
         </div></section>
