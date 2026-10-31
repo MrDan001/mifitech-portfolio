@@ -30,7 +30,8 @@ export async function getSiteContent(): Promise<SiteContent> {
       demos: Array.isArray(saved.demos) ? saved.demos.map((demo) => ({ ...defaultSiteContent.demos.find((item) => item.slug === demo.slug), ...demo })) : defaultSiteContent.demos,
       projects: Array.isArray(saved.projects) ? saved.projects.map((project) => {
         const fallback = defaultSiteContent.projects.find((item) => item.slug === project.slug);
-        return { ...fallback, ...project, caseStudy: { ...(fallback?.caseStudy || {}), ...(project.caseStudy || {}), gallery: Array.isArray(project.caseStudy?.gallery) ? project.caseStudy.gallery : (fallback?.caseStudy?.gallery || []) } };
+        const caseStudy = project.caseStudy || fallback?.caseStudy;
+        return { ...fallback, ...project, ...(caseStudy ? { caseStudy: { ...(fallback?.caseStudy || {}), ...(project.caseStudy || {}), gallery: Array.isArray(project.caseStudy?.gallery) ? project.caseStudy.gallery : (fallback?.caseStudy?.gallery || []) } } : {}) };
       }) : defaultSiteContent.projects,
       guideArticle: { ...defaultSiteContent.guideArticle, ...(saved.guideArticle || {}) },
       studioProfile: { ...defaultSiteContent.studioProfile, ...(saved.studioProfile || {}), highlights: Array.isArray(saved.studioProfile?.highlights) ? saved.studioProfile.highlights : defaultSiteContent.studioProfile.highlights },
