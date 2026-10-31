@@ -60,11 +60,11 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
         </section>}
         <section className="case-section"><p className="section-label">THE STACK</p><h2>Technology</h2><div className="tag-row-new">{project.stack.map((item) => <span key={item}>{item}</span>)}</div></section>
         <section className="case-section"><p className="section-label">PROJECT SCOPE</p><h2>What&apos;s included</h2><div className="facts">{project.features.map((item, index) => <div className="fact" key={item}><small>{String(index + 1).padStart(2, '0')}</small><strong>{item}</strong></div>)}</div></section>
-        {study?.gallery?.length > 0 && <section className="case-section">
+        {(study?.gallery?.length ?? 0) > 0 && study && <section className="case-section">
           <p className="section-label">PRODUCT GALLERY</p><h2>Inside the experience</h2>
-          <div className="case-gallery">{study.gallery.map((image, index) => <img src={image} alt={project.name + ' product screenshot ' + (index + 1)} key={image} loading="lazy" />)}</div>
+          <div className="case-gallery">{(study.gallery || []).map((image, index) => <img src={image} alt={project.name + ' product screenshot ' + (index + 1)} key={image} loading="lazy" />)}</div>
         </section>}
-        {study?.flyer && <section className="case-section case-flyer">
+        {study && study.flyer && <section className="case-section case-flyer">
           <div><p className="section-label">PROJECT FLYER</p><h2>Share the project.</h2><p>A branded project overview you can save and share.</p><a className="button button-dark" href={study.flyer} download>Download project flyer ↓</a></div>
           <a className="case-flyer-preview" href={study.flyer} target="_blank" rel="noreferrer" aria-label={'Open ' + project.name + ' project flyer'}><img src={study.flyer} alt={project.name + ' promotional flyer'} loading="lazy" /></a>
         </section>}
