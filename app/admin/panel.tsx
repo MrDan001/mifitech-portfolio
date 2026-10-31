@@ -137,7 +137,7 @@ export default function AdminPanel() {
       const response = await fetch('/api/admin/upload', { method: 'POST', body: form });
       const result = await response.json();
       if (!response.ok || !result.url) throw new Error(result.error || 'Image upload failed.');
-      if (collection === 'hero') updateGroup('hero', field, result.url);
+      if (collection === 'hero' || collection === 'studioProfile') updateGroup(collection, field, result.url);
       else updateItem(collection, index, field, result.url);
       setMsg('Image uploaded. Save all website changes to publish it.');
     } catch (error) {
@@ -289,6 +289,13 @@ export default function AdminPanel() {
             {itemEditor('demos', 'Industry demo cards & pages', [{ key: 'n', label: 'Number' }, { key: 'slug', label: 'Demo page slug (for example private-clinic)' }, { key: 'title', label: 'Industry title' }, { key: 'brand', label: 'Sample brand name' }, { key: 'text', label: 'Card description', area: true }, { key: 'image', label: 'Image URL' }, { key: 'tags', label: 'Tags (comma separated)', list: true }, { key: 'href', label: 'Custom destination (leave blank to use /demos/slug)' }, { key: 'pageTitle', label: 'Detail page headline', area: true }, { key: 'pageIntro', label: 'Detail page introduction', area: true }, { key: 'pageSectionTitle', label: 'Detail page section heading' }, { key: 'pageSectionIntro', label: 'Detail page section description', area: true }, { key: 'pageClosingTitle', label: 'Closing CTA heading' }, { key: 'pageClosingText', label: 'Closing CTA description', area: true }], 'demo')}
             {itemEditor('projects', 'Portfolio projects & website links', [{ key: 'slug', label: 'Project slug (URL path)' }, { key: 'name', label: 'Project name' }, { key: 'type', label: 'Project category' }, { key: 'text', label: 'Description', area: true }, { key: 'image', label: 'Preview image path or URL' }, { key: 'websiteUrl', label: 'Live website URL (blank hides the link)' }, { key: 'repoUrl', label: 'GitHub repository URL (optional)' }, { key: 'stack', label: 'Technology tags (comma separated)', list: true }, { key: 'features', label: 'Project features (comma separated)', list: true }, { key: 'caseStudy.challenge', label: 'Case study: challenge', area: true }, { key: 'caseStudy.approach', label: 'Case study: approach', area: true }, { key: 'caseStudy.delivery', label: 'Case study: what was delivered', area: true }, { key: 'caseStudy.role', label: 'Case study: MifiTech role' }, { key: 'caseStudy.outcome', label: 'Case study: outcome', area: true }, { key: 'caseStudy.gallery', label: 'Case study gallery URLs', list: true }, { key: 'caseStudy.flyer', label: 'Project flyer URL' }], 'project')}
             {itemEditor('stages', 'Project process steps', [{ key: 'n', label: 'Number' }, { key: 'title', label: 'Step title' }, { key: 'body', label: 'Step description', area: true }], 'step')}
+            <div style={cmsCard}>
+              <h3 style={{ margin: 0 }}>Founder / studio profile (optional)</h3>
+              {(['name', 'role', 'headline', 'bio'] as string[]).map((key) => input(key, content.studioProfile[key], (v) => updateGroup('studioProfile', key, v), key === 'bio'))}
+              {input('Highlights (comma separated)', (content.studioProfile.highlights || []).join(', '), (v) => updateGroup('studioProfile', 'highlights', v.split(',').map((x: string) => x.trim()).filter(Boolean)))}
+              <label className="admin-field">Profile image (JPG, PNG, WebP, AVIF or GIF · max 5 MB)<input type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/gif" onChange={(e) => { const file = e.target.files?.[0]; if (file) uploadImage('studioProfile', 0, 'image', file); e.currentTarget.value = ''; }} /></label>
+              <p style={{ margin: 0, color: '#777', fontSize: 12 }}>This section stays hidden on the public website until you add a name, bio or profile image. Add only accurate personal details.</p>
+            </div>
             <div style={cmsCard}>
               <h3 style={{ margin: 0 }}>Website guide page</h3>
               {(['eyebrow', 'title', 'intro', 'closingTitle', 'closingText'] as string[]).map((key) => input(key, content.guideArticle[key], (v) => updateGroup('guideArticle', key, v), ['intro', 'closingText'].includes(key)))}
