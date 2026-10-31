@@ -4,6 +4,7 @@ export type ServiceItem = { icon: string; name: string; body: string };
 export type DemoItem = {
   slug: string; n: string; title: string; brand: string; text: string;
   image: string; tags: string[]; href?: string; visible?: boolean;
+  pageTitle?: string; pageIntro?: string; pageSectionTitle?: string; pageSectionIntro?: string; pageClosingTitle?: string; pageClosingText?: string;
 };
 export type ProjectCaseStudy = {
   challenge: string; approach: string; delivery: string; role: string; outcome: string;
@@ -16,6 +17,8 @@ export type ProjectItem = {
 };
 export type FAQItem = { question: string; answer: string };
 export type TestimonialItem = { quote: string; name: string; role: string; company: string };
+export type GuideArticle = { eyebrow: string; title: string; intro: string; closingTitle: string; closingText: string };
+export type GuideSection = { heading: string; body: string };
 export type StageItem = { n: string; title: string; body: string };
 export type SiteContent = {
   navigation: NavigationItem[];
@@ -36,6 +39,8 @@ export type SiteContent = {
   services: ServiceItem[];
   demos: DemoItem[];
   projects: ProjectItem[];
+  guideArticle: GuideArticle;
+  guideSections: GuideSection[];
   trustPoints: Array<{ title: string; body: string }>;
   faqs: FAQItem[];
   testimonials: TestimonialItem[];
@@ -49,6 +54,7 @@ export const defaultSiteContent: SiteContent = {
     { label: 'Demo studio', href: '/#demos' },
     { label: 'Our work', href: '/#work' },
     { label: 'Our approach', href: '/#process' },
+    { label: 'FAQs', href: '/#faqs' },
     { label: 'Website guide', href: '/how-to-build-a-website-in-nigeria' },
   ],
   hero: {
@@ -156,6 +162,24 @@ export const defaultSiteContent: SiteContent = {
     { slug: 'ehealthcare', image: '/previews/ehealthcare.svg', flyer: '/flyers/ehealthcare.svg', name: 'eHealthcare', type: 'HEALTHCARE TECHNOLOGY', text: 'A PHP telemedicine platform built around patient access, consultations and care workflows.', websiteUrl: '', repoUrl: 'https://github.com/MrDan001/ehealthcare-system', stack: ['PHP', 'JavaScript', 'MySQL', 'Railway'], features: ['Patient-facing healthcare journeys', 'Appointment and booking workflows', 'Doctor and nurse service workflows', 'Consultation and patient dashboards', 'Administrative and care coordination tools'], caseStudy: { challenge: 'Make healthcare information and remote-care workflows easier to access through a connected digital service.', approach: 'Bring patient-facing journeys together with booking, consultation, clinical service and administrative workflows.', delivery: 'A PHP telemedicine application with appointment and booking flows, patient and clinician experiences, consultation tools and supporting administration.', role: 'MifiTech product build and implementation.', outcome: 'A broad telemedicine platform with patient, clinician and administrative workflows. The project description focuses on implemented product areas rather than unverified clinical outcomes.', gallery: [], flyer: '/flyers/ehealthcare.svg' } },
     { slug: 'garrison-market', image: '/previews/garrison-market.svg', flyer: '/flyers/garrison-market.svg', name: 'Garrison Market', type: 'BUSINESS OPERATIONS', text: 'An inventory and operations app for shop owners and staff to manage stock, sales and day-to-day work.', websiteUrl: 'https://gmstock.co', repoUrl: 'https://github.com/MrDan001/garrison-market', stack: ['Next.js', 'TypeScript', 'Database'], features: ['Inventory and stock management', 'Staff operations and permissions', 'Sales, orders and reporting workflows', 'Business records and everyday operations', 'Owner and staff workspaces'], caseStudy: { challenge: 'Help shop owners and staff manage the moving parts of daily retail operations without relying on disconnected records.', approach: 'Build an owner-and-staff operations workspace that brings inventory, sales and day-to-day business tasks into one place.', delivery: 'An inventory and business operations application covering stock, staff, sales and supporting workflows. It is an operations tool, not a consumer shopping marketplace.', role: 'MifiTech product build and implementation.', outcome: 'A single operations workspace for shop owners and staff, with the live product available at gmstock.co.', gallery: [], flyer: '/flyers/garrison-market.svg' } },
     { slug: 'the-africa-plug', image: '/previews/the-africa-plug.svg', flyer: '/flyers/the-africa-plug.svg', name: 'The Africa Plug', type: 'MEDIA & PUBLISHING', text: 'A media and publishing experience for African stories, video and editorial content.', websiteUrl: '', repoUrl: 'https://github.com/MrDan001/the-africa-plug', stack: ['Next.js', 'TypeScript', 'Media publishing'], features: ['Editorial and story publishing', 'Video and media content', 'Admin content management', 'Responsive media experience'], caseStudy: { challenge: 'Create a digital home where African stories and media can be presented through a clear, editorial experience.', approach: 'Bring publishing, video content and an admin workflow together so content can be managed without changing the public presentation.', delivery: 'A media and publishing website with story and video sections plus an administration workflow for content updates.', role: 'MifiTech product build and implementation.', outcome: 'A publishing-focused digital experience designed to present African stories, media and editorial content.', gallery: [], flyer: '/flyers/the-africa-plug.svg' } },
+  ],
+  guideArticle: {
+    eyebrow: 'MIFITECH FIELD GUIDE',
+    title: 'How to build a website in Nigeria: a practical guide for your business',
+    intro: 'A business website helps customers understand what you offer, trust your business and take the next step. Here is how to plan, build and launch one.',
+    closingTitle: 'Ready to build a website for your business?',
+    closingText: 'MifiTech builds business websites, online stores, booking experiences and custom web applications. Explore our website demos or tell us about your project.',
+  },
+  guideSections: [
+    { heading: '1. Decide what your website should achieve', body: 'Start with the business goal. Do you want more enquiries, bookings, online orders, store visits or a place to explain your services? Choose the main action you want visitors to take and design around it.' },
+    { heading: '2. Plan the pages and features', body: 'Most businesses need a homepage, about section, services or products, and contact page. Depending on the business, add a portfolio, gallery, booking form, catalogue, online payments or customer account features. Only add functionality that helps your customers.' },
+    { heading: '3. Choose a domain and hosting', body: 'Your domain is your website address. Pick a name that is easy to remember and spell. Hosting keeps your website available online. Confirm who owns the domain, how renewals work, where backups are kept and how you can access your website.' },
+    { heading: '4. Prepare your content', body: 'Gather your logo, brand colours, real photos, service descriptions, product details, business hours and contact information. Write in clear language and answer the questions customers commonly ask before they buy.' },
+    { heading: '5. Choose a website builder or professional developer', body: 'A DIY builder can work for a simple site if you have time to maintain it. A professional web designer or development studio is useful when you need custom design, ecommerce, booking workflows, integrations or help from planning to launch. Review previous work and get a written proposal with scope, timeline, ownership and support.' },
+    { heading: '6. Make it mobile-friendly and fast', body: 'Many customers browse on phones. Make text readable, buttons easy to tap, menus simple and pages quick to load. Test forms, links, booking and checkout journeys on different screen sizes before launch.' },
+    { heading: '7. Set up search engine optimisation (SEO)', body: 'Use a clear title and description for every important page, one descriptive main heading, useful subheadings, meaningful image alt text and internal links. Publish original answers to questions your customers search for. Mention only the locations you genuinely serve. Avoid keyword stuffing and copied content. After launch, submit your sitemap in Google Search Console and Bing Webmaster Tools, check that public pages can be crawled and monitor the search terms that bring visitors.' },
+    { heading: '8. Understand the cost before you start', body: 'Website prices vary with page count, design, content, ecommerce, booking features, integrations and ongoing support. Ask for a proposal that separates development from domain, hosting and maintenance. Confirm deliverables, milestones, revision limits and payment terms before work begins.' },
+    { heading: '9. Launch and keep improving', body: 'Check spelling, contact details, mobile layouts, security, page speed and every enquiry form. After launch, update your content and review enquiries and search performance so the site improves with your business.' },
   ],
   trustPoints: [
     { title: 'Useful before impressive', body: 'We start with the actual problem and build the features that help solve it.' },
