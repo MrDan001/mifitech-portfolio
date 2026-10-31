@@ -1,0 +1,6 @@
+<svg width="214" height="48" viewBox="0 0 214 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="46" height="46" rx="13" fill="#17211F"/>
+  <path d="M12 34V14L24 25L36 14V34" stroke="#D8E99A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="58" y="31" fill="#17211F" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" letter-spacing="-0.8">MifiTech</text>
+  <circle cx="151" cy="27" r="3" fill="#087F79"/>
+</svg>
