@@ -954,3 +954,93 @@ html[data-theme="dark"] .proposal-page h3{color:#eef3f3}
 html[data-theme="dark"] .proposal-page p{color:#b7c5c7}
 html[data-theme="dark"] .proposal-price{color:#ff986f}
 html[data-theme="dark"] .proposal-page .theme-toggle{--s-line:#405157;--s-white:#172329;--s-ink:#eef3f3}
+
+/* Refined artwork framing: keep the hero composition fully in view */
+.studio-visual{
+  height:auto;
+  aspect-ratio:1 / 1;
+  max-width:540px;
+  width:100%;
+  justify-self:end;
+  position:relative;
+  padding:0;
+  overflow:hidden;
+  border:1px solid rgba(32,49,57,.12);
+  border-radius:24px;
+  background-color:#f2eee7;
+  background-size:cover !important;
+  background-position:center !important;
+  box-shadow:0 24px 65px rgba(25,33,38,.14);
+}
+.studio-visual:before{display:none}
+.studio-photo-note{
+  top:20px;
+  left:20px;
+  max-width:190px;
+  padding:12px 15px;
+  border:1px solid rgba(32,49,57,.1);
+  border-radius:12px;
+  background:rgba(255,254,250,.9);
+  color:#23343b;
+  box-shadow:0 8px 24px rgba(22,31,35,.12);
+  backdrop-filter:blur(10px);
+  transform:none;
+  font:700 12px/1.35 var(--display,Arial,sans-serif);
+}
+.studio-photo-note b{color:#d95a32;font-size:17px}
+.studio-photo-index{
+  right:18px;
+  bottom:18px;
+  padding:9px 12px;
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:30px;
+  background:rgba(11,22,31,.72);
+  color:#fff;
+  font-size:8px;
+  letter-spacing:1.2px;
+  backdrop-filter:blur(9px);
+}
+.studio-work-image{
+  height:auto;
+  aspect-ratio:16 / 9;
+  display:block;
+  position:relative;
+  overflow:hidden;
+  background-color:#111d26;
+  background-size:cover !important;
+  background-position:center !important;
+  transition:filter .25s ease;
+}
+.studio-work-card:hover .studio-work-image{filter:saturate(1.08)}
+.studio-work-image>span{
+  top:14px;
+  left:14px;
+  border-radius:5px;
+  background:rgba(9,18,27,.78);
+  backdrop-filter:blur(8px);
+}
+.studio-work-image>b{
+  right:14px;
+  bottom:14px;
+  border-radius:4px;
+  background:rgba(255,254,250,.94);
+}
+html[data-theme="dark"] .studio-services{background:#0d171b}
+html[data-theme="dark"] .studio-service{
+  background:#172329;
+  border-color:#304147;
+}
+html[data-theme="dark"] .studio-service h3{color:#eef3f3}
+html[data-theme="dark"] .studio-service p{color:#aab9bc}
+html[data-theme="dark"] .studio-service-number{color:#7e9399}
+html[data-theme="dark"] .studio-work-card{background:#172329;border-color:#304147}
+html[data-theme="dark"] .studio-work-copy h3{color:#eef3f3}
+@media(max-width:900px){
+  .studio-visual{max-width:500px;justify-self:center}
+}
+@media(max-width:760px){
+  .studio-visual{width:min(100%,480px);max-width:480px}
+  .studio-photo-note{top:13px;left:13px;max-width:165px;padding:10px 12px;font-size:10px}
+  .studio-photo-index{right:13px;bottom:13px}
+  .studio-work-image{aspect-ratio:16 / 9}
+}
