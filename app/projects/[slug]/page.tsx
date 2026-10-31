@@ -52,7 +52,7 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
           </div>
           <div className="case-preview" role="img" aria-label={project.name + ' project preview'} style={{ backgroundImage: "url(" + project.image + ")" }} />
         </div>
-        {study && <section className="case-section case-study-grid">
+        {study && (study.challenge || study.approach || study.delivery || study.role || study.outcome) && <section className="case-section case-study-grid">
           <div><p className="section-label">THE CHALLENGE</p><h2>What needed solving</h2><p>{study.challenge}</p></div>
           <div><p className="section-label">THE APPROACH</p><h2>How it was shaped</h2><p>{study.approach}</p></div>
           <div><p className="section-label">THE DELIVERY</p><h2>What was built</h2><p>{study.delivery}</p></div>
