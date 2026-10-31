@@ -939,3 +939,18 @@ html[data-theme="dark"] .demo-section{border-color:#304147}
  .demo-header-actions{gap:7px}
 }
 html[data-theme="dark"] .studio-profile{background:#172329}
+
+.case-preview{background-size:cover;background-position:center}
+.studio-work-image{background-size:cover;background-position:center}
+.proposal-brand-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}
+.proposal-page article>.proposal-brand-row>.admin-brand{display:inline-flex}
+.proposal-page .theme-toggle{--s-line:#dedbd2;--s-white:#fffefa;--s-ink:#203139}
+html[data-theme="dark"] .proposal-page{background:#0f191d;color:#eaf0f0}
+html[data-theme="dark"] .proposal-page article{background:#172329;border-color:#304147}
+html[data-theme="dark"] .proposal-page .admin-brand,
+html[data-theme="dark"] .proposal-page h1,
+html[data-theme="dark"] .proposal-page h2,
+html[data-theme="dark"] .proposal-page h3{color:#eef3f3}
+html[data-theme="dark"] .proposal-page p{color:#b7c5c7}
+html[data-theme="dark"] .proposal-price{color:#ff986f}
+html[data-theme="dark"] .proposal-page .theme-toggle{--s-line:#405157;--s-white:#172329;--s-ink:#eef3f3}
