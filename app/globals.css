@@ -800,3 +800,11 @@ html{scroll-behavior:smooth}body{margin:0;background:#fbf9f4;color:#203139}butto
     font-size: 8px;
   }
 }
+
+.studio-footer-main nav>.studio-footer-nav-label {
+  color: #ffb092;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}

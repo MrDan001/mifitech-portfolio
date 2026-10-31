@@ -112,8 +112,11 @@ export default async function Home() {
             </Link>
             <p>{content.footer.tagline}</p>
             <nav aria-label="Footer navigation">
+              <span className="studio-footer-nav-label">{content.footer.exploreLabel}</span>
               {content.navigation.slice(0, 4).map((item) => <Link key={item.label} href={item.href}>{item.label}</Link>)}
-              <a href={`mailto:${section.contact.email}`}>Email us</a>
+              <span className="studio-footer-nav-label">{content.footer.projectLabel}</span>
+              <a href="#contact">{content.footer.projectCta}</a>
+              <a href={'mailto:' + section.contact.email}>{section.contact.email}</a>
             </nav>
           </div>
           <div className="studio-footer-bottom">
