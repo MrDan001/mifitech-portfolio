@@ -1,36 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import SiteNav from './components/SiteNav';
 import ContactForm from './components/ContactForm';
-
-const demos = [
-  { slug: 'restaurant', n: '01', title: 'Restaurant & catering', brand: 'MESA / KITCHEN', text: 'Menus, food galleries and reservations in one welcoming place.', image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1100&q=85', tags: ['Menu', 'Gallery', 'Bookings'] },
-  { slug: 'beauty-salon', n: '02', title: 'Beauty & wellness', brand: 'AUREL / BEAUTY STUDIO', text: 'Services, results and appointment requests presented with care.', image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1100&q=85', tags: ['Services', 'Gallery', 'Appointments'] },
-  { slug: 'fashion-boutique', n: '03', title: 'Fashion & retail', brand: 'NAYA / STYLE HOUSE', text: 'Collections, product stories and a smoother route to ordering.', image: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1100&q=85', tags: ['Lookbook', 'Catalogue', 'Orders'] },
-  { slug: 'event-planner', n: '04', title: 'Events & experiences', brand: 'GATHER & GRACE', text: 'A beautiful way to present your work, packages and enquiries.', image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1100&q=85', tags: ['Portfolio', 'Packages', 'Enquiries'] },
-  { slug: 'printing', n: '05', title: 'Printing & creative', brand: 'FORM / PRINT STUDIO', text: 'Show your capabilities, completed work and request a quote.', image: 'https://images.unsplash.com/photo-1504274066651-8d31a536b11a?auto=format&fit=crop&w=1100&q=85', tags: ['Services', 'Portfolio', 'Quotes'] },
-  { slug: 'auto-workshop', n: '06', title: 'Auto workshops', brand: 'MOTION / AUTO CARE', text: 'Diagnostics, services, recent work and easy workshop enquiries.', image: 'https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=1100&q=85', tags: ['Diagnostics', 'Services', 'Bookings'] },
-  { slug: 'laundry', n: '07', title: 'Laundry & dry cleaning', brand: 'FRESH / LAUNDRY CO.', text: 'Services, garment care and pickup requests built for busy customers.', image: 'https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?auto=format&fit=crop&w=1100&q=85', tags: ['Services', 'Pickup', 'Delivery'] },
-  { slug: 'catering', n: '08', title: 'Catering services', brand: 'TABLE / CATERING HOUSE', text: 'Menus, event packages and visual proof that turn enquiries into conversations.', image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1100&q=85', tags: ['Menus', 'Events', 'Quotes'] },
-  { slug: 'interior-design', n: '09', title: 'Interior design', brand: 'FORM / INTERIORS', text: 'A premium portfolio for residential, commercial and bespoke projects.', image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1100&q=85', tags: ['Portfolio', 'Projects', 'Consultations'] },
-  { slug: 'cleaning', n: '10', title: 'Cleaning & facilities', brand: 'NEAT / HOME & OFFICE', text: 'Service packages, proof of work and fast quote requests for local customers.', image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1100&q=85', tags: ['Services', 'Commercial', 'Quotes'] },
-];
-
-const projects = [
-  { slug: 'ludo-live', image: '/previews/ludo-live.svg', name: 'Ludo Live', type: 'GAMING PLATFORM', text: 'A multiplayer gaming experience with player journeys, missions and tournaments.' },
-  { slug: 'ehealthcare', image: '/previews/ehealthcare.svg', name: 'eHealthcare', type: 'HEALTHCARE TECHNOLOGY', text: 'A digital healthcare platform built around patient access and care workflows.' },
-  { slug: 'garrison-market', image: '/previews/garrison-market.svg', name: 'Garrison Market', type: 'BUSINESS OPERATIONS', text: 'An operations platform for inventory, staff, sales and everyday business management.', live: 'https://gmstock.co' },
-  { slug: 'the-africa-plug', image: '/previews/the-africa-plug.svg', name: 'The Africa Plug', type: 'MEDIA & PUBLISHING', text: 'A publishing experience for stories, video and African media.' },
-];
-
-const services = [
-  { icon: 'website', name: 'Website Design', body: 'Beautiful, modern websites that work smoothly on every screen.' },
-  { icon: 'store', name: 'E-commerce Solutions', body: 'Product catalogues and shopping journeys that make it easier to sell.' },
-  { icon: 'apps', name: 'Web Applications', body: 'Custom digital tools built around the way your business works.' },
-  { icon: 'search', name: 'SEO & Digital Marketing', body: 'A stronger foundation for search visibility and customer discovery.' },
-  { icon: 'maintenance', name: 'Website Maintenance', body: 'Updates, improvements and the practical care your website needs.' },
-  { icon: 'support', name: 'Ongoing Support', body: 'A dependable technical partner as your business keeps moving.' },
-];
+import { getSiteContent } from '@/lib/site-content';
 
 function ServiceIcon({ name }: { name: string }) {
   const base = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.65, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true as const };
@@ -42,58 +13,101 @@ function ServiceIcon({ name }: { name: string }) {
   return <svg {...base}><path d="M4 13a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-1v-6h3M4 13v6h3v-6H4Z"/><path d="M7 19a5 5 0 0 0 5 3h2"/></svg>;
 }
 
-const stages = [
-  { n: '01', title: 'Understand', body: 'We get to know your business, your customers and the result you need.' },
-  { n: '02', title: 'Shape', body: 'We agree the structure, visual direction, scope and project plan before building.' },
-  { n: '03', title: 'Build', body: 'We develop the experience, test the details and refine it with your feedback.' },
-  { n: '04', title: 'Launch', body: 'We take your website live and walk you through what happens next.' },
-];
+export default async function Home() {
+  const content = await getSiteContent();
+  const visibleDemos = content.demos.filter((demo) => demo.visible !== false);
+  const visibleProjects = content.projects.filter((project) => project.visible !== false);
+  const section = content.sections;
 
-export default function Home() {
   return (
     <div className="studio-shell">
-      <SiteNav />
+      <SiteNav items={content.navigation} />
       <main>
         <section className="studio-hero">
           <div className="studio-container studio-hero-grid">
             <div className="studio-hero-copy">
-              <div className="studio-eyebrow"><span /> MODERN WEBSITES FOR REAL BUSINESSES</div>
-              <p className="studio-kicker">WEB DESIGN · DEVELOPMENT · DIGITAL PRODUCTS</p>
-              <h1>Turn Your Business Into a Powerful <em>Online Presence.</em></h1>
-              <p className="studio-lead">MifiTech is a digital studio that designs and builds beautiful, fast and secure websites for businesses in Nigeria and beyond.</p>
-              <div className="studio-actions"><a href="#demos" className="studio-button studio-button-primary">View Our Demo Websites</a><a href="#contact" className="studio-button studio-button-outline">Contact Us</a></div>
-              <div className="studio-hero-foot"><span>BUILT AROUND YOUR BUSINESS</span><i /> <span>MADE FOR REAL PEOPLE</span><i /> <span>READY FOR EVERY SCREEN</span></div>
+              <div className="studio-eyebrow"><span /> {content.hero.eyebrow}</div>
+              <p className="studio-kicker">{content.hero.kicker}</p>
+              <h1>{content.hero.title} <em>{content.hero.emphasis}</em></h1>
+              <p className="studio-lead">{content.hero.lead}</p>
+              <div className="studio-actions">
+                <a href={content.hero.primaryHref} className="studio-button studio-button-primary">{content.hero.primaryLabel}</a>
+                <a href={content.hero.secondaryHref} className="studio-button studio-button-outline">{content.hero.secondaryLabel}</a>
+              </div>
+              <div className="studio-hero-foot"><span>BUILT AROUND YOUR BUSINESS</span><i /><span>MADE FOR REAL PEOPLE</span><i /><span>READY FOR EVERY SCREEN</span></div>
             </div>
-            <div className="studio-visual" role="img" aria-label="A business owner working on her laptop in a bright, welcoming workspace"><span className="studio-photo-note">Great websites<br />build trust <b>↙</b></span><span className="studio-photo-index">MIFITECH / DIGITAL STUDIO</span></div>
+            <div className="studio-visual" role="img" aria-label="A business owner working on her laptop in a bright, welcoming workspace">
+              <span className="studio-photo-note">{content.hero.visualNote.split('\\n').map((line, i) => <span key={i}>{line}{i === 0 ? <br /> : null}</span>)} <b>↙</b></span>
+              <span className="studio-photo-index">{content.hero.visualIndex}</span>
+            </div>
           </div>
-          <div className="studio-ribbon"><div className="studio-container studio-ribbon-inner"><span>FROM FIRST IDEA TO LIVE WEBSITE</span><b>STRATEGY <i>✳</i> DESIGN <i>✳</i> DEVELOPMENT <i>✳</i> LAUNCH</b></div></div>
+          <div className="studio-ribbon"><div className="studio-container studio-ribbon-inner"><span>{content.hero.ribbonLead}</span><b>{content.hero.ribbonItems.map((item, i) => <span key={item}>{i > 0 && <> <i>✳</i> </>}{item}</span>)}</b></div></div>
         </section>
 
         <section className="studio-services studio-section" id="services">
-          <div className="studio-container"><div className="studio-section-head"><div><p className="studio-label">01 / OUR SERVICES</p><h2>Everything You Need to <em>Succeed Online.</em></h2></div><p>Practical digital solutions, from the first design decision to the support that keeps your business moving.</p></div><div className="studio-service-grid">{services.map((service, index) => <article className="studio-service" key={service.name}><div className="studio-service-icon"><ServiceIcon name={service.icon} /></div><h3>{service.name}</h3><p>{service.body}</p><span className="studio-service-number">0{index + 1}</span></article>)}</div></div>
+          <div className="studio-container">
+            <div className="studio-section-head"><div><p className="studio-label">{section.services.label}</p><h2>{section.services.title} <em>{section.services.emphasis}</em></h2></div><p>{section.services.intro}</p></div>
+            <div className="studio-service-grid">{content.services.map((service, index) => <article className="studio-service" key={service.name + index}><div className="studio-service-icon"><ServiceIcon name={service.icon} /></div><h3>{service.name}</h3><p>{service.body}</p><span className="studio-service-number">{String(index + 1).padStart(2, '0')}</span></article>)}</div>
+          </div>
         </section>
 
         <section className="studio-demos studio-section" id="demos">
           <div className="studio-container">
-            <div className="studio-section-head"><div><p className="studio-label">02 / WEBSITE DEMO STUDIO</p><h2>Explore Our Industry <em>Website Demos.</em></h2></div><p>See how your business could look with a professional website. Choose an industry to explore a live concept, then tell us what you need.</p></div>
-            <div className="studio-demo-grid">{demos.map(d => <article className="studio-demo-card" key={d.slug}><Link className="studio-demo-art" href={'/demos/' + d.slug} aria-label={'Explore the ' + d.title + ' website demo'} style={{ backgroundImage: 'url(' + d.image + ')' }}><span className="studio-demo-photo-label">{d.title}</span><span className="studio-demo-photo-arrow">OPEN</span></Link><div className="studio-demo-info"><div><span>{d.n} / {d.title}</span><Link href={'/demos/' + d.slug} aria-label={'Open ' + d.title}></Link></div><h3>{d.brand}</h3><p>{d.text}</p><small>{d.tags.join('  ·  ')}</small><Link className="studio-demo-visit" href={'/demos/' + d.slug}>View demo</Link></div></article>)}</div>
-            <div className="studio-demo-bottom"><p><strong>GOOD TO KNOW</strong> These are sample brands and illustrative concepts. Your final website is designed around your business.</p><a href="#contact">Request Your Own Website</a></div>
+            <div className="studio-section-head"><div><p className="studio-label">{section.demos.label}</p><h2>{section.demos.title} <em>{section.demos.emphasis}</em></h2></div><p>{section.demos.intro}</p></div>
+            <div className="studio-demo-grid">{visibleDemos.map((d) => {
+              const href = d.href || '/demos/' + d.slug;
+              return <article className="studio-demo-card" key={d.slug}>
+                <Link className="studio-demo-art" href={href} aria-label={'Explore the ' + d.title + ' website demo'} style={{ backgroundImage: 'url(' + d.image + ')' }}>
+                  <span className="studio-demo-photo-label">{d.title}</span><span className="studio-demo-photo-arrow">OPEN</span>
+                </Link>
+                <div className="studio-demo-info"><div><span>{d.n} / {d.title}</span><Link href={href} aria-label={'Open ' + d.title}></Link></div><h3>{d.brand}</h3><p>{d.text}</p><small>{d.tags.join('  ·  ')}</small><Link className="studio-demo-visit" href={href}>View demo</Link></div>
+              </article>;
+            })}</div>
+            <div className="studio-demo-bottom"><p><strong>{section.demos.noteTitle}</strong> {section.demos.note}</p><a href="#contact">{section.demos.noteLink}</a></div>
           </div>
         </section>
 
         <section className="studio-work studio-section" id="work">
-          <div className="studio-container"><div className="studio-section-head"><div><p className="studio-label">03 / OUR WORK</p><h2>Selected work. <em>Real products.</em></h2></div><p>Digital products and platforms from the MifiTech portfolio. Explore the thinking and experience behind each build.</p></div><div className="studio-work-grid">{projects.map((project, index) => <article className="studio-work-card" key={project.slug}><Link className="studio-work-image" href={'/projects/' + project.slug}><Image src={project.image} alt={project.name + ' project preview'} fill sizes="(max-width: 760px) 84vw, (max-width: 1100px) 48vw, 560px"/><span>0{index + 1}</span><b>VIEW PROJECT</b></Link><div className="studio-work-copy"><small>{project.type}</small><div><h3>{project.name}</h3><Link href={'/projects/' + project.slug} aria-label={'View ' + project.name + ' project'}></Link></div><p>{project.text}</p><footer><Link href={'/projects/' + project.slug}>Project details</Link>{project.live ? <a href={project.live} target="_blank" rel="noreferrer">Visit live site</a> : <span>Portfolio project</span>}</footer></div></article>)}</div></div>
+          <div className="studio-container">
+            <div className="studio-section-head"><div><p className="studio-label">{section.work.label}</p><h2>{section.work.title} <em>{section.work.emphasis}</em></h2></div><p>{section.work.intro}</p></div>
+            <div className="studio-work-grid">{visibleProjects.map((project, index) => {
+              const projectHref = '/projects/' + project.slug;
+              return <article className="studio-work-card" key={project.slug}>
+                <Link className="studio-work-image" href={projectHref} style={{ backgroundImage: 'url(' + project.image + ')' }}>
+                  <span>{String(index + 1).padStart(2, '0')}</span><b>VIEW PROJECT</b>
+                </Link>
+                <div className="studio-work-copy"><small>{project.type}</small><div><h3>{project.name}</h3><Link href={projectHref} aria-label={'View ' + project.name + ' project'}></Link></div><p>{project.text}</p>
+                  <footer><Link href={projectHref}>Project details</Link>{project.websiteUrl ? <a href={project.websiteUrl} target="_blank" rel="noreferrer">Visit live website ↗</a> : <span>Portfolio project</span>}</footer>
+                </div>
+              </article>;
+            })}</div>
+          </div>
         </section>
 
-        <section className="studio-intro studio-section" id="about"><div className="studio-container studio-intro-grid"><div><p className="studio-label">04 / WHY MIFITECH</p><h2>Your website should work as hard as <em>you do.</em></h2></div><div><p>People discover businesses in many places. When they're ready to know more, your website should make the next step obvious.</p><p>We bring your story, services and customer journey together in one considered digital experience — so people can understand what you offer and feel confident getting in touch.</p><a className="studio-inline-link" href="#process">See how we work <span></span></a></div></div></section>
+        <section className="studio-intro studio-section" id="about"><div className="studio-container studio-intro-grid">
+          <div><p className="studio-label">{section.about.label}</p><h2>{section.about.title} <em>{section.about.emphasis}</em></h2></div>
+          <div>{section.about.paragraphs.map((paragraph, i) => <p key={i}>{paragraph}</p>)}<a className="studio-inline-link" href="#process">{section.about.linkLabel} <span></span></a></div>
+        </div></section>
 
-        <section className="studio-process studio-section" id="process"><div className="studio-container studio-process-grid"><div className="studio-process-intro"><p className="studio-label">05 / THE APPROACH</p><h2>Good work.<br/><em>Clear process.</em></h2><p>No unnecessary complexity. You'll know what we're making, what it costs and what happens next.</p><a href="#contact" className="studio-button studio-button-primary">Start a conversation</a></div><div className="studio-stages">{stages.map(stage=><article key={stage.n}><span>{stage.n}</span><div><h3>{stage.title}</h3><p>{stage.body}</p></div><b></b></article>)}</div></div></section>
+        <section className="studio-process studio-section" id="process"><div className="studio-container studio-process-grid">
+          <div className="studio-process-intro"><p className="studio-label">{section.process.label}</p><h2>{section.process.title}<br/><em>{section.process.emphasis}</em></h2><p>{section.process.intro}</p><a href="#contact" className="studio-button studio-button-primary">{section.process.buttonLabel}</a></div>
+          <div className="studio-stages">{content.stages.map((stage) => <article key={stage.n + stage.title}><span>{stage.n}</span><div><h3>{stage.title}</h3><p>{stage.body}</p></div><b></b></article>)}</div>
+        </div></section>
 
-        <section className="studio-guide"><div className="studio-container studio-guide-inner"><div><p className="studio-label">A GOOD PLACE TO START</p><h2>Planning your first business website?</h2><p>Our practical guide covers domains, hosting, content, features, costs and the basics of SEO for Nigerian businesses.</p><Link href="/how-to-build-a-website-in-nigeria">Read: How to build a website in Nigeria</Link></div><div className="studio-guide-mark">01<span> / FIELD GUIDE</span></div></div></section>
+        <section className="studio-guide"><div className="studio-container studio-guide-inner"><div><p className="studio-label">{section.guide.label}</p><h2>{section.guide.title}</h2><p>{section.guide.intro}</p><Link href={section.guide.href}>{section.guide.linkLabel}</Link></div><div className="studio-guide-mark">01<span> / FIELD GUIDE</span></div></div></section>
 
-        <section className="studio-contact studio-section" id="contact"><div className="studio-container studio-contact-grid"><div className="studio-contact-copy"><p className="studio-label">06 / YOUR PROJECT</p><h2>Let's build something <em>great.</em></h2><p>Tell us about your business and what you want your website to achieve. We'll help you work out the right next step.</p><div className="studio-contact-email"><small>EMAIL THE STUDIO</small><a href="mailto:officialsafebase@gmail.com">officialsafebase@gmail.com </a></div><div className="studio-contact-note">A few details are enough to begin. No complicated brief required.</div></div><div className="studio-form-card"><div><span>PROJECT ENQUIRY</span><small>LET'S START HERE ↘</small></div><ContactForm/></div></div></section>
+        <section className="studio-contact studio-section" id="contact"><div className="studio-container studio-contact-grid">
+          <div className="studio-contact-copy"><p className="studio-label">{section.contact.label}</p><h2>{section.contact.title} <em>{section.contact.emphasis}</em></h2><p>{section.contact.intro}</p>
+            <div className="studio-contact-email"><small>{section.contact.emailLabel}</small><a href={'mailto:' + section.contact.email}>{section.contact.email}</a></div><div className="studio-contact-note">{section.contact.note}</div>
+          </div>
+          <div className="studio-form-card"><div><span>{section.contact.formTitle}</span><small>{section.contact.formKicker}</small></div><ContactForm email={section.contact.email}/></div>
+        </div></section>
       </main>
-      <footer className="studio-footer"><div className="studio-container studio-footer-grid"><div><Link href="/" className="studio-footer-brand">MIFITECH<span>.</span></Link><p>Modern websites and digital products for businesses in Nigeria and beyond.</p></div><div><span>EXPLORE</span><Link href="#services">Services</Link><Link href="#demos">Website demos</Link><Link href="#work">Our work</Link></div><div><span>START A PROJECT</span><a href="#contact">Tell us what you need</a><a href="mailto:officialsafebase@gmail.com">officialsafebase@gmail.com</a></div></div></footer>
+      <footer className="studio-footer"><div className="studio-container studio-footer-grid">
+        <div><Link href="/" className="studio-footer-brand">MIFITECH<span>.</span></Link><p>{content.footer.tagline}</p></div>
+        <div><span>{content.footer.exploreLabel}</span>{content.navigation.slice(0, 4).map((item) => <Link key={item.label} href={item.href}>{item.label}</Link>)}</div>
+        <div><span>{content.footer.projectLabel}</span><a href="#contact">{content.footer.projectCta}</a><a href={'mailto:' + section.contact.email}>{section.contact.email}</a></div>
+      </div></footer>
     </div>
   );
 }

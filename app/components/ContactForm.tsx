@@ -2,9 +2,9 @@
 
 import { FormEvent, useState } from 'react';
 
-const email = 'officialsafebase@gmail.com';
+type ContactFormProps = { email?: string };
 
-export default function ContactForm() {
+export default function ContactForm({ email = 'officialsafebase@gmail.com' }: ContactFormProps) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
@@ -40,7 +40,7 @@ export default function ContactForm() {
         form.reset(); setStatus('success');
         setMessage('Your enquiry has been saved to our project pipeline. Email notification is temporarily unavailable.');
       } else {
-        setStatus('error'); setMessage('We could not send or save your enquiry. Please email officialsafebase@gmail.com directly.');
+        setStatus('error'); setMessage('We could not send or save your enquiry. Please email ' + email + ' directly.');
       }
     }
   }

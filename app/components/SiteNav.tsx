@@ -3,14 +3,16 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-const links = [
+type NavItem = { label: string; href: string };
+const defaultLinks: NavItem[] = [
   { label: 'Services', href: '/#services' },
   { label: 'Demo studio', href: '/#demos' },
   { label: 'Our work', href: '/#work' },
   { label: 'Our approach', href: '/#process' },
+  { label: 'Website guide', href: '/how-to-build-a-website-in-nigeria' },
 ];
 
-export default function SiteNav() {
+export default function SiteNav({ items = defaultLinks }: { items?: NavItem[] }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -32,8 +34,7 @@ export default function SiteNav() {
           </span>
         </Link>
         <nav className="studio-desktop-nav" aria-label="Main navigation">
-          {links.map((link) => <Link href={link.href} key={link.label}>{link.label}</Link>)}
-          <Link href="/how-to-build-a-website-in-nigeria">Website guide</Link>
+          {items.map((item, index) => <Link href={item.href} key={item.label + index}>{item.label}</Link>)}
         </nav>
         <div className="studio-nav-actions">
           <a href="/#contact">Start a project</a>
@@ -51,8 +52,7 @@ export default function SiteNav() {
       </div>
       {open && (
         <nav className="studio-mobile-nav" id="studio-mobile-navigation" aria-label="Mobile navigation">
-          {links.map((link) => <Link href={link.href} key={link.label} onClick={() => setOpen(false)}>{link.label}</Link>)}
-          <Link href="/how-to-build-a-website-in-nigeria" onClick={() => setOpen(false)}>Website guide </Link>
+          {items.map((item, index) => <Link href={item.href} key={item.label + index} onClick={() => setOpen(false)}>{item.label}</Link>)}
           <Link href="/#contact" onClick={() => setOpen(false)}>Start a project</Link>
         </nav>
       )}

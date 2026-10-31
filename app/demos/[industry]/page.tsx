@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { getSiteContent, type DemoItem } from '@/lib/site-content';
 
 type DemoCard = { title: string; description: string; image: string; alt: string; label: string };
 
@@ -100,16 +101,46 @@ const demos: Record<string, DemoSite> = {
   },
 };
 
+
+function demoFromCard(card?: DemoItem): DemoSite | undefined {
+  if (!card) return undefined;
+  const label = card.title.toUpperCase();
+  const image = card.image;
+  return {
+    name: card.brand || card.title,
+    descriptor: label,
+    title: 'A clearer online presence for ' + card.title.toLowerCase() + '.',
+    intro: card.text,
+    primaryAction: 'Make an enquiry',
+    sectionTitle: 'A digital home built around your service.',
+    sectionIntro: card.text + ' Use a clear structure to explain what you offer, show your work and help potential customers take the next step.',
+    cards: [
+      { title: 'What you offer', description: 'Give visitors a clear overview of your services, products and the value you provide.', image, alt: card.title + ' service and business website concept', label: card.tags[0] || 'SERVICES' },
+      { title: 'Proof and presentation', description: 'Use strong images, useful details and a consistent story to help people understand your business.', image, alt: card.title + ' portfolio and brand presentation', label: card.tags[1] || 'ABOUT THE BUSINESS' },
+      { title: 'Enquiries made simple', description: 'Make it easy for interested customers to ask questions and request the right next step.', image, alt: card.title + ' customer enquiry experience', label: card.tags[2] || 'CONTACT & ENQUIRIES' },
+    ],
+    closingTitle: 'Ready to give your business a stronger online presence?',
+    closingText: 'This is an illustrative concept. MifiTech can tailor the structure, content and customer journey around your actual business.',
+  };
+}
+
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+
 export function generateStaticParams() { return Object.keys(demos).map((industry) => ({ industry })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ industry: string }> }): Promise<Metadata> {
-  const { industry } = await params; const demo = demos[industry];
+  const { industry } = await params;
+  const content = await getSiteContent();
+  const demo = demos[industry] || demoFromCard(content.demos.find((item) => item.slug === industry));
   if (!demo) return { title: 'Website demo' };
   return { title: demo.name + ' — Website concept', description: demo.intro, robots: { index: false, follow: false } };
 }
 
 export default async function IndustryDemo({ params }: { params: Promise<{ industry: string }> }) {
-  const { industry } = await params; const demo = demos[industry];
+  const { industry } = await params;
+  const content = await getSiteContent();
+  const demo = demos[industry] || demoFromCard(content.demos.find((item) => item.slug === industry));
   if (!demo) notFound();
   const subject = encodeURIComponent('Website concept for my business');
   const body = encodeURIComponent('Hello MifiTech,\n\nI viewed the ' + demo.name + ' demo and would like to discuss a website for my business.\n\nBusiness name:\nWhat I need:\n');
