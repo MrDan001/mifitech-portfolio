@@ -152,6 +152,9 @@ export default function AdminPanel() {
       demos: { slug: 'new-demo', n: String(content.demos.length + 1).padStart(2, '0'), title: 'New industry demo', brand: 'NEW BRAND', text: 'Describe the website concept.', image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=85', tags: ['Services', 'Enquiries'], visible: true, href: '' },
       projects: { slug: 'new-project', image: '/previews/garrison-market.svg', name: 'New project', type: 'PORTFOLIO PROJECT', text: 'Describe the project.', websiteUrl: '', repoUrl: '', visible: true, stack: [], features: [] },
       stages: { n: String(content.stages.length + 1).padStart(2, '0'), title: 'New step', body: 'Describe this step.' },
+      trustPoints: { title: 'New principle', body: 'Describe this studio principle.' },
+      faqs: { question: 'New question', answer: 'Write a clear answer.' },
+      testimonials: { quote: '', name: '', role: '', company: '' },
     };
     setContent((old: any) => ({ ...old, [collection]: [...old[collection], templates[collection]] }));
   }
