@@ -89,6 +89,12 @@ export default async function Home() {
           <div>{section.about.paragraphs.map((paragraph, i) => <p key={i}>{paragraph}</p>)}<a className="studio-inline-link" href="#process">{section.about.linkLabel} <span></span></a></div>
         </div></section>
 
+        {(content.studioProfile.name || content.studioProfile.bio || content.studioProfile.image) && <section className="studio-profile studio-section" id="studio-profile">
+          <div className="studio-container studio-profile-grid">
+            {content.studioProfile.image && <div className="studio-profile-photo"><img src={content.studioProfile.image} alt={content.studioProfile.name ? content.studioProfile.name + ' — MifiTech' : 'MifiTech studio profile'} loading="lazy" /></div>}
+            <div><p className="studio-label">BEHIND MIFITECH</p><h2>{content.studioProfile.headline}</h2>{content.studioProfile.name && <strong className="studio-profile-name">{content.studioProfile.name}{content.studioProfile.role ? ' · ' + content.studioProfile.role : ''}</strong>}{content.studioProfile.bio && <p>{content.studioProfile.bio}</p>}{content.studioProfile.highlights.length > 0 && <div className="studio-profile-highlights">{content.studioProfile.highlights.map((item, index) => <span key={item + index}>{item}</span>)}</div>}</div>
+          </div>
+        </section>}
         <section className="studio-proof studio-section" id="why-mifitech">
           <div className="studio-container">
             <div className="studio-section-head">
