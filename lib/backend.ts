@@ -11,7 +11,7 @@ export async function db<T>(path: string, init: RequestInit = {}): Promise<T> {
     cache: 'no-store',
     headers: {
       apikey: key,
-      Authorization: `Bearer ${key}`,
+      ...(key.startsWith('sb_secret_') ? {} : { Authorization: `Bearer ${key}` }),
       'Content-Type': 'application/json',
       ...(init.headers || {}),
     },
@@ -79,7 +79,7 @@ export async function uploadPublicImage(file: File): Promise<string> {
     method: 'POST',
     headers: {
       apikey: key,
-      Authorization: `Bearer ${key}`,
+      ...(key.startsWith('sb_secret_') ? {} : { Authorization: `Bearer ${key}` }),
       'Content-Type': file.type,
       'x-upsert': 'false',
     },
