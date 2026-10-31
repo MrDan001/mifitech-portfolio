@@ -27,11 +27,13 @@ export async function getSiteContent(): Promise<SiteContent> {
       footer: { ...defaultSiteContent.footer, ...(saved.footer || {}) },
       navigation: Array.isArray(saved.navigation) ? saved.navigation : defaultSiteContent.navigation,
       services: Array.isArray(saved.services) ? saved.services : defaultSiteContent.services,
-      demos: Array.isArray(saved.demos) ? saved.demos : defaultSiteContent.demos,
+      demos: Array.isArray(saved.demos) ? saved.demos.map((demo) => ({ ...defaultSiteContent.demos.find((item) => item.slug === demo.slug), ...demo })) : defaultSiteContent.demos,
       projects: Array.isArray(saved.projects) ? saved.projects.map((project) => {
         const fallback = defaultSiteContent.projects.find((item) => item.slug === project.slug);
         return { ...fallback, ...project, caseStudy: { ...(fallback?.caseStudy || {}), ...(project.caseStudy || {}), gallery: Array.isArray(project.caseStudy?.gallery) ? project.caseStudy.gallery : (fallback?.caseStudy?.gallery || []) } };
       }) : defaultSiteContent.projects,
+      guideArticle: { ...defaultSiteContent.guideArticle, ...(saved.guideArticle || {}) },
+      guideSections: Array.isArray(saved.guideSections) ? saved.guideSections : defaultSiteContent.guideSections,
       trustPoints: Array.isArray(saved.trustPoints) ? saved.trustPoints : defaultSiteContent.trustPoints,
       faqs: Array.isArray(saved.faqs) ? saved.faqs : defaultSiteContent.faqs,
       testimonials: Array.isArray(saved.testimonials) ? saved.testimonials : defaultSiteContent.testimonials,
