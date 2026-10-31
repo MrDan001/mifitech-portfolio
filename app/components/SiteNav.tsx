@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 type NavItem = { label: string; href: string };
 const defaultLinks: NavItem[] = [
@@ -9,6 +10,7 @@ const defaultLinks: NavItem[] = [
   { label: 'Demo studio', href: '/#demos' },
   { label: 'Our work', href: '/#work' },
   { label: 'Our approach', href: '/#process' },
+  { label: 'FAQs', href: '/#faqs' },
   { label: 'Website guide', href: '/how-to-build-a-website-in-nigeria' },
 ];
 
@@ -38,6 +40,7 @@ export default function SiteNav({ items = defaultLinks }: { items?: NavItem[] })
         </nav>
         <div className="studio-nav-actions">
           <a href="/#contact">Start a project</a>
+          <ThemeToggle />
           <button
             type="button"
             className="studio-menu-button"
