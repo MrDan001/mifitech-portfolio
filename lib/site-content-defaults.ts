@@ -7,8 +7,8 @@ export type DemoItem = {
   pageTitle?: string; pageIntro?: string; pageSectionTitle?: string; pageSectionIntro?: string; pageClosingTitle?: string; pageClosingText?: string;
 };
 export type ProjectCaseStudy = {
-  challenge: string; approach: string; delivery: string; role: string; outcome: string;
-  gallery: string[]; flyer: string;
+  challenge?: string; approach?: string; delivery?: string; role?: string; outcome?: string;
+  gallery?: string[]; flyer?: string;
 };
 export type ProjectItem = {
   slug: string; image: string; name: string; type: string; text: string;
