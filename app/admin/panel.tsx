@@ -172,7 +172,7 @@ export default function AdminPanel() {
             <div style={cmsCard}>
               <h3 style={{ margin: 0 }}>Hero / first impression</h3>
               {(['eyebrow', 'kicker', 'title', 'emphasis', 'lead', 'primaryLabel', 'primaryHref', 'secondaryLabel', 'secondaryHref', 'visualNote', 'visualIndex', 'ribbonLead'] as string[]).map((key) => input(key.replace(/[A-Z]/g, (m) => ' ' + m).replace(/^./, (m) => m.toUpperCase()), content.hero[key], (v) => updateGroup('hero', key, v), ['lead', 'visualNote'].includes(key)))}
-              {input('Ribbon items (comma separated)', content.hero.ribbonItems.join(', '), (v) => updateGroup('hero', 'ribbonItems', v.split(',').map((x: string) => x.trim()).filter(Boolean))}
+              {input('Ribbon items (comma separated)', content.hero.ribbonItems.join(', '), (v) => updateGroup('hero', 'ribbonItems', v.split(',').map((x: string) => x.trim()).filter(Boolean)))}
               <label className="admin-field">Upload hero image (JPG, PNG, WebP, AVIF or GIF · max 5 MB)<input type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/gif" onChange={(e) => { const file = e.target.files?.[0]; if (file) uploadImage('hero', 0, 'visualImage', file); e.currentTarget.value = ''; }} /></label>
             </div>
             <div style={cmsCard}>
