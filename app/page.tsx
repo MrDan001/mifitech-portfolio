@@ -103,11 +103,37 @@ export default async function Home() {
           <div className="studio-form-card"><div><span>{section.contact.formTitle}</span><small>{section.contact.formKicker}</small></div><ContactForm email={section.contact.email}/></div>
         </div></section>
       </main>
-      <footer className="studio-footer"><div className="studio-container studio-footer-grid">
-        <div><Link href="/" className="studio-footer-brand">MIFITECH<span>.</span></Link><p>{content.footer.tagline}</p></div>
-        <div><span>{content.footer.exploreLabel}</span>{content.navigation.slice(0, 4).map((item) => <Link key={item.label} href={item.href}>{item.label}</Link>)}</div>
-        <div><span>{content.footer.projectLabel}</span><a href="#contact">{content.footer.projectCta}</a><a href={'mailto:' + section.contact.email}>{section.contact.email}</a></div>
-      </div></footer>
+      <footer className="studio-footer">
+        <div className="studio-container">
+          <div className="studio-footer-main">
+            <Link href="/" className="studio-footer-brand" aria-label="MifiTech home">
+              <b aria-hidden="true">M</b>
+              MifiTech<span>.</span>
+            </Link>
+            <p>{content.footer.tagline}</p>
+            <nav aria-label="Footer navigation">
+              {content.navigation.slice(0, 4).map((item) => <Link key={item.label} href={item.href}>{item.label}</Link>)}
+              <a href={`mailto:${section.contact.email}`}>Email us</a>
+            </nav>
+          </div>
+          <div className="studio-footer-bottom">
+            <span>© {new Date().getFullYear()} MifiTech. All rights reserved.</span>
+            <span>Websites · Apps · Digital Solutions</span>
+          </div>
+        </div>
+      </footer>
+      <a
+        className="studio-mobile-cta"
+        href="#contact"
+        aria-label="Let's build something great — tell us about your project"
+      >
+        <span className="studio-mobile-cta-icon" aria-hidden="true">↗</span>
+        <span>
+          <strong>Let's Build Something Great</strong>
+          <small>Tell us about your project</small>
+        </span>
+        <b aria-hidden="true">→</b>
+      </a>
     </div>
   );
 }
