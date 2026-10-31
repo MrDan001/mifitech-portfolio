@@ -36,7 +36,7 @@ export default async function Home() {
               </div>
               <div className="studio-hero-foot"><span>BUILT AROUND YOUR BUSINESS</span><i /><span>MADE FOR REAL PEOPLE</span><i /><span>READY FOR EVERY SCREEN</span></div>
             </div>
-            <div className="studio-visual" role="img" aria-label="MifiTech creative workspace and digital product concept" style={{ backgroundImage: "linear-gradient(180deg, transparent 55%, rgba(0,0,0,.3)), url(" + (content.hero.visualImage || '/previews/hero-workspace.svg') + ")", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <div className="studio-visual" role="img" aria-label="MifiTech creative workspace and digital product concept" style={{ backgroundImage: "linear-gradient(180deg, transparent 55%, rgba(0,0,0,.3)), url(" + (content.hero.visualImage || '/portfolio/hero-workspace.webp') + ")", backgroundSize: 'cover', backgroundPosition: 'center' }}>
               <span className="studio-photo-note">{content.hero.visualNote.split('\\n').map((line, i) => <span key={i}>{line}{i === 0 ? <br /> : null}</span>)} <b>↙</b></span>
               <span className="studio-photo-index">{content.hero.visualIndex}</span>
             </div>
@@ -73,7 +73,7 @@ export default async function Home() {
             <div className="studio-work-grid">{visibleProjects.map((project, index) => {
               const projectHref = '/projects/' + project.slug;
               return <article className="studio-work-card" key={project.slug}>
-                <Link className="studio-work-image" href={projectHref} style={{ backgroundImage: 'url(' + project.image + ')' }}>
+                <Link className="studio-work-image" href={projectHref} aria-label={'View the ' + project.name + ' case study'} style={{ backgroundImage: 'linear-gradient(135deg, rgba(6,12,19,.02), rgba(6,12,19,.22)), url(' + project.image + ')', backgroundSize: 'cover', backgroundPosition: 'center' }}>
                   <span>{String(index + 1).padStart(2, '0')}</span><b>VIEW PROJECT</b>
                 </Link>
                 <div className="studio-work-copy"><small>{project.type}</small><div><h3>{project.name}</h3><Link href={projectHref} aria-label={'View ' + project.name + ' project'}></Link></div><p>{project.text}</p>
