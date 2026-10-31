@@ -28,7 +28,13 @@ export async function getSiteContent(): Promise<SiteContent> {
       navigation: Array.isArray(saved.navigation) ? saved.navigation : defaultSiteContent.navigation,
       services: Array.isArray(saved.services) ? saved.services : defaultSiteContent.services,
       demos: Array.isArray(saved.demos) ? saved.demos : defaultSiteContent.demos,
-      projects: Array.isArray(saved.projects) ? saved.projects : defaultSiteContent.projects,
+      projects: Array.isArray(saved.projects) ? saved.projects.map((project) => {
+        const fallback = defaultSiteContent.projects.find((item) => item.slug === project.slug);
+        return { ...fallback, ...project, caseStudy: { ...(fallback?.caseStudy || {}), ...(project.caseStudy || {}), gallery: Array.isArray(project.caseStudy?.gallery) ? project.caseStudy.gallery : (fallback?.caseStudy?.gallery || []) } };
+      }) : defaultSiteContent.projects,
+      trustPoints: Array.isArray(saved.trustPoints) ? saved.trustPoints : defaultSiteContent.trustPoints,
+      faqs: Array.isArray(saved.faqs) ? saved.faqs : defaultSiteContent.faqs,
+      testimonials: Array.isArray(saved.testimonials) ? saved.testimonials : defaultSiteContent.testimonials,
       stages: Array.isArray(saved.stages) ? saved.stages : defaultSiteContent.stages,
     };
     return content;
