@@ -1,3 +1,4 @@
+// Path: app/components/SiteNav.tsx
 'use client';
 
 import Link from 'next/link';
@@ -29,7 +30,7 @@ export default function SiteNav({ items = defaultLinks }: { items?: NavItem[] })
     <header className="studio-header">
       <div className="studio-container studio-nav-inner">
         <Link className="studio-brand" href="/" aria-label="MifiTech home">
-          <b>M</b>
+          <img src="/brand/logo-b-mark.svg" alt="" width={40} height={40} style={{ flex: 'none' }} />
           <span className="studio-brand-copy">
             <strong>MifiTech<span>.</span></strong>
             <small>Websites · Apps · Digital Solutions</small>

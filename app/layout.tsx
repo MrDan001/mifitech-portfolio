@@ -23,6 +23,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     '@type': 'ProfessionalService',
     name: 'MifiTech',
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech-portfolio.vercel.app',
+    logo: (process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech-portfolio.vercel.app') + '/brand/logo-512.png',
     email: 'officialsafebase@gmail.com',
     telephone: '+2349067859200',
     description: 'Website design, web development, ecommerce and custom web application services for businesses in Nigeria.',

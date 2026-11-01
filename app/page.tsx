@@ -38,7 +38,7 @@ export default async function Home() {
       <div className="mh-dark">
         <header className="mh-header">
           <div className="mh-wrap">
-            <Link className="mh-logo" href="/" aria-label="MifiTech home"><b>M</b>MifiTech</Link>
+            <Link className="mh-logo" href="/" aria-label="MifiTech home"><img src="/brand/logo-b-horizontal-dark.svg" alt="MifiTech" width={260} height={56} /></Link>
             <nav className="mh-nav" aria-label="Main navigation">
               {content.navigation.map((item, index) => <Link key={item.label + index} href={item.href}>{item.label}</Link>)}
             </nav>
@@ -216,7 +216,7 @@ export default async function Home() {
         </section>
         <footer className="mh-footer">
           <div className="mh-wrap">
-            <span>© {new Date().getFullYear()} MifiTech. {content.footer.tagline}</span>
+            <span><img className="mh-footer-logo" src="/brand/logo-b-mark.svg" alt="" width={24} height={24} />© {new Date().getFullYear()} MifiTech. {content.footer.tagline}</span>
             <span>
               {content.navigation.slice(0, 3).map((item, index) => <Link key={item.label + index} href={item.href}>{item.label}</Link>)}
               <Link href="/privacy">Privacy</Link>

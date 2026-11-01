@@ -21,8 +21,9 @@
 /* header */
 .mh .mh-header{padding:20px 0}
 .mh .mh-header .mh-wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.mh .mh-logo{display:flex;align-items:center;gap:10px;font:800 22px var(--display);text-decoration:none}
-.mh .mh-logo b{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--ink2);color:var(--lime);border:1px solid #ffffff25}
+.mh .mh-logo{display:flex;align-items:center;text-decoration:none}
+.mh .mh-logo img{display:block;height:44px;width:auto}
+.mh .mh-footer-logo{height:24px;width:24px;vertical-align:-7px;margin-right:10px}
 .mh .mh-nav{display:flex;gap:22px;font-size:15px}
 .mh .mh-nav a{text-decoration:none;opacity:.8}
 .mh .mh-nav a:hover{opacity:1}
