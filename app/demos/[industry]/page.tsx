@@ -1,8 +1,11 @@
+// Path: app/demos/[industry]/page.tsx
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getSiteContent, type DemoItem, type SiteContent } from '@/lib/site-content';
 import ThemeToggle from '../../components/ThemeToggle';
+import RichDemo from './RichDemo';
+import { richDemos } from '@/lib/demo-sites';
 
 type DemoCard = { title: string; description: string; image: string; alt: string; label: string };
 
@@ -147,10 +150,12 @@ function resolveDemo(industry: string, content: SiteContent): DemoSite | undefin
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
 
-export function generateStaticParams() { return Object.keys(demos).map((industry) => ({ industry })); }
+export function generateStaticParams() { return Array.from(new Set([...Object.keys(demos), ...Object.keys(richDemos)])).map((industry) => ({ industry })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ industry: string }> }): Promise<Metadata> {
   const { industry } = await params;
+  const rich = richDemos[industry];
+  if (rich) return { title: rich.name + ' — Website concept', description: rich.hero.intro, robots: { index: false, follow: false } };
   const content = await getSiteContent();
   const demo = resolveDemo(industry, content);
   if (!demo) return { title: 'Website demo' };
@@ -159,6 +164,8 @@ export async function generateMetadata({ params }: { params: Promise<{ industry:
 
 export default async function IndustryDemo({ params }: { params: Promise<{ industry: string }> }) {
   const { industry } = await params;
+  const rich = richDemos[industry];
+  if (rich) return <RichDemo demo={rich} slug={industry} />;
   const content = await getSiteContent();
   const demo = resolveDemo(industry, content);
   if (!demo) notFound();
