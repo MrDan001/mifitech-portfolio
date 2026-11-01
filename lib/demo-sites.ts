@@ -55,7 +55,7 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Before you visit', items: [{ q: 'Do I need to book?', a: 'Walk-ins are welcome, but weekends and evenings fill up, so we recommend booking.' }, { q: 'Do you cater for events?', a: 'Yes. We cater for office lunches, weddings and private dinners across Lagos.' }, { q: 'Is there parking?', a: 'Yes, secure parking is available for guests.' }] },
     ],
     form: { title: 'Reserve a table', intro: 'Tell us when you are coming and we will confirm on WhatsApp.', fields: ['Your name', 'Phone number', 'Day and time', 'Number of guests'], button: 'Request reservation' },
-    footer: { address: '12 Admiralty Way, Lekki Phase 1, Lagos', hours: 'Mon to Sun, 12pm to 10pm', phone: '0801 234 5678' },
+    footer: { address: '12 Admiralty Way, Lekki Phase 1, Lagos', hours: 'Mon to Sun, 12pm to 10pm', phone: '+234 906 785 9200' },
   },
   'beauty-salon': {
     name: 'AUREL', tag: 'Beauty studio, Victoria Island', nav: ['Services', 'Team', 'Book'], accent: '#8a3d6e', ink: '#2a1824', bg: '#fdf8fa', soft: '#f5e8ef', serif: true,
@@ -74,7 +74,7 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Good to know', items: [{ q: 'Can I bring a photo?', a: 'Please do. It helps us agree the look before we start.' }, { q: 'What if I need to reschedule?', a: 'Tell us 24 hours ahead and your deposit moves to the new date.' }, { q: 'Do you do bridal parties?', a: 'Yes. We offer on-site and in-studio packages for the bride and her team.' }] },
     ],
     form: { title: 'Request an appointment', intro: 'Share what you would like and your preferred day.', fields: ['Your name', 'Phone number', 'Service you want', 'Preferred day and time'], button: 'Request appointment' },
-    footer: { address: '5 Adetokunbo Ademola Street, Victoria Island, Lagos', hours: 'Tue to Sun, 9am to 7pm', phone: '0802 345 6789' },
+    footer: { address: '5 Adetokunbo Ademola Street, Victoria Island, Lagos', hours: 'Tue to Sun, 9am to 7pm', phone: '+234 906 785 9200' },
   },
   'fashion-boutique': {
     name: 'NAYA', tag: 'Style House', nav: ['New in', 'Lookbook', 'Order'], accent: '#274a7c', ink: '#14202e', bg: '#ffffff', soft: '#eef2f7',
@@ -90,7 +90,7 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Delivery and returns', items: [{ q: 'Can I try before I pay?', a: 'In Lagos, yes. Pay on delivery after you have checked your order.' }, { q: 'What if it does not fit?', a: 'Message us within 7 days and we will arrange an exchange.' }, { q: 'Do you ship outside Lagos?', a: 'Yes, to all states through trusted dispatch partners.' }] },
     ],
     form: { title: 'Order or ask a question', intro: 'Tell us what you want and we will reply on WhatsApp.', fields: ['Your name', 'WhatsApp number', 'Item and size', 'Delivery area'], button: 'Send order request' },
-    footer: { address: 'Showroom: 8 Allen Avenue, Ikeja, Lagos', hours: 'Mon to Sat, 10am to 7pm', phone: '0805 678 9012' },
+    footer: { address: 'Showroom: 8 Allen Avenue, Ikeja, Lagos', hours: 'Mon to Sat, 10am to 7pm', phone: '+234 906 785 9200' },
   },
   'private-clinic': {
     name: 'WELLSPRING', tag: 'Medical centre, Ikeja', nav: ['Services', 'Doctors', 'Appointments'], accent: '#087f79', ink: '#0d2a2c', bg: '#f7fbfb', soft: '#e4f1f1',
@@ -107,7 +107,7 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Common questions', items: [{ q: 'Do you accept health insurance?', a: 'We work with several providers. Call us with your plan details and we will confirm.' }, { q: 'Can I get my results online?', a: 'Yes, lab results are sent securely to your phone or email.' }, { q: 'What if I need urgent care on Sunday?', a: 'Our emergency line is answered every day of the week.' }] },
     ],
     form: { title: 'Request an appointment', intro: 'Fill in your details and our team will confirm your slot.', fields: ['Full name', 'Phone number', 'Service needed', 'Preferred day and time'], button: 'Request appointment' },
-    footer: { address: '27 Obafemi Awolowo Way, Ikeja, Lagos', hours: 'Mon to Sat, 8am to 8pm', phone: '0803 456 7890' },
+    footer: { address: '27 Obafemi Awolowo Way, Ikeja, Lagos', hours: 'Mon to Sat, 8am to 8pm', phone: '+234 906 785 9200' },
   },
   'real-estate': {
     name: 'HOMESTEAD', tag: 'Realty, Lagos and Abuja', nav: ['Listings', 'Agents', 'Viewings'], accent: '#1f5d46', ink: '#14231d', bg: '#fbfaf6', soft: '#eef0e6', serif: true,
@@ -123,7 +123,7 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Questions buyers ask', items: [{ q: 'Do you charge to list a property?', a: 'Listing is free. Our fee is agreed in writing before we start.' }, { q: 'Can you help with diaspora purchases?', a: 'Yes. We offer video viewings and a representative on the ground.' }, { q: 'How do you verify properties?', a: 'We check title documents, survey plans and seller identity before listing.' }] },
     ],
     form: { title: 'Request a viewing', intro: 'Tell us what you are looking for and an agent will call you.', fields: ['Full name', 'Phone number', 'Area and budget', 'Preferred viewing day'], button: 'Request viewing' },
-    footer: { address: '14 Ozumba Mbadiwe Avenue, Victoria Island, Lagos', hours: 'Mon to Sun, 8am to 7pm', phone: '0809 012 3456' },
+    footer: { address: '14 Ozumba Mbadiwe Avenue, Victoria Island, Lagos', hours: 'Mon to Sun, 8am to 7pm', phone: '+234 906 785 9200' },
   },
   'event-planner': {
     name: 'GATHER & GRACE', tag: 'Event design and planning', nav: ['Packages', 'Process', 'Enquire'], accent: '#a65b4a', ink: '#2b1d1a', bg: '#fffaf7', soft: '#f6e9e3', serif: true,
@@ -139,7 +139,7 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Before you book', items: [{ q: 'How early should we book?', a: 'For weddings, 6 to 9 months ahead is ideal. Smaller events can be arranged in 4 to 6 weeks.' }, { q: 'Can you work with our budget?', a: 'Yes. We tell you honestly what is possible and where to save.' }, { q: 'Do you handle vendors?', a: 'We source, brief and manage caterers, decorators, photographers and entertainers.' }] },
     ],
     form: { title: 'Tell us about your event', intro: 'Share a few details and we will reply with next steps.', fields: ['Your name', 'Phone number', 'Event type and date', 'Guest count and budget'], button: 'Send enquiry' },
-    footer: { address: '9 Bourdillon Road, Ikoyi, Lagos', hours: 'Mon to Fri, 9am to 6pm', phone: '0807 111 2233' },
+    footer: { address: '9 Bourdillon Road, Ikoyi, Lagos', hours: 'Mon to Fri, 9am to 6pm', phone: '+234 906 785 9200' },
   },
   printing: {
     name: 'FORM', tag: 'Print and design studio', nav: ['Services', 'Process', 'Quote'], accent: '#d4491f', ink: '#171717', bg: '#fafafa', soft: '#eeeeee',
@@ -156,7 +156,7 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Quick answers', items: [{ q: 'Can you design for me?', a: 'Yes. Our designers handle logos, flyers, packaging and full brand kits.' }, { q: 'How fast can you print?', a: 'Cards and flyers can be ready in 24 to 48 hours. Larger jobs take 3 to 5 days.' }, { q: 'Do you deliver outside Lagos?', a: 'Yes, through trusted dispatch partners to all states.' }] },
     ],
     form: { title: 'Request a quote', intro: 'Tell us what you need printed and by when.', fields: ['Your name', 'Phone number', 'What you need printed', 'Quantity and deadline'], button: 'Request quote' },
-    footer: { address: '31 Opebi Road, Ikeja, Lagos', hours: 'Mon to Sat, 8am to 6pm', phone: '0808 222 3344' },
+    footer: { address: '31 Opebi Road, Ikeja, Lagos', hours: 'Mon to Sat, 8am to 6pm', phone: '+234 906 785 9200' },
   },
   'auto-workshop': {
     name: 'MOTION', tag: 'Auto care and diagnostics', nav: ['Services', 'Process', 'Book'], accent: '#e0521b', ink: '#10151c', bg: '#f6f7f9', soft: '#e6e9ee',
@@ -173,7 +173,7 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Common questions', items: [{ q: 'Do you fix all car brands?', a: 'We service most Japanese, Korean, German and American brands.' }, { q: 'Do you use genuine parts?', a: 'Yes, and we tell you the options and prices before fitting.' }, { q: 'How long does a service take?', a: 'A standard service takes 2 to 3 hours. We confirm repairs after inspection.' }] },
     ],
     form: { title: 'Book an inspection', intro: 'Tell us about your car and what you have noticed.', fields: ['Your name', 'Phone number', 'Car make, model and year', 'What is the problem?'], button: 'Book inspection' },
-    footer: { address: '3 Ikorodu Road, Maryland, Lagos', hours: 'Mon to Sat, 8am to 6pm', phone: '0809 333 4455' },
+    footer: { address: '3 Ikorodu Road, Maryland, Lagos', hours: 'Mon to Sat, 8am to 6pm', phone: '+234 906 785 9200' },
   },
   laundry: {
     name: 'FRESH', tag: 'Laundry and dry cleaning', nav: ['Prices', 'Pickup', 'Book'], accent: '#1b7fd1', ink: '#0f2236', bg: '#f6fafe', soft: '#e3f0fb',
@@ -190,7 +190,7 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Good to know', items: [{ q: 'What if something is damaged or lost?', a: 'Every item is tagged and checked. We cover verified damage or loss.' }, { q: 'Do you handle stains?', a: 'Yes. Tell us about the stain when you book and we treat it first.' }, { q: 'Which areas do you cover?', a: 'Lekki, Ikoyi, Victoria Island, Surulere, Yaba and Ikeja.' }] },
     ],
     form: { title: 'Book a pickup', intro: 'Tell us where and when and we will confirm on WhatsApp.', fields: ['Your name', 'Phone number', 'Pickup address', 'Preferred time'], button: 'Book pickup' },
-    footer: { address: '18 Admiralty Way, Lekki Phase 1, Lagos', hours: 'Mon to Sat, 7am to 7pm', phone: '0810 444 5566' },
+    footer: { address: '18 Admiralty Way, Lekki Phase 1, Lagos', hours: 'Mon to Sat, 7am to 7pm', phone: '+234 906 785 9200' },
   },
   catering: {
     name: 'TABLE', tag: 'Catering house', nav: ['Menus', 'Events', 'Quote'], accent: '#7a4a1e', ink: '#241a12', bg: '#fdf9f3', soft: '#f3e8d8', serif: true,
@@ -207,7 +207,7 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Frequently asked', items: [{ q: 'Do you cater outside Lagos?', a: 'Yes, with a travel and setup fee agreed in advance.' }, { q: 'Can you handle dietary needs?', a: 'Yes. Vegetarian, halal and allergy-conscious menus are available.' }, { q: 'How much deposit do you need?', a: 'A 50 percent deposit secures your date.' }] },
     ],
     form: { title: 'Request a catering quote', intro: 'Share your event details and we will send a proposal.', fields: ['Your name', 'Phone number', 'Event date and venue', 'Guest count and budget'], button: 'Request quote' },
-    footer: { address: '22 Awolowo Road, Ikoyi, Lagos', hours: 'Mon to Sat, 9am to 6pm', phone: '0811 555 6677' },
+    footer: { address: '22 Awolowo Road, Ikoyi, Lagos', hours: 'Mon to Sat, 9am to 6pm', phone: '+234 906 785 9200' },
   },
   'interior-design': {
     name: 'FORM INTERIORS', tag: 'Design and fit-out studio', nav: ['Projects', 'Services', 'Consult'], accent: '#6b5b45', ink: '#1f1b16', bg: '#faf8f4', soft: '#eee8de', serif: true,
@@ -222,7 +222,7 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Questions we hear', items: [{ q: 'How is design priced?', a: 'A fixed design fee, with furniture and build costs quoted separately.' }, { q: 'Can you work with my contractor?', a: 'Yes. We can design only, or manage the whole project.' }, { q: 'How long does a project take?', a: 'Most homes take 8 to 14 weeks from approval to handover.' }] },
     ],
     form: { title: 'Book a design consultation', intro: 'Tell us about your space and what you would like to change.', fields: ['Your name', 'Phone number', 'Property type and location', 'Budget range'], button: 'Book consultation' },
-    footer: { address: '6 Glover Road, Ikoyi, Lagos', hours: 'Mon to Fri, 9am to 6pm', phone: '0812 666 7788' },
+    footer: { address: '6 Glover Road, Ikoyi, Lagos', hours: 'Mon to Fri, 9am to 6pm', phone: '+234 906 785 9200' },
   },
   cleaning: {
     name: 'NEAT', tag: 'Home and office cleaning', nav: ['Services', 'Process', 'Book'], accent: '#17917a', ink: '#0e2723', bg: '#f5fbf9', soft: '#e0f2ee',
@@ -239,7 +239,7 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Before you book', items: [{ q: 'Do I need to provide supplies?', a: 'No. Our team brings professional equipment and products.' }, { q: 'Are your cleaners vetted?', a: 'Yes. Every cleaner is background-checked, trained and uniformed.' }, { q: 'What if I am not happy?', a: 'Tell us within 24 hours and we will return to fix it at no cost.' }] },
     ],
     form: { title: 'Get a cleaning quote', intro: 'Tell us about your space and we will reply with a fixed price.', fields: ['Your name', 'Phone number', 'Property type and size', 'Service needed and date'], button: 'Get my quote' },
-    footer: { address: '41 Adeniran Ogunsanya Street, Surulere, Lagos', hours: 'Mon to Sat, 7am to 6pm', phone: '0813 777 8899' },
+    footer: { address: '41 Adeniran Ogunsanya Street, Surulere, Lagos', hours: 'Mon to Sat, 7am to 6pm', phone: '+234 906 785 9200' },
   },
   school: {
     name: 'BRIGHTWAY', tag: 'Private primary and secondary school', nav: ['Programmes', 'Admissions', 'Contact'], accent: '#c2410c', ink: '#1c1917', bg: '#fffdf9', soft: '#faeee3',
@@ -255,7 +255,7 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Parents often ask', items: [{ q: 'What are the school hours?', a: 'Classes run from 8am to 3pm, with optional after-school clubs until 5pm.' }, { q: 'Do you offer scholarships?', a: 'Yes. Merit and need-based places are available each year.' }, { q: 'Is there a school bus?', a: 'Yes, with trained drivers and a supervisor on each route.' }] },
     ],
     form: { title: 'Request an admission pack', intro: 'Share your details and we will invite you for a campus tour.', fields: ['Parent name', 'Phone number', 'Child name and age', 'Class applying for'], button: 'Request admission pack' },
-    footer: { address: '15 Palm Avenue, Magodo, Lagos', hours: 'Mon to Fri, 7:30am to 4pm', phone: '0814 888 9900' },
+    footer: { address: '15 Palm Avenue, Magodo, Lagos', hours: 'Mon to Fri, 7:30am to 4pm', phone: '+234 906 785 9200' },
   },
   logistics: {
     name: 'SWIFTLINE', tag: 'Dispatch and delivery', nav: ['Services', 'Rates', 'Book'], accent: '#e5a100', ink: '#14171c', bg: '#f7f7f5', soft: '#ecece6',
@@ -272,7 +272,7 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Delivery questions', items: [{ q: 'Is my parcel insured?', a: 'Yes. Every delivery has basic cover, with higher cover for valuable items.' }, { q: 'Can I pay on delivery?', a: 'Business accounts can collect payment on delivery and settle weekly.' }, { q: 'What can you not carry?', a: 'We do not carry illegal, hazardous or perishable items without prior approval.' }] },
     ],
     form: { title: 'Book a delivery', intro: 'Tell us what you are sending and where it is going.', fields: ['Your name', 'Phone number', 'Pickup and drop-off address', 'Item size and weight'], button: 'Book delivery' },
-    footer: { address: '7 Apapa Oshodi Expressway, Lagos', hours: 'Mon to Sun, 6am to 9pm', phone: '0815 999 0011' },
+    footer: { address: '7 Apapa Oshodi Expressway, Lagos', hours: 'Mon to Sun, 6am to 9pm', phone: '+234 906 785 9200' },
   },
   'car-dealership': {
     name: 'APEX', tag: 'Motor house', nav: ['Inventory', 'Process', 'Visit'], accent: '#c0211f', ink: '#101114', bg: '#f6f6f7', soft: '#e8e8ea',
@@ -287,6 +287,6 @@ export const richDemos: Record<string, RichDemo> = {
       { k: 'faq', title: 'Buyer questions', items: [{ q: 'Can I bring my own mechanic?', a: 'Yes. We encourage independent inspections before you buy.' }, { q: 'Do you offer a warranty?', a: 'Yes. Every car comes with a limited 30-day mechanical warranty.' }, { q: 'Can you deliver the car?', a: 'We deliver nationwide with a trusted car carrier.' }] },
     ],
     form: { title: 'Book a test drive', intro: 'Tell us which car you would like to see.', fields: ['Your name', 'Phone number', 'Car you are interested in', 'Preferred day and time'], button: 'Book test drive' },
-    footer: { address: '90 Lekki-Epe Expressway, Lagos', hours: 'Mon to Sat, 9am to 6pm', phone: '0816 000 1122' },
+    footer: { address: '90 Lekki-Epe Expressway, Lagos', hours: 'Mon to Sat, 9am to 6pm', phone: '+234 906 785 9200' },
   },
 };

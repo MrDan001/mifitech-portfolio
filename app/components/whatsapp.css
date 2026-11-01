@@ -1,0 +1,6 @@
+/* Path: app/components/whatsapp.css */
+.wa-float{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;display:flex;align-items:center;gap:8px;padding:11px 18px 11px 12px;border-radius:99px;background:#25d366;color:#06301a;font:700 15px/1 Arial,Helvetica,sans-serif;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.28)}
+.wa-float:hover{background:#2be172}
+.wa-float:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px #06301a}
+.wa-float svg{width:28px;height:28px;flex:none}
+@media(max-width:540px){.wa-float span{display:none}.wa-float{padding:12px}}

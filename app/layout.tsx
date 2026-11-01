@@ -1,3 +1,4 @@
+// Path: app/layout.tsx
 import type { Metadata } from 'next';
 import { getSeo } from '@/lib/backend';
 import './globals.css';
@@ -10,8 +11,8 @@ export async function generateMetadata(): Promise<Metadata> {
     description: String(seo.description),
     applicationName: 'MifiTech',
     keywords: Array.isArray(seo.keywords) ? seo.keywords.map(String) : [],
-    openGraph: { title: String(seo.ogTitle), description: String(seo.ogDescription), siteName: 'MifiTech', type: 'website' },
-    twitter: { card: 'summary_large_image', title: String(seo.ogTitle), description: String(seo.ogDescription) },
+    openGraph: { title: String(seo.ogTitle), description: String(seo.ogDescription), siteName: 'MifiTech', type: 'website', images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'MifiTech portfolio: Ludo Live, eHealthcare, Garrison Market and The Africa Plug' }] },
+    twitter: { card: 'summary_large_image', title: String(seo.ogTitle), description: String(seo.ogDescription), images: ['/og-image.jpg'] },
     icons: { icon: '/icon.svg', apple: '/apple-icon.svg' },
   };
 }
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     name: 'MifiTech',
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech-portfolio.vercel.app',
     email: 'officialsafebase@gmail.com',
+    telephone: '+2349067859200',
     description: 'Website design, web development, ecommerce and custom web application services for businesses in Nigeria.',
     areaServed: { '@type': 'Country', name: 'Nigeria' },
     serviceType: ['Website design', 'Website development', 'Ecommerce website development', 'Custom web applications'],

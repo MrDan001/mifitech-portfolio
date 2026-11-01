@@ -1,7 +1,10 @@
+// Path: app/page.tsx
 import Link from 'next/link';
 import { Bricolage_Grotesque, Hanken_Grotesk } from 'next/font/google';
 import ContactForm from './components/ContactForm';
 import HeroPhone from './components/HeroPhone';
+import WhatsAppButton from './components/WhatsAppButton';
+import { WHATSAPP_DISPLAY, whatsappLink } from '@/lib/contact';
 import { getSiteContent } from '@/lib/site-content';
 import './home.css';
 
@@ -9,6 +12,7 @@ const display = Bricolage_Grotesque({ subsets: ['latin'], weight: ['500', '800']
 const body = Hanken_Grotesk({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--mh-body', display: 'swap' });
 
 const VISIBLE_DEMOS = 6;
+const WA_MESSAGE = 'Hello MifiTech, I would like to discuss a website for my business.';
 
 export default async function Home() {
   const content = await getSiteContent();
@@ -204,7 +208,7 @@ export default async function Home() {
               <h2>Tell us about your business.</h2>
               <p className="mh-sub">{contact.intro}</p>
               <a className="mh-mail" href={'mailto:' + contact.email}>{contact.email}</a>
-              {contact.whatsappUrl?.startsWith('https://wa.me/') && <a className="mh-mail mh-wa" href={contact.whatsappUrl} target="_blank" rel="noreferrer">Message MifiTech on WhatsApp</a>}
+              <a className="mh-mail mh-wa" href={contact.whatsappUrl?.startsWith('https://wa.me/') ? contact.whatsappUrl : whatsappLink(WA_MESSAGE)} target="_blank" rel="noreferrer">Chat on WhatsApp: {WHATSAPP_DISPLAY}</a>
               <p className="mh-note-line">{contact.note}</p>
             </div>
             <div className="studio-form-card mh-form"><ContactForm email={contact.email} /></div>
@@ -220,6 +224,7 @@ export default async function Home() {
           </div>
         </footer>
       </div>
+      <WhatsAppButton message={WA_MESSAGE} />
     </div>
   );
 }

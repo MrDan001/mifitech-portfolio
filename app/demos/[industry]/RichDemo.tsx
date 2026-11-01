@@ -3,6 +3,8 @@ import Link from 'next/link';
 import type { CSSProperties } from 'react';
 import { Fraunces, Hanken_Grotesk } from 'next/font/google';
 import DemoForm from './DemoForm';
+import WhatsAppButton from '../../components/WhatsAppButton';
+import { whatsappLink } from '@/lib/contact';
 import type { RichDemo as Demo, Section } from '@/lib/demo-sites';
 import './rich-demo.css';
 
@@ -31,6 +33,7 @@ function Block({ s }: { s: Section }) {
 }
 
 export default function RichDemo({ demo, slug }: { demo: Demo; slug: string }) {
+  const waMessage = 'Hello MifiTech, I saw the ' + demo.name + ' demo and I would like a website like it.';
   const theme = { '--a': demo.accent, '--ink': demo.ink, '--bg': demo.bg, '--soft': demo.soft } as CSSProperties;
   return (
     <main className={'rd ' + sans.variable + ' ' + serif.variable + (demo.serif ? ' rd-serif' : '')} style={theme}>
@@ -39,9 +42,10 @@ export default function RichDemo({ demo, slug }: { demo: Demo; slug: string }) {
       <section className="rd-hero"><div className="rd-hero-img" style={photo(demo.hero.img)} /><div className="rd-wrap"><div className="rd-hero-copy"><small>{demo.hero.kicker}</small><h1>{demo.hero.title}</h1><p>{demo.hero.intro}</p><a className="rd-btn" href="#enquire">{demo.hero.cta}</a><a className="rd-btn rd-ghost" href="#s0">{demo.hero.cta2}</a></div></div></section>
       <div className="rd-facts"><div className="rd-wrap">{demo.facts.map(([a, b]) => <div key={a}><b>{a}</b><span>{b}</span></div>)}</div></div>
       {demo.sections.map((s, i) => <div id={'s' + i} key={i}><Block s={s} /></div>)}
-      <section className="rd-sec rd-contact" id="enquire"><div className="rd-wrap rd-two"><div><h2>{demo.form.title}</h2><p className="rd-intro">{demo.form.intro}</p><p className="rd-addr"><b>{demo.name}</b><br />{demo.footer.address}<br />{demo.footer.hours}<br />{demo.footer.phone}</p></div><DemoForm fields={demo.form.fields} button={demo.form.button} /></div></section>
-      <section className="rd-cta"><div className="rd-wrap"><h2>Want a website like this for your business?</h2><p>This is an illustrative concept. MifiTech can tailor the pages, content and customer journey to your business.</p><Link className="rd-btn" href={'/?demo=' + encodeURIComponent(slug) + '#contact'}>Build a website like this</Link></div></section>
+      <section className="rd-sec rd-contact" id="enquire"><div className="rd-wrap rd-two"><div><h2>{demo.form.title}</h2><p className="rd-intro">{demo.form.intro}</p><p className="rd-addr"><b>{demo.name}</b><br />{demo.footer.address}<br />{demo.footer.hours}<br />WhatsApp: <a href={whatsappLink(waMessage)} target="_blank" rel="noreferrer">{demo.footer.phone}</a></p></div><DemoForm fields={demo.form.fields} button={demo.form.button} /></div></section>
+      <section className="rd-cta"><div className="rd-wrap"><h2>Want a website like this for your business?</h2><p>This is an illustrative concept. MifiTech can tailor the pages, content and customer journey to your business.</p><Link className="rd-btn" href={'/?demo=' + encodeURIComponent(slug) + '#contact'}>Build a website like this</Link><a className="rd-btn rd-ghost" href={whatsappLink(waMessage)} target="_blank" rel="noreferrer">Chat on WhatsApp</a></div></section>
       <footer className="rd-foot"><div className="rd-wrap"><span>A concept by <strong>MifiTech.</strong> Not a live business.</span><Link href="/#demos">Explore other demos</Link></div></footer>
+      <WhatsAppButton message={waMessage} />
     </main>
   );
 }

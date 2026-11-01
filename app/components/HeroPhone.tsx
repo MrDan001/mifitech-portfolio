@@ -39,7 +39,7 @@ function Restaurant() {
       <Photo src={IMG.room} className="sx-banner"><div><b>The room</b><span>Indoor, terrace and private dining for up to 20</span></div></Photo>
       <div className="sx-quote"><Stars /><p>“Best party jollof in Lekki. We came for lunch and stayed for dinner.”</p><small>Ngozi A., Google review</small></div>
       <div className="sx-form"><h5>Reserve a table</h5><div className="sx-field"><span>Day</span><b>Saturday</b></div><div className="sx-field"><span>Time</span><b>7:30pm</b></div><div className="sx-field"><span>Guests</span><b>4 people</b></div><span className="sx-btn">Confirm reservation</span></div>
-      <div className="sx-foot"><b>Mesa Kitchen &amp; Table</b><br />12 Admiralty Way, Lekki Phase 1<br />Mon to Sun, 12pm to 10pm<br />WhatsApp: 0801 234 5678</div>
+      <div className="sx-foot"><b>Mesa Kitchen &amp; Table</b><br />12 Admiralty Way, Lekki Phase 1<br />Mon to Sun, 12pm to 10pm<br />WhatsApp: +234 906 785 9200</div>
     </div>
   );
 }
@@ -65,7 +65,7 @@ function Salon() {
       <div className="sx-sec"><h5>Recent work</h5><div className="sx-grid2"><Photo src={IMG.makeup} className="sx-sq" /><Photo src={IMG.portrait} className="sx-sq" /></div></div>
       <div className="sx-quote"><Stars /><p>“I walked in stressed and left feeling brand new. My hair has never looked better.”</p><small>Funke O., returning client</small></div>
       <div className="sx-form"><h5>Book in three steps</h5><div className="sx-field"><span>1</span><b>Choose a service</b></div><div className="sx-field"><span>2</span><b>Pick a time</b></div><div className="sx-field"><span>3</span><b>Pay a small deposit</b></div><span className="sx-btn">Request appointment</span></div>
-      <div className="sx-foot"><b>Aurel Beauty Studio</b><br />5 Adetokunbo Ademola St, Victoria Island<br />Tue to Sun, 9am to 7pm<br />WhatsApp: 0802 345 6789</div>
+      <div className="sx-foot"><b>Aurel Beauty Studio</b><br />5 Adetokunbo Ademola St, Victoria Island<br />Tue to Sun, 9am to 7pm<br />WhatsApp: +234 906 785 9200</div>
     </div>
   );
 }
@@ -96,7 +96,7 @@ function Clinic() {
       </div>
       <div className="sx-quote"><Stars /><p>“Quick, clear and kind. I knew the cost before I sat down.”</p><small>Mrs. Okafor, patient</small></div>
       <div className="sx-form"><h5>Request an appointment</h5><div className="sx-field"><span>Name</span><b>Your full name</b></div><div className="sx-field"><span>Phone</span><b>080…</b></div><div className="sx-field"><span>Service</span><b>Dental check-up</b></div><span className="sx-btn">Request appointment</span></div>
-      <div className="sx-foot"><b>Wellspring Medical Centre</b><br />27 Obafemi Awolowo Way, Ikeja<br />Mon to Sat, 8am to 8pm<br />Emergency line: 0803 456 7890</div>
+      <div className="sx-foot"><b>Wellspring Medical Centre</b><br />27 Obafemi Awolowo Way, Ikeja<br />Mon to Sat, 8am to 8pm<br />WhatsApp: +234 906 785 9200</div>
     </div>
   );
 }
@@ -121,7 +121,7 @@ function Shop() {
       <div className="sx-info"><div><b>Pay on delivery</b><span>Lagos</span></div><div><b>Order on</b><span>WhatsApp</span></div><div><b>Easy</b><span>7-day returns</span></div></div>
       <div className="sx-quote"><Stars /><p>“The fit is perfect and it arrived in two days. Already ordering again.”</p><small>Bisi T., Abuja</small></div>
       <div className="sx-form"><h5>Get 10% off your first order</h5><div className="sx-field"><span>Email</span><b>you@email.com</b></div><span className="sx-btn">Join the list</span></div>
-      <div className="sx-foot"><b>Naya Style House</b><br />Showroom: 8 Allen Avenue, Ikeja<br />Mon to Sat, 10am to 7pm<br />WhatsApp: 0805 678 9012</div>
+      <div className="sx-foot"><b>Naya Style House</b><br />Showroom: 8 Allen Avenue, Ikeja<br />Mon to Sat, 10am to 7pm<br />WhatsApp: +234 906 785 9200</div>
     </div>
   );
 }

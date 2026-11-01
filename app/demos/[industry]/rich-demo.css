@@ -88,3 +88,5 @@
  .rd-hero{min-height:520px;padding:56px 0}
  .rd-bar span{font-size:12px}
 }
+.rd-addr a{font-weight:700;color:var(--a)}
+.rd-cta .rd-ghost{margin-left:10px}
