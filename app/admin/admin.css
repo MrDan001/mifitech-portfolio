@@ -45,7 +45,7 @@
 .ad-btn.danger{background:#fff;color:var(--danger);border-color:#ecc9c5}.ad-btn.danger:hover{background:#fdf0ee}
 .ad-btn.sm{padding:7px 11px;font-size:13px;border-radius:9px}
 .ad-btn.icon{padding:8px;border-radius:9px}
-.ad-field{display:grid;gap:6px;font-weight:700;font-size:14px}
+.ad-field{display:grid;gap:6px;align-content:start;font-weight:700;font-size:14px}
 .ad-field>span small{font-weight:400;color:var(--mute);margin-left:6px}
 .ad-field input,.ad-field textarea,.ad-field select,.ad-in{font:inherit;font-weight:400;padding:11px 13px;border:1.5px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);width:100%}
 .ad-field textarea{min-height:104px;resize:vertical}
