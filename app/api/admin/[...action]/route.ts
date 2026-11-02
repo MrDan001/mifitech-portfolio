@@ -1,7 +1,9 @@
+// Path: app/api/admin/[...action]/route.ts
 import { NextResponse } from 'next/server';
 import { randomBytes } from 'node:crypto';
 import { db, deletePublicImage, isAdmin, listPublicImages, passwordOK, sessionValue, seoDefaults, uploadPublicImage } from '@/lib/backend';
 import { defaultSiteContent, getSiteContent, type SiteContent } from '@/lib/site-content';
+import { clear, clientIp, isLimited, record } from '@/lib/rate-limit';
 
 type Ctx = { params: Promise<{ action: string[] }> };
 const leadStatuses = ['new', 'interested', 'consultation', 'proposal_sent', 'awaiting_payment', 'converted', 'lost'];
@@ -19,10 +21,6 @@ function safeUrl(value: unknown, allowRelative = false) {
   }
 }
 
-function safeProjectAssetUrl(value: unknown) {
-  return safeUrl(value, true);
-}
-
 export async function POST(req: Request, ctx: Ctx) {
   const { action } = await ctx.params;
   const route = action.join('/');
@@ -32,9 +30,16 @@ export async function POST(req: Request, ctx: Ctx) {
     if (!process.env.ADMIN_PASSWORD || !process.env.ADMIN_SESSION_SECRET) {
       return NextResponse.json({ error: 'Set ADMIN_PASSWORD and ADMIN_SESSION_SECRET.' }, { status: 503 });
     }
+    const attemptKey = 'login:' + clientIp(req);
+    if (isLimited(attemptKey, 5, 15 * 60_000)) {
+      return NextResponse.json({ error: 'Too many sign-in attempts. Please wait 15 minutes and try again.' }, { status: 429 });
+    }
     if (!passwordOK(String(body.password || ''))) {
+      record(attemptKey, 15 * 60_000);
+      await new Promise((resolve) => setTimeout(resolve, 700));
       return NextResponse.json({ error: 'Incorrect password.' }, { status: 401 });
     }
+    clear(attemptKey);
     const res = NextResponse.json({ ok: true });
     res.cookies.set('mifi_admin', sessionValue(), {
       httpOnly: true, secure: process.env.NODE_ENV === 'production',
@@ -118,19 +123,9 @@ export async function POST(req: Request, ctx: Ctx) {
       if (!Array.isArray(content.navigation) || !Array.isArray(content.services) || !Array.isArray(content.demos) || !Array.isArray(content.projects) || !Array.isArray(content.stages) || !Array.isArray(content.trustPoints) || !Array.isArray(content.faqs) || !Array.isArray(content.testimonials) || !Array.isArray(content.guideSections)) {
         return NextResponse.json({ error: 'One of the website content lists is invalid.' }, { status: 400 });
       }
-
-      // Website and repository links must be real absolute URLs. Project artwork,
-      // flyers and gallery images may also use the portfolio's local /public assets.
-      const invalidProject = content.projects.find((item) =>
-        !safeUrl(item.websiteUrl) ||
-        !safeUrl(item.repoUrl) ||
-        !safeProjectAssetUrl(item.caseStudy?.flyer) ||
-        (item.caseStudy?.gallery || []).some((url) => !safeProjectAssetUrl(url)),
-      );
-      if (invalidProject) {
-        return NextResponse.json({ error: 'Project website and repository links must use http:// or https://. Flyer and gallery images may use a local /path or an http(s) URL.' }, { status: 400 });
+      if (content.projects.some((item) => !safeUrl(item.websiteUrl) || !safeUrl(item.repoUrl) || !safeUrl(item.caseStudy?.flyer) || (item.caseStudy?.gallery || []).some((url) => !safeUrl(url)))) {
+        return NextResponse.json({ error: 'Project website, repository, flyer and gallery links must use http:// or https://.' }, { status: 400 });
       }
-
       const whatsappUrl = content.sections?.contact?.whatsappUrl || '';
       if (whatsappUrl && !/^https:\/\/wa\.me\/\d+$/.test(whatsappUrl)) {
         return NextResponse.json({ error: 'WhatsApp must be a wa.me link with the international phone number.' }, { status: 400 });

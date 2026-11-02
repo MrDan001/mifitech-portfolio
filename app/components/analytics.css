@@ -1,0 +1,8 @@
+/* Path: app/components/analytics.css */
+.an-banner{position:fixed;left:16px;bottom:16px;z-index:70;max-width:min(420px,calc(100vw - 32px));display:grid;gap:12px;padding:16px 18px;border-radius:16px;background:#0f1a17;color:#e8efe9;font:400 14px/1.5 Arial,Helvetica,sans-serif;box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.an-banner p{margin:0}.an-banner a{color:#d8e99a}
+.an-banner div{display:flex;gap:10px}
+.an-banner button{font:700 14px Arial,Helvetica,sans-serif;padding:9px 16px;border-radius:10px;cursor:pointer;border:1.5px solid #ffffff40;background:transparent;color:#fff}
+.an-banner .an-yes{background:#d8e99a;color:#0f1a17;border-color:#d8e99a}
+.an-banner button:focus-visible{outline:3px solid #35e0a1;outline-offset:2px}
+@media(max-width:540px){.an-banner{left:8px;right:8px;bottom:78px;max-width:none}}
