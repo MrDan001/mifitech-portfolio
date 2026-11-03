@@ -12,7 +12,7 @@ const proposalStatuses = ['draft', 'sent', 'accepted', 'declined', 'awaiting_pay
 function safeUrl(value: unknown, allowRelative = false) {
   const url = String(value || '').trim();
   if (!url) return true;
-  if (allowRelative && (url.startsWith('/') || url.startsWith('#'))) return true;
+  if (allowRelative && (url.startsWith('#') || (url.startsWith('/') && !url.startsWith('//'))) return true;
   try {
     const parsed = new URL(url);
     return parsed.protocol === 'https:' || parsed.protocol === 'http:';
@@ -123,8 +123,15 @@ export async function POST(req: Request, ctx: Ctx) {
       if (!Array.isArray(content.navigation) || !Array.isArray(content.services) || !Array.isArray(content.demos) || !Array.isArray(content.projects) || !Array.isArray(content.stages) || !Array.isArray(content.trustPoints) || !Array.isArray(content.faqs) || !Array.isArray(content.testimonials) || !Array.isArray(content.guideSections)) {
         return NextResponse.json({ error: 'One of the website content lists is invalid.' }, { status: 400 });
       }
-      if (content.projects.some((item) => !safeUrl(item.websiteUrl) || !safeUrl(item.repoUrl) || !safeUrl(item.caseStudy?.flyer) || (item.caseStudy?.gallery || []).some((url) => !safeUrl(url)))) {
-        return NextResponse.json({ error: 'Project website, repository, flyer and gallery links must use http:// or https://.' }, { status: 400 });
+      const invalidProject = content.projects.find((item) =>
+        !safeUrl(item.websiteUrl) ||
+        !safeUrl(item.repoUrl) ||
+        !safeUrl(item.flyer, true) ||
+        !safeUrl(item.caseStudy?.flyer, true) ||
+        (item.caseStudy?.gallery || []).some((url) => !safeUrl(url, true))
+      );
+      if (invalidProject) {
+        return NextResponse.json({ error: 'Project website and repository links must use http:// or https://. Flyer and gallery images can use a local path (for example /flyers/image.svg) or a full http(s) URL.' }, { status: 400 });
       }
       const whatsappUrl = content.sections?.contact?.whatsappUrl || '';
       if (whatsappUrl && !/^https:\/\/wa\.me\/\d+$/.test(whatsappUrl)) {
