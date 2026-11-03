@@ -12,7 +12,7 @@ const proposalStatuses = ['draft', 'sent', 'accepted', 'declined', 'awaiting_pay
 function safeUrl(value: unknown, allowRelative = false) {
   const url = String(value || '').trim();
   if (!url) return true;
-  if (allowRelative && (url.startsWith('#') || (url.startsWith('/') && !url.startsWith('//'))) return true;
+  if (allowRelative && (url.startsWith('#') || (url.startsWith('/') && !url.startsWith('//')))) return true;
   try {
     const parsed = new URL(url);
     return parsed.protocol === 'https:' || parsed.protocol === 'http:';
