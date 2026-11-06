@@ -25,6 +25,8 @@ A Next.js portfolio and client-acquisition website for MifiTech.
   - `/demos/car-dealership`
 - Admin-added demo cards can use the reusable concept page template by choosing a unique slug.
 - Existing project case studies under `/projects/[slug]`.
+- Featured project case studies include Ludo Live, eHealthcare, Garrison Market, The Africa Plug and Prestige Life RP.
+- Prestige Life RP links to its public player-facing website and source repository; its case study focuses on the live website and documented staff-management workflows.
 
 All industry demos use fictional sample brands and illustrative content. They are concept previews, not client websites.
 
