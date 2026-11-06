@@ -11,6 +11,7 @@ const TABS: Array<[string, string]> = [['home', 'Homepage'], ['headings', 'Conta
 const VISIBLE: Array<[string, string]> = [['yes', 'Visible on the website'], ['no', 'Hidden']];
 const nested = (item: any, key: string) => (key.startsWith('caseStudy.') ? item.caseStudy?.[key.slice(10)] : item[key]);
 const UNSPLASH = 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=85';
+const slugify = (value: string) => value.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 export default function Content({ content, setContent, notify }: Props) {
   const [tab, setTab] = useState('home');
@@ -27,7 +28,7 @@ export default function Content({ content, setContent, notify }: Props) {
     const t: Record<string, any> = {
       navigation: { label: 'New link', href: '/#contact' }, services: { icon: 'website', name: 'New service', body: 'Describe this service.' },
       demos: { slug: 'new-demo', n: String(content.demos.length + 1).padStart(2, '0'), title: 'New industry demo', brand: 'NEW BRAND', text: 'Describe the website concept.', image: UNSPLASH, tags: ['Services', 'Enquiries'], visible: true, href: '', pageTitle: '', pageIntro: '', pageSectionTitle: '', pageSectionIntro: '', pageClosingTitle: '', pageClosingText: '' },
-      projects: { slug: 'new-project', image: '/previews/garrison-market.svg', name: 'New project', type: 'PORTFOLIO PROJECT', text: 'Describe the project.', websiteUrl: '', repoUrl: '', visible: true, stack: [], features: [] },
+      projects: { slug: 'new-project', image: '/previews/garrison-market.svg', name: 'New project', type: 'PORTFOLIO PROJECT', text: 'Describe the project.', websiteUrl: '', repoUrl: '', visible: false, stack: [], features: [], caseStudy: { challenge: '', approach: '', delivery: '', role: '', outcome: '', gallery: [] } },
       stages: { n: String(content.stages.length + 1).padStart(2, '0'), title: 'New step', body: 'Describe this step.' }, trustPoints: { title: 'New principle', body: 'Describe this studio principle.' },
       faqs: { question: 'New question', answer: 'Write a clear answer.' }, testimonials: { quote: '', name: '', role: '', company: '' }, guideSections: { heading: 'New guide section', body: 'Write the section content.' },
     };
@@ -69,7 +70,16 @@ export default function Content({ content, setContent, notify }: Props) {
     const items: any[] = content[c] || [];
     const q = (o.filter || '').trim().toLowerCase();
     const body = (it: any, i: number) => {
-      const set = (k: string) => (v: any) => update(c, i, k, v);
+      const set = (k: string) => (v: any) => {
+        if (c === 'projects' && k === 'name') {
+          const currentSlug = String(it.slug || '');
+          const oldAutoSlug = slugify(String(it.name || ''));
+          update(c, i, 'name', v);
+          if (!currentSlug || currentSlug === oldAutoSlug || currentSlug === 'new-project') update(c, i, 'slug', slugify(String(v)) || 'new-project');
+          return;
+        }
+        update(c, i, k, v);
+      };
       const half = fields.filter((f) => !f.area && !f.image && !f.list && !f.options);
       const rest = fields.filter((f) => !half.includes(f));
       return (
@@ -77,6 +87,20 @@ export default function Content({ content, setContent, notify }: Props) {
           {o.visible && <SelectField label="Visibility" value={it.visible === false ? 'no' : 'yes'} onChange={(v) => update(c, i, 'visible', v === 'yes')} options={VISIBLE} />}
           {half.length > 0 && <div className="ad-grid2">{half.map((f) => fieldEl(f, it, set(f.key)))}</div>}
           {rest.map((f) => fieldEl(f, it, set(f.key)))}
+          {c === 'projects' && <div className="ad-callout"><Icon n="spark" /><div><b>Project detail page</b><p className="ad-sub">This project has its own page at <code>/projects/{it.slug || 'your-project-slug'}</code>. Keep it hidden while drafting; make it visible when the details are ready.</p><button type="button" className="ad-btn ghost sm" style={{ marginTop: 10 }} onClick={() => {
+            const stack = Array.isArray(it.stack) ? it.stack : [];
+            const features = Array.isArray(it.features) ? it.features : [];
+            const projectName = it.name || 'This project';
+            const category = it.type || 'digital product';
+            const summary = it.text || 'Add a short project description above.';
+            update(c, i, 'caseStudy.challenge', 'Document the real problem this ' + category.toLowerCase() + ' was built to solve. Project brief: ' + summary + ' Replace this starter copy with the confirmed client or product context.');
+            update(c, i, 'caseStudy.approach', 'Explain the decisions behind ' + projectName + ': the intended audience, core user journey, design direction and technical approach. Technologies currently listed: ' + (stack.join(', ') || 'add the actual stack') + '.');
+            update(c, i, 'caseStudy.delivery', 'Summarise the implemented scope using only verified work: ' + (features.length ? features.join('; ') : 'add the delivered features') + '. Add any important workflows, integrations and launch details that are confirmed.');
+            update(c, i, 'caseStudy.role', 'Describe MifiTech’s actual role, responsibilities and contribution on this project.');
+            update(c, i, 'caseStudy.outcome', 'State the verified result and what the delivered product enables. Add measurable outcomes only when you have evidence; do not invent users, revenue, performance or business impact.');
+            setOpen(c + ':' + i);
+            notify('A structured case-study draft has been added. Review every section before publishing.');
+          }}><Icon n="spark" />Prepare case-study draft</button></div></div>}
           {o.extra && <details className="ad-legacy" open><summary>{o.extra.label}</summary><div className="ad-stack">{o.extra.fields.map((f) => fieldEl(f, it, set(f.key)))}</div></details>}
           {o.legacy && <details className="ad-legacy"><summary>{o.legacy.label}</summary><div className="ad-stack">{o.legacy.fields.map((f) => fieldEl(f, it, set(f.key)))}</div></details>}
           <div className="ad-row">
