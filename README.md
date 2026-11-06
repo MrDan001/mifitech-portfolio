@@ -25,6 +25,7 @@ A Next.js portfolio and client-acquisition website for MifiTech.
   - `/demos/car-dealership`
 - Admin-added demo cards can use the reusable concept page template by choosing a unique slug.
 - Existing project case studies under `/projects/[slug]`; project details accept both canonical hyphenated slugs and legacy/display-name forms (for example, `/projects/prestige-life-rp` and `/projects/Prestige%20life%20RP`).
+- New projects start hidden as drafts. The project name generates a clean URL slug automatically; the slug remains editable. Each project has an editable case-study section and a structured draft-preparation action that uses the supplied brief, stack and features as prompts for human-reviewed copy. Saving content creates/updates the project's detail page automatically; make it visible to publish.
 - Featured project case studies include Ludo Live, eHealthcare, Garrison Market, The Africa Plug and Prestige Life RP.
 - Prestige Life RP links to its public player-facing website and source repository; its case study focuses on the live website and documented staff-management workflows.
 
@@ -56,6 +57,7 @@ The Website Content tab manages:
 - Service cards.
 - Industry demo cards, visibility and destinations.
 - Portfolio cards, live website URLs and GitHub repository links.
+- Project detail pages, editable case studies, draft visibility and auto-generated URL slugs.
 - Process steps and footer copy.
 
 To remove a project's live website button, clear its Live website URL. Garrison Market is preconfigured with `https://gmstock.co`; other project live-site fields are blank. Image fields accept an existing local asset path or an HTTPS image URL. The Website Content tab can also upload JPG, PNG, WebP, AVIF and GIF files up to 5 MB into the portfolio's public Supabase Storage bucket; uploaded media is served from that bucket.
