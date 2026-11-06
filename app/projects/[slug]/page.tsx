@@ -7,6 +7,22 @@ import { defaultSiteContent, getSiteContent } from '@/lib/site-content';
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
 
+// Accept legacy/admin-entered slugs such as "Prestige life RP" as well as
+// canonical slugs such as "prestige-life-rp".
+function normalizeProjectSlug(value: string) {
+  return decodeURIComponent(value).trim().toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function findVisibleProject(projects: Awaited<ReturnType<typeof getSiteContent>>['projects'], slug: string) {
+  const requested = normalizeProjectSlug(slug);
+  return projects.find((item) =>
+    item.visible !== false &&
+    (normalizeProjectSlug(item.slug) === requested || normalizeProjectSlug(item.name) === requested)
+  );
+}
+
 export function generateStaticParams() {
   return defaultSiteContent.projects.map((project) => ({ slug: project.slug }));
 }
@@ -14,7 +30,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const content = await getSiteContent();
-  const project = content.projects.find((item) => item.slug === slug && item.visible !== false);
+  const project = findVisibleProject(content.projects, slug);
   if (!project) return { title: 'Project not found | MifiTech' };
   return {
     title: project.name + ' Case Study',
@@ -26,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function Project({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const content = await getSiteContent();
-  const project = content.projects.find((item) => item.slug === slug && item.visible !== false);
+  const project = findVisibleProject(content.projects, slug);
   if (!project) notFound();
 
   const email = content.sections.contact.email;
