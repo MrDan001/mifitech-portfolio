@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import ThemeToggle from '../components/ThemeToggle';
 import { getSiteContent } from '@/lib/site-content';
+import { SITE_URL } from '@/lib/contact';
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getSiteContent();
@@ -23,7 +24,7 @@ export default async function Guide() {
     description: article.intro,
     author: { '@type': 'Organization', name: 'MifiTech' },
     publisher: { '@type': 'Organization', name: 'MifiTech' },
-    mainEntityOfPage: (process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech.top') + '/how-to-build-a-website-in-nigeria',
+    mainEntityOfPage: SITE_URL + '/how-to-build-a-website-in-nigeria',
   };
 
   return (
