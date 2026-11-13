@@ -954,3 +954,23 @@ html[data-theme="dark"] .proposal-page h3{color:#eef3f3}
 html[data-theme="dark"] .proposal-page p{color:#b7c5c7}
 html[data-theme="dark"] .proposal-price{color:#ff986f}
 html[data-theme="dark"] .proposal-page .theme-toggle{--s-line:#405157;--s-white:#172329;--s-ink:#eef3f3}
+
+/* Service landing pages */
+.service-page-preview{display:flex;align-items:center;justify-content:center;padding:28px;background:linear-gradient(145deg,#e8dfd1,#d9e1db 58%,#f0d9ce)}
+.service-preview-card{width:min(100%,360px);padding:30px;background:#fffefa;border:1px solid #dedbd2;box-shadow:0 24px 55px #29231920;border-radius:9px;display:flex;flex-direction:column;gap:16px}
+.service-preview-card>span{font-size:8px;letter-spacing:1.7px;font-weight:800;color:#d94f25}
+.service-preview-card>strong{font:700 clamp(25px,3vw,35px)/1.08 Georgia,serif;color:#203139;letter-spacing:-.8px}
+.service-preview-card>p{margin:0;color:#63737a;font-size:12px;line-height:1.8}
+.service-preview-card>i{font-style:normal;font-size:8px;letter-spacing:1.1px;font-weight:800;color:#d94f25;border-top:1px solid #e5e1d8;padding-top:14px}
+.service-faqs details{border-top:1px solid #e5e1d8;padding:17px 0}
+.service-faqs details:last-child{border-bottom:1px solid #e5e1d8}
+.service-faqs summary{cursor:pointer;list-style:none;color:#203139;font-size:14px;font-weight:800}
+.service-faqs summary::-webkit-details-marker{display:none}
+.service-faqs summary:after{content:'+';float:right;color:#d94f25;font-size:18px}
+.service-faqs details[open] summary:after{content:'−'}
+.service-faqs details p{max-width:760px;margin:12px 30px 0 0;color:#63737a;font-size:13px;line-height:1.85}
+.service-related{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.service-related a{display:flex;flex-direction:column;gap:9px;min-height:120px;padding:19px;border:1px solid #e6e1d8;border-radius:9px;background:#fffefa;text-decoration:none}
+.service-related strong{color:#203139;font-size:13px}
+.service-related span{color:#63737a;font-size:11px;line-height:1.7}
+@media(max-width:760px){.service-page-preview{min-height:260px;padding:18px}.service-preview-card{padding:23px}.service-related{grid-template-columns:1fr}}
