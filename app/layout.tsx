@@ -21,15 +21,29 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
-    name: 'MifiTech',
-    url: SITE_URL,
-    logo: SITE_URL + '/brand/logo-512.png',
-    email: 'officialsafebase@gmail.com',
-    telephone: '+2349067859200',
-    description: 'Website design, web development, ecommerce and custom web application services for businesses in Nigeria.',
-    areaServed: { '@type': 'Country', name: 'Nigeria' },
-    serviceType: ['Website design', 'Website development', 'Ecommerce website development', 'Custom web applications'],
+    '@graph': [
+      {
+        '@type': 'ProfessionalService',
+        '@id': SITE_URL + '/#business',
+        name: 'MifiTech',
+        url: SITE_URL,
+        logo: SITE_URL + '/brand/logo-512.png',
+        email: 'officialsafebase@gmail.com',
+        telephone: '+2349067859200',
+        description: 'Website design, web development, ecommerce and custom web application services for businesses in Nigeria.',
+        areaServed: { '@type': 'Country', name: 'Nigeria' },
+        serviceType: ['Website design', 'Website development', 'Ecommerce website development', 'Custom web applications'],
+      },
+      {
+        '@type': 'WebSite',
+        '@id': SITE_URL + '/#website',
+        name: 'MifiTech',
+        alternateName: ['MifiTech Nigeria', 'mifitech.top'],
+        url: SITE_URL + '/',
+        publisher: { '@id': SITE_URL + '/#business' },
+      },
+    ],
   };
+
   return <html lang="en" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{ __html: `try { const saved = localStorage.getItem('mifitech-theme'); const dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches; document.documentElement.dataset.theme = dark ? 'dark' : 'light'; } catch (_) {}` }} /></head><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />{children}</body></html>;
 }
