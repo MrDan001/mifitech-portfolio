@@ -2,7 +2,7 @@
 
 // Owner & Site Configuration
 export const CONTACT_EMAIL = "officialsafebase@gmail.com";
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech.top').replace(/\/$/, '');
+export const SITE_URL = 'https://mifitech.top';
 
 // WhatsApp Configuration
 export const WHATSAPP_NUMBER = '2349067859200';
