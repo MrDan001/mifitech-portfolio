@@ -5,7 +5,7 @@ import { getSiteContent } from '@/lib/site-content';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [seo, content] = await Promise.all([getSeo(), getSiteContent()]);
   const root = String(seo.canonicalUrl).replace(/\/$/, '');
-  const projectPaths = content.projects.filter((project) => project.visible !== false).map((project) => '/projects/' + project.slug);
+  const projectPaths = content.projects.filter((project) => project.visible !== false).map((project) => '/projects/' + encodeURIComponent(project.slug));
   const paths = Array.from(new Set(['', '/privacy', '/how-to-build-a-website-in-nigeria', '/website-design-nigeria', '/ecommerce-website-development-nigeria', ...projectPaths]));
   return paths.map((path) => ({
     url: root + path,
