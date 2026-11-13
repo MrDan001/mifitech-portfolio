@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import ServiceLandingPage, { type ServicePageContent } from '@/app/components/ServiceLandingPage';
+import ServiceLandingPage, { type ServicePageContent } from '../components/ServiceLandingPage';
 
 export const metadata: Metadata = {
   title: 'E-commerce Website Development in Nigeria | MifiTech',
