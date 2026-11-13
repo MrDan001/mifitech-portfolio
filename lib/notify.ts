@@ -23,7 +23,7 @@ export async function notifyOwner(alert: Alert): Promise<boolean> {
   const text = [alert.title, '', ...alert.lines, '', 'Open: ' + SITE_URL + (alert.path || '/admin')].join('\n');
   const jobs: Array<{ name: string; run: Promise<void> }> = [];
   const json = { 'Content-Type': 'application/json' };
-  if (env('RESEND_API_KEY')) jobs.push({ name: 'email', run: send('https://api.resend.com/emails', { method: 'POST', headers: { ...json, Authorization: 'Bearer ' + env('RESEND_API_KEY') }, body: JSON.stringify({ from: env('ALERT_EMAIL_FROM') || env('EMAIL_FROM') || 'MifiTech <hello@mifitech.top>', to: [env('ALERT_EMAIL_TO') || CONTACT_EMAIL], reply_to: env('CONTACT_REPLY_TO') || CONTACT_EMAIL, subject: alert.title, text }) }) });
+  if (env('RESEND_API_KEY')) jobs.push({ name: 'email', run: send('https://api.resend.com/emails', { method: 'POST', headers: { ...json, Authorization: 'Bearer ' + env('RESEND_API_KEY') }, body: JSON.stringify({ from: env('EMAIL_FROM') || env('ALERT_EMAIL_FROM') || 'MifiTech <hello@mifitech.top>', to: [env('ALERT_EMAIL_TO') || CONTACT_EMAIL], reply_to: env('CONTACT_REPLY_TO') || CONTACT_EMAIL, subject: alert.title, text }) }) });
   if (env('TELEGRAM_BOT_TOKEN') && env('TELEGRAM_CHAT_ID')) jobs.push({ name: 'telegram', run: send('https://api.telegram.org/bot' + env('TELEGRAM_BOT_TOKEN') + '/sendMessage', { method: 'POST', headers: json, body: JSON.stringify({ chat_id: env('TELEGRAM_CHAT_ID'), text, disable_web_page_preview: true }) }) });
   if (env('CALLMEBOT_PHONE') && env('CALLMEBOT_APIKEY')) jobs.push({ name: 'whatsapp', run: send('https://api.callmebot.com/whatsapp.php?phone=' + encodeURIComponent(env('CALLMEBOT_PHONE')) + '&text=' + encodeURIComponent(text.slice(0, 900)) + '&apikey=' + encodeURIComponent(env('CALLMEBOT_APIKEY')), { method: 'GET' }) });
   if (!jobs.length) return false;
@@ -67,7 +67,7 @@ export async function sendEnquiryAcknowledgement(input: {
     '',
     'MifiTech',
     SITE_URL,
-  ].join('\\n');
+  ].join('\n');
   const html = '<div style="margin:0;padding:32px 16px;background:#f5f5f3;font-family:Arial,sans-serif;color:#20211f">' +
     '<div style="max-width:600px;margin:0 auto;padding:32px;background:#fff;border-radius:16px">' +
     '<p style="font-size:13px;font-weight:700;letter-spacing:2px;color:#68715d">MIFITECH</p>' +
