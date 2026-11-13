@@ -6,8 +6,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [seo, content] = await Promise.all([getSeo(), getSiteContent()]);
   const root = String(seo.canonicalUrl).replace(/\/$/, '');
   const projectPaths = content.projects.filter((project) => project.visible !== false).map((project) => '/projects/' + project.slug);
-  const demoPaths = content.demos.filter((demo) => demo.visible !== false).map((demo) => demo.href?.startsWith('/') ? demo.href : '/demos/' + demo.slug);
-  const paths = Array.from(new Set(['', '/privacy', '/how-to-build-a-website-in-nigeria', ...projectPaths, ...demoPaths]));
+  const paths = Array.from(new Set(['', '/privacy', '/how-to-build-a-website-in-nigeria', ...projectPaths]));
   return paths.map((path) => ({
     url: root + path,
     changeFrequency: path === '' ? 'weekly' : 'monthly',
