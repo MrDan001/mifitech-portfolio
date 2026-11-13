@@ -48,7 +48,7 @@ export const seoDefaults = {
   title: 'MifiTech | Website Design & Development in Nigeria',
   description: 'MifiTech designs and builds professional business websites, online stores and custom web applications in Nigeria.',
   keywords: ['website design Nigeria', 'website development Nigeria', 'how to build a website', 'web designer Nigeria'],
-  canonicalUrl: 'https://mifitech-portfolio.vercel.app',
+  canonicalUrl: 'https://mifitech.top',
   ogTitle: 'MifiTech — Websites & Digital Products',
   ogDescription: 'Thoughtful websites and useful digital products, built around your business.',
 };
