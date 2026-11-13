@@ -93,6 +93,10 @@ export default async function Home() {
               <ul className="mh-service-list">
                 {content.services.map((service, index) => <li key={service.name + index}><h3>{service.name}</h3><p>{service.body}</p></li>)}
               </ul>
+              <p className="mh-service-detail-links">
+                <Link href="/website-design-nigeria">Website design in Nigeria <span aria-hidden="true">↗</span></Link>
+                <Link href="/ecommerce-website-development-nigeria">E-commerce website development <span aria-hidden="true">↗</span></Link>
+              </p>
             </div>
           </section>
         )}
