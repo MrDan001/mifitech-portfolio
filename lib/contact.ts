@@ -1,7 +1,7 @@
 // Path: lib/contact.ts
 
 // Owner & Site Configuration
-export const CONTACT_EMAIL = "owner@mifitech.com"; // Replace with your actual email address
+export const CONTACT_EMAIL = "officialsafebase@gmail.com";
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech.top').replace(/\/$/, '');
 
 // WhatsApp Configuration
