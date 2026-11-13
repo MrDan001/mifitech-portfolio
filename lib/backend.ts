@@ -49,7 +49,7 @@ export const seoDefaults = {
   title: 'MifiTech | Website Design & Development in Nigeria',
   description: 'MifiTech designs and builds professional business websites, online stores and custom web applications in Nigeria.',
   keywords: ['website design Nigeria', 'website development Nigeria', 'how to build a website', 'web designer Nigeria'],
-  canonicalUrl: 'https://mifitech.top',
+  canonicalUrl: SITE_URL,
   ogTitle: 'MifiTech — Websites & Digital Products',
   ogDescription: 'Thoughtful websites and useful digital products, built around your business.',
 };
@@ -63,7 +63,7 @@ export async function getSeo() {
       ...seoDefaults,
       ...saved,
       // Replace the retired Vercel address if it is still stored in Supabase.
-      canonicalUrl: savedCanonical.includes('mifitech-portfolio.vercel.app') ? SITE_URL : (savedCanonical || SITE_URL),
+      canonicalUrl: (() => {\n        if (!savedCanonical || savedCanonical.includes('mifitech-portfolio.vercel.app')) return SITE_URL;\n        try {\n          const parsed = new URL(savedCanonical);\n          // The apex domain permanently redirects to www, so canonical metadata,\n          // structured data and sitemap entries must use the final destination.\n          if (parsed.hostname === 'mifitech.top' || parsed.hostname === 'www.mifitech.top') return SITE_URL;\n        } catch { return SITE_URL; }\n        return savedCanonical;\n      })(),
     };
   } catch {
     return seoDefaults;
