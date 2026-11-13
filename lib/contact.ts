@@ -2,7 +2,7 @@
 
 // Owner & Site Configuration
 export const CONTACT_EMAIL = "owner@mifitech.com"; // Replace with your actual email address
-export const SITE_URL = "https://mifitech-portfolio.vercel.app"; // Replace with your production domain if needed
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech.top').replace(/\/$/, '');
 
 // WhatsApp Configuration
 export const WHATSAPP_NUMBER = '2349067859200';
