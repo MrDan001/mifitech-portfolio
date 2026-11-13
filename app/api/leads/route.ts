@@ -13,7 +13,7 @@ const ok = () => NextResponse.json({ ok: true });
 export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
   if (!body || typeof body !== 'object') return NextResponse.json({ error: 'Invalid enquiry.' }, { status: 400 });
-  if (body.website) return ok(); // hidden trap field: only bots fill it in
+  if (body.website) return ok();
 
   const ip = clientIp(req);
   if (isLimited('lead:' + ip, 5, HOUR)) return NextResponse.json({ error: 'Too many enquiries from this connection. Please try again later or message us on WhatsApp.' }, { status: 429 });
@@ -22,7 +22,6 @@ export async function POST(req: Request) {
   if (name.length < 2 || !EMAIL.test(email) || details.length < 10) return NextResponse.json({ error: 'Please add your name, a valid email and a short description of your project.' }, { status: 400 });
   record('lead:' + ip, HOUR);
 
-  // Quietly drop what looks like automated or link-stuffed spam, without telling the sender.
   const elapsed = Number(body.elapsed) || 0;
   if ((elapsed > 0 && elapsed < 1500) || linkCount(details) > 2) return ok();
   const dup = 'dup:' + email.toLowerCase() + ':' + details.slice(0, 60);
@@ -36,13 +35,15 @@ export async function POST(req: Request) {
     saved = true;
   } catch (error) { console.error('Could not save enquiry:', error instanceof Error ? error.message : 'unknown error'); }
 
-  const alert = { title: 'New enquiry: ' + name + (business ? ' (' + business + ')' : ''), lines: ['Email: ' + email, 'Project: ' + type, ...(demo ? ['Asked about the ' + demo + ' demo'] : []), '', details.slice(0, 600)] };
+  const alert = {
+    title: 'New website enquiry from ' + name,
+    lines: ['Email: ' + email, 'Project: ' + type, ...(business ? ['Business: ' + business] : []), ...(demo ? ['Asked about: ' + demo] : []), '', details.slice(0, 600)],
+  };
   const acknowledge = () => sendEnquiryAcknowledgement({ name, email, projectType: type, details });
   if (saved) {
     after(async () => { await Promise.allSettled([notifyOwner(alert), acknowledge()]); });
     return ok();
   }
-  // The database is unavailable: only report success if an alert actually reached you, so no enquiry is lost silently.
   if (await notifyOwner(alert)) {
     after(() => acknowledge());
     return ok();
