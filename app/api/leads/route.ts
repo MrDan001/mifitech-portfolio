@@ -1,7 +1,7 @@
 // Path: app/api/leads/route.ts
 import { NextResponse, after } from 'next/server';
 import { db } from '@/lib/backend';
-import { notifyOwner } from '@/lib/notify';
+import { notifyOwner, sendEnquiryAcknowledgement } from '@/lib/notify';
 import { clientIp, isLimited, record } from '@/lib/rate-limit';
 
 const HOUR = 3600_000;
@@ -37,8 +37,15 @@ export async function POST(req: Request) {
   } catch (error) { console.error('Could not save enquiry:', error instanceof Error ? error.message : 'unknown error'); }
 
   const alert = { title: 'New enquiry: ' + name + (business ? ' (' + business + ')' : ''), lines: ['Email: ' + email, 'Project: ' + type, ...(demo ? ['Asked about the ' + demo + ' demo'] : []), '', details.slice(0, 600)] };
-  if (saved) { after(() => notifyOwner(alert)); return ok(); }
+  const acknowledge = () => sendEnquiryAcknowledgement({ name, email, projectType: type, details });
+  if (saved) {
+    after(async () => { await Promise.allSettled([notifyOwner(alert), acknowledge()]); });
+    return ok();
+  }
   // The database is unavailable: only report success if an alert actually reached you, so no enquiry is lost silently.
-  if (await notifyOwner(alert)) return ok();
+  if (await notifyOwner(alert)) {
+    after(() => acknowledge());
+    return ok();
+  }
   return NextResponse.json({ error: 'We could not send your enquiry right now. Please message us on WhatsApp instead.' }, { status: 503 });
 }
