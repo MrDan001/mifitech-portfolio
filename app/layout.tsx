@@ -8,7 +8,6 @@ export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSeo();
   return {
     metadataBase: new URL(String(seo.canonicalUrl)),
-    alternates: { canonical: '/' },
     title: { default: String(seo.title), template: '%s | MifiTech' },
     description: String(seo.description),
     applicationName: 'MifiTech',
