@@ -1,6 +1,7 @@
 // Path: app/layout.tsx
 import type { Metadata } from 'next';
 import { getSeo } from '@/lib/backend';
+import { SITE_URL } from '@/lib/contact';
 import './globals.css';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,8 +23,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: 'MifiTech',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech-portfolio.vercel.app',
-    logo: (process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech-portfolio.vercel.app') + '/brand/logo-512.png',
+    url: SITE_URL,
+    logo: SITE_URL + '/brand/logo-512.png',
     email: 'officialsafebase@gmail.com',
     telephone: '+2349067859200',
     description: 'Website design, web development, ecommerce and custom web application services for businesses in Nigeria.',

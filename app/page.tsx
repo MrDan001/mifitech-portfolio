@@ -1,4 +1,5 @@
 // Path: app/page.tsx
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Bricolage_Grotesque, Hanken_Grotesk } from 'next/font/google';
 import ContactForm from './components/ContactForm';
@@ -10,6 +11,10 @@ import './home.css';
 
 const display = Bricolage_Grotesque({ subsets: ['latin'], weight: ['500', '800'], variable: '--mh-display', display: 'swap' });
 const body = Hanken_Grotesk({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--mh-body', display: 'swap' });
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
 
 const VISIBLE_DEMOS = 6;
 const WA_MESSAGE = 'Hello MifiTech, I would like to discuss a website for my business.';
@@ -88,6 +93,10 @@ export default async function Home() {
               <ul className="mh-service-list">
                 {content.services.map((service, index) => <li key={service.name + index}><h3>{service.name}</h3><p>{service.body}</p></li>)}
               </ul>
+              <p className="mh-service-detail-links">
+                <Link href="/website-design-nigeria">Website design in Nigeria <span aria-hidden="true">↗</span></Link>
+                <Link href="/ecommerce-website-development-nigeria">E-commerce website development <span aria-hidden="true">↗</span></Link>
+              </p>
             </div>
           </section>
         )}

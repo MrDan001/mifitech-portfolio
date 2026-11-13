@@ -1,8 +1,8 @@
 // Path: lib/contact.ts
 
 // Owner & Site Configuration
-export const CONTACT_EMAIL = "owner@mifitech.com"; // Replace with your actual email address
-export const SITE_URL = "https://mifitech-portfolio.vercel.app"; // Replace with your production domain if needed
+export const CONTACT_EMAIL = "officialsafebase@gmail.com";
+export const SITE_URL = 'https://mifitech.top';
 
 // WhatsApp Configuration
 export const WHATSAPP_NUMBER = '2349067859200';

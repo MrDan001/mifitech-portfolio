@@ -1,5 +1,6 @@
 import { createHmac, timingSafeEqual, randomUUID } from 'node:crypto';
 import { cookies } from 'next/headers';
+import { SITE_URL } from './contact';
 
 const base = (process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL)?.replace(/\/$/, '');
 const key = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -48,7 +49,7 @@ export const seoDefaults = {
   title: 'MifiTech | Website Design & Development in Nigeria',
   description: 'MifiTech designs and builds professional business websites, online stores and custom web applications in Nigeria.',
   keywords: ['website design Nigeria', 'website development Nigeria', 'how to build a website', 'web designer Nigeria'],
-  canonicalUrl: 'https://mifitech-portfolio.vercel.app',
+  canonicalUrl: 'https://mifitech.top',
   ogTitle: 'MifiTech — Websites & Digital Products',
   ogDescription: 'Thoughtful websites and useful digital products, built around your business.',
 };
@@ -56,7 +57,14 @@ export const seoDefaults = {
 export async function getSeo() {
   try {
     const rows = await db<Array<{ value: Record<string, unknown> }>>('site_settings?key=eq.seo&select=value&limit=1');
-    return { ...seoDefaults, ...(rows[0]?.value || {}) };
+    const saved = rows[0]?.value || {};
+    const savedCanonical = String(saved.canonicalUrl || '');
+    return {
+      ...seoDefaults,
+      ...saved,
+      // Replace the retired Vercel address if it is still stored in Supabase.
+      canonicalUrl: savedCanonical.includes('mifitech-portfolio.vercel.app') ? SITE_URL : (savedCanonical || SITE_URL),
+    };
   } catch {
     return seoDefaults;
   }

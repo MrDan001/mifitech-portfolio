@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import SiteNav from '../../components/SiteNav';
 import { defaultSiteContent, getSiteContent } from '@/lib/site-content';
+import { SITE_URL } from '@/lib/contact';
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
@@ -35,6 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: project.name + ' Case Study',
     description: project.text,
+    alternates: { canonical: new URL('/projects/' + encodeURIComponent(project.slug), SITE_URL).toString() },
     openGraph: { title: project.name + ' | MifiTech', description: project.text, images: project.caseStudy?.flyer ? [project.caseStudy.flyer] : [project.image], type: 'article' },
   };
 }
