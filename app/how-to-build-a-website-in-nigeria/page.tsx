@@ -23,7 +23,7 @@ export default async function Guide() {
     description: article.intro,
     author: { '@type': 'Organization', name: 'MifiTech' },
     publisher: { '@type': 'Organization', name: 'MifiTech' },
-    mainEntityOfPage: (process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech-portfolio.vercel.app') + '/how-to-build-a-website-in-nigeria',
+    mainEntityOfPage: (process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech.top') + '/how-to-build-a-website-in-nigeria',
   };
 
   return (
