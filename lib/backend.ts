@@ -63,7 +63,18 @@ export async function getSeo() {
       ...seoDefaults,
       ...saved,
       // Replace the retired Vercel address if it is still stored in Supabase.
-      canonicalUrl: (() => {\n        if (!savedCanonical || savedCanonical.includes('mifitech-portfolio.vercel.app')) return SITE_URL;\n        try {\n          const parsed = new URL(savedCanonical);\n          // The apex domain permanently redirects to www, so canonical metadata,\n          // structured data and sitemap entries must use the final destination.\n          if (parsed.hostname === 'mifitech.top' || parsed.hostname === 'www.mifitech.top') return SITE_URL;\n        } catch { return SITE_URL; }\n        return savedCanonical;\n      })(),
+      canonicalUrl: (() => {
+        if (!savedCanonical || savedCanonical.includes('mifitech-portfolio.vercel.app')) return SITE_URL;
+        try {
+          const parsed = new URL(savedCanonical);
+          // The apex domain permanently redirects to www, so canonical metadata,
+          // structured data and sitemap entries must use the final destination.
+          if (parsed.hostname === 'mifitech.top' || parsed.hostname === 'www.mifitech.top') return SITE_URL;
+        } catch {
+          return SITE_URL;
+        }
+        return savedCanonical;
+      })(),
     };
   } catch {
     return seoDefaults;
