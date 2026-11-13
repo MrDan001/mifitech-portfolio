@@ -7,6 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSeo();
   return {
     metadataBase: new URL(String(seo.canonicalUrl)),
+    alternates: { canonical: '/' },
     title: { default: String(seo.title), template: '%s | MifiTech' },
     description: String(seo.description),
     applicationName: 'MifiTech',
@@ -22,8 +23,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: 'MifiTech',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech-portfolio.vercel.app',
-    logo: (process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech-portfolio.vercel.app') + '/brand/logo-512.png',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech.top',
+    logo: (process.env.NEXT_PUBLIC_SITE_URL || 'https://mifitech.top') + '/brand/logo-512.png',
     email: 'officialsafebase@gmail.com',
     telephone: '+2349067859200',
     description: 'Website design, web development, ecommerce and custom web application services for businesses in Nigeria.',
