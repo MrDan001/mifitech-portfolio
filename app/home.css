@@ -247,3 +247,6 @@
 .mh .sx-tall{aspect-ratio:3/4;border-radius:12px}
 .mh .sx-more{display:grid;place-items:center;text-align:center;padding:12px;background:var(--c);color:#fff;margin:0}
 .mh .sx-more b{color:#fff;margin:0;font:800 15px var(--display)}
+.mh .mh-service-detail-links{display:flex;gap:24px;flex-wrap:wrap;margin-top:22px}
+.mh .mh-service-detail-links a{font-size:14px;font-weight:800;text-decoration:none}
+.mh .mh-service-detail-links a span{margin-left:5px}
