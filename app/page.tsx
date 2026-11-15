@@ -19,6 +19,14 @@ export const metadata: Metadata = {
 
 const VISIBLE_DEMOS = 6;
 const WA_MESSAGE = 'Hello MifiTech, I would like to discuss a website for my business.';
+const INDUSTRY_SOLUTIONS = [
+  { label: 'Restaurant website development', href: '/solutions/restaurant-website-development-nigeria' },
+  { label: 'Salon website design', href: '/solutions/salon-website-design-nigeria' },
+  { label: 'E-commerce website development', href: '/solutions/ecommerce-website-development-nigeria' },
+  { label: 'Clinic website development', href: '/solutions/clinic-website-development-nigeria' },
+  { label: 'Real estate website development', href: '/solutions/real-estate-website-development-nigeria' },
+  { label: 'School website development', href: '/solutions/school-website-development-nigeria' },
+];
 
 export default async function Home() {
   const content = await getSiteContent();
@@ -103,6 +111,15 @@ export default async function Home() {
             </div>
           </section>
         )}
+
+        <section className="mh-sec" id="industry-solutions">
+          <div className="mh-wrap">
+            <div className="mh-head"><h2>Websites built for your industry.</h2><p>Explore how MifiTech can shape a website around the services, customers and everyday needs of your business.</p></div>
+            <div className="mh-service-detail-links">
+              {INDUSTRY_SOLUTIONS.map((item) => <Link key={item.href} href={item.href}>{item.label} <span aria-hidden="true">↗</span></Link>)}
+            </div>
+          </div>
+        </section>
 
         <section className="mh-sec" id="demos">
           <div className="mh-wrap">
