@@ -3,6 +3,8 @@ import type { ReactNode } from 'react';
 import { Bricolage_Grotesque, Hanken_Grotesk } from 'next/font/google';
 import './admin.css';
 
+export const metadata = { robots: { index: false, follow: false, noarchive: true } };
+
 const display = Bricolage_Grotesque({ subsets: ['latin'], weight: ['500', '800'], variable: '--ad-display', display: 'swap' });
 const body = Hanken_Grotesk({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--ad-body', display: 'swap' });
 
