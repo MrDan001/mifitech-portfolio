@@ -14,11 +14,12 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: Array.isArray(seo.keywords) ? seo.keywords.map(String) : [],
     openGraph: { title: String(seo.ogTitle), description: String(seo.ogDescription), siteName: 'MifiTech', type: 'website', images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'MifiTech portfolio: Ludo Live, eHealthcare, Garrison Market and The Africa Plug' }] },
     twitter: { card: 'summary_large_image', title: String(seo.ogTitle), description: String(seo.ogDescription), images: ['/og-image.jpg'] },
-    // Publish a standalone SVG favicon plus the original high-resolution PNG fallback.
+    // Google Search supports PNG favicons; keep the SVG as a browser-friendly alternative.
+    // Put the supported PNG first so crawlers select the correct brand artwork.
     icons: {
       icon: [
-        { url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' },
         { url: '/brand/logo-512.png', type: 'image/png', sizes: '512x512' },
+        { url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' },
       ],
       apple: [{ url: '/brand/logo-512.png', type: 'image/png', sizes: '512x512' }],
     },
