@@ -202,7 +202,7 @@
 .mh .sx-hero::before,.mh .sx-banner::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 15%,rgba(0,0,0,.72))}
 .mh .sx-hero>div,.mh .sx-banner>div{position:relative}
 .mh .sx-hero small{opacity:.9;font-size:11px}
-.mh .sx-hero h4{font:800 27px/1.05 var(--display);margin:4px 0 8px;letter-spacing:-.02em}
+.mh .sx-hero .sx-heading{font:800 27px/1.05 var(--display);margin:4px 0 8px;letter-spacing:-.02em}
 .mh .sx-hero p{font-size:12.5px;opacity:.95;margin:0 0 14px}
 .mh .sx-btn{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--c);color:#fff;font-weight:700;font-size:12px;margin:0 6px 6px 0;border:1.5px solid var(--c)}
 .mh .sx-ghost{background:transparent;border-color:#ffffffcc}
@@ -212,7 +212,7 @@
 .mh .sx-sec{padding:22px 16px}
 .mh .sx-tight{padding:14px 16px 0}
 .mh .sx-soft{background:#faf8f5}
-.mh .sx-sec h5,.mh .sx-form h5{font:800 18px var(--display);margin:0 0 12px;letter-spacing:-.01em}
+.mh .sx-sec .sx-heading,.mh .sx-form .sx-heading{font:800 18px var(--display);margin:0 0 12px;letter-spacing:-.01em}
 .mh .sx-row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #eee}
 .mh .sx-row b{display:block;font-size:13px}.mh .sx-row span{color:#777;font-size:11px}.mh .sx-row strong{white-space:nowrap;font-size:13px}
 .mh .sx-link{display:inline-block;margin-top:12px;font-weight:700;color:var(--c)}
