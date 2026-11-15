@@ -42,6 +42,7 @@ const page: ServicePageContent = {
   ],
   related: [
     { label: 'Website design in Nigeria', href: '/website-design-nigeria', description: 'Explore business websites and the design process.' },
+    { label: 'Website design cost in Nigeria', href: '/website-design-cost-nigeria', description: 'Understand the factors that affect a website project quote.' },
     { label: 'Garrison Market case study', href: '/projects/garrison-market', description: 'See a business operations product built around inventory and sales workflows.' },
     { label: 'Explore website demos', href: '/#demos', description: 'View sample concepts for retail and other business types.' },
   ],
