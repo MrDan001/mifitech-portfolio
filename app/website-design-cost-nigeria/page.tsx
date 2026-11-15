@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 const article: GuideArticle = {
+  path: '/website-design-cost-nigeria',
   eyebrow: 'WEBSITE PLANNING / COST GUIDE',
   title: 'How much does website design cost in Nigeria?',
   intro: 'There is no single price that fits every business website. The cost depends on what the site needs to do, how much content it contains and whether it requires custom functionality. This guide explains the main things to consider before requesting a quote.',
