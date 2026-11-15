@@ -228,7 +228,7 @@ export default async function Home() {
             <span><img className="mh-footer-logo" src="/brand/logo-b-mark.svg" alt="" width={24} height={24} />© {new Date().getFullYear()} MifiTech. {content.footer.tagline}</span>
             <span>
               {content.navigation.slice(0, 3).map((item, index) => <Link key={item.label + index} href={item.href}>{item.label}</Link>)}
-              <Link href="/privacy">Privacy</Link>
+              <Link href="/about">About MifiTech</Link><Link href="/privacy">Privacy</Link>
             </span>
           </div>
         </footer>
