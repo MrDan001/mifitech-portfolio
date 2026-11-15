@@ -198,6 +198,16 @@ export default async function Home() {
           </div>
         </section>
 
+        <section className="mh-sec" id="resources">
+          <div className="mh-wrap">
+            <div className="mh-head"><h2>Planning a website? Start here.</h2><p>Practical answers to common questions Nigerian businesses ask before choosing a website partner.</p></div>
+            <div className="mh-projects">
+              <article className="mh-proj"><span className="mh-tag">Planning & budget</span><h3>How much does website design cost in Nigeria?</h3><p>Understand the factors that affect project scope, pricing, hosting and ongoing support.</p><div className="mh-proj-links"><Link href="/website-design-cost-nigeria">Read the cost guide</Link></div></article>
+              <article className="mh-proj"><span className="mh-tag">Choosing a partner</span><h3>How to choose a website design company in Nigeria</h3><p>Questions to ask about portfolios, project scope, mobile experience, SEO and ownership.</p><div className="mh-proj-links"><Link href="/choose-website-design-company-nigeria">Read the checklist</Link></div></article>
+            </div>
+          </div>
+        </section>
+
         <section className="mh-sec mh-faq" id="faqs">
           <div className="mh-wrap mh-two">
             <div>
