@@ -149,7 +149,7 @@ export async function generateMetadata({ params }: { params: Promise<{ industry:
   return {
     title: page.title,
     description: page.description,
-    alternates: { canonical: '/' + page.slug },
+    alternates: { canonical: '/solutions/' + industry },
     openGraph: { title: page.title + ' | MifiTech', description: page.description, type: 'website' },
   };
 }
@@ -158,7 +158,7 @@ export default async function IndustrySolutionPage({ params }: { params: Promise
   const { industry } = await params;
   const page = solutions[industry];
   if (!page) notFound();
-  const url = SITE_URL + '/' + page.slug;
+  const url = SITE_URL + '/solutions/' + industry;
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
