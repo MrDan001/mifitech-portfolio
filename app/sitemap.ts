@@ -12,6 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const paths = Array.from(new Set([
     '', '/about', '/privacy', '/how-to-build-a-website-in-nigeria',
     '/website-design-nigeria', '/ecommerce-website-development-nigeria',
+    '/custom-web-application-development-nigeria', '/business-management-software-nigeria',
     ...projectPaths,
   ]));
   return paths.map((path) => ({
