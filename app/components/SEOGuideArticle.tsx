@@ -2,6 +2,7 @@ import Link from 'next/link';
 import SiteNav from './SiteNav';
 
 export type GuideArticle = {
+  path: string;
   eyebrow: string;
   title: string;
   intro: string;
@@ -17,7 +18,7 @@ export default function SEOGuideArticle({ article }: { article: GuideArticle }) 
     description: article.intro,
     author: { '@type': 'Organization', name: 'MifiTech', url: 'https://www.mifitech.top/about' },
     publisher: { '@type': 'Organization', name: 'MifiTech', url: 'https://www.mifitech.top' },
-    mainEntityOfPage: 'https://www.mifitech.top',
+    mainEntityOfPage: 'https://www.mifitech.top' + article.path,
   };
   return (
     <div className="studio-shell">
