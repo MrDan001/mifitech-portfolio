@@ -7,10 +7,10 @@ import { SITE_URL } from '@/lib/contact';
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getSiteContent();
   return {
-    title: content.guideArticle.title,
+    title: 'Website Planning Guide for Nigerian Businesses',
     description: content.guideArticle.intro,
     alternates: { canonical: '/how-to-build-a-website-in-nigeria' },
-    openGraph: { title: content.guideArticle.title, description: content.guideArticle.intro, type: 'article' },
+    openGraph: { title: 'Website Planning Guide for Nigerian Businesses', description: content.guideArticle.intro, type: 'article' },
   };
 }
 
