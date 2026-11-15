@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import ServiceLandingPage, { type ServicePageContent } from '../components/ServiceLandingPage';
 
 export const metadata: Metadata = {
-  title: 'Website Design in Nigeria | MifiTech',
+  title: 'Website Design in Nigeria',
   description: 'MifiTech designs and builds mobile-friendly business websites for Nigerian companies, with clear project scope, enquiry paths and support.',
   alternates: { canonical: '/website-design-nigeria' },
   openGraph: {

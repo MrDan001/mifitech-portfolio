@@ -7,6 +7,7 @@ import HeroPhone from './components/HeroPhone';
 import WhatsAppButton from './components/WhatsAppButton';
 import { WHATSAPP_DISPLAY, whatsappLink } from '@/lib/contact';
 import { getSiteContent } from '@/lib/site-content';
+import { projectPath } from '@/lib/project-slug';
 import './home.css';
 
 const display = Bricolage_Grotesque({ subsets: ['latin'], weight: ['500', '800'], variable: '--mh-display', display: 'swap' });
@@ -131,7 +132,7 @@ export default async function Home() {
                     <ul className="mh-stack">{featured.stack.map((item) => <li key={item}>{item}</li>)}</ul>
                     <div className="mh-proj-links">
                       {featuredIsLive && <a href={featured.websiteUrl} target="_blank" rel="noreferrer">Visit {featuredHost}</a>}
-                      <Link href={'/projects/' + featured.slug}>Read the case study</Link>
+                      <Link href={projectPath(featured.slug)}>Read the case study</Link>
                     </div>
                   </div>
                   {featured.features.length > 0 && <ul className="mh-kpis">{featured.features.slice(0, 3).map((item) => <li key={item}>{item}</li>)}</ul>}
@@ -145,7 +146,7 @@ export default async function Home() {
                         <p>{project.text}</p>
                         <ul className="mh-stack">{project.stack.slice(0, 3).map((item) => <li key={item}>{item}</li>)}</ul>
                         <div className="mh-proj-links">
-                          <Link href={'/projects/' + project.slug}>Project details</Link>
+                          <Link href={projectPath(project.slug)}>Project details</Link>
                           {project.websiteUrl && <a href={project.websiteUrl} target="_blank" rel="noreferrer">Visit website</a>}
                         </div>
                       </article>

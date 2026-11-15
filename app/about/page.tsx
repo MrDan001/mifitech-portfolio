@@ -3,10 +3,11 @@ import Link from 'next/link';
 import SiteNav from '../components/SiteNav';
 import { getSiteContent } from '@/lib/site-content';
 import { SITE_URL } from '@/lib/contact';
+import { projectPath } from '@/lib/project-slug';
 
 export const metadata: Metadata = {
-  title: 'About MifiTech | Nigerian Website Design & Software Studio',
-  description: 'Meet MifiTech, a Nigerian digital studio building business websites, ecommerce stores and custom web applications. Learn about our services, approach and selected projects.',
+  title: { absolute: 'About MifiTech | Nigerian Digital Studio' },
+  description: 'Meet MifiTech, a Nigerian digital studio for business websites, ecommerce stores and custom web applications.',
   alternates: { canonical: new URL('/about', SITE_URL).toString() },
   openGraph: {
     title: 'About MifiTech | Digital Studio in Nigeria',
@@ -74,7 +75,7 @@ export default async function AboutPage() {
             {projects.map((project) => <div className="fact" key={project.slug}>
               <strong>{project.name}</strong>
               <p>{project.text}</p>
-              <Link href={'/projects/' + encodeURIComponent(project.slug)}>View project details ↗</Link>
+              <Link href={projectPath(project.slug)}>View project details ↗</Link>
             </div>)}
           </div>
         </section>}
