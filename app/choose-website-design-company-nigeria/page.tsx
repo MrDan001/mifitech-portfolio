@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 const article: GuideArticle = {
+  path: '/choose-website-design-company-nigeria',
   eyebrow: 'BUSINESS WEBSITE / BUYER CHECKLIST',
   title: 'How to choose a website design company in Nigeria.',
   intro: 'Choosing a web design partner is about more than finding an attractive homepage or the lowest quote. You need a team that understands your business, explains the work clearly and can deliver a website you can confidently use and manage.',
