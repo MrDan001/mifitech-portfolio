@@ -42,6 +42,8 @@ const page: ServicePageContent = {
   ],
   related: [
     { label: 'How to build a website in Nigeria', href: '/how-to-build-a-website-in-nigeria', description: 'A practical guide to planning, costs, domains and launch.' },
+    { label: 'Website design cost in Nigeria', href: '/website-design-cost-nigeria', description: 'Understand the factors that shape a website project quote.' },
+    { label: 'Choosing a website design company', href: '/choose-website-design-company-nigeria', description: 'Use a practical checklist before selecting a development partner.' },
     { label: 'Explore website demos', href: '/#demos', description: 'Open sample website concepts for different business types.' },
     { label: 'E-commerce website development', href: '/ecommerce-website-development-nigeria', description: 'Explore online stores, catalogues and order journeys.' },
   ],
