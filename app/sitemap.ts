@@ -10,12 +10,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter((project) => project.visible !== false)
     .map((project) => projectPath(project.slug));
   const solutionPaths = [
-    '/solutions/restaurant-website-development-nigeria',
-    '/solutions/salon-website-design-nigeria',
-    '/solutions/ecommerce-website-development-nigeria',
-    '/solutions/clinic-website-development-nigeria',
-    '/solutions/real-estate-website-development-nigeria',
-    '/solutions/school-website-development-nigeria',
+    '/solutions/restaurant',
+    '/solutions/salon',
+    '/solutions/ecommerce',
+    '/solutions/clinic',
+    '/solutions/real-estate',
+    '/solutions/school',
   ];
   const paths = Array.from(new Set([
     '', '/about', '/privacy', '/how-to-build-a-website-in-nigeria', '/website-design-cost-nigeria', '/choose-website-design-company-nigeria',
