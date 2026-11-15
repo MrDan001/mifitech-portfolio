@@ -1,20 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
+import { normalizeProjectSlug, projectPath } from '@/lib/project-slug';
 import SiteNav from '../../components/SiteNav';
 import { defaultSiteContent, getSiteContent } from '@/lib/site-content';
 import { SITE_URL } from '@/lib/contact';
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
-
-// Accept legacy/admin-entered slugs such as "Prestige life RP" as well as
-// canonical slugs such as "prestige-life-rp".
-function normalizeProjectSlug(value: string) {
-  return decodeURIComponent(value).trim().toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-}
 
 function findVisibleProject(projects: Awaited<ReturnType<typeof getSiteContent>>['projects'], slug: string) {
   const requested = normalizeProjectSlug(slug);
@@ -35,9 +28,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!project) return { title: 'Project not found | MifiTech' };
   return {
     title: project.name + ' Case Study',
-    description: project.text,
-    alternates: { canonical: new URL('/projects/' + encodeURIComponent(project.slug), SITE_URL).toString() },
-    openGraph: { title: project.name + ' | MifiTech', description: project.text, images: project.caseStudy?.flyer ? [project.caseStudy.flyer] : [project.image], type: 'article' },
+    description: project.text.length > 155 ? project.text.slice(0, 152).replace(/\s+\S*$/, '') + '…' : project.text,
+    alternates: { canonical: new URL(projectPath(project.slug), SITE_URL).toString() },
+    openGraph: { title: project.name + ' | MifiTech', description: project.text.length > 155 ? project.text.slice(0, 152).replace(/\s+\S*$/, '') + '…' : project.text, images: project.caseStudy?.flyer ? [project.caseStudy.flyer] : [project.image], type: 'article' },
   };
 }
 
@@ -46,6 +39,8 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
   const content = await getSiteContent();
   const project = findVisibleProject(content.projects, slug);
   if (!project) notFound();
+  const canonicalSlug = normalizeProjectSlug(project.slug);
+  if (slug !== canonicalSlug) permanentRedirect(projectPath(project.slug));
 
   const email = content.sections.contact.email;
   const websiteUrl = project.websiteUrl?.trim();
