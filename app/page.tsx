@@ -20,12 +20,12 @@ export const metadata: Metadata = {
 const VISIBLE_DEMOS = 6;
 const WA_MESSAGE = 'Hello MifiTech, I would like to discuss a website for my business.';
 const INDUSTRY_SOLUTIONS = [
-  { label: 'Restaurant website development', href: '/solutions/restaurant-website-development-nigeria' },
-  { label: 'Salon website design', href: '/solutions/salon-website-design-nigeria' },
-  { label: 'E-commerce website development', href: '/solutions/ecommerce-website-development-nigeria' },
-  { label: 'Clinic website development', href: '/solutions/clinic-website-development-nigeria' },
-  { label: 'Real estate website development', href: '/solutions/real-estate-website-development-nigeria' },
-  { label: 'School website development', href: '/solutions/school-website-development-nigeria' },
+  { label: 'Restaurant website development', href: '/solutions/restaurant' },
+  { label: 'Salon website design', href: '/solutions/salon' },
+  { label: 'E-commerce website development', href: '/solutions/ecommerce' },
+  { label: 'Clinic website development', href: '/solutions/clinic' },
+  { label: 'Real estate website development', href: '/solutions/real-estate' },
+  { label: 'School website development', href: '/solutions/school' },
 ];
 
 export default async function Home() {
