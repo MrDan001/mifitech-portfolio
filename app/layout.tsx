@@ -1,4 +1,3 @@
-// Path: app/layout.tsx
 import type { Metadata } from 'next';
 import { getSeo } from '@/lib/backend';
 import { SITE_URL } from '@/lib/contact';
@@ -36,6 +35,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         name: 'MifiTech',
         url: SITE_URL,
         logo: SITE_URL + '/brand/logo-512.png',
+        image: SITE_URL + '/brand/logo-512.png',
+        sameAs: [
+          'https://www.instagram.com/mifi.tech/',
+          'https://www.facebook.com/profile.php?id=61593251797989',
+        ],
         email: 'officialsafebase@gmail.com',
         telephone: '+2349067859200',
         description: 'Website design, web development, ecommerce and custom web application services for businesses in Nigeria.',
