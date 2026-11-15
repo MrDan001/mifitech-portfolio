@@ -27,10 +27,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const project = findVisibleProject(content.projects, slug);
   if (!project) return { title: 'Project not found | MifiTech' };
   return {
-    title: project.name + ' Case Study',
-    description: project.text.length > 155 ? project.text.slice(0, 152).replace(/\s+\S*$/, '') + '…' : project.text,
+    title: project.name.trim() + ' Case Study',
+    description: project.text.length < 70 ? project.text + ' Explore the project, its approach and what MifiTech built.' : project.text.length > 155 ? project.text.slice(0, 152).replace(/\s+\S*$/, '') + '…' : project.text,
     alternates: { canonical: new URL(projectPath(project.slug), SITE_URL).toString() },
-    openGraph: { title: project.name + ' | MifiTech', description: project.text.length > 155 ? project.text.slice(0, 152).replace(/\s+\S*$/, '') + '…' : project.text, images: project.caseStudy?.flyer ? [project.caseStudy.flyer] : [project.image], type: 'article' },
+    openGraph: { title: project.name.trim() + ' | MifiTech', description: project.text.length < 70 ? project.text + ' Explore the project, its approach and what MifiTech built.' : project.text.length > 155 ? project.text.slice(0, 152).replace(/\s+\S*$/, '') + '…' : project.text, images: project.caseStudy?.flyer ? [project.caseStudy.flyer] : [project.image], type: 'article' },
   };
 }
 
@@ -54,8 +54,8 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
         <Link href="/#work" className="back-link">Back to selected work</Link>
         <div className="case-hero">
           <div>
-            <p className="section-label">CASE STUDY / {project.type.toUpperCase()}</p>
-            <h1>{project.name}</h1>
+            <p className="section-label">CASE STUDY / {project.type.trim().toUpperCase()}</p>
+            <h1>{project.name.trim()}</h1>
             <p className="case-intro">{project.text}</p>
             <div className="hero-actions">
               {websiteUrl && <a className="button button-dark" href={websiteUrl} target="_blank" rel="noreferrer">Visit live website ↗</a>}
