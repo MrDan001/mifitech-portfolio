@@ -97,6 +97,8 @@ export default async function Home() {
               <p className="mh-service-detail-links">
                 <Link href="/website-design-nigeria">Website design in Nigeria <span aria-hidden="true">↗</span></Link>
                 <Link href="/ecommerce-website-development-nigeria">E-commerce website development <span aria-hidden="true">↗</span></Link>
+                <Link href="/custom-web-application-development-nigeria">Custom web application development <span aria-hidden="true">↗</span></Link>
+                <Link href="/business-management-software-nigeria">Business management software <span aria-hidden="true">↗</span></Link>
               </p>
             </div>
           </section>
