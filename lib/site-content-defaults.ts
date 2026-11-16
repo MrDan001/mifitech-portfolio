@@ -58,6 +58,7 @@ export const defaultSiteContent: SiteContent = {
     { label: 'Our approach', href: '/#process' },
     { label: 'FAQs', href: '/#faqs' },
     { label: 'Website guide', href: '/how-to-build-a-website-in-nigeria' },
+    { label: 'Blog', href: '/blog' },
   ],
   hero: {
     eyebrow: 'MODERN WEBSITES FOR REAL BUSINESSES',
