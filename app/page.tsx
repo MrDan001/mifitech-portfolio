@@ -103,11 +103,12 @@ export default async function Home() {
                 {content.services.map((service, index) => <li key={service.name + index}><h3>{service.name}</h3><p>{service.body}</p></li>)}
               </ul>
               <p className="mh-service-detail-links">
-                <Link href="/website-design-nigeria">Website design in Nigeria <span aria-hidden="true">↗</span></Link>
-                <Link href="/ecommerce-website-development-nigeria">E-commerce website development <span aria-hidden="true">↗</span></Link>
-                <Link href="/custom-web-application-development-nigeria">Custom web application development <span aria-hidden="true">↗</span></Link>
-                <Link href="/business-management-software-nigeria">Business management software <span aria-hidden="true">↗</span></Link>
+                <Link href="/services/web-design">Website design & development <span aria-hidden="true">↗</span></Link>
+                <Link href="/services/ecommerce-development">E-commerce development <span aria-hidden="true">↗</span></Link>
+                <Link href="/services/custom-web-applications">Custom web applications <span aria-hidden="true">↗</span></Link>
+                <Link href="/services/business-software">Business management software <span aria-hidden="true">↗</span></Link>
               </p>
+              <p className="mh-demo-note">Looking for a local provider? <Link href="/website-design-nigeria">Explore our website design services in Nigeria</Link>.</p>
             </div>
           </section>
         )}
