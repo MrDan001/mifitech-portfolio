@@ -23,6 +23,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/website-design-nigeria', '/ecommerce-website-development-nigeria',
     '/custom-web-application-development-nigeria', '/business-management-software-nigeria',
     ...solutionPaths,
+    '/blog',
+    ...blogPosts.map((post) => '/blog/' + post.slug),
     ...projectPaths,
   ]));
   return paths.map((path) => ({
