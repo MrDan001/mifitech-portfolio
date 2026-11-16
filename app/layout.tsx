@@ -42,8 +42,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         ],
         email: 'officialsafebase@gmail.com',
         telephone: '+2349067859200',
-        description: 'Website design, web development, ecommerce and custom web application services for businesses in Nigeria.',
-        areaServed: { '@type': 'Country', name: 'Nigeria' },
+        description: 'Website design, web development, ecommerce and custom web application services for businesses worldwide.',
+        areaServed: 'Worldwide',
         serviceType: ['Website design', 'Website development', 'Ecommerce website development', 'Custom web applications'],
       },
       {
