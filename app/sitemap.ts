@@ -22,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/solutions/school',
   ];
   const paths = Array.from(new Set([
-    '', '/about', '/privacy', '/how-to-build-a-website-in-nigeria', '/website-design-cost-nigeria', '/choose-website-design-company-nigeria',
+    '', '/about', '/privacy', '/services/web-design', '/services/ecommerce-development', '/services/custom-web-applications', '/services/business-software', '/how-to-build-a-website-in-nigeria', '/website-design-cost-nigeria', '/choose-website-design-company-nigeria',
     '/website-design-nigeria', '/ecommerce-website-development-nigeria',
     '/custom-web-application-development-nigeria', '/business-management-software-nigeria',
     ...solutionPaths,
