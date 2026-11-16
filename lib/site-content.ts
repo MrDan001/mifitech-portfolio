@@ -25,7 +25,10 @@ export async function getSiteContent(): Promise<SiteContent> {
         contact: { ...defaultSiteContent.sections.contact, ...(savedSections.contact || {}) },
       },
       footer: { ...defaultSiteContent.footer, ...(saved.footer || {}) },
-      navigation: Array.isArray(saved.navigation) ? saved.navigation : defaultSiteContent.navigation,
+      navigation: (() => {
+        const links = Array.isArray(saved.navigation) ? saved.navigation : defaultSiteContent.navigation;
+        return links.some((item) => item.href === '/blog') ? links : [...links, { label: 'Blog', href: '/blog' }];
+      })(),
       services: Array.isArray(saved.services) ? saved.services : defaultSiteContent.services,
       demos: Array.isArray(saved.demos) ? saved.demos.map((demo) => ({ ...defaultSiteContent.demos.find((item) => item.slug === demo.slug), ...demo })) : defaultSiteContent.demos,
       projects: Array.isArray(saved.projects) ? saved.projects.map((project) => {

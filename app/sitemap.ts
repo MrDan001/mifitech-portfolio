@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { getSeo } from '@/lib/backend';
 import { getSiteContent } from '@/lib/site-content';
 import { projectPath } from '@/lib/project-slug';
+import { blogPosts } from '@/lib/blog-posts';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [seo, content] = await Promise.all([getSeo(), getSiteContent()]);
@@ -22,6 +23,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/website-design-nigeria', '/ecommerce-website-development-nigeria',
     '/custom-web-application-development-nigeria', '/business-management-software-nigeria',
     ...solutionPaths,
+    '/blog',
+    ...blogPosts.map((post) => '/blog/' + post.slug),
     ...projectPaths,
   ]));
   return paths.map((path) => ({
