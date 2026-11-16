@@ -4,6 +4,9 @@ import { getSiteContent } from '@/lib/site-content';
 import { projectPath } from '@/lib/project-slug';
 import { blogPosts } from '@/lib/blog-posts';
 
+// Keep the sitemap in sync with the current public CMS content, not build-time data.
+export const dynamic = 'force-dynamic';
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [seo, content] = await Promise.all([getSeo(), getSiteContent()]);
   const root = String(seo.canonicalUrl).replace(/\/$/, '');
