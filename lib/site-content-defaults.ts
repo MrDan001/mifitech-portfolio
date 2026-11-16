@@ -65,7 +65,7 @@ export const defaultSiteContent: SiteContent = {
     kicker: 'WEB DESIGN · DEVELOPMENT · DIGITAL PRODUCTS',
     title: 'Turn Your Business Into a Powerful',
     emphasis: 'Online Presence.',
-    lead: 'MifiTech is a digital studio that designs and builds beautiful, fast and secure websites for businesses in Nigeria and beyond.',
+    lead: 'MifiTech is a digital studio that designs and builds beautiful, fast and secure websites for businesses worldwide.',
     primaryLabel: 'View Our Demo Websites',
     primaryHref: '#demos',
     secondaryLabel: 'Contact Us',
@@ -118,7 +118,7 @@ export const defaultSiteContent: SiteContent = {
     guide: {
       label: 'A GOOD PLACE TO START',
       title: 'Planning your first business website?',
-      intro: 'Our practical guide covers domains, hosting, content, features, costs and the basics of SEO for Nigerian businesses.',
+      intro: 'Our practical guide covers domains, hosting, content, features, costs and the basics of SEO.',
       linkLabel: 'Read: How to build a website in Nigeria',
       href: '/how-to-build-a-website-in-nigeria',
     },
