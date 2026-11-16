@@ -13,6 +13,7 @@ const defaultLinks: NavItem[] = [
   { label: 'Our approach', href: '/#process' },
   { label: 'FAQs', href: '/#faqs' },
   { label: 'Website guide', href: '/how-to-build-a-website-in-nigeria' },
+  { label: 'Blog', href: '/blog' },
 ];
 
 export default function SiteNav({ items = defaultLinks }: { items?: NavItem[] }) {
