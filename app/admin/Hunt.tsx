@@ -5,7 +5,7 @@ import { Empty, Icon } from './ui';
 
 type LocationResponse = { error?: boolean; data?: any; msg?: string };
 type Prospect = {
-  id: string; name: string; address: string; country: string; city: string; industry: string;
+  id: string; name: string; address: string; country: string; region?: string; city: string; industry: string;
   phone: string; email: string; emailSourceUrl?: string; description: string; mapsUrl: string; websiteStatus: string;
   subject: string; draft: string; status: string; batchId: string; createdAt: string;
 };
@@ -150,7 +150,7 @@ export default function Hunt() {
 
   function waLink(p:Prospect){
     const phone=p.phone.replace(/\D/g,'').replace(/^00/,'');
-    const text='Hello '+p.name+' team, I came across your business while researching '+p.industry.toLowerCase()+' businesses in '+p.city+'. I could not find a dedicated website linked to your public listing, so I wanted to introduce MifiTech. A clear website could help customers understand your services, see what you offer and contact you more easily. Would you be open to a quick, no-obligation conversation?';
+    const text='Hello '+p.name+' team, I came across your business while researching '+p.industry.toLowerCase()+' businesses in '+(p.city||p.region||p.country)+'. I could not find a dedicated website linked to your public listing, so I wanted to introduce MifiTech. A clear website could help customers understand your services, see what you offer and contact you more easily. Would you be open to a quick, no-obligation conversation?';
     return phone?'https://wa.me/'+phone+'?text='+encodeURIComponent(text):'';
   }
 
@@ -183,7 +183,7 @@ export default function Hunt() {
       const open=expanded===p.id;
       return <article className="ad-item" key={p.id}>
         <button className="ad-item-head" aria-expanded={open} onClick={()=>setExpanded(open?null:p.id)}>
-          <i className="ad-av">{p.name.slice(0,1).toUpperCase()}</i><span className="grow"><b>{p.name}</b><small>{p.industry} · {p.city}, {p.country} · {p.address}</small></span>
+          <i className="ad-av">{p.name.slice(0,1).toUpperCase()}</i><span className="grow"><b>{p.name}</b><small>{p.industry} · {[p.city,p.region,p.country].filter(Boolean).join(', ')} · {p.address}</small></span>
           <span className={'ad-badge '+(p.status==='sent'?'sent':p.status==='whatsapp_sent'?'converted':'new')}>{p.status.replace('_',' ')}</span><span className="ad-chev"><Icon n="chev"/></span>
         </button>
         {open&&<div className="ad-item-body">
@@ -206,7 +206,7 @@ export default function Hunt() {
         </div>}
       </article>;
     }):<Empty title="Your next prospects will appear here" text="Choose a country and business category, then run a search. HUNT will keep a history so the same listing is not added twice."/>}
-    {history.length>current.length&&<details className="ad-card"><summary><b>Campaign history ({history.length})</b></summary><div className="ad-list" style={{marginTop:12}}>{history.slice(0,50).map(p=><div className="ad-li" key={p.id}><span className="grow"><b>{p.name}</b><small>{p.city}, {p.country} · {p.status}</small></span><small>{new Date(p.createdAt).toLocaleDateString()}</small></div>)}</div></details>}
+    {history.length>current.length&&<details className="ad-card"><summary><b>Campaign history ({history.length})</b></summary><div className="ad-list" style={{marginTop:12}}>{history.slice(0,50).map(p=><div className="ad-li" key={p.id}><span className="grow"><b>{p.name}</b><small>{[p.city,p.region,p.country].filter(Boolean).join(', ')} · {p.status}</small></span><small>{new Date(p.createdAt).toLocaleDateString()}</small></div>)}</div></details>}
     <p className="ad-hint">HUNT only prepares a WhatsApp message. WhatsApp opens with the text filled in; you must review and press Send yourself. Email is always sent one business at a time after confirmation.</p>
   </div>;
 }
