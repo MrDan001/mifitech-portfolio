@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Empty, Icon } from './ui';
 
+type LocationResponse = { error?: boolean; data?: any; msg?: string };
 type Prospect = {
   id: string; name: string; address: string; country: string; city: string; industry: string;
   phone: string; email: string; emailSourceUrl?: string; description: string; mapsUrl: string; websiteStatus: string;
@@ -10,11 +11,16 @@ type Prospect = {
 };
 
 const industries = ['Restaurants','Hotels','Beauty salons','Fashion boutiques','Construction companies','Real estate agencies','Clinics','Schools','Logistics companies','Professional services','Retail shops','Auto workshops','Event businesses','Other'];
-const countries = ['Nigeria','United Kingdom','United States','Canada','Ireland','Australia','South Africa','Ghana','Kenya','United Arab Emirates','Germany','France','Netherlands','India'];
 
 export default function Hunt() {
   const [country,setCountry]=useState('');
+  const [region,setRegion]=useState('');
   const [city,setCity]=useState('');
+  const [countries,setCountries]=useState<string[]>([]);
+  const [regions,setRegions]=useState<string[]>([]);
+  const [cities,setCities]=useState<string[]>([]);
+  const [locationLoading,setLocationLoading]=useState(false);
+  const [locationError,setLocationError]=useState('');
   const [industry,setIndustry]=useState('Restaurants');
   const [customIndustry,setCustomIndustry]=useState('');
   const [prospects,setProspects]=useState<Prospect[]>([]);
@@ -38,6 +44,54 @@ export default function Hunt() {
     }
   },[]);
   useEffect(()=>{loadHistory().catch(()=>setMessage('Could not load HUNT history.'));},[loadHistory]);
+  useEffect(()=>{
+    let active=true;
+    fetch('https://countriesnow.space/api/v0.1/countries/iso')
+      .then(async response=>{if(!response.ok)throw new Error('Country list is temporarily unavailable.');return response.json() as Promise<LocationResponse>;})
+      .then(data=>{
+        if(data.error)throw new Error(data.msg||'Country list is temporarily unavailable.');
+        const names=(Array.isArray(data.data)?data.data:[]).map((item:any)=>String(item.name||'').trim()).filter(Boolean);
+        if(active)setCountries([...new Set(names)].sort((a,b)=>a.localeCompare(b)));
+      })
+      .catch(error=>{if(active)setLocationError(error instanceof Error?error.message:'Could not load location options.');});
+    return ()=>{active=false;};
+  },[]);
+
+  useEffect(()=>{
+    setRegion('');setCity('');setRegions([]);setCities([]);
+    if(!country)return;
+    let active=true;
+    setLocationLoading(true);setLocationError('');
+    fetch('https://countriesnow.space/api/v0.1/countries/states/q?country='+encodeURIComponent(country))
+      .then(async response=>{if(!response.ok)throw new Error('Could not load states or regions.');return response.json() as Promise<LocationResponse>;})
+      .then(data=>{
+        if(data.error)throw new Error(data.msg||'No state or region list is available for this country.');
+        const rows=Array.isArray(data.data?.states)?data.data.states:[];
+        if(active)setRegions([...new Set(rows.map((item:any)=>String(item.name||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b)));
+      })
+      .catch(error=>{if(active)setLocationError(error instanceof Error?error.message:'Could not load states or regions.');})
+      .finally(()=>{if(active)setLocationLoading(false);});
+    return ()=>{active=false;};
+  },[country]);
+
+  useEffect(()=>{
+    setCity('');setCities([]);
+    if(!country||!region)return;
+    let active=true;
+    setLocationLoading(true);setLocationError('');
+    fetch('https://countriesnow.space/api/v0.1/countries/state/cities',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({country,state:region})})
+      .then(async response=>{if(!response.ok)throw new Error('Could not load cities for this region.');return response.json() as Promise<LocationResponse>;})
+      .then(data=>{
+        if(data.error)throw new Error(data.msg||'No city list is available for this region.');
+        const rows=Array.isArray(data.data)?data.data:[];
+        const names=rows.map((item:any)=>String(typeof item==='string'?item:item.name||'').trim()).filter(Boolean);
+        if(active)setCities([...new Set(names)].sort((a,b)=>a.localeCompare(b)));
+      })
+      .catch(error=>{if(active)setLocationError(error instanceof Error?error.message:'Could not load cities.');})
+      .finally(()=>{if(active)setLocationLoading(false);});
+    return ()=>{active=false;};
+  },[country,region]);
+
 
   const current = useMemo(()=>prospects.filter(p=>!activeBatch||p.batchId===activeBatch),[prospects,activeBatch]);
   const completed = current.length>0 && current.every(p=>['sent','whatsapp_sent','skipped'].includes(p.status));
@@ -46,7 +100,7 @@ export default function Hunt() {
   const findBatch=useCallback(async()=>{
     setLoading(true);setMessage('');
     try{
-      const r=await fetch('/api/admin/hunt/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({country,city,industry:industry==='Other'?customIndustry:industry,limit:15})});
+      const r=await fetch('/api/admin/hunt/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({country,region,city,industry:industry==='Other'?customIndustry:industry,limit:15})});
       const d=await r.json();
       if(!r.ok)throw new Error(d.error||'HUNT could not find businesses.');
       if(!d.prospects?.length){setMessage(d.message||'No new qualifying businesses were found. Try another city or industry.');return;}
@@ -55,7 +109,7 @@ export default function Hunt() {
       await loadHistory();
     }catch(e){setMessage(e instanceof Error?e.message:'Search failed.');}
     finally{setLoading(false);}
-  },[country,city,industry,customIndustry,loadHistory]);
+  },[country,region,city,industry,customIndustry,loadHistory]);
 
   useEffect(()=>{
     if(completed&&!loading&&!autoNext.current){autoNext.current=true;void findBatch();}
@@ -104,11 +158,13 @@ export default function Hunt() {
     <section className="ad-card">
       <div className="ad-card-head"><div><h2>Find businesses worth approaching</h2><p className="ad-sub">Search globally. HUNT checks public business listings and filters out listings that already show a website.</p></div><span className="ad-pill">15 per batch</span></div>
       <div className="ad-grid2">
-        <label className="ad-field"><span>Country filter <small>Leave blank for a broad global search</small></span><input list="hunt-countries" value={country} onChange={e=>setCountry(e.target.value)} placeholder="Any country"/><datalist id="hunt-countries">{countries.map(c=><option key={c} value={c}/>)}</datalist></label>
-        <label className="ad-field"><span>City or region <small>Optional</small></span><input value={city} onChange={e=>setCity(e.target.value)} placeholder="e.g. Lagos, Dublin, Toronto"/></label>
+        <label className="ad-field"><span>Country <small>Leave blank for a broad global search</small></span><select value={country} onChange={e=>setCountry(e.target.value)}><option value="">All countries</option>{countries.map(name=><option key={name} value={name}>{name}</option>)}</select></label>
+        <label className="ad-field"><span>State / region <small>{country?'Optional':'Choose a country first'}</small></span><select value={region} onChange={e=>setRegion(e.target.value)} disabled={!country||!regions.length||locationLoading}><option value="">All states / regions</option>{regions.map(name=><option key={name} value={name}>{name}</option>)}</select></label>
+        <label className="ad-field"><span>City <small>{region?'Optional':'Choose a state or region first'}</small></span><select value={city} onChange={e=>setCity(e.target.value)} disabled={!region||!cities.length||locationLoading}><option value="">All cities</option>{cities.map(name=><option key={name} value={name}>{name}</option>)}</select></label>
         <label className="ad-field"><span>Business category</span><select value={industry} onChange={e=>setIndustry(e.target.value)}>{industries.map(x=><option key={x}>{x}</option>)}</select></label>
         {industry==='Other'&&<label className="ad-field"><span>Describe the industry</span><input value={customIndustry} onChange={e=>setCustomIndustry(e.target.value)} placeholder="e.g. accounting firms"/></label>}
       </div>
+      {locationLoading&&<p className="ad-hint" role="status">Loading location options…</p>}{locationError&&<p className="ad-hint" role="status">{locationError} You can still search using the country filter if its list loaded.</p>}
       <div className="ad-row" style={{marginTop:16}}>
         <button className="ad-btn lime" onClick={findBatch} disabled={loading||(industry==='Other'&&!customIndustry.trim())}><Icon n="search"/>{loading?'Searching public listings…':'Find 15 businesses'}</button>
         <span className="ad-hint">No emails are sent during discovery. The next batch is prepared automatically after this one is processed.</span>
