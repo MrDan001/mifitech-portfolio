@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { getSeo } from '@/lib/backend';
 import { SITE_URL } from '@/lib/contact';
+import { getSiteContent } from '@/lib/site-content';
+import FloatingMenu from './components/FloatingMenu';
 import './globals.css';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -25,7 +27,8 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const siteContent = await getSiteContent();
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -57,5 +60,5 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     ],
   };
 
-  return <html lang="en" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{ __html: `try { const saved = localStorage.getItem('mifitech-theme'); const dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches; document.documentElement.dataset.theme = dark ? 'dark' : 'light'; } catch (_) {}` }} /></head><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />{children}</body></html>;
+  return <html lang="en" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{ __html: `try { const saved = localStorage.getItem('mifitech-theme'); const dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches; document.documentElement.dataset.theme = dark ? 'dark' : 'light'; } catch (_) {}` }} /></head><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} /><FloatingMenu navigation={siteContent.navigation} />{children}</body></html>;
 }
