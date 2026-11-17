@@ -132,6 +132,7 @@ export default function Hunt() {
             {p.mapsUrl&&<a className="ad-btn ghost sm" href={p.mapsUrl} target="_blank" rel="noreferrer"><Icon n="map"/>Open listing</a>}
           </div>
           <label className="ad-field"><span>Public email address <small>Verify before sending</small></span><input type="email" value={d.email} onChange={e=>setDrafts(old=>({...old,[p.id]:{...d,email:e.target.value}}))} placeholder="Add a verified business email"/></label>
+          {p.emailSourceUrl&&<p className="ad-sub">Email source: <a href={p.emailSourceUrl} target="_blank" rel="noreferrer">view public result</a></p>}
           <label className="ad-field"><span>Email subject</span><input value={d.subject} onChange={e=>setDrafts(old=>({...old,[p.id]:{...d,subject:e.target.value}}))}/></label>
           <label className="ad-field"><span>Personalised email</span><textarea rows={8} value={d.draft} onChange={e=>setDrafts(old=>({...old,[p.id]:{...d,draft:e.target.value}}))}/></label>
           <div className="ad-row">
