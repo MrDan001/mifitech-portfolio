@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Empty, Icon } from './ui';
 
 type Prospect = {
@@ -10,10 +10,10 @@ type Prospect = {
 };
 
 const industries = ['Restaurants','Hotels','Beauty salons','Fashion boutiques','Construction companies','Real estate agencies','Clinics','Schools','Logistics companies','Professional services','Retail shops','Auto workshops','Event businesses','Other'];
-const countries = ['Nigeria','United Kingdom','United States','Canada','Ireland','Australia','South Africa','Ghana','Kenya','United Arab Emirates','Germany','France','Netherlands','India','Other'];
+const countries = ['Nigeria','United Kingdom','United States','Canada','Ireland','Australia','South Africa','Ghana','Kenya','United Arab Emirates','Germany','France','Netherlands','India'];
 
 export default function Hunt() {
-  const [country,setCountry]=useState('Nigeria');
+  const [country,setCountry]=useState('');
   const [city,setCity]=useState('');
   const [industry,setIndustry]=useState('Restaurants');
   const [customIndustry,setCustomIndustry]=useState('');
@@ -26,7 +26,7 @@ export default function Hunt() {
   const [drafts,setDrafts]=useState<Record<string,{email:string;subject:string;draft:string}>>({});
   const [expanded,setExpanded]=useState<string|null>(null);
 
-  async function loadHistory(){
+  const loadHistory=useCallback(async()=>{
     const r=await fetch('/api/admin/hunt/prospects'); const d=await r.json();
     if(r.ok){const rows=d.prospects||[];setHistory(rows);setProspects(rows);if(rows[0]?.batchId)setActiveBatch(rows[0].batchId);}
   }
@@ -92,13 +92,13 @@ export default function Hunt() {
     <section className="ad-card">
       <div className="ad-card-head"><div><h2>Find businesses worth approaching</h2><p className="ad-sub">Search globally. HUNT checks public business listings and filters out listings that already show a website.</p></div><span className="ad-pill">15 per batch</span></div>
       <div className="ad-grid2">
-        <label className="ad-field"><span>Country</span><select value={country} onChange={e=>setCountry(e.target.value)}>{countries.map(c=><option key={c}>{c}</option>)}</select></label>
+        <label className="ad-field"><span>Country filter <small>Leave blank for a broad global search</small></span><input list="hunt-countries" value={country} onChange={e=>setCountry(e.target.value)} placeholder="Any country"/><datalist id="hunt-countries">{countries.map(c=><option key={c} value={c}/>)}</datalist></label>
         <label className="ad-field"><span>City or region <small>Optional</small></span><input value={city} onChange={e=>setCity(e.target.value)} placeholder="e.g. Lagos, Dublin, Toronto"/></label>
         <label className="ad-field"><span>Business category</span><select value={industry} onChange={e=>setIndustry(e.target.value)}>{industries.map(x=><option key={x}>{x}</option>)}</select></label>
         {industry==='Other'&&<label className="ad-field"><span>Describe the industry</span><input value={customIndustry} onChange={e=>setCustomIndustry(e.target.value)} placeholder="e.g. accounting firms"/></label>}
       </div>
       <div className="ad-row" style={{marginTop:16}}>
-        <button className="ad-btn lime" onClick={findBatch} disabled={loading||!country||(industry==='Other'&&!customIndustry.trim())}><Icon n="search"/>{loading?'Searching public listings…':'Find 15 businesses'}</button>
+        <button className="ad-btn lime" onClick={findBatch} disabled={loading||(industry==='Other'&&!customIndustry.trim())}><Icon n="search"/>{loading?'Searching public listings…':'Find 15 businesses'}</button>
         <span className="ad-hint">No emails are sent during discovery.</span>
       </div>
       {message&&<p className="ad-sub" role="status" style={{marginTop:12}}>{message}</p>}
