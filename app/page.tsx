@@ -38,7 +38,6 @@ export default async function Home() {
   const others = projects.filter((project) => project !== featured);
   const featuredIsLive = Boolean(featured?.websiteUrl);
   const featuredHost = featured?.websiteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '');
-  const profile = content.studioProfile;
 
   const demoCard = (d: (typeof demos)[number]) => (
     <Link key={d.slug} className="mh-demo" href={d.href || '/demos/' + d.slug} style={{ backgroundImage: 'url(' + d.image + ')' }} aria-label={'Open the ' + d.title + ' website demo'}>
@@ -155,19 +154,6 @@ export default async function Home() {
                     ))}
                   </div>
                 )}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {(profile.name || profile.bio || profile.image) && (
-          <section className="mh-sec" id="studio-profile">
-            <div className="mh-wrap mh-profile">
-              {profile.image && <img src={profile.image} alt={profile.name ? profile.name + ', MifiTech' : 'MifiTech studio profile'} loading="lazy" />}
-              <div>
-                <h2>{profile.headline}</h2>
-                {profile.name && <p><strong>{profile.name}{profile.role ? ', ' + profile.role : ''}</strong></p>}
-                {profile.bio && <p>{profile.bio}</p>}
               </div>
             </div>
           </section>
