@@ -131,20 +131,30 @@ export async function POST(req: Request, ctx: Ctx) {
       const apiKey = process.env.GOOGLE_PLACES_API_KEY;
       if (!apiKey) return NextResponse.json({ error: 'HUNT needs a Google Places API key. Add GOOGLE_PLACES_API_KEY to the MifiTech Vercel project environment variables, enable Places API (New), then redeploy.' }, { status: 503 });
       const query = industry + ' businesses' + (city ? ' in ' + city : '') + (country ? ', ' + country : '');
-      const response = await fetch('https://places.googleapis.com/v1/places:searchText', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Goog-Api-Key': apiKey, 'X-Goog-FieldMask': 'places.id,places.displayName,places.formattedAddress,places.nationalPhoneNumber,places.internationalPhoneNumber,places.types,places.websiteUri,places.googleMapsUri,places.businessStatus,places.rating,places.editorialSummary' },
-        body: JSON.stringify({ textQuery: query, pageSize: 20 }),
-        cache: 'no-store',
-      });
-      const result = await response.json().catch(() => ({}));
-      if (!response.ok) return NextResponse.json({ error: result.error?.message || 'Google Places could not complete this search. Check API billing and Places API access.' }, { status: 502 });
+      const fieldMask = 'places.id,places.displayName,places.formattedAddress,places.nationalPhoneNumber,places.internationalPhoneNumber,places.types,places.websiteUri,places.googleMapsUri,places.businessStatus,places.rating,places.editorialSummary,nextPageToken';
+      const allPlaces: any[] = [];
+      let pageToken = '';
+      for (let page = 0; page < 3 && allPlaces.length < 60; page++) {
+        const response = await fetch('https://places.googleapis.com/v1/places:searchText', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-Goog-Api-Key': apiKey, 'X-Goog-FieldMask': fieldMask },
+          body: JSON.stringify({ textQuery: query, pageSize: 20, ...(pageToken ? { pageToken } : {}) }),
+          cache: 'no-store',
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) return NextResponse.json({ error: result.error?.message || 'Google Places could not complete this search. Check API billing and Places API access.' }, { status: 502 });
+        allPlaces.push(...(result.places || []));
+        pageToken = result.nextPageToken || '';
+        if (!pageToken) break;
+      }
       const existing = await huntRows();
       const known = new Set(existing.map((row) => String(row.value.googlePlaceId || '')));
-      const places = (result.places || []).filter((place: any) => place.id && !place.websiteUri && place.businessStatus !== 'CLOSED_PERMANENTLY' && !known.has(place.id)).slice(0, 15);
+      const places = allPlaces.filter((place: any) => place.id && !place.websiteUri && place.businessStatus !== 'CLOSED_PERMANENTLY' && !known.has(place.id)).slice(0, 15);
       if (!places.length) return NextResponse.json({ prospects: [], message: 'No new listings without a website link were found for this search. Try another city or category.' });
       const batchId = randomUUID();
-      const prospects = await Promise.all(places.map(async (place: any) => {
+      const prospects: any[] = [];
+      for (let index = 0; index < places.length; index += 4) {
+        const group = await Promise.all(places.slice(index, index + 4).map(async (place: any) => {
         const name = String(place.displayName?.text || 'Business').slice(0, 180);
         const address = String(place.formattedAddress || '').slice(0, 400);
         const description = String(place.editorialSummary?.text || (place.types || []).slice(0, 5).map((x: string) => x.replace(/_/g, ' ')).join(', ') || 'Public business listing').slice(0, 600);
@@ -153,7 +163,9 @@ export async function POST(req: Request, ctx: Ctx) {
         const draft = huntDraft(name, industry, city, actualCountry);
         const contact = await findPublicEmail(name, address);
         return { id: String(place.id), googlePlaceId: String(place.id), batchId, name, address, country: actualCountry, city, industry, phone, email: contact.email, emailSourceUrl: contact.emailSourceUrl, description, mapsUrl: String(place.googleMapsUri || ''), websiteStatus: 'not_found', subject: draft.subject, draft: draft.draft, status: 'new', createdAt: new Date().toISOString(), rating: place.rating || null };
-      }));
+        }));
+        prospects.push(...group);
+      }
       for (const prospect of prospects) await saveHuntRow(prospect.id, prospect);
       await db('site_settings?on_conflict=key', {
         method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
