@@ -1,15 +1,16 @@
 import type { MetadataRoute } from 'next';
-import { getSeo } from '@/lib/backend';
 import { getSiteContent } from '@/lib/site-content';
 import { projectPath } from '@/lib/project-slug';
 import { blogPosts } from '@/lib/blog-posts';
+import { SITE_URL } from '@/lib/contact';
 
-// Keep the sitemap in sync with the current public CMS content, not build-time data.
+// Keep the sitemap on the final canonical host and include publication updates
+// so search engines can reliably discover every published editorial URL.
 export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [seo, content] = await Promise.all([getSeo(), getSiteContent()]);
-  const root = String(seo.canonicalUrl).replace(/\/$/, '');
+  const content = await getSiteContent();
+  const root = SITE_URL;
   const projectPaths = content.projects
     .filter((project) => project.visible !== false)
     .map((project) => projectPath(project.slug));
@@ -30,9 +31,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogPosts.map((post) => '/blog/' + post.slug),
     ...projectPaths,
   ]));
-  return paths.map((path) => ({
-    url: root + path,
-    changeFrequency: path === '' ? 'weekly' : 'monthly',
-    priority: path === '' ? 1 : path === '/about' ? 0.85 : path === '/how-to-build-a-website-in-nigeria' ? 0.9 : solutionPaths.includes(path) ? 0.8 : 0.7,
-  }));
+  const blogByPath = new Map(blogPosts.map((post) => ['/blog/' + post.slug, post]));
+  return paths.map((path) => {
+    const post = blogByPath.get(path);
+    return {
+      url: root + path,
+      ...(post ? { lastModified: new Date(post.updatedAt + 'T12:00:00Z') } : {}),
+      changeFrequency: path === '' ? 'weekly' : 'monthly',
+      priority: path === '' ? 1 : path === '/blog' ? 0.85 : post ? 0.75 : path === '/about' ? 0.85 : path === '/how-to-build-a-website-in-nigeria' ? 0.9 : solutionPaths.includes(path) ? 0.8 : 0.7,
+    };
+  });
 }
