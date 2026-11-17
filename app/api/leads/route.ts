@@ -37,6 +37,7 @@ export async function POST(req: Request) {
 
   const alert = {
     title: 'New website enquiry from ' + name,
+    replyTo: email,
     lines: ['Email: ' + email, 'Project: ' + type, ...(business ? ['Business: ' + business] : []), ...(demo ? ['Asked about: ' + demo] : []), '', details.slice(0, 600)],
   };
   const acknowledge = () => sendEnquiryAcknowledgement({ name, email, projectType: type, details });
