@@ -186,6 +186,8 @@ export async function POST(req: Request, ctx: Ctx) {
       if (prospect.status === 'sent') return NextResponse.json({ error: 'An email has already been sent to this prospect.' }, { status: 409 });
       const apiKey = process.env.RESEND_API_KEY;
       if (!apiKey) return NextResponse.json({ error: 'RESEND_API_KEY is not configured on the MifiTech Vercel project.' }, { status: 503 });
+      const sendLimitKey = 'hunt-send:' + clientIp(req);
+      if (isLimited(sendLimitKey, 20, 60 * 60_000)) return NextResponse.json({ error: 'HUNT has reached its hourly sending limit. Please try again later.' }, { status: 429 });
       const mail = await fetch('https://api.resend.com/emails', {
         method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + apiKey },
         body: JSON.stringify({ from: process.env.EMAIL_FROM || 'MifiTech <hello@mifitech.top>', to: [email], reply_to: process.env.CONTACT_REPLY_TO || 'officialsafebase@gmail.com', subject, text: draft }),
@@ -193,6 +195,7 @@ export async function POST(req: Request, ctx: Ctx) {
       });
       const mailResult = await mail.json().catch(() => ({}));
       if (!mail.ok) return NextResponse.json({ error: mailResult.message || mailResult.error?.message || 'Resend rejected this email.' }, { status: 502 });
+      record(sendLimitKey, 60 * 60_000);
       await saveHuntRow(id, { ...prospect, email, subject, draft, status: 'sent', sentAt: new Date().toISOString(), resendId: mailResult.id || null });
       return NextResponse.json({ ok: true, resendId: mailResult.id || null });
     }
