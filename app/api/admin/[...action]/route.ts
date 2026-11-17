@@ -21,6 +21,22 @@ async function saveHuntRow(id: string, value: Record<string, any>) {
     body: JSON.stringify({ key: HUNT_PREFIX + id, value, updated_at: new Date().toISOString() }),
   });
 }
+async function findPublicEmail(name: string, address: string) {
+  const apiKey = process.env.GOOGLE_CSE_API_KEY;
+  const cx = process.env.GOOGLE_CSE_CX;
+  if (!apiKey || !cx) return { email: '', emailSourceUrl: '' };
+  const params = new URLSearchParams({ key: apiKey, cx, q: '"' + name + '" "' + address + '" email contact', num: '5' });
+  const response = await fetch('https://www.googleapis.com/customsearch/v1?' + params.toString(), { cache: 'no-store' });
+  if (!response.ok) return { email: '', emailSourceUrl: '' };
+  const data = await response.json().catch(() => ({}));
+  for (const item of data.items || []) {
+    const text = [item.title, item.snippet, ...(item.pagemap?.metatags || []).map((tag: any) => Object.values(tag).join(' '))].join(' ');
+    const match = text.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}/i);
+    if (match && !/example\\.(com|org)|wixsite\\.com/i.test(match[0])) return { email: match[0], emailSourceUrl: String(item.link || '') };
+  }
+  return { email: '', emailSourceUrl: '' };
+}
+
 function huntDraft(name: string, industry: string, city: string, country: string) {
   const first = name.split(/\s+/)[0] || 'there';
   const subject = 'A website idea for ' + name;
@@ -128,15 +144,16 @@ export async function POST(req: Request, ctx: Ctx) {
       const places = (result.places || []).filter((place: any) => place.id && !place.websiteUri && place.businessStatus !== 'CLOSED_PERMANENTLY' && !known.has(place.id)).slice(0, 15);
       if (!places.length) return NextResponse.json({ prospects: [], message: 'No new listings without a website link were found for this search. Try another city or category.' });
       const batchId = randomUUID();
-      const prospects = places.map((place: any) => {
+      const prospects = await Promise.all(places.map(async (place: any) => {
         const name = String(place.displayName?.text || 'Business').slice(0, 180);
         const address = String(place.formattedAddress || '').slice(0, 400);
         const description = String(place.editorialSummary?.text || (place.types || []).slice(0, 5).map((x: string) => x.replace(/_/g, ' ')).join(', ') || 'Public business listing').slice(0, 600);
         const phone = String(place.internationalPhoneNumber || place.nationalPhoneNumber || '').slice(0, 60);
         const actualCountry = country || address.split(',').map((x: string) => x.trim()).filter(Boolean).slice(-1)[0] || 'Unspecified';
         const draft = huntDraft(name, industry, city, actualCountry);
-        return { id: String(place.id), googlePlaceId: String(place.id), batchId, name, address, country: actualCountry, city, industry, phone, email: '', description, mapsUrl: String(place.googleMapsUri || ''), websiteStatus: 'not_found', subject: draft.subject, draft: draft.draft, status: 'new', createdAt: new Date().toISOString(), rating: place.rating || null };
-      });
+        const contact = await findPublicEmail(name, address);
+        return { id: String(place.id), googlePlaceId: String(place.id), batchId, name, address, country: actualCountry, city, industry, phone, email: contact.email, emailSourceUrl: contact.emailSourceUrl, description, mapsUrl: String(place.googleMapsUri || ''), websiteStatus: 'not_found', subject: draft.subject, draft: draft.draft, status: 'new', createdAt: new Date().toISOString(), rating: place.rating || null };
+      }));
       for (const prospect of prospects) await saveHuntRow(prospect.id, prospect);
       await db('site_settings?on_conflict=key', {
         method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
