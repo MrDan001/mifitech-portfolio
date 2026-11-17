@@ -5,6 +5,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { defaultSiteContent } from '@/lib/site-content-defaults';
 import Content from './Content';
 import Leads from './Leads';
+import Hunt from './Hunt';
 import Media from './Media';
 import Overview from './Overview';
 import Proposals from './Proposals';
@@ -15,6 +16,7 @@ type Row = Record<string, any>;
 type Toast = { id: number; text: string; tone: 'ok' | 'err' };
 const TITLES: Record<string, [string, string]> = {
   overview: ['Overview', 'How your studio and website are doing today.'],
+  hunt: ['HUNT', 'Find and contact businesses that could benefit from a website.'],
   leads: ['Enquiries', 'Everyone who has contacted you through the website.'],
   proposals: ['Proposals', 'Create private proposal links and track payments.'],
   content: ['Website content', 'Edit your pages. Nothing goes live until you save.'],
@@ -154,7 +156,7 @@ export default function AdminPanel() {
   const go = (t: string) => { setTab(t); setNavOpen(false); window.scrollTo({ top: 0 }); };
   const newCount = leads.filter((l) => l.status === 'new').length;
   const openCount = proposals.filter((p) => ['sent', 'accepted', 'awaiting_payment', 'in_progress'].includes(p.status)).length;
-  const NAV: Array<[string, string, string, number?]> = [['overview', 'Overview', 'home'], ['leads', 'Enquiries', 'inbox', newCount], ['proposals', 'Proposals', 'doc', openCount]];
+  const NAV: Array<[string, string, string, number?]> = [['overview', 'Overview', 'home'], ['hunt', 'HUNT', 'search'], ['leads', 'Enquiries', 'inbox', newCount], ['proposals', 'Proposals', 'doc', openCount]];
   const SITE: Array<[string, string, string]> = [['content', 'Website content', 'edit'], ['media', 'Media library', 'image'], ['seo', 'Search & sharing', 'search']];
   const [title, sub] = TITLES[tab];
 
@@ -181,6 +183,7 @@ export default function AdminPanel() {
           <a className="ad-btn ghost sm ad-hide" href="/" target="_blank" rel="noreferrer"><Icon n="ext" />View site</a>
         </header>
         <main className="ad-page">
+          {tab === 'hunt' && <Hunt />}
           {tab === 'overview' && <Overview leads={leads} proposals={proposals} content={content} seo={seo} loading={loading} go={go} />}
           {tab === 'leads' && <Leads leads={leads} loading={loading} onStatus={(id, s) => setStatus('leads', id, s)} onDelete={deleteLead} onProposal={(l) => { setDraft(l); go('proposals'); }} notify={notify} />}
           {tab === 'proposals' && <Proposals proposals={proposals} loading={loading} draft={draft} onCreate={createProposal} onStatus={(id, s) => setStatus('proposals', id, s)} notify={notify} />}
