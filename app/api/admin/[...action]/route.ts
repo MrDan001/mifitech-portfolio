@@ -133,8 +133,9 @@ export async function POST(req: Request, ctx: Ctx) {
         const address = String(place.formattedAddress || '').slice(0, 400);
         const description = String(place.editorialSummary?.text || (place.types || []).slice(0, 5).map((x: string) => x.replace(/_/g, ' ')).join(', ') || 'Public business listing').slice(0, 600);
         const phone = String(place.internationalPhoneNumber || place.nationalPhoneNumber || '').slice(0, 60);
-        const draft = huntDraft(name, industry, city, country);
-        return { id: String(place.id), googlePlaceId: String(place.id), batchId, name, address, country, city, industry, phone, email: '', description, mapsUrl: String(place.googleMapsUri || ''), websiteStatus: 'not_found', subject: draft.subject, draft: draft.draft, status: 'new', createdAt: new Date().toISOString(), rating: place.rating || null };
+        const actualCountry = country || address.split(',').map((x: string) => x.trim()).filter(Boolean).slice(-1)[0] || 'Unspecified';
+        const draft = huntDraft(name, industry, city, actualCountry);
+        return { id: String(place.id), googlePlaceId: String(place.id), batchId, name, address, country: actualCountry, city, industry, phone, email: '', description, mapsUrl: String(place.googleMapsUri || ''), websiteStatus: 'not_found', subject: draft.subject, draft: draft.draft, status: 'new', createdAt: new Date().toISOString(), rating: place.rating || null };
       });
       for (const prospect of prospects) await saveHuntRow(prospect.id, prospect);
       await db('site_settings?on_conflict=key', {
