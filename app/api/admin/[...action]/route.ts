@@ -319,23 +319,6 @@ export async function DELETE(req: Request, ctx: Ctx) {
   const body = await req.json().catch(() => ({}));
 
   try {
-    if (route === 'hunt/prospects' && body.id) {
-      const id = String(body.id);
-      const rows = await db<Array<{ value: Record<string, any> }>>('site_settings?key=eq.' + encodeURIComponent(HUNT_PREFIX + id) + '&select=value&limit=1');
-      const current = rows[0]?.value;
-      if (!current) return NextResponse.json({ error: 'Prospect not found.' }, { status: 404 });
-      const next = { ...current };
-      if (body.email !== undefined) {
-        const email = String(body.email || '').trim();
-        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return NextResponse.json({ error: 'Enter a valid email address.' }, { status: 400 });
-        next.email = email;
-      }
-      if (body.subject !== undefined) next.subject = String(body.subject || '').slice(0, 180);
-      if (body.draft !== undefined) next.draft = String(body.draft || '').slice(0, 12000);
-      if (['whatsapp_sent','skipped'].includes(String(body.status || ''))) next.status = body.status;
-      await saveHuntRow(id, next);
-      return NextResponse.json({ ok: true });
-    }
     if (route === 'leads' && body.id) {
       await db('leads?id=eq.' + encodeURIComponent(String(body.id)), { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
       return NextResponse.json({ ok: true });
@@ -357,6 +340,23 @@ export async function PATCH(req: Request, ctx: Ctx) {
   const body = await req.json().catch(() => ({}));
 
   try {
+    if (route === 'hunt/prospects' && body.id) {
+      const id = String(body.id);
+      const rows = await db<Array<{ value: Record<string, any> }>>('site_settings?key=eq.' + encodeURIComponent(HUNT_PREFIX + id) + '&select=value&limit=1');
+      const current = rows[0]?.value;
+      if (!current) return NextResponse.json({ error: 'Prospect not found.' }, { status: 404 });
+      const next = { ...current };
+      if (body.email !== undefined) {
+        const email = String(body.email || '').trim();
+        if (email && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) return NextResponse.json({ error: 'Enter a valid email address.' }, { status: 400 });
+        next.email = email;
+      }
+      if (body.subject !== undefined) next.subject = String(body.subject || '').slice(0, 180);
+      if (body.draft !== undefined) next.draft = String(body.draft || '').slice(0, 12000);
+      if (['whatsapp_sent','skipped'].includes(String(body.status || ''))) next.status = body.status;
+      await saveHuntRow(id, next);
+      return NextResponse.json({ ok: true });
+    }
     if (route === 'leads' && body.id && leadStatuses.includes(body.status)) {
       await db('leads?id=eq.' + encodeURIComponent(body.id), {
         method: 'PATCH', headers: { Prefer: 'return=minimal' },
