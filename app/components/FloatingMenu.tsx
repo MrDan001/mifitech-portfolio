@@ -1,8 +1,14 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 type NavigationItem = { label: string; href: string };
 
 export default function FloatingMenu({ navigation }: { navigation: NavigationItem[] }) {
+  const pathname = usePathname();
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) return null;
+
   return (
     <div className="mifi-floating-menu">
       <Link className="mifi-floating-brand" href="/" aria-label="MifiTech home">

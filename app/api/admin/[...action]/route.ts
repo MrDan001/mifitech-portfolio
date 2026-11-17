@@ -125,12 +125,13 @@ export async function POST(req: Request, ctx: Ctx) {
   try {
     if (route === 'hunt/search') {
       const country = String(body.country || '').trim().slice(0, 100);
+      const region = String(body.region || '').trim().slice(0, 100);
       const city = String(body.city || '').trim().slice(0, 100);
       const industry = String(body.industry || '').trim().slice(0, 100);
       if (!industry) return NextResponse.json({ error: 'Choose a business category.' }, { status: 400 });
       const apiKey = process.env.GOOGLE_PLACES_API_KEY;
       if (!apiKey) return NextResponse.json({ error: 'HUNT needs a Google Places API key. Add GOOGLE_PLACES_API_KEY to the MifiTech Vercel project environment variables, enable Places API (New), then redeploy.' }, { status: 503 });
-      const query = industry + ' businesses' + (city ? ' in ' + city : '') + (country ? ', ' + country : '');
+      const query = industry + ' businesses' + (city ? ' in ' + city : '') + (region ? ', ' + region : '') + (country ? ', ' + country : '');
       const fieldMask = 'places.id,places.displayName,places.formattedAddress,places.nationalPhoneNumber,places.internationalPhoneNumber,places.types,places.websiteUri,places.googleMapsUri,places.businessStatus,places.rating,places.editorialSummary,nextPageToken';
       const allPlaces: any[] = [];
       let pageToken = '';
@@ -162,14 +163,14 @@ export async function POST(req: Request, ctx: Ctx) {
         const actualCountry = country || address.split(',').map((x: string) => x.trim()).filter(Boolean).slice(-1)[0] || 'Unspecified';
         const draft = huntDraft(name, industry, city, actualCountry);
         const contact = await findPublicEmail(name, address);
-        return { id: String(place.id), googlePlaceId: String(place.id), batchId, name, address, country: actualCountry, city, industry, phone, email: contact.email, emailSourceUrl: contact.emailSourceUrl, description, mapsUrl: String(place.googleMapsUri || ''), websiteStatus: 'not_found', subject: draft.subject, draft: draft.draft, status: 'new', createdAt: new Date().toISOString(), rating: place.rating || null };
+        return { id: String(place.id), googlePlaceId: String(place.id), batchId, name, address, country: actualCountry, region, city, industry, phone, email: contact.email, emailSourceUrl: contact.emailSourceUrl, description, mapsUrl: String(place.googleMapsUri || ''), websiteStatus: 'not_found', subject: draft.subject, draft: draft.draft, status: 'new', createdAt: new Date().toISOString(), rating: place.rating || null };
         }));
         prospects.push(...group);
       }
       for (const prospect of prospects) await saveHuntRow(prospect.id, prospect);
       await db('site_settings?on_conflict=key', {
         method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
-        body: JSON.stringify({ key: 'hunt_batch_' + batchId, value: { id: batchId, country, city, industry, count: prospects.length, createdAt: new Date().toISOString() }, updated_at: new Date().toISOString() }),
+        body: JSON.stringify({ key: 'hunt_batch_' + batchId, value: { id: batchId, country, region, city, industry, count: prospects.length, createdAt: new Date().toISOString() }, updated_at: new Date().toISOString() }),
       });
       return NextResponse.json({ batchId, prospects });
     }
