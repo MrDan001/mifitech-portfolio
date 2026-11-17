@@ -37,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return {
       url: root + path,
       ...(post ? { lastModified: new Date(post.updatedAt + 'T12:00:00Z') } : {}),
-      changeFrequency: path === '' ? 'weekly' : post ? 'monthly' : 'monthly',
+      changeFrequency: path === '' ? 'weekly' : 'monthly',
       priority: path === '' ? 1 : path === '/blog' ? 0.85 : post ? 0.75 : path === '/about' ? 0.85 : path === '/how-to-build-a-website-in-nigeria' ? 0.9 : solutionPaths.includes(path) ? 0.8 : 0.7,
     };
   });
