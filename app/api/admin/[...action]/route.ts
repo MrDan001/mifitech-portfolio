@@ -31,8 +31,8 @@ async function findPublicEmail(name: string, address: string) {
   const data = await response.json().catch(() => ({}));
   for (const item of data.items || []) {
     const text = [item.title, item.snippet, ...(item.pagemap?.metatags || []).map((tag: any) => Object.values(tag).join(' '))].join(' ');
-    const match = text.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}/i);
-    if (match && !/example\\.(com|org)|wixsite\\.com/i.test(match[0])) return { email: match[0], emailSourceUrl: String(item.link || '') };
+    const match = text.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
+    if (match && !/example\.(com|org)|wixsite\.com/i.test(match[0])) return { email: match[0], emailSourceUrl: String(item.link || '') };
   }
   return { email: '', emailSourceUrl: '' };
 }
