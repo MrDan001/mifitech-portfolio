@@ -5,7 +5,7 @@ import { Empty, Icon } from './ui';
 
 type Prospect = {
   id: string; name: string; address: string; country: string; city: string; industry: string;
-  phone: string; email: string; description: string; mapsUrl: string; websiteStatus: string;
+  phone: string; email: string; emailSourceUrl?: string; description: string; mapsUrl: string; websiteStatus: string;
   subject: string; draft: string; status: string; batchId: string; createdAt: string;
 };
 
