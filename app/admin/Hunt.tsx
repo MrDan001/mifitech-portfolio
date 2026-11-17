@@ -27,10 +27,16 @@ export default function Hunt() {
   const [expanded,setExpanded]=useState<string|null>(null);
 
   const loadHistory=useCallback(async()=>{
-    const r=await fetch('/api/admin/hunt/prospects'); const d=await r.json();
-    if(r.ok){const rows=d.prospects||[];setHistory(rows);setProspects(rows);if(rows[0]?.batchId)setActiveBatch(rows[0].batchId);}
-  }
-  useEffect(()=>{loadHistory().catch(()=>setMessage('Could not load HUNT history.'));},[]);
+    const r=await fetch('/api/admin/hunt/prospects');
+    const d=await r.json();
+    if(r.ok){
+      const rows=d.prospects||[];
+      setHistory(rows);
+      setProspects(rows);
+      if(rows[0]?.batchId)setActiveBatch(rows[0].batchId);
+    }
+  },[]);
+  useEffect(()=>{loadHistory().catch(()=>setMessage('Could not load HUNT history.'));},[loadHistory]);
 
   const current = useMemo(()=>prospects.filter(p=>!activeBatch||p.batchId===activeBatch),[prospects,activeBatch]);
   const completed = current.length>0 && current.every(p=>['sent','whatsapp_sent','skipped'].includes(p.status));
