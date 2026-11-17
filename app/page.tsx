@@ -50,24 +50,6 @@ export default async function Home() {
   return (
     <div className={'mh ' + display.variable + ' ' + body.variable}>
       <div className="mh-dark">
-        <header className="mh-header">
-          <div className="mh-wrap">
-            <Link className="mh-logo" href="/" aria-label="MifiTech home"><img src="/brand/logo-b-horizontal-dark.svg" alt="MifiTech" width={260} height={56} /></Link>
-            <nav className="mh-nav" aria-label="Main navigation">
-              {content.navigation.map((item, index) => <Link key={item.label + index} href={item.href}>{item.label}</Link>)}
-            </nav>
-            <div className="mh-header-actions">
-              <a className="mh-btn mh-btn-lime" href="#contact">Start a project</a>
-              <details className="mh-menu">
-                <summary>Menu</summary>
-                <div>
-                  {content.navigation.map((item, index) => <Link key={item.label + index} href={item.href}>{item.label}</Link>)}
-                  <a href="#contact">Start a project</a>
-                </div>
-              </details>
-            </div>
-          </div>
-        </header>
 
         <section className="mh-hero">
           <div className="mh-wrap">
