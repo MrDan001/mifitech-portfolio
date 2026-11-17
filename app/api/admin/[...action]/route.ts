@@ -348,7 +348,7 @@ export async function PATCH(req: Request, ctx: Ctx) {
       const next = { ...current };
       if (body.email !== undefined) {
         const email = String(body.email || '').trim();
-        if (email && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) return NextResponse.json({ error: 'Enter a valid email address.' }, { status: 400 });
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return NextResponse.json({ error: 'Enter a valid email address.' }, { status: 400 });
         next.email = email;
       }
       if (body.subject !== undefined) next.subject = String(body.subject || '').slice(0, 180);
