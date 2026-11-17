@@ -6,7 +6,7 @@ import { SITE_URL } from '@/lib/contact';
 
 export const metadata: Metadata = {
   title: 'Wonders | Ideas for a Smarter Digital World',
-  description: 'Explore practical ideas, thoughtful perspectives and expert guides on web design, e-commerce, software, technology and growing a business online. The MifiTech editorial journal.',
+  description: 'Practical guides on web design, e-commerce, software and digital growth for businesses building online.',
   alternates: { canonical: '/blog', types: { 'application/rss+xml': '/blog/feed.xml' } },
   openGraph: {
     title: 'Wonders by MifiTech — Ideas for a Smarter Digital World',
