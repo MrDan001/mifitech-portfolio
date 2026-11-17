@@ -51,7 +51,7 @@ export default function Hunt() {
       .then(data=>{
         if(data.error)throw new Error(data.msg||'Country list is temporarily unavailable.');
         const names=(Array.isArray(data.data)?data.data:[]).map((item:any)=>String(item.name||'').trim()).filter(Boolean);
-        if(active)setCountries([...new Set(names)].sort((a,b)=>a.localeCompare(b)));
+        if(active)setCountries([...new Set<string>(names)].sort((a,b)=>a.localeCompare(b)));
       })
       .catch(error=>{if(active)setLocationError(error instanceof Error?error.message:'Could not load location options.');});
     return ()=>{active=false;};
@@ -67,7 +67,7 @@ export default function Hunt() {
       .then(data=>{
         if(data.error)throw new Error(data.msg||'No state or region list is available for this country.');
         const rows=Array.isArray(data.data?.states)?data.data.states:[];
-        if(active)setRegions([...new Set(rows.map((item:any)=>String(item.name||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b)));
+        if(active)setRegions([...new Set<string>(rows.map((item:any):string=>String(item.name||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b)));
       })
       .catch(error=>{if(active)setLocationError(error instanceof Error?error.message:'Could not load states or regions.');})
       .finally(()=>{if(active)setLocationLoading(false);});
@@ -85,7 +85,7 @@ export default function Hunt() {
         if(data.error)throw new Error(data.msg||'No city list is available for this region.');
         const rows=Array.isArray(data.data)?data.data:[];
         const names=rows.map((item:any)=>String(typeof item==='string'?item:item.name||'').trim()).filter(Boolean);
-        if(active)setCities([...new Set(names)].sort((a,b)=>a.localeCompare(b)));
+        if(active)setCities([...new Set<string>(names)].sort((a,b)=>a.localeCompare(b)));
       })
       .catch(error=>{if(active)setLocationError(error instanceof Error?error.message:'Could not load cities.');})
       .finally(()=>{if(active)setLocationLoading(false);});
