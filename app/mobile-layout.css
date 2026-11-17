@@ -1,0 +1,28 @@
+/* Shared page-width and mobile safe-gutter correction.
+   Several legacy pages use .wrap without the newer .case.wrap selector.
+   Keep readable space between the viewport edge and every page's text. */
+.wrap {
+  width: min(1160px, calc(100% - 48px));
+  max-width: 100%;
+  min-width: 0;
+  margin-inline: auto;
+}
+.wrap > * {
+  min-width: 0;
+}
+@media (max-width: 760px) {
+  .wrap {
+    width: calc(100% - 36px);
+  }
+}
+@media (max-width: 390px) {
+  .wrap {
+    width: calc(100% - 32px);
+  }
+}
+
+/* The public profile card was intended for founder-led promotion.
+   Keep personal profile imagery/details out of the company-facing homepage. */
+.mh #studio-profile {
+  display: none !important;
+}
