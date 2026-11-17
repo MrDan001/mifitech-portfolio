@@ -4,6 +4,7 @@ import { SITE_URL } from '@/lib/contact';
 import { getSiteContent } from '@/lib/site-content';
 import FloatingMenu from './components/FloatingMenu';
 import './globals.css';
+import './mobile-layout.css';
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSeo();
@@ -13,9 +14,8 @@ export async function generateMetadata(): Promise<Metadata> {
     description: String(seo.description),
     applicationName: 'MifiTech',
     keywords: Array.isArray(seo.keywords) ? seo.keywords.map(String) : [],
-    openGraph: { title: String(seo.ogTitle), description: String(seo.ogDescription), siteName: 'MifiTech', type: 'website', images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'MifiTech portfolio: Ludo Live, eHealthcare, Garrison Market and The Africa Plug' }] },
+    openGraph: { title: String(seo.ogTitle), description: String(seo.ogDescription), siteName: 'MifiTech', type: 'website', images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'MifiTech digital products and services' }] },
     twitter: { card: 'summary_large_image', title: String(seo.ogTitle), description: String(seo.ogDescription), images: ['/og-image.jpg'] },
-    // Use the compact, square MifiTech brand mark as the primary crawlable favicon.
     icons: {
       icon: [
         { url: '/favicon.svg?v=2', type: 'image/svg+xml', sizes: 'any' },
