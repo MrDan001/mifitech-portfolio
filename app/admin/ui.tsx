@@ -17,6 +17,8 @@ const ICONS: Record<string, string> = {
   mail: 'M3 6h18v12H3zM3 7l9 7 9-7',
   check: 'M5 12l5 5 9-10',
   menu: 'M4 7h16M4 12h16M4 17h16',
+  bell: 'M18 8a6 6 0 00-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4',
+  more: 'M5 12h.01M12 12h.01M19 12h.01',
   up: 'M12 19V5M6 11l6-6 6 6',
   down: 'M12 5v14M6 13l6 6 6-6',
   chev: 'M6 9l6 6 6-6',
