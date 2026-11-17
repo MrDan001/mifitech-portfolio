@@ -147,7 +147,7 @@ export async function generateMetadata({ params }: { params: Promise<{ industry:
   const page = solutions[industry];
   if (!page) return { title: 'Industry website solutions | MifiTech' };
   return {
-    title: page.title,
+    title: industry === 'ecommerce' ? 'Online Store Solutions for Businesses' : page.title,
     description: page.description,
     alternates: { canonical: '/solutions/' + industry },
     openGraph: { title: page.title + ' | MifiTech', description: page.description, type: 'website' },
