@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Empty, Icon } from './ui';
 
 type Prospect = {
@@ -25,6 +25,7 @@ export default function Hunt() {
   const [activeBatch,setActiveBatch]=useState('');
   const [drafts,setDrafts]=useState<Record<string,{email:string;subject:string;draft:string}>>({});
   const [expanded,setExpanded]=useState<string|null>(null);
+  const autoNext=useRef(false);
 
   const loadHistory=useCallback(async()=>{
     const r=await fetch('/api/admin/hunt/prospects');
@@ -42,7 +43,7 @@ export default function Hunt() {
   const completed = current.length>0 && current.every(p=>['sent','whatsapp_sent','skipped'].includes(p.status));
   const stats = useMemo(()=>({sent:history.filter(p=>p.status==='sent').length,contacted:history.filter(p=>['sent','whatsapp_sent'].includes(p.status)).length,available:current.length}),[history,current]);
 
-  async function findBatch(){
+  const findBatch=useCallback(async()=>{
     setLoading(true);setMessage('');
     try{
       const r=await fetch('/api/admin/hunt/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({country,city,industry:industry==='Other'?customIndustry:industry,limit:15})});
@@ -54,7 +55,12 @@ export default function Hunt() {
       await loadHistory();
     }catch(e){setMessage(e instanceof Error?e.message:'Search failed.');}
     finally{setLoading(false);}
-  }
+  },[country,city,industry,customIndustry,loadHistory]);
+
+  useEffect(()=>{
+    if(completed&&!loading&&!autoNext.current){autoNext.current=true;void findBatch();}
+    if(!completed)autoNext.current=false;
+  },[completed,loading,findBatch]);
 
   async function saveContact(p:Prospect){
     const draft=drafts[p.id]||{email:p.email,subject:p.subject,draft:p.draft};
@@ -105,7 +111,7 @@ export default function Hunt() {
       </div>
       <div className="ad-row" style={{marginTop:16}}>
         <button className="ad-btn lime" onClick={findBatch} disabled={loading||(industry==='Other'&&!customIndustry.trim())}><Icon n="search"/>{loading?'Searching public listings…':'Find 15 businesses'}</button>
-        <span className="ad-hint">No emails are sent during discovery.</span>
+        <span className="ad-hint">No emails are sent during discovery. The next batch is prepared automatically after this one is processed.</span>
       </div>
       {message&&<p className="ad-sub" role="status" style={{marginTop:12}}>{message}</p>}
     </section>
@@ -115,7 +121,7 @@ export default function Hunt() {
       <div className="ad-kpi"><b>{stats.sent}</b><span>Emails sent</span></div>
       <div className="ad-kpi"><b>{history.length}</b><span>Saved prospects</span></div>
     </div>
-    <div className="ad-row ad-between"><div><h2>Prospect list</h2><p className="ad-sub">Check the evidence, add a verified email if available, then send individually.</p></div>{completed&&<button className="ad-btn lime" onClick={findBatch} disabled={loading}>{loading?'Finding…':'Load next 15'}</button>}</div>
+    <div className="ad-row ad-between"><div><h2>Prospect list</h2><p className="ad-sub">Check the evidence, add a verified email if available, then send individually.</p></div>{completed&&<span className="ad-hint">Preparing your next batch…</span>}</div>
     {current.length?current.map(p=>{
       const d=drafts[p.id]||{email:p.email||'',subject:p.subject||'',draft:p.draft||''};
       const open=expanded===p.id;
