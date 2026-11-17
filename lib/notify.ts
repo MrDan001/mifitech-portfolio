@@ -2,7 +2,7 @@
 // Transactional email and optional owner-alert channels.
 import { CONTACT_EMAIL, SITE_URL } from './contact';
 
-export type Alert = { title: string; lines: string[]; path?: string };
+export type Alert = { title: string; lines: string[]; path?: string; replyTo?: string };
 const env = (key: string) => (process.env[key] || '').trim();
 const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (char) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
@@ -37,7 +37,7 @@ export async function notifyOwner(alert: Alert): Promise<boolean> {
     body: JSON.stringify({
       from: env('EMAIL_FROM') || env('ALERT_EMAIL_FROM') || 'MifiTech <hello@mifitech.top>',
       to: [env('ALERT_EMAIL_TO') || CONTACT_EMAIL],
-      reply_to: env('CONTACT_REPLY_TO') || CONTACT_EMAIL,
+      reply_to: alert.replyTo || env('CONTACT_REPLY_TO') || CONTACT_EMAIL,
       subject: alert.title,
       text,
       html,
