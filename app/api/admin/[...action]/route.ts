@@ -111,10 +111,10 @@ export async function POST(req: Request, ctx: Ctx) {
       const country = String(body.country || '').trim().slice(0, 100);
       const city = String(body.city || '').trim().slice(0, 100);
       const industry = String(body.industry || '').trim().slice(0, 100);
-      if (!country || !industry) return NextResponse.json({ error: 'Choose a country and business category.' }, { status: 400 });
+      if (!industry) return NextResponse.json({ error: 'Choose a business category.' }, { status: 400 });
       const apiKey = process.env.GOOGLE_PLACES_API_KEY;
       if (!apiKey) return NextResponse.json({ error: 'HUNT needs a Google Places API key. Add GOOGLE_PLACES_API_KEY to the MifiTech Vercel project environment variables, enable Places API (New), then redeploy.' }, { status: 503 });
-      const query = industry + ' businesses' + (city ? ' in ' + city + ',' : ' in') + ' ' + country;
+      const query = industry + ' businesses' + (city ? ' in ' + city : '') + (country ? ', ' + country : '');
       const response = await fetch('https://places.googleapis.com/v1/places:searchText', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-Goog-Api-Key': apiKey, 'X-Goog-FieldMask': 'places.id,places.displayName,places.formattedAddress,places.nationalPhoneNumber,places.internationalPhoneNumber,places.types,places.websiteUri,places.googleMapsUri,places.businessStatus,places.rating,places.editorialSummary' },
