@@ -102,7 +102,7 @@ export default async function PrivateConceptPage({ params }: { params: Promise<{
         .pc-brand{font-weight:800;letter-spacing:.12em;font-size:17px}.pc-brand span{display:block;font-size:9px;font-weight:500;letter-spacing:.2em;color:#78827d;margin-top:5px}
         .pc-nav a,.pc-cta a{color:inherit;text-decoration:none}.pc-pill{display:inline-block;border:1px solid #a9b2ab;border-radius:30px;padding:12px 18px;font-size:13px}
         .pc-hero{position:relative;min-height:560px;display:flex;align-items:center;color:white;background:#1b2725;overflow:hidden}
-        .pc-hero:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,24,22,.92),rgba(13,24,22,.68) 54%,rgba(13,24,22,.2)),url(var(--hero)) center/cover}
+        .pc-hero:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,24,22,.92),rgba(13,24,22,.68) 54%,rgba(13,24,22,.2)),var(--hero) center/cover}
         .pc-hero-inner{position:relative;padding:90px 0;max-width:760px}.pc-kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:700}
         .pc-hero h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(42px,6vw,76px);line-height:1.02;letter-spacing:-.04em;margin:22px 0}
         .pc-hero p{font-size:18px;line-height:1.7;color:#e0e6e1;max-width:630px}.pc-button{display:inline-block;background:var(--accent);color:#14201e!important;text-decoration:none;padding:15px 22px;border-radius:3px;font-weight:700;font-size:13px;margin:18px 10px 0 0}
