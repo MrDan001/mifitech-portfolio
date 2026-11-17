@@ -5,7 +5,7 @@ A Next.js portfolio and client-acquisition website for MifiTech.
 ## Website features
 
 - Responsive agency homepage with editable content sections.
-- Admin workspace at `/admin` for editing homepage copy, navigation, service cards, demo cards, portfolio projects, live website links, SEO settings, enquiries and proposals.
+- Admin workspace at `/admin` for editing homepage copy, navigation, service cards, demo cards, portfolio projects, live website links, SEO settings, enquiries, proposals and HUNT business prospecting.
 - Portfolio projects and live website links are managed separately. By default, only Garrison Market has a live website button: `https://gmstock.co`.
 - Fifteen industry website concept previews:
   - `/demos/restaurant`
@@ -47,6 +47,12 @@ Use a **dedicated Supabase project for this portfolio**. Do not reuse a database
 5. Open `/admin` and sign in.
 
 A legacy `SUPABASE_SERVICE_ROLE_KEY` can be used instead of `SUPABASE_SECRET_KEY`, but it must remain server-only. The public website uses safe defaults until the CMS database is connected and content is saved.
+
+## HUNT business prospecting
+
+The HUNT tab in `/admin` searches Google Business listings globally or within a selected country/city and industry. It creates batches of up to 15 businesses whose Google listing does not show a website link, automatically prepares the next batch once every current prospect is contacted or skipped, stores campaign history in the existing `site_settings` table, and prevents the same Google Place ID from being added twice. It shows public phone numbers and listing details when available, creates an individual email draft, and opens WhatsApp with a prefilled message. WhatsApp messages are never sent automatically; the operator must press Send in WhatsApp and then mark the prospect as contacted. Email is sent one recipient at a time through the existing Resend configuration after a confirmation prompt.
+
+**Important:** A missing website link on a Google listing is a research signal, not proof that a business has no website. Review the listing and any available public contact details before outreach. Google Places does not supply business email addresses; add a verified public email address in the prospect card before using Send email. The search feature requires `GOOGLE_PLACES_API_KEY` in Vercel, with Places API (New) enabled and billing configured. Optional public email discovery uses `GOOGLE_CSE_API_KEY` and `GOOGLE_CSE_CX` from a Google Programmable Search Engine; it only fills an address when it appears in a public result and links the source for review. Without those optional keys, add a verified public email manually. All keys remain server-side.
 
 ## Admin content management
 
