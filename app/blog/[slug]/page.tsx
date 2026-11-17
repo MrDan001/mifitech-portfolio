@@ -22,7 +22,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!post) return { title: 'Article not found | MifiTech', robots: { index: false, follow: false } };
   const image = articleImages[post.slug];
   return {
-    title: post.title,
+    title: post.slug === 'how-to-prepare-for-an-ecommerce-website-in-nigeria'
+      ? 'Prepare for an E-commerce Website'
+      : post.slug === 'what-your-business-website-needs-to-win-customers'
+        ? 'What a Business Website Needs to Win'
+        : post.title,
     description: post.description,
     alternates: { canonical: '/blog/' + post.slug },
     openGraph: {
