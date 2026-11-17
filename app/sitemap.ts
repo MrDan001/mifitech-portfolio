@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const content = await getSiteContent();
-  const root = SITE_URL.replace(/\\/$/, '');
+  const root = SITE_URL;
   const projectPaths = content.projects
     .filter((project) => project.visible !== false)
     .map((project) => projectPath(project.slug));
