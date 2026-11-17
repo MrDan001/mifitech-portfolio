@@ -36,9 +36,6 @@ export default function PrivacyPage() {
         <h2>Security</h2>
         <p>Reasonable technical and organisational measures are used to protect the website and its enquiry records. No internet transmission or storage system can be guaranteed to be completely secure.</p>
 
-        <h2>Admin access</h2>
-        <p>The private administration area uses a protected, HTTP-only session cookie to keep an authorised administrator signed in. This cookie is separate from the public project enquiry form.</p>
-
         <h2>Changes to this policy</h2>
         <p>This policy may be updated when the website or its service providers change. The latest version will be published on this page.</p>
 
