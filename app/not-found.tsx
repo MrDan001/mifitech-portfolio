@@ -68,7 +68,7 @@ export default async function NotFound() {
           <div>
             <Link href="/privacy">Privacy policy</Link>
             <Link href="/#contact">Contact</Link>
-            <a href="#top" onClick={(event) => { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Back to top ↑</a>
+            <a href="/">Back to top ↑</a>
           </div>
         </div>
       </footer>
