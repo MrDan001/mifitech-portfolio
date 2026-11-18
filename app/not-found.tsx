@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { getSiteContent } from '@/lib/site-content';
 
 export const metadata: Metadata = {
   title: 'Page not found',
@@ -7,8 +8,11 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-export default function NotFound() {
+export default async function NotFound() {
+  const content = await getSiteContent();
+
   return (
+    <div className="mf-not-found-page">
     <main className="mf-not-found">
       <div className="mf-not-found-inner">
         <Link href="/" className="mf-not-found-brand" aria-label="MifiTech home">
@@ -38,5 +42,34 @@ export default function NotFound() {
         @media(prefers-reduced-motion:reduce){.mf-not-found-home{transition:none}}
       `}</style>
     </main>
+    <footer className="mf-site-footer">
+      <div className="mf-site-footer-inner">
+        <span className="mf-site-footer-brand">
+          <img src="/brand/logo-b-mark.svg" alt="" width={24} height={24} />
+          © {new Date().getFullYear()} MifiTech. {content.footer.tagline}
+        </span>
+        <nav aria-label="Footer navigation">
+          {content.navigation.slice(0, 3).map((item, index) => (
+            <Link key={item.label + index} href={item.href}>{item.label}</Link>
+          ))}
+          <Link href="/about">About MifiTech</Link>
+          <Link href="/privacy">Privacy</Link>
+        </nav>
+      </div>
+    </footer>
+    <style>{`
+      .mf-not-found-page{min-height:100svh;display:flex;flex-direction:column;background:#111b1d}
+      .mf-not-found{flex:1;min-height:calc(100svh - 92px)}
+      .mf-site-footer{padding:28px 22px;border-top:1px solid #344345;background:#111b1d;color:#82918d;font-family:Arial,Helvetica,sans-serif;font-size:13px}
+      .mf-site-footer-inner{width:min(100%,1120px);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+      .mf-site-footer-brand{display:inline-flex;align-items:center;gap:10px;line-height:1.6}
+      .mf-site-footer-brand img{display:block;flex:0 0 24px}
+      .mf-site-footer nav{display:flex;align-items:center;flex-wrap:wrap;gap:18px}
+      .mf-site-footer a{color:#b6c3c0;text-decoration:none;transition:color .2s ease}
+      .mf-site-footer a:hover{color:#c7f36b}
+      @media(max-width:600px){.mf-site-footer-inner{align-items:flex-start;flex-direction:column}.mf-site-footer nav{gap:14px}}
+      @media(prefers-reduced-motion:reduce){.mf-site-footer a{transition:none}}
+    `}</style>
+    </div>
   );
 }
