@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import './salon.css';
+import SalonMobileNav from './MobileNav';
 
 export const metadata = {
   title: 'Unisex Salon Website Demo | MifiTech',
@@ -35,6 +36,7 @@ export default function UnisexSalonDemo() {
       <section className="salonVisit" id="visit"><div><span>COME THROUGH</span><h2>Find us. Get comfortable.</h2><p>Location, opening hours and contact information can be updated for the real salon.</p></div><div className="salonVisitDetails"><p><b>LOCATION</b><br/>Your salon address goes here</p><p><b>OPENING HOURS</b><br/>Monday – Saturday · 9am – 7pm<br/>Sunday · By appointment</p><p><b>CONTACT</b><br/>WhatsApp appointment requests</p></div></section>
       <footer className="salonFooter"><a className="salonLogo" href="#home"><span className="salonMark">✂</span><span>THE CHAIR<small>HAIR STUDIO</small></span></a><p>Good hair. Good energy.</p><a href={whatsapp}>WhatsApp ↗</a></footer>
       <div className="salonDemoBottom"><Link href="/demos">← Back to website demos</Link><span>Built as a MifiTech concept</span></div>
+    <SalonMobileNav whatsapp={whatsapp} />
     </main>
   );
 }
