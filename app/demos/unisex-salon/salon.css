@@ -30,3 +30,23 @@
  .salonMobileAppNav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:50;justify-content:space-around;align-items:center;padding:10px 5% calc(10px + env(safe-area-inset-bottom));background:rgba(20,19,18,.96);border-top:1px solid #393633;backdrop-filter:blur(18px);box-shadow:0 -8px 30px rgba(0,0,0,.2)}
  .salonMobileAppNav a{display:flex;flex:1;align-items:center;justify-content:center;flex-direction:column;gap:4px;color:#b9b2a7;font-size:19px;min-width:0}.salonMobileAppNav small{font-size:9px;letter-spacing:.04em;color:#aaa39a}.salonMobileAppNav .salonMobileBook{color:var(--sg)}.salonMobileAppNav .salonMobileBook small{color:var(--sg)}
 }
+
+/* Final visual polish: restrained buttons, clean navigation and resilient imagery */
+.salonBook,.salonGoldBtn{display:inline-flex;align-items:center;justify-content:center;background:transparent!important;color:var(--sw)!important;border:1px solid #a98950;padding:13px 18px;border-radius:2px;font-size:11px;font-weight:500;letter-spacing:.025em;text-transform:none;box-shadow:none;transition:background .2s ease,border-color .2s ease,color .2s ease}
+.salonBook:hover,.salonGoldBtn:hover{background:#d5b06a!important;border-color:#d5b06a;color:#151310!important}
+.salonTextLink{font-size:12px;color:#d5b06a;text-decoration:underline!important;text-underline-offset:5px}
+.salonPhoto{background:#211f1c}.salonPhoto img{display:block;background:#211f1c}
+.salonHeroImage>img,.salonBookingImage img{background:#211f1c}
+.salonDemo a{transition:color .2s ease}
+.salonDemoBottom a{color:#c8b58f}
+@media(max-width:650px){
+ .salonBook,.salonGoldBtn{border-radius:2px;padding:12px 16px;font-size:11px;letter-spacing:0}
+ .salonMobileAppNav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:50;justify-content:space-around;align-items:stretch;gap:0;padding:0 3% calc(5px + env(safe-area-inset-bottom));background:#11100f;border-top:1px solid #34302a;backdrop-filter:none;box-shadow:none}
+ .salonMobileAppNav a{position:relative;display:flex;flex:1;align-items:center;justify-content:center;flex-direction:row;gap:0;color:#aaa39a;font-size:11px;min-width:0;min-height:54px;text-decoration:none!important}
+ .salonMobileAppNav a.isActive{color:#e3c58c}
+ .salonMobileAppNav a.isActive:before{content:"";position:absolute;top:0;left:27%;right:27%;height:2px;background:#c9a76b}
+ .salonMobileAppNav .salonMobileBook{color:#e3c58c;font-weight:600}
+ .salonMobileAppNav .salonMobileBook:before{content:"";position:absolute;top:0;left:27%;right:27%;height:2px;background:#c9a76b}
+ .salonHeroActions{align-items:flex-start}
+ .salonTextLink{padding:12px 0}
+}
