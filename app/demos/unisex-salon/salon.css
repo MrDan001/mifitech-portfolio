@@ -50,3 +50,61 @@
  .salonHeroActions{align-items:flex-start}
  .salonTextLink{padding:12px 0}
 }
+
+
+/* Mobile app controls: tactile pill buttons and a compact app-style dock */
+@media(max-width:650px){
+  .salonDemo .salonBook,
+  .salonDemo .salonGoldBtn{
+    min-height:48px;
+    padding:0 22px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border:0!important;
+    border-radius:999px!important;
+    background:#d5b06a!important;
+    color:#17140f!important;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0;
+    box-shadow:0 5px 14px rgba(213,176,106,.18);
+    -webkit-tap-highlight-color:transparent;
+  }
+  .salonDemo .salonBook:active,
+  .salonDemo .salonGoldBtn:active{transform:scale(.97)}
+  .salonDemo .salonHeroActions{gap:12px;align-items:center}
+  .salonDemo .salonTextLink{
+    min-height:46px;padding:0 8px;display:inline-flex;align-items:center;
+    text-decoration:none!important;font-size:12px
+  }
+  .salonDemo .salonMobileAppNav{
+    min-height:76px;
+    display:flex;align-items:center;justify-content:space-around;gap:5px;
+    padding:8px 10px calc(8px + env(safe-area-inset-bottom));
+    background:rgba(20,19,18,.98);
+    border-top:1px solid #38332b;
+    box-shadow:0 -8px 24px rgba(0,0,0,.24);
+  }
+  .salonDemo .salonMobileAppNav a{
+    min-height:46px;flex:1;max-width:76px;
+    display:flex;align-items:center;justify-content:center;
+    padding:0 7px;border-radius:16px;
+    color:#bcb5a9;font-size:11px;font-weight:600;
+    background:transparent;
+    transition:background .18s ease,color .18s ease,transform .18s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .salonDemo .salonMobileAppNav a.isActive{
+    color:#f0d7a6;background:rgba(213,176,106,.14);
+  }
+  .salonDemo .salonMobileAppNav a.isActive:before,
+  .salonDemo .salonMobileAppNav .salonMobileBook:before{display:none}
+  .salonDemo .salonMobileAppNav a:active{transform:scale(.95)}
+  .salonDemo .salonMobileAppNav .salonMobileBook{
+    max-width:84px;min-height:46px;
+    margin-left:2px;border-radius:999px;
+    background:#d5b06a;color:#17140f;
+    font-weight:700;box-shadow:0 4px 12px rgba(213,176,106,.2);
+  }
+}
