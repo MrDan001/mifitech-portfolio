@@ -1,6 +1,12 @@
 import Link from 'next/link';
+import type { Viewport } from 'next';
 import './salon.css';
 import SalonMobileNav from './MobileNav';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
 
 export const metadata = {
   title: 'Unisex Salon Website Demo | MifiTech',
