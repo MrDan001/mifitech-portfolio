@@ -10,8 +10,8 @@ const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (char) => ({
 function buttonFor(url: string): { label: string; color: string } {
   try {
     const host = new URL(url).hostname.replace(/^www\./, '');
-    if (host === 'wa.me' || host.endsWith('whatsapp.com')) return { label: 'Chat on WhatsApp', color: '#1fa855' };
-    if (host === 'mifitech.top') return { label: 'Visit our website', color: '#0b5fff' };
+    if (host === 'wa.me' || host.endsWith('whatsapp.com')) return { label: 'Chat with Us on WhatsApp', color: '#25D366' };
+    if (host === 'mifitech.top') return { label: 'Visit MifiTech Website', color: '#0b5fff' };
     return { label: host, color: '#0b5fff' };
   } catch {
     return { label: url, color: '#0b5fff' };
