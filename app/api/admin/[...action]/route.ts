@@ -51,8 +51,8 @@ function huntDraft(name: string, industry: string, city: string, country: string
     'Daniel',
     'MifiTech',
     '',
-    'Visit our website: https://www.mifitech.top',
-    'Chat on WhatsApp: https://wa.me/2349067859200',
+    'Visit MifiTech Website: https://mifitech.top',
+    'Chat with Us on WhatsApp: https://wa.me/2349067859200',
     '',
     "If this isn't relevant, just tell me and I won't follow up."
   ].join('\n');
