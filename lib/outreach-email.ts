@@ -20,7 +20,7 @@ function buttonFor(url: string): { label: string; color: string } {
 
 function button(url: string): string {
   const { label, color } = buttonFor(url);
-  return '<a href="' + escapeHtml(url) + '" style="display:inline-block;background:' + color + ';color:#ffffff;text-decoration:none;font-weight:bold;padding:11px 20px;border-radius:6px;margin:0 8px 8px 0">' + escapeHtml(label) + '</a>';
+  return '<a href="' + escapeHtml(url) + '" style="display:block;width:fit-content;background:' + color + ';color:#ffffff;text-decoration:none;font-weight:bold;padding:11px 20px;border-radius:6px;margin:0 0 10px 0">' + escapeHtml(label) + '</a>';
 }
 
 // Matches a line that is only a URL, optionally prefixed with "Label:".
@@ -41,9 +41,9 @@ export function draftToHtml(draft: string): string {
   const body = blocks.map((block) => {
     const lines = block.split('\n');
     const links = lines.map((line) => line.match(LINK_LINE)?.[1] || '');
-    // A block made only of link lines becomes a row of buttons.
+    // A block made only of link lines becomes vertically stacked buttons.
     if (lines.length && links.every(Boolean)) {
-      return '<p style="margin:18px 0">' + links.map(button).join('') + '</p>';
+      return '<div style="margin:18px 0">' + links.map(button).join('') + '</div>';
     }
     return '<p style="margin:0 0 14px">' + lines.map(linkify).join('<br/>') + '</p>';
   }).join('');
