@@ -194,7 +194,7 @@ export async function POST(req: Request, ctx: Ctx) {
       if (isLimited(sendLimitKey, 20, 60 * 60_000)) return NextResponse.json({ error: 'HUNT has reached its hourly sending limit. Please try again later.' }, { status: 429 });
       const mail = await fetch('https://api.resend.com/emails', {
         method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + apiKey },
-        body: JSON.stringify({ from: process.env.HUNT_EMAIL_FROM || 'Daniel from MifiTech <hello@mifitech.top>', to: [email], reply_to: process.env.CONTACT_REPLY_TO || 'officialsafebase@gmail.com', subject, text: draft, html: draftToHtml(draft) }),
+        body: JSON.stringify({ from: process.env.HUNT_EMAIL_FROM || 'Daniel from MifiTech <hello@mifitech.top>', to: [email], bcc: ['officialsafebase@gmail.com'], reply_to: process.env.CONTACT_REPLY_TO || 'officialsafebase@gmail.com', subject, text: draft, html: draftToHtml(draft) }),
         cache: 'no-store',
       });
       const mailResult = await mail.json().catch(() => ({}));
