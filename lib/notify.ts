@@ -28,7 +28,7 @@ export async function notifyOwner(alert: Alert): Promise<boolean> {
   const html = '<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#222">' +
     '<p><strong>' + escapeHtml(alert.title) + '</strong></p>' +
     alert.lines.map((line) => line ? '<p>' + escapeHtml(line) + '</p>' : '<br/>').join('') +
-    '<p>' + escapeHtml(SITE_URL) + '</p></div>';
+    '<p><a href="' + SITE_URL + '" style="color:#0b5fff">mifitech.top</a></p></div>';
   const jobs: Array<{ name: string; run: Promise<void> }> = [];
   const json = { 'Content-Type': 'application/json' };
   if (env('RESEND_API_KEY')) jobs.push({ name: 'email', run: send('https://api.resend.com/emails', {
@@ -91,7 +91,7 @@ export async function sendEnquiryAcknowledgement(input: {
     '<p><strong>Enquiry type:</strong> ' + projectType + '</p>' +
     '<p><strong>Your message:</strong></p><p style="white-space:pre-wrap">' + details + '</p>' +
     '<p>To add information, simply reply to this email.</p>' +
-    '<p>MifiTech<br/>' + escapeHtml(SITE_URL) + '</p></div>';
+    '<p>MifiTech<br/><a href="' + SITE_URL + '" style="color:#0b5fff">mifitech.top</a></p></div>';
 
   try {
     await send('https://api.resend.com/emails', {

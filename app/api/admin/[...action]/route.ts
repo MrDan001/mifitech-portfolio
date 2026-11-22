@@ -4,6 +4,7 @@ import { randomBytes, randomUUID } from 'node:crypto';
 import { db, deletePublicImage, isAdmin, listPublicImages, passwordOK, sessionValue, seoDefaults, uploadPublicImage } from '@/lib/backend';
 import { defaultSiteContent, getSiteContent, type SiteContent } from '@/lib/site-content';
 import { clear, clientIp, isLimited, record } from '@/lib/rate-limit';
+import { draftToHtml } from '@/lib/outreach-email';
 
 type Ctx = { params: Promise<{ action: string[] }> };
 const leadStatuses = ['new', 'interested', 'consultation', 'proposal_sent', 'awaiting_payment', 'converted', 'lost'];
@@ -191,7 +192,7 @@ export async function POST(req: Request, ctx: Ctx) {
       if (isLimited(sendLimitKey, 20, 60 * 60_000)) return NextResponse.json({ error: 'HUNT has reached its hourly sending limit. Please try again later.' }, { status: 429 });
       const mail = await fetch('https://api.resend.com/emails', {
         method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + apiKey },
-        body: JSON.stringify({ from: process.env.EMAIL_FROM || 'MifiTech <hello@mifitech.top>', to: [email], reply_to: process.env.CONTACT_REPLY_TO || 'officialsafebase@gmail.com', subject, text: draft }),
+        body: JSON.stringify({ from: process.env.EMAIL_FROM || 'MifiTech <hello@mifitech.top>', to: [email], reply_to: process.env.CONTACT_REPLY_TO || 'officialsafebase@gmail.com', subject, text: draft, html: draftToHtml(draft) }),
         cache: 'no-store',
       });
       const mailResult = await mail.json().catch(() => ({}));
