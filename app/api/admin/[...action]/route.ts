@@ -39,24 +39,22 @@ async function findPublicEmail(name: string, address: string) {
 }
 
 function huntDraft(name: string, industry: string, city: string, country: string) {
-  const first = name.split(/\s+/)[0] || 'there';
-  const subject = 'A website idea for ' + name;
+  const subject = 'Quick note for ' + name;
+  const place = city ? ' in ' + city : (country ? ' in ' + country : '');
   const draft = [
-    'Hello ' + first + ' team,',
+    'Hi,',
     '',
-    'I came across ' + name + ' while researching ' + industry.toLowerCase() + ' businesses' + (city ? ' in ' + city : '') + (country ? ', ' + country : '') + '. I noticed your public business listing does not show a dedicated website link. I may have missed one, but I thought it was worth reaching out.',
+    'I came across ' + name + ' while looking at ' + industry.toLowerCase() + ' businesses' + place + '. I did not see a website linked on your public listing, so I wanted to ask: do customers mostly find and contact you through WhatsApp and calls?',
     '',
-    'A clear, professional website could help people understand what you offer, see useful information about your business and contact you more easily. At MifiTech, we build websites and digital tools around how each business actually works.',
+    'I build simple websites for businesses like yours, and I have a few ideas that could help people find you and get in touch more easily. Happy to share them if useful.',
     '',
-    'If this is something you have considered, I would be happy to share a few practical ideas for your business. There is no obligation.',
-    '',
-    'Best regards,',
-    'Okechukwu Daniel Ernest',
+    'Daniel',
     'MifiTech',
-    'https://www.mifitech.top',
-    'WhatsApp: https://wa.me/2349067859200',
     '',
-    'If this is not relevant, just let me know and I will not follow up.'
+    'Visit our website: https://www.mifitech.top',
+    'Chat on WhatsApp: https://wa.me/2349067859200',
+    '',
+    "If this isn't relevant, just tell me and I won't follow up."
   ].join('\n');
   return { subject, draft };
 }
@@ -188,11 +186,15 @@ export async function POST(req: Request, ctx: Ctx) {
       if (prospect.status === 'sent') return NextResponse.json({ error: 'An email has already been sent to this prospect.' }, { status: 409 });
       const apiKey = process.env.RESEND_API_KEY;
       if (!apiKey) return NextResponse.json({ error: 'RESEND_API_KEY is not configured on the MifiTech Vercel project.' }, { status: 503 });
+      const dailyLimit = Math.max(1, Number(process.env.HUNT_DAILY_LIMIT) || 15);
+      const dayStart = new Date(); dayStart.setUTCHours(0, 0, 0, 0);
+      const sentToday = (await huntRows()).filter((row) => row.value?.status === 'sent' && row.value?.sentAt && new Date(row.value.sentAt) >= dayStart).length;
+      if (sentToday >= dailyLimit) return NextResponse.json({ error: 'Daily sending limit reached (' + dailyLimit + ' emails). Keep it low while the new domain builds a good name. Try again tomorrow.' }, { status: 429 });
       const sendLimitKey = 'hunt-send:' + clientIp(req);
       if (isLimited(sendLimitKey, 20, 60 * 60_000)) return NextResponse.json({ error: 'HUNT has reached its hourly sending limit. Please try again later.' }, { status: 429 });
       const mail = await fetch('https://api.resend.com/emails', {
         method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + apiKey },
-        body: JSON.stringify({ from: process.env.EMAIL_FROM || 'MifiTech <hello@mifitech.top>', to: [email], reply_to: process.env.CONTACT_REPLY_TO || 'officialsafebase@gmail.com', subject, text: draft, html: draftToHtml(draft) }),
+        body: JSON.stringify({ from: process.env.HUNT_EMAIL_FROM || 'Daniel from MifiTech <hello@mifitech.top>', to: [email], reply_to: process.env.CONTACT_REPLY_TO || 'officialsafebase@gmail.com', subject, text: draft, html: draftToHtml(draft) }),
         cache: 'no-store',
       });
       const mailResult = await mail.json().catch(() => ({}));
