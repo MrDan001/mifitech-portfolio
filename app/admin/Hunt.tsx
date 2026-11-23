@@ -126,12 +126,12 @@ export default function Hunt() {
   async function sendEmail(p:Prospect){
     const draft=drafts[p.id]||{email:p.email,subject:p.subject,draft:p.draft};
     if(!draft.email.trim()){setMessage('Add and save a verified public email address first.');return;}
-    if(!window.confirm('Send this personalised email to '+draft.email+'?'))return;
+    if(!window.confirm('Queue this personalised email to '+draft.email+'? HUNT sends emails a few minutes apart.'))return;
     setSending(p.id);setMessage('');
     try{
       const r=await fetch('/api/admin/hunt/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:p.id,...draft})});
       const d=await r.json();if(!r.ok)throw new Error(d.error||'Email could not be sent.');
-      setMessage('Email accepted by Resend for '+draft.email+'.');await loadHistory();
+      setMessage(d.scheduledFor?'Scheduled for '+new Date(d.scheduledFor).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})+' to '+draft.email+'. A copy will arrive in your inbox when it sends.':'Email accepted by Resend for '+draft.email+'.');await loadHistory();
     }catch(e){setMessage(e instanceof Error?e.message:'Email sending failed.');}
     finally{setSending(null);}
   }

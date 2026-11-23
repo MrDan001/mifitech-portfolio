@@ -5,6 +5,7 @@ import { db, deletePublicImage, isAdmin, listPublicImages, passwordOK, sessionVa
 import { defaultSiteContent, getSiteContent, type SiteContent } from '@/lib/site-content';
 import { clear, clientIp, isLimited, record } from '@/lib/rate-limit';
 import { draftToHtml } from '@/lib/outreach-email';
+import { alreadyEmailedViaResend, isDoNotEmail, normalizeEmail, reserveSendSlot } from '@/lib/hunt-guard';
 
 type Ctx = { params: Promise<{ action: string[] }> };
 const leadStatuses = ['new', 'interested', 'consultation', 'proposal_sent', 'awaiting_payment', 'converted', 'lost'];
@@ -186,22 +187,26 @@ export async function POST(req: Request, ctx: Ctx) {
       if (prospect.status === 'sent') return NextResponse.json({ error: 'An email has already been sent to this prospect.' }, { status: 409 });
       const apiKey = process.env.RESEND_API_KEY;
       if (!apiKey) return NextResponse.json({ error: 'RESEND_API_KEY is not configured on the MifiTech Vercel project.' }, { status: 503 });
-      const dailyLimit = Math.max(1, Number(process.env.HUNT_DAILY_LIMIT) || 15);
-      const dayStart = new Date(); dayStart.setUTCHours(0, 0, 0, 0);
-      const sentToday = (await huntRows()).filter((row) => row.value?.status === 'sent' && row.value?.sentAt && new Date(row.value.sentAt) >= dayStart).length;
-      if (sentToday >= dailyLimit) return NextResponse.json({ error: 'Daily sending limit reached (' + dailyLimit + ' emails). Keep it low while the new domain builds a good name. Try again tomorrow.' }, { status: 429 });
+      const wanted = normalizeEmail(email);
+      if (isDoNotEmail(email)) return NextResponse.json({ error: 'This address was already contacted or bounced before. HUNT will not email it again.' }, { status: 409 });
+      const earlier = (await huntRows()).find((row) => row.key !== HUNT_PREFIX + id && row.value?.status === 'sent' && normalizeEmail(String(row.value?.email || '')) === wanted);
+      if (earlier) return NextResponse.json({ error: 'This address was already emailed through HUNT (' + String(earlier.value?.name || 'another prospect') + ').' }, { status: 409 });
+      if (await alreadyEmailedViaResend(apiKey, email)) return NextResponse.json({ error: 'Resend already shows an email to this address. HUNT will not send a second one.' }, { status: 409 });
       const sendLimitKey = 'hunt-send:' + clientIp(req);
       if (isLimited(sendLimitKey, 20, 60 * 60_000)) return NextResponse.json({ error: 'HUNT has reached its hourly sending limit. Please try again later.' }, { status: 429 });
+      const dailyLimit = Math.max(1, Number(process.env.HUNT_DAILY_LIMIT) || 15);
+      const slot = await reserveSendSlot(dailyLimit);
+      if ('error' in slot) return NextResponse.json({ error: slot.error }, { status: slot.status });
       const mail = await fetch('https://api.resend.com/emails', {
-        method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + apiKey },
-        body: JSON.stringify({ from: process.env.HUNT_EMAIL_FROM || 'Daniel from MifiTech <hello@mifitech.top>', to: [email], bcc: ['officialsafebase@gmail.com'], reply_to: process.env.CONTACT_REPLY_TO || 'officialsafebase@gmail.com', subject, text: draft, html: draftToHtml(draft) }),
+        method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + apiKey, 'Idempotency-Key': 'hunt-send-' + id },
+        body: JSON.stringify({ from: process.env.HUNT_EMAIL_FROM || 'Daniel from MifiTech <hello@mifitech.top>', to: [email], bcc: [process.env.HUNT_BCC || 'officialsafebase@gmail.com'], reply_to: process.env.CONTACT_REPLY_TO || 'officialsafebase@gmail.com', subject, text: draft, html: draftToHtml(draft), scheduled_at: slot.at.toISOString() }),
         cache: 'no-store',
       });
       const mailResult = await mail.json().catch(() => ({}));
       if (!mail.ok) return NextResponse.json({ error: mailResult.message || mailResult.error?.message || 'Resend rejected this email.' }, { status: 502 });
       record(sendLimitKey, 60 * 60_000);
-      await saveHuntRow(id, { ...prospect, email, subject, draft, status: 'sent', sentAt: new Date().toISOString(), resendId: mailResult.id || null });
-      return NextResponse.json({ ok: true, resendId: mailResult.id || null });
+      await saveHuntRow(id, { ...prospect, email, subject, draft, status: 'sent', sentAt: new Date().toISOString(), scheduledFor: slot.at.toISOString(), resendId: mailResult.id || null });
+      return NextResponse.json({ ok: true, resendId: mailResult.id || null, scheduledFor: slot.at.toISOString() });
     }
 
     if (route === 'proposals') {
