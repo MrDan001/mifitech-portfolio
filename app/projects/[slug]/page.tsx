@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { normalizeProjectSlug, projectPath } from '@/lib/project-slug';
-import SiteNav from '../../components/SiteNav';
 import { defaultSiteContent, getSiteContent } from '@/lib/site-content';
 import { SITE_URL } from '@/lib/contact';
 
@@ -49,7 +48,6 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
 
   return (
     <div className="studio-shell">
-      <SiteNav items={content.navigation} />
       <main className="case wrap">
         <Link href="/#work" className="back-link">Back to selected work</Link>
         <div className="case-hero">
@@ -83,7 +81,6 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
         </section>}
         <section className="case-section case-cta"><div><p className="section-label">YOUR NEXT BUILD</p><h2>Have a project in mind?</h2></div><div className="hero-actions"><a className="button button-dark" href="/#contact">Start a conversation</a></div></section>
       </main>
-      <footer className="footer"><div className="wrap footer-main"><Link href="/" className="footer-brand"><span className="brand-mark">M</span><span>MifiTech<span className="brand-period">.</span></span></Link><p>{content.footer.tagline}</p><div className="footer-links"><Link href="/">Back home</Link><Link href="/#demos">Website demos</Link><Link href="/privacy">Privacy</Link><a href={'mailto:' + email}>Email</a></div></div><div className="wrap footer-bottom"><span>© {new Date().getFullYear()} MifiTech. All rights reserved.</span><span>DESIGNED WITH INTENTION. BUILT FOR BUSINESS.</span></div></footer>
     </div>
   );
 }
