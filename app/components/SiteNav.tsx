@@ -4,7 +4,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import ThemeToggle from './ThemeToggle';
 
 type NavItem = { label: string; href: string };
 const defaultLinks: NavItem[] = [
@@ -54,16 +53,15 @@ export default function SiteNav({ items = defaultLinks }: { items?: NavItem[] })
         </nav>
         <div className="studio-nav-actions">
           <Link href="/#contact">Start a project</Link>
-          <ThemeToggle />
           <button
             type="button"
             className="studio-menu-button"
-            aria-label={open ? 'Close navigation' : 'Open navigation'}
+            aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
             aria-controls="studio-mobile-navigation"
             onClick={() => setOpen((value) => !value)}
           >
-            <i/><i/>
+            Menu
           </button>
         </div>
       </div>
