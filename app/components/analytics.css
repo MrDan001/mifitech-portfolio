@@ -6,3 +6,8 @@
 .an-banner .an-yes{background:#d8e99a;color:#0f1a17;border-color:#d8e99a}
 .an-banner button:focus-visible{outline:3px solid #35e0a1;outline-offset:2px}
 @media(max-width:540px){.an-banner{left:8px;right:8px;bottom:78px;max-width:none}}
+/* Consent banner uses the MifiTech public palette. */
+.an-banner{background:#171819;color:#fffefa;border:1px solid #45413d}
+.an-banner a{color:#ff9976}
+.an-banner .an-yes{background:#e75b35;color:#fff;border-color:#e75b35}
+.an-banner button:focus-visible{outline-color:#ff9976}
