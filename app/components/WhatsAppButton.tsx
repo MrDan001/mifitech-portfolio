@@ -11,7 +11,7 @@ export default function WhatsAppButton({ message }: { message: string }) {
   useEffect(() => {
     const footer = document.querySelector('.mifi-site-footer');
     if (!footer) return;
-    const observer = new IntersectionObserver(([entry]) => setFooterVisible(entry.isIntersecting), { threshold: 0.01 });
+    const observer = new IntersectionObserver(([entry]) => setFooterVisible(entry.isIntersecting), { rootMargin: '0px 0px 140px 0px', threshold: 0 });
     observer.observe(footer);
     return () => observer.disconnect();
   }, []);
