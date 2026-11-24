@@ -93,14 +93,6 @@ export default function ServiceLandingPage({ page }: { page: ServicePageContent 
           <div className="hero-actions"><Link className="button button-dark" href="/#contact">Start a project enquiry</Link></div>
         </section>
       </main>
-      <footer className="footer">
-        <div className="wrap footer-main">
-          <Link href="/" className="footer-brand"><span className="brand-mark">M</span><span>MifiTech<span className="brand-period">.</span></span></Link>
-          <p>Modern websites and digital products for businesses worldwide.</p>
-          <div className="footer-links"><Link href="/">Home</Link><Link href="/#services">Services</Link><Link href="/privacy">Privacy</Link><a href="mailto:officialsafebase@gmail.com">Email</a></div>
-        </div>
-        <div className="wrap footer-bottom"><span>© {new Date().getFullYear()} MifiTech. All rights reserved.</span><span>DESIGNED WITH INTENTION. BUILT FOR BUSINESS.</span></div>
-      </footer>
     </div>
   );
 }
