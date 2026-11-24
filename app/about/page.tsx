@@ -128,7 +128,6 @@ export default async function AboutPage() {
           <div className="hero-actions"><Link className="button button-dark" href="/#contact">Discuss a project</Link><a className="button button-light" href={'mailto:' + email}>Email MifiTech</a></div>
         </section>
       </main>
-      <footer className="footer"><div className="wrap footer-main"><Link href="/" className="footer-brand"><span className="brand-mark">M</span><span>MifiTech<span className="brand-period">.</span></span></Link><p>{content.footer.tagline}</p><div className="footer-links"><Link href="/">Home</Link><Link href="/website-design-nigeria">Website design</Link><Link href="/ecommerce-website-development-nigeria">Ecommerce</Link><Link href="/privacy">Privacy</Link></div></div><div className="wrap footer-bottom"><span>© {new Date().getFullYear()} MifiTech. All rights reserved.</span><span>DIGITAL SOLUTIONS. BUILT FOR BUSINESS.</span></div></footer>
       <style>{`
         .mf-about-page .case-section{margin-top:clamp(3.5rem,7vw,6rem)}
         .mf-about-gap{max-width:850px}
