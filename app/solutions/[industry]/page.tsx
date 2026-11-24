@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { SITE_URL } from '@/lib/contact';
+import { getSiteContent } from '@/lib/site-content';
+import { projectPath } from '@/lib/project-slug';
 
 type Solution = {
   slug: string;
@@ -159,6 +161,8 @@ export default async function IndustrySolutionPage({ params }: { params: Promise
   const page = solutions[industry];
   if (!page) notFound();
   const url = SITE_URL + '/solutions/' + industry;
+  const content = await getSiteContent();
+  const relatedProject = industry === 'clinic' ? content.projects.find((project) => project.slug === 'ehealthcare' && project.visible !== false) : undefined;
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -168,6 +172,15 @@ export default async function IndustrySolutionPage({ params }: { params: Promise
     provider: { '@id': SITE_URL + '/#business' },
     areaServed: 'Worldwide',
     url,
+  };
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Industry solutions', item: SITE_URL + '/#industries' },
+      { '@type': 'ListItem', position: 3, name: page.title, item: url },
+    ],
   };
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -181,7 +194,7 @@ export default async function IndustrySolutionPage({ params }: { params: Promise
   return (
     <div className="studio-shell">
       <main className="case wrap service-landing">
-        <Link href="/" className="back-link">MifiTech home</Link>
+        <nav className="case-breadcrumbs" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/#industries">Industries</Link><span aria-hidden="true">/</span><span aria-current="page">{page.title}</span></nav>
         <article>
           <header className="case-hero">
             <div>
@@ -207,6 +220,21 @@ export default async function IndustrySolutionPage({ params }: { params: Promise
             <p>This demonstration uses an illustrative sample brand and content. It shows the kind of customer journey MifiTech can tailor to your actual business.</p>
             <div className="hero-actions"><Link className="button button-dark" href={'/demos/' + page.demo}>{page.demoLabel}</Link></div>
           </section>
+          {relatedProject && (
+            <section className="case-section service-proof" aria-labelledby="industry-proof-title">
+              <p className="section-label">RELATED MIFITECH PROJECT</p>
+              <h2 id="industry-proof-title">See a healthcare platform we have built.</h2>
+              <p className="service-proof-intro">Explore eHealthcare, a telemedicine platform with patient, clinician, appointment and administration workflows. This is a separate product example, not a claim that it is the same as your clinic website.</p>
+              <div className="service-proof-grid">
+                <Link className="service-proof-card" href={projectPath(relatedProject.slug)}>
+                  <span>{relatedProject.type}</span>
+                  <strong>{relatedProject.name}</strong>
+                  <p>{relatedProject.text}</p>
+                  <small>Explore project <b aria-hidden="true">↗</b></small>
+                </Link>
+              </div>
+            </section>
+          )}
           <section className="case-section">
             <p className="section-label">COMMON QUESTIONS</p>
             <h2>Questions about {page.title.toLowerCase()}.</h2>
@@ -218,7 +246,7 @@ export default async function IndustrySolutionPage({ params }: { params: Promise
           </section>
         </article>
       </main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([schema, faqSchema]) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([schema, faqSchema, breadcrumbSchema]) }} />
     </div>
   );
 }
