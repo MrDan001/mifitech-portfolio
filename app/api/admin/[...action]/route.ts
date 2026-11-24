@@ -6,6 +6,7 @@ import { defaultSiteContent, getSiteContent, type SiteContent } from '@/lib/site
 import { clear, clientIp, isLimited, record } from '@/lib/rate-limit';
 import { draftToHtml } from '@/lib/outreach-email';
 import { alreadyEmailedViaResend, isDoNotEmail, normalizeEmail, reserveSendSlot } from '@/lib/hunt-guard';
+import { getTestimonials, saveTestimonials } from '@/lib/testimonials';
 
 type Ctx = { params: Promise<{ action: string[] }> };
 const leadStatuses = ['new', 'interested', 'consultation', 'proposal_sent', 'awaiting_payment', 'converted', 'lost'];
@@ -306,6 +307,7 @@ export async function GET(_req: Request, ctx: Ctx) {
       const prospects = rows.map((row) => row.value).sort((a,b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
       return NextResponse.json({ prospects });
     }
+    if (route === 'testimonials') return NextResponse.json({ testimonials: await getTestimonials() });
     if (route === 'leads') return NextResponse.json({ leads: await db('leads?select=*&order=created_at.desc') });
     if (route === 'proposals') return NextResponse.json({ proposals: await db('proposals?select=*&order=created_at.desc') });
     if (route === 'seo') {
@@ -328,6 +330,13 @@ export async function DELETE(req: Request, ctx: Ctx) {
   const body = await req.json().catch(() => ({}));
 
   try {
+    if (route === 'testimonials' && body.id) {
+      const items = await getTestimonials();
+      const next = items.filter((item) => item.id !== String(body.id));
+      if (next.length === items.length) return NextResponse.json({ error: 'Testimonial not found.' }, { status: 404 });
+      await saveTestimonials(next);
+      return NextResponse.json({ ok: true });
+    }
     if (route === 'leads' && body.id) {
       await db('leads?id=eq.' + encodeURIComponent(String(body.id)), { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
       return NextResponse.json({ ok: true });
@@ -349,6 +358,25 @@ export async function PATCH(req: Request, ctx: Ctx) {
   const body = await req.json().catch(() => ({}));
 
   try {
+    if (route === 'testimonials' && body.id) {
+      const items = await getTestimonials();
+      const index = items.findIndex((item) => item.id === String(body.id));
+      if (index < 0) return NextResponse.json({ error: 'Testimonial not found.' }, { status: 404 });
+      const patch: Record<string, unknown> = {};
+      if (body.status !== undefined) {
+        if (!['pending', 'approved', 'archived'].includes(String(body.status))) return NextResponse.json({ error: 'Invalid testimonial status.' }, { status: 400 });
+        patch.status = String(body.status);
+      }
+      if (body.displayed !== undefined) {
+        if (typeof body.displayed !== 'boolean') return NextResponse.json({ error: 'Display setting must be true or false.' }, { status: 400 });
+        patch.displayed = body.displayed;
+      }
+      const nextItem = { ...items[index], ...patch, updatedAt: new Date().toISOString() };
+      if (nextItem.status !== 'approved') nextItem.displayed = false;
+      items[index] = nextItem;
+      await saveTestimonials(items);
+      return NextResponse.json({ ok: true, testimonial: nextItem });
+    }
     if (route === 'hunt/prospects' && body.id) {
       const id = String(body.id);
       const rows = await db<Array<{ value: Record<string, any> }>>('site_settings?key=eq.' + encodeURIComponent(HUNT_PREFIX + id) + '&select=value&limit=1');
