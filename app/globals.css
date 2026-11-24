@@ -1327,7 +1327,7 @@ html[data-theme="dark"] .studio-mobile-nav a{color:#eef3f3;border-color:#304147}
    width:auto;height:42px;min-width:82px;padding:0 20px;
    border:0;border-radius:10px;background:#e75b35;color:#fff;
    box-shadow:0 8px 22px rgba(23,24,25,.16);
-   font:700 13px/1 inherit;letter-spacing:.15px;
+   font-family:inherit;font-size:13px;font-weight:700;line-height:1;letter-spacing:.15px;
  }
  .studio-header.mifi-primary-header .studio-mobile-nav{
    position:fixed;top:64px;right:12px;z-index:1001;
