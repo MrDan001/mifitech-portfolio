@@ -45,11 +45,33 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
   const websiteUrl = project.websiteUrl?.trim();
   const repoUrl = project.repoUrl?.trim();
   const study = project.caseStudy;
+  const canonicalUrl = new URL(projectPath(project.slug), SITE_URL).toString();
+  const projectSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: project.name.trim(),
+    description: project.text,
+    creator: { '@id': SITE_URL + '/#business' },
+    publisher: { '@id': SITE_URL + '/#business' },
+    url: canonicalUrl,
+    image: new URL(project.image, SITE_URL).toString(),
+    keywords: project.stack.join(', '),
+    ...(websiteUrl ? { sameAs: websiteUrl } : {}),
+  };
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Selected work', item: SITE_URL + '/#work' },
+      { '@type': 'ListItem', position: 3, name: project.name.trim(), item: canonicalUrl },
+    ],
+  };
 
   return (
     <div className="studio-shell">
       <main className="case wrap">
-        <Link href="/#work" className="back-link">Back to selected work</Link>
+        <nav className="case-breadcrumbs" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/#work">Selected work</Link><span aria-hidden="true">/</span><span aria-current="page">{project.name.trim()}</span></nav>
         <div className="case-hero">
           <div>
             <p className="section-label">CASE STUDY / {project.type.trim().toUpperCase()}</p>
@@ -81,6 +103,7 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
         </section>}
         <section className="case-section case-cta"><div><p className="section-label">YOUR NEXT BUILD</p><h2>Have a project in mind?</h2></div><div className="hero-actions"><a className="button button-dark" href="/#contact">Start a conversation</a></div></section>
       </main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([projectSchema, breadcrumbSchema]) }} />
     </div>
   );
 }
