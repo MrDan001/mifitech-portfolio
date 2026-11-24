@@ -1086,3 +1086,8 @@ html[data-theme="dark"] .wonders-article-dropcap{color:var(--w-ink)!important}
 .mifi-floating-details nav .mifi-floating-cta{margin-top:7px;background:#d8e99a;color:#17211b;font-weight:800}
 .mifi-floating-details nav .mifi-floating-cta span{color:#17211b}
 @media(max-width:600px){.mifi-floating-menu{top:10px;right:10px;gap:5px;padding:6px 6px 6px 10px}.mifi-floating-brand img{width:105px}.mifi-floating-details>summary{min-height:39px;padding:0 12px;gap:9px;font-size:11px}.mifi-floating-details nav{max-height:70vh}}
+
+/* MifiTech public navigation recoloured to the orange/ivory identity */
+.mifi-floating-menu{background:rgba(251,246,238,.96);border-color:#e6dcd0;box-shadow:0 12px 35px rgba(23,24,25,.13)}
+.mifi-floating-details>summary{background:#e75b35;color:#fff}.mifi-floating-details nav{background:#fbf6ee;border-color:#e6dcd0;box-shadow:0 20px 55px rgba(23,24,25,.18)}
+.mifi-floating-details nav a{color:#171819}.mifi-floating-details nav a:hover{background:#f0e5d9}.mifi-floating-details nav a span{color:#e75b35}.mifi-floating-details nav .mifi-floating-cta{background:#e75b35;color:#fff}.mifi-floating-details nav .mifi-floating-cta span{color:#fff}
