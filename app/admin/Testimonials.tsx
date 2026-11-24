@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Badge, Empty, pretty, timeAgo } from './ui';
+import { Badge, Empty, timeAgo } from './ui';
 
 type Item = Record<string, any>;
 type Props = { items: Item[]; loading: boolean; onUpdate: (id: string, patch: Record<string, any>) => Promise<void>; onDelete: (id: string) => Promise<void> };
