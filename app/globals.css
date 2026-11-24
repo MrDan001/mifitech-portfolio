@@ -1091,3 +1091,9 @@ html[data-theme="dark"] .wonders-article-dropcap{color:var(--w-ink)!important}
 .mifi-floating-menu{background:rgba(251,246,238,.96);border-color:#e6dcd0;box-shadow:0 12px 35px rgba(23,24,25,.13)}
 .mifi-floating-details>summary{background:#e75b35;color:#fff}.mifi-floating-details nav{background:#fbf6ee;border-color:#e6dcd0;box-shadow:0 20px 55px rgba(23,24,25,.18)}
 .mifi-floating-details nav a{color:#171819}.mifi-floating-details nav a:hover{background:#f0e5d9}.mifi-floating-details nav a span{color:#e75b35}.mifi-floating-details nav .mifi-floating-cta{background:#e75b35;color:#fff}.mifi-floating-details nav .mifi-floating-cta span{color:#fff}
+
+/* Minimal floating navigation: a single Menu pill */
+.mifi-floating-menu{padding:0;background:transparent;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.mifi-floating-details>summary{min-height:44px;padding:0 22px;border-radius:10px;background:#e75b35;color:#fff;font-size:14px;font-weight:700;letter-spacing:.2px;box-shadow:0 8px 22px rgba(23,24,25,.14)}
+.mifi-floating-details nav{border-radius:12px}
+@media(max-width:600px){.mifi-floating-menu{padding:0}.mifi-floating-details>summary{min-height:42px;padding:0 18px;font-size:13px}}
