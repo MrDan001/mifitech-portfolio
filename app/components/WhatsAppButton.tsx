@@ -1,3 +1,5 @@
+'use client';
+
 // Path: app/components/WhatsAppButton.tsx
 import { useEffect, useState } from 'react';
 import { whatsappLink } from '@/lib/contact';
