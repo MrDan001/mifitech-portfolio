@@ -1148,3 +1148,52 @@ html[data-theme="dark"] .wonders-article-dropcap{color:var(--w-ink)!important}
 }
 /* Keep navigation links and CTA free of browser-default underlines in every state */
 .mifi-desktop-nav a,.mifi-desktop-nav a:hover,.mifi-desktop-nav a:focus,.mifi-desktop-nav a:visited{text-decoration:none}
+
+
+/* MifiTech unified public-site palette — warm ivory, white, charcoal and persimmon */
+:root {
+  --mifi-orange: #e75b35;
+  --mifi-orange-hover: #c94a2b;
+  --mifi-ivory: #fbf6ee;
+  --mifi-white: #fffefa;
+  --mifi-cream: #f3e9dd;
+  --mifi-ink: #171819;
+  --mifi-muted: #68635d;
+  --mifi-border: #e6dcd0;
+}
+html, body { background: var(--mifi-ivory); color: var(--mifi-ink); }
+body { --accent: var(--mifi-orange); --primary: var(--mifi-orange); --brand: var(--mifi-orange); }
+a { text-decoration-color: var(--mifi-orange); }
+:where(main, .page-shell, .page-container, .content-shell) {
+  color: var(--mifi-ink);
+}
+:where(main) {
+  background-color: var(--mifi-ivory);
+}
+:where(main section, main article, main .section, main .content-section) {
+  border-color: var(--mifi-border);
+}
+:where(main h1, main h2, main h3, main h4) { color: var(--mifi-ink); }
+:where(main p, main li, main label, main small) { --page-muted: var(--mifi-muted); }
+:where(main a:not([class*="button"]):not([class*="btn"])) { color: inherit; }
+:where(main button, main [role="button"], main input[type="submit"], main .button, main .btn, main [class*="primary-button"], main [class*="primary-btn"]) {
+  --button-accent: var(--mifi-orange);
+}
+:where(main input, main select, main textarea) {
+  border-color: var(--mifi-border);
+}
+:where(main input:focus, main select:focus, main textarea:focus) {
+  border-color: var(--mifi-orange);
+  outline-color: var(--mifi-orange);
+}
+/* Retint common light surfaces without flattening intentionally dark hero/contact areas. */
+:where(main .card, main [class*="card"]:not([class*="demo"]):not([class*="preview"]), main .panel, main .surface) {
+  border-color: var(--mifi-border);
+}
+:where(main .eyebrow, main .kicker, main .label, main [class*="eyebrow"], main [class*="kicker"]) {
+  color: var(--mifi-orange);
+}
+/* Keep bespoke interactive previews and the private admin workspace visually isolated. */
+.admin-shell, [data-admin-shell], .studio-demo-window, .studio-browser, .mh-phone, .sx {
+  color: revert;
+}
