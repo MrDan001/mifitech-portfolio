@@ -16,12 +16,12 @@ export default function FloatingMenu({ navigation }: { navigation: NavigationIte
           <img src="/brand/logo-b-horizontal-dark.svg" alt="MifiTech" />
         </Link>
         <nav className="mifi-desktop-links" aria-label="Main navigation">
-          {navigation.map((item, index) => {
+          {navigation.filter((item) => item.label.toLowerCase() !== 'blog').map((item, index) => {
             const active = item.href === '/' ? pathname === '/' : item.href.startsWith('/#') ? pathname === '/' : pathname === item.href || pathname.startsWith(item.href + '/');
             return <Link key={item.label + index} href={item.href} className={active ? 'active' : undefined}>{item.label}</Link>;
           })}
         </nav>
-        <Link className="mifi-desktop-cta" href="/#contact">Start a project <span aria-hidden="true">→</span></Link>
+        <Link className="mifi-desktop-cta" href="/#contact">Get Started</Link>
       </header>
 
       <div className="mifi-floating-menu">
