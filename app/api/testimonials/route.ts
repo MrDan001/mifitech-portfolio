@@ -1,6 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { randomUUID } from 'node:crypto';
 import { clientIp, isLimited, record } from '@/lib/rate-limit';
+import { notifyOwner } from '@/lib/notify';
+import { SITE_URL } from '@/lib/contact';
 import { getTestimonials, saveTestimonials, type TestimonialRecord } from '@/lib/testimonials';
 
 export const dynamic = 'force-dynamic';
@@ -38,6 +40,13 @@ export async function POST(req: Request) {
     };
     await saveTestimonials([item, ...items].slice(0, 500));
     record(limitKey, 60 * 60_000);
+    after(async () => {
+      await notifyOwner({
+        title: 'New client testimony from ' + name,
+        ...(email ? { replyTo: email } : {}),
+        lines: ['Rating: ' + rating + '/5', ...(company ? ['Business: ' + company] : []), ...(role ? ['Role: ' + role] : []), '', quote, '', 'Review and manage it in the MifiTech admin: ' + SITE_URL + '/admin'],
+      });
+    });
     return NextResponse.json({ ok: true, message: 'Thank you. Your testimony has been sent for review.' });
   } catch {
     return NextResponse.json({ error: 'We could not save your testimony right now. Please try again shortly.' }, { status: 503 });
