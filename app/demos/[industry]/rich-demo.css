@@ -90,3 +90,9 @@
 }
 .rd-addr a{font-weight:700;color:var(--a)}
 .rd-cta .rd-ghost{margin-left:10px}
+/* Consistent separation for paired calls-to-action across every rich demo */
+.rd-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:4px}
+.rd-actions-center{justify-content:center}
+.rd-actions .rd-btn{margin:0;max-width:100%;text-align:center}
+.rd-actions .rd-ghost{margin:0}
+@media(max-width:600px){.rd-actions{gap:12px}.rd-actions .rd-btn{display:flex;width:100%;justify-content:center}.rd-actions-center{max-width:460px;margin:4px auto 0}}
