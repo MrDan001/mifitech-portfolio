@@ -33,7 +33,7 @@ export default function SiteNav({ items = defaultLinks }: { items?: NavItem[] })
     return () => window.removeEventListener('keydown', close);
   }, []);
 
-  if (pathname === '/admin' || pathname.startsWith('/admin/')) return null;
+  if (pathname === '/admin' || pathname.startsWith('/admin/') || pathname.startsWith('/demos/') || pathname.startsWith('/previews/') || pathname.startsWith('/proposal/')) return null;
 
   return (
     <header className="studio-header mifi-primary-header">
@@ -41,7 +41,7 @@ export default function SiteNav({ items = defaultLinks }: { items?: NavItem[] })
         <Link className="studio-brand" href="/" aria-label="MifiTech home">
           <img src="/brand/logo-b-mark.svg" alt="" width={40} height={40} style={{ flex: 'none' }} />
           <span className="studio-brand-copy">
-            <strong>MifiTech<span>.</span></strong>
+            <strong><span className="brand-mifi">Mifi</span>Tech<span className="brand-period">.</span></strong>
             <small>Websites · Apps · Digital Solutions</small>
           </span>
         </Link>
