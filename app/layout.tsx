@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getSeo } from '@/lib/backend';
 import { SITE_URL } from '@/lib/contact';
 import { getSiteContent } from '@/lib/site-content';
-import FloatingMenu from './components/FloatingMenu';
+import SiteNav from './components/SiteNav';
 import './globals.css';
 import './mobile-layout.css';
 
@@ -60,5 +60,5 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     ],
   };
 
-  return <html lang="en" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{ __html: `try { const saved = localStorage.getItem('mifitech-theme'); const dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches; document.documentElement.dataset.theme = dark ? 'dark' : 'light'; } catch (_) {}` }} /></head><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} /><FloatingMenu navigation={siteContent.navigation} />{children}</body></html>;
+  return <html lang="en" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{ __html: `try { const saved = localStorage.getItem('mifitech-theme'); const dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches; document.documentElement.dataset.theme = dark ? 'dark' : 'light'; } catch (_) {}` }} /></head><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} /><SiteNav items={siteContent.navigation} />{children}</body></html>;
 }
