@@ -56,7 +56,7 @@ export default async function Home() {
           <div className="mh-wrap">
             <div className="mh-copy">
               <h1>Your business, open on every phone.</h1>
-              <p className="mh-lead">MifiTech builds websites, online stores and business apps for ambitious businesses worldwide, designed for the people your customers already are.</p>
+              <p className="mh-lead">We build customer-facing websites, online stores, booking and enquiry systems, and custom business apps — helping businesses attract customers, sell online and run everyday work more smoothly.</p>
               <div className="mh-cta">
                 <a className="mh-btn mh-btn-lime" href="#contact">Start a project</a>
                 <a className="mh-btn mh-btn-line" href="#demos">See website demos</a>
@@ -68,6 +68,35 @@ export default async function Home() {
       </div>
 
       <main>
+      <section className="mh-sec mh-offer" aria-label="What MifiTech offers">
+        <div className="mh-wrap">
+          <div className="mh-head">
+            <h2>Digital tools that move your business forward.</h2>
+            <p>Not just a website that looks good. A useful digital experience built around what your customers need and how your team works.</p>
+          </div>
+          <div className="mh-offer-grid">
+            <article className="mh-offer-card">
+              <span>01 / WHAT WE BUILD</span>
+              <h3>From your online storefront to the software behind it.</h3>
+              <p>Business websites, e-commerce stores, product catalogues, booking and enquiry flows, and custom web applications for day-to-day operations.</p>
+              <a href="#services">Explore our services</a>
+            </article>
+            <article className="mh-offer-card">
+              <span>02 / WHO WE HELP</span>
+              <h3>Businesses that need to be easier to find, trust and work with.</h3>
+              <p>Retailers, restaurants, clinics, schools, property firms, hospitality teams, professional services and growing organisations — in Nigeria and internationally.</p>
+              <a href="#industry-solutions">Find your industry</a>
+            </article>
+            <article className="mh-offer-card">
+              <span>03 / WHY MIFITECH</span>
+              <h3>Thoughtful development, clear expectations and practical support.</h3>
+              <p>We understand the goal first, agree the scope before building, show real project work and can support improvements after launch.</p>
+              <a href="#work">See what we have built</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
         {featured && featuredIsLive && (
           <div className="mh-proof">
             <div className="mh-wrap">
