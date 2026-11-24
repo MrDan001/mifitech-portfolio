@@ -1305,3 +1305,52 @@ html[data-theme="dark"] .studio-menu-button{background:#172329;border-color:#405
 html[data-theme="dark"] .studio-menu-button i{background:#eef3f3}
 html[data-theme="dark"] .studio-mobile-nav{background:#172329;border-color:#304147}
 html[data-theme="dark"] .studio-mobile-nav a{color:#eef3f3;border-color:#304147}
+
+
+/* Restore the original mobile Menu pill: text only, no logo or hamburger. */
+@media(max-width:760px){
+ .studio-header.mifi-primary-header{
+   position:fixed;top:0;right:0;left:0;z-index:1000;
+   height:0;min-height:0;background:transparent!important;
+   border:0!important;box-shadow:none!important;backdrop-filter:none!important;
+ }
+ .studio-header.mifi-primary-header .studio-nav-inner{
+   position:relative;width:100%;height:0;min-height:0;padding:0;margin:0;
+ }
+ .studio-header.mifi-primary-header .studio-brand,
+ .studio-header.mifi-primary-header .studio-nav-actions>a{display:none!important}
+ .studio-header.mifi-primary-header .studio-nav-actions{
+   position:fixed;top:12px;right:12px;z-index:1002;display:flex;gap:0;
+ }
+ .studio-header.mifi-primary-header .studio-menu-button{
+   display:inline-flex!important;align-items:center;justify-content:center;
+   width:auto;height:42px;min-width:82px;padding:0 20px;
+   border:0;border-radius:10px;background:#e75b35;color:#fff;
+   box-shadow:0 8px 22px rgba(23,24,25,.16);
+   font:700 13px/1 inherit;letter-spacing:.15px;
+ }
+ .studio-header.mifi-primary-header .studio-mobile-nav{
+   position:fixed;top:64px;right:12px;z-index:1001;
+   width:min(300px,calc(100vw - 24px));max-height:calc(100dvh - 82px);
+   overflow:auto;padding:9px 15px 15px;border:1px solid #e6dcd0;
+   border-radius:13px;background:#fffefa;
+   box-shadow:0 18px 48px rgba(23,24,25,.18);
+ }
+ .studio-header.mifi-primary-header .studio-mobile-nav a{
+   padding:13px 4px;color:#171819;border-bottom:1px solid #e6dcd0;
+   font-size:13px;
+ }
+ .studio-header.mifi-primary-header .studio-mobile-nav a:last-child{
+   margin-top:7px;padding:12px 13px;border:0;border-radius:8px;
+   background:#e75b35;color:#fff;
+ }
+ html[data-theme="dark"] .studio-header.mifi-primary-header .studio-mobile-nav{
+   background:#172329;border-color:#304147;
+ }
+ html[data-theme="dark"] .studio-header.mifi-primary-header .studio-mobile-nav a{
+   color:#eef3f3;border-color:#304147;
+ }
+ html[data-theme="dark"] .studio-header.mifi-primary-header .studio-mobile-nav a:last-child{
+   background:#e75b35;color:#fff;
+ }
+}
