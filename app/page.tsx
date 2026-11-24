@@ -5,8 +5,10 @@ import { Bricolage_Grotesque, Hanken_Grotesk } from 'next/font/google';
 import ContactForm from './components/ContactForm';
 import HeroPhone from './components/HeroPhone';
 import WhatsAppButton from './components/WhatsAppButton';
+import TestimonialForm from './components/TestimonialForm';
 import { WHATSAPP_DISPLAY, whatsappLink } from '@/lib/contact';
 import { getSiteContent } from '@/lib/site-content';
+import { getPublicTestimonials } from '@/lib/testimonials';
 import { projectPath } from '@/lib/project-slug';
 import './home.css';
 
@@ -29,7 +31,7 @@ const INDUSTRY_SOLUTIONS = [
 ];
 
 export default async function Home() {
-  const content = await getSiteContent();
+  const [content, submittedTestimonials] = await Promise.all([getSiteContent(), getPublicTestimonials()]);
   const demos = content.demos.filter((demo) => demo.visible !== false);
   const projects = content.projects.filter((project) => project.visible !== false);
   const contact = content.sections.contact;
@@ -159,21 +161,31 @@ export default async function Home() {
           </section>
         )}
 
-        {content.testimonials.length > 0 && (
-          <section className="mh-sec" aria-label="Client feedback">
-            <div className="mh-wrap">
-              <div className="mh-head"><h2>What clients say.</h2><p>Published only when a client has approved the wording and name.</p></div>
+        <section className="mh-sec mh-testimonials-section" id="testimonials" aria-label="Client feedback and ratings">
+          <div className="mh-wrap">
+            <div className="mh-head"><h2>Good work speaks through people.</h2><p>Read feedback from clients who have worked with MifiTech, or share your own experience.</p></div>
+            {(content.testimonials.length > 0 || submittedTestimonials.length > 0) ? (
               <div className="mh-quotes">
                 {content.testimonials.map((item, index) => (
-                  <blockquote key={item.name + index}>
+                  <blockquote key={'editorial-' + item.name + index}>
+                    <p>“{item.quote}”</p>
+                    <footer>{item.name}{[item.role, item.company].filter(Boolean).length > 0 ? ', ' + [item.role, item.company].filter(Boolean).join(', ') : ''}</footer>
+                  </blockquote>
+                ))}
+                {submittedTestimonials.map((item) => (
+                  <blockquote key={item.id}>
+                    <div className="mh-public-rating" aria-label={item.rating + ' out of 5 stars'}>{'★'.repeat(item.rating)}<span>{'★'.repeat(5 - item.rating)}</span></div>
                     <p>“{item.quote}”</p>
                     <footer>{item.name}{[item.role, item.company].filter(Boolean).length > 0 ? ', ' + [item.role, item.company].filter(Boolean).join(', ') : ''}</footer>
                   </blockquote>
                 ))}
               </div>
-            </div>
-          </section>
-        )}
+            ) : (
+              <p className="mh-testimonial-empty">We’re looking forward to sharing our first client stories here.</p>
+            )}
+            <TestimonialForm />
+          </div>
+        </section>
 
         <section className="mh-sec" id="process">
           <div className="mh-wrap">
