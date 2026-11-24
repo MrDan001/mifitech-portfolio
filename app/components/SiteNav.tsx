@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type NavItem = { label: string; href: string };
 const defaultLinks: NavItem[] = [
@@ -21,18 +21,35 @@ const defaultLinks: NavItem[] = [
 export default function SiteNav({ items = defaultLinks }: { items?: NavItem[] }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileNavRef = useRef<HTMLElement>(null);
   const links = [...items];
   for (const item of defaultLinks) {
     if (!links.some((link) => link.href === item.href)) links.push(item);
   }
 
   useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const firstLink = mobileNavRef.current?.querySelector<HTMLAnchorElement>('a');
+    firstLink?.focus();
     const close = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpen(false);
+      if (event.key === 'Escape') {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
     };
     window.addEventListener('keydown', close);
-    return () => window.removeEventListener('keydown', close);
-  }, []);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', close);
+    };
+  }, [open]);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (!pathname.startsWith('/demos/') && !pathname.startsWith('/previews/')) {
@@ -63,6 +80,7 @@ export default function SiteNav({ items = defaultLinks }: { items?: NavItem[] })
           <button
             type="button"
             className="studio-menu-button"
+            ref={menuButtonRef}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
             aria-controls="studio-mobile-navigation"
@@ -73,7 +91,7 @@ export default function SiteNav({ items = defaultLinks }: { items?: NavItem[] })
         </div>
       </div>
       {open && (
-        <nav className="studio-mobile-nav" id="studio-mobile-navigation" aria-label="Mobile navigation">
+        <nav ref={mobileNavRef} className="studio-mobile-nav" id="studio-mobile-navigation" aria-label="Mobile navigation">
           {links.map((item, index) => <Link href={item.href} key={item.label + index} onClick={() => setOpen(false)}>{item.label}</Link>)}
           <Link href="/#contact" onClick={() => setOpen(false)}>Start a project</Link>
         </nav>
