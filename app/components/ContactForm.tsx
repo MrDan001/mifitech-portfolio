@@ -52,6 +52,6 @@ export default function ContactForm({ email = 'officialsafebase@gmail.com' }: Co
     <label><span>Tell us a little about it</span><textarea name="project_details" rows={5} minLength={10} placeholder="What does your business do, and what would you like your website to help with?" required /></label>
     <button className="form-submit" type="submit" disabled={status === 'sending'}>{status === 'sending' ? 'Sending enquiry…' : 'Send project enquiry'} <span></span></button>
     {status === 'error' && <p className="form-error" role="alert">{message} You can also <a href={whatsappLink(WA_FALLBACK)} target="_blank" rel="noreferrer">message us on WhatsApp</a> or email <a href={'mailto:' + email}>{email}</a>.</p>}
-    <p className="form-footnote">We reply within one working day. Prefer WhatsApp? <a href={whatsappLink('Hello MifiTech, I would like to discuss a website for my business.')} target="_blank" rel="noreferrer">Chat with us</a>.</p>
+    <p className="form-footnote">We reply within one working day. Your details are handled according to our <a href="/privacy">Privacy Policy</a>. Prefer WhatsApp? <a href={whatsappLink('Hello MifiTech, I would like to discuss a website for my business.')} target="_blank" rel="noreferrer">Chat with us</a>.</p>
   </form>;
 }
