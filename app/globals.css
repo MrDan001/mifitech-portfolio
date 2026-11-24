@@ -1197,3 +1197,33 @@ a { text-decoration-color: var(--mifi-orange); }
 .admin-shell, [data-admin-shell], .studio-demo-window, .studio-browser, .mh-phone, .sx {
   color: revert;
 }
+
+
+/* Final public-page brand pass: remove legacy lime/teal accents outside private admin and client demo previews. */
+:root{color-scheme:light;--accent:#e75b35;--brand:#e75b35;--primary:#e75b35;--lime:#e75b35;--teal:#e75b35;--green:#e75b35;--line:#e6dcd0;--surface:#fffefa;--paper:#fbf6ee}
+:where(.case,.case-section,.case-hero,.mf-about-page,.wonders-page,.service-landing,.seo-guide,.content-page){--accent:#e75b35;--lime:#e75b35;--teal:#e75b35;--green:#e75b35;--line:#e6dcd0;--surface:#fffefa}
+.mf-about-page .mf-about-focus{background:#e6dcd0;border-color:#e6dcd0}
+.mf-about-page .mf-about-focus article{background:#fffefa}
+.mf-about-page .mf-about-focus article>span{color:#e75b35}
+.mf-about-page .mf-about-founder-visual{background:#171819}
+.mf-about-page .mf-about-initials{color:#e75b35}
+.mf-about-page .mf-about-founder-caption{background:rgba(23,24,25,.94);color:#fffefa}
+.mf-about-page .mf-about-founder-caption span,.mf-about-page .mf-about-mini-label{color:#ff9976}
+.mf-about-page .mf-about-founder-contact a{color:#171819;border-bottom-color:#e75b35}
+.mf-about-page .mf-about-resume{background:#171819;color:#fffefa}
+.mf-about-page .mf-about-resume-heading h2,.mf-about-page .mf-about-education h3{color:#fffefa}
+.mf-about-page .mf-about-resume-tag{border-color:#665047;color:#ff9976}
+.mf-about-page .mf-about-resume-grid article,.mf-about-page .mf-about-experience{border-color:#45413d;background:#252626}
+.mf-about-page .mf-about-mini-label{color:#ff9976}
+.mf-about-page .mf-about-skills span{border-color:#55504a;color:#f4eee6}
+.mf-about-page .mf-about-focus p,.mf-about-page .mf-about-founder-copy>p:not(.section-label){color:#68635d}
+:where(.case,.mf-about-page,.wonders-page,.service-landing) :is(.section-label,.case-section .section-label){color:#e75b35}
+:where(.case,.mf-about-page,.wonders-page,.service-landing) :is(.button-primary,.button-dark,.case-cta a:first-child){background:#171819;color:#fffefa}
+:where(.case,.mf-about-page,.wonders-page,.service-landing) :is(a:hover,.case-section a:hover){text-decoration-color:#e75b35}
+:where(.case,.mf-about-page,.wonders-page,.service-landing) :is(input,select,textarea):focus{border-color:#e75b35;outline-color:#e75b35}
+.an-banner{background:#171819;color:#fffefa;border:1px solid #45413d}
+.an-banner a{color:#ff9976}
+.an-banner .an-yes{background:#e75b35;color:#fff;border-color:#e75b35}
+.an-banner button:focus-visible{outline-color:#ff9976}
+/* Explicitly preserve the separate private admin and third-party demo palettes. */
+.admin-shell,.apd,.ad-app,.rd,.salonDemo,.studio-demo-window,.studio-browser{color:revert}
