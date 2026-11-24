@@ -4,3 +4,7 @@
 .wa-float:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px #06301a}
 .wa-float svg{width:28px;height:28px;flex:none}
 @media(max-width:540px){.wa-float span{display:none}.wa-float{padding:12px}}
+/* Keep the floating WhatsApp action clear of the shared footer and its links. */
+.wa-float{transition:opacity .2s ease,transform .2s ease,background .2s ease}
+.wa-float.wa-footer-visible{opacity:0;pointer-events:none;transform:translateY(12px)}
+@media(max-width:540px){.wa-float{right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px))}}
