@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import SiteNav from '../components/SiteNav';
 import { getSiteContent } from '@/lib/site-content';
 import { SITE_URL } from '@/lib/contact';
 import { projectPath } from '@/lib/project-slug';
@@ -45,7 +44,6 @@ export default async function AboutPage() {
 
   return (
     <div className="studio-shell">
-      <SiteNav items={[...content.navigation, { label: 'About MifiTech', href: '/about' }]} />
       <main className="case wrap mf-about-page" style={{ paddingTop: 'clamp(3rem, 8vw, 7rem)', paddingBottom: '5rem' }}>
         <header className="case-hero">
           <div>
