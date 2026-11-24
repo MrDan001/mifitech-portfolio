@@ -34,6 +34,12 @@ export default function SiteNav({ items = defaultLinks }: { items?: NavItem[] })
     return () => window.removeEventListener('keydown', close);
   }, []);
 
+  useEffect(() => {
+    if (!pathname.startsWith('/demos/') && !pathname.startsWith('/previews/')) {
+      document.documentElement.dataset.theme = 'light';
+    }
+  }, [pathname]);
+
   if (pathname === '/admin' || pathname.startsWith('/admin/') || pathname.startsWith('/demos/') || pathname.startsWith('/previews/') || pathname.startsWith('/proposal/')) return null;
 
   return (
