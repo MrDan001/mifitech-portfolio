@@ -250,3 +250,14 @@
 .mh .mh-service-detail-links{display:flex;gap:24px;flex-wrap:wrap;margin-top:22px}
 .mh .mh-service-detail-links a{font-size:14px;font-weight:800;text-decoration:none}
 .mh .mh-service-detail-links a span{margin-left:5px}
+
+/* MifiTech brand refresh: warm ivory, ink black and persimmon orange */
+.mh{--ink:#171819;--ink2:#252626;--lime:#f0643b;--teal:#e75b35;--chalk:#fbf6ee;--line:#e6dcd0;--mute:#68635d;background:var(--chalk);color:var(--ink)}
+.mh .mh-dark{background:#171819;color:#fff}.mh .mh-hero{background:#fbf6ee;padding:78px 0 70px}.mh .mh-hero h1{color:#171819}.mh .mh-lead{color:#68635d}
+.mh .mh-btn-lime{background:#e75b35;color:#fff}.mh .mh-btn-lime:hover,.mh .mh-form .form-submit:hover{background:#c94a2b}.mh .mh-btn-line{border-color:#171819;color:#171819}.mh .mh-btn-line:hover{background:#171819;color:#fff;border-color:#171819}.mh .mh-btn-ink{background:#171819;color:#fff}
+.mh .mh-phone{background:#171819;box-shadow:0 22px 50px #17181930}.mh .mh-note{color:#68635d}.mh .mh-proof{background:#fffefa}.mh .mh-dot{background:#e75b35}
+.mh .mh-sec{background:#fbf6ee}.mh .mh-services{background:#fffefa}.mh .mh-work{background:#f3e9dd}.mh .mh-head p,.mh .mh-service-list p,.mh .mh-proj p,.mh .mh-step p,.mh .mh-aside,.mh .mh-faq details p{color:#68635d}
+.mh .mh-service-list li{border-color:#e6dcd0}.mh .mh-proj{border-color:#e6dcd0;background:#fffefa;border-radius:4px}.mh .mh-proj-main{background:#171819;color:#fff;border-color:#171819}.mh .mh-proj-main p{color:#d4d1cb}.mh .mh-tag{color:#e75b35}.mh .mh-proj-main .mh-tag{color:#ff9976}.mh .mh-stack li{border-color:#e6dcd0}.mh .mh-proj-main .mh-stack li{border-color:#ffffff30}.mh .mh-kpis li{background:#252626}.mh .mh-steps{border-color:#171819}.mh .mh-step b{color:#e75b35}
+.mh .mh-quotes blockquote{background:#fffefa;border-left-color:#e75b35;border-radius:0}.mh .mh-faq details{border-color:#e6dcd0}.mh .mh-contact{background:#171819;color:#fff}.mh .mh-contact .mh-sub{color:#d4d1cb}.mh .mh-mail{color:#ff9976}.mh .mh-wa{color:#fff}.mh .mh-note-line{color:#aaa69e}
+.mh .mh-form{background:#252626;border-color:#454545;border-radius:4px}.mh .mh-form .contact-form input,.mh .mh-form .contact-form select,.mh .mh-form .contact-form textarea{background:#171819;border-color:#545454}.mh .mh-form .contact-form input:focus,.mh .mh-form .contact-form textarea:focus,.mh .mh-form .contact-form select:focus{border-color:#ff9976;box-shadow:0 0 0 3px #e75b3530}.mh .mh-form .form-submit{background:#e75b35;color:#fff;border-radius:4px}.mh .mh-form .form-footnote{color:#aaa69e}.mh .mh-form .form-footnote a,.mh .mh-form .form-success a{color:#ff9976}
+.mh .mh-footer{background:#111213;color:#aaa69e;border-top-color:#383838}.mh .mh-footer a:hover{color:#ff9976}.mh .mh-demo{border-radius:4px}.mh .mh-service-list li{padding:24px 0}@media(max-width:900px){.mh .mh-hero{padding:54px 0 45px}}
