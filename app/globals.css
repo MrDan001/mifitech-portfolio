@@ -1227,3 +1227,11 @@ a { text-decoration-color: var(--mifi-orange); }
 .an-banner button:focus-visible{outline-color:#ff9976}
 /* Explicitly preserve the separate private admin and third-party demo palettes. */
 .admin-shell,.apd,.ad-app,.rd,.salonDemo,.studio-demo-window,.studio-browser{color:revert}
+
+
+/* Keep the single primary navigation usable on tablet widths without dropping any links. */
+@media (max-width: 1100px) {
+  .studio-desktop-nav { display:none; }
+  .studio-menu-button { display:grid; align-content:center; gap:5px; width:42px; height:42px; border:1px solid var(--s-line); border-radius:8px; background:transparent; }
+  .studio-menu-button i { width:17px; height:1.5px; margin:auto; background:var(--s-ink); }
+}
