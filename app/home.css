@@ -261,3 +261,8 @@
 .mh .mh-quotes blockquote{background:#fffefa;border-left-color:#e75b35;border-radius:0}.mh .mh-faq details{border-color:#e6dcd0}.mh .mh-contact{background:#171819;color:#fff}.mh .mh-contact .mh-sub{color:#d4d1cb}.mh .mh-mail{color:#ff9976}.mh .mh-wa{color:#fff}.mh .mh-note-line{color:#aaa69e}
 .mh .mh-form{background:#252626;border-color:#454545;border-radius:4px}.mh .mh-form .contact-form input,.mh .mh-form .contact-form select,.mh .mh-form .contact-form textarea{background:#171819;border-color:#545454}.mh .mh-form .contact-form input:focus,.mh .mh-form .contact-form textarea:focus,.mh .mh-form .contact-form select:focus{border-color:#ff9976;box-shadow:0 0 0 3px #e75b3530}.mh .mh-form .form-submit{background:#e75b35;color:#fff;border-radius:4px}.mh .mh-form .form-footnote{color:#aaa69e}.mh .mh-form .form-footnote a,.mh .mh-form .form-success a{color:#ff9976}
 .mh .mh-footer{background:#111213;color:#aaa69e;border-top-color:#383838}.mh .mh-footer a:hover{color:#ff9976}.mh .mh-demo{border-radius:4px}.mh .mh-service-list li{padding:24px 0}@media(max-width:900px){.mh .mh-hero{padding:54px 0 45px}}
+
+/* Keep the business preview tabs readable before selection. */
+.mh .mh-tabs button{color:#171819;background:#fffefa;border-color:#e6dcd0}
+.mh .mh-tabs button:hover{border-color:#e75b35;background:#fbf6ee}
+.mh .mh-tabs button[aria-selected=true]{background:#e75b35;color:#fff;border-color:#e75b35}
