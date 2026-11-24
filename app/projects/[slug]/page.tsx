@@ -41,7 +41,6 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
   const canonicalSlug = normalizeProjectSlug(project.slug);
   if (slug !== canonicalSlug) permanentRedirect(projectPath(project.slug));
 
-  const email = content.sections.contact.email;
   const websiteUrl = project.websiteUrl?.trim();
   const repoUrl = project.repoUrl?.trim();
   const study = project.caseStudy;
@@ -80,7 +79,7 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
             <div className="hero-actions">
               {websiteUrl && <a className="button button-dark" href={websiteUrl} target="_blank" rel="noreferrer">Visit live website ↗</a>}
               {repoUrl && <a className="button button-light" href={repoUrl} target="_blank" rel="noreferrer">View GitHub ↗</a>}
-              <a className="button button-light" href={'mailto:' + email + '?subject=Project%20enquiry%20for%20MifiTech'}>Discuss a project</a>
+              <Link className="button button-light" href="/#contact">Discuss a project</Link>
             </div>
           </div>
           <div className="case-preview" role="img" aria-label={project.name + ' project preview'} style={{ backgroundImage: "url(" + project.image + ")" }} />
