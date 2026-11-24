@@ -39,7 +39,6 @@ export async function POST(req: Request) {
       status: 'pending', displayed: false, consent: true, createdAt: new Date().toISOString(),
     };
     await saveTestimonials([item, ...items].slice(0, 500));
-    record(limitKey, 60 * 60_000);
     after(async () => {
       await notifyOwner({
         title: 'New client testimony from ' + name,
