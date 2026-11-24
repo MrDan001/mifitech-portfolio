@@ -1354,3 +1354,30 @@ html[data-theme="dark"] .studio-mobile-nav a{color:#eef3f3;border-color:#304147}
    background:#e75b35;color:#fff;
  }
 }
+
+
+/* Shared MifiTech footer — consistent across public pages */
+.studio-brand-copy strong .brand-mifi{color:#e75b35}
+.studio-brand-copy strong .brand-period{color:#171819}
+.mifi-site-footer{background:#171819;color:#fffefa;padding:clamp(42px,6vw,76px) clamp(22px,5vw,76px) 22px}
+.mifi-footer-main{width:min(1240px,100%);margin:0 auto;display:grid;grid-template-columns:minmax(220px,1.05fr) minmax(250px,1fr) minmax(230px,.9fr);gap:clamp(28px,5vw,72px);padding-bottom:48px}
+.mifi-footer-wordmark{display:inline-block;color:#fffefa;text-decoration:none;font-size:clamp(27px,3vw,36px);font-weight:850;letter-spacing:-1.8px}
+.mifi-footer-wordmark>span:first-child{color:#e75b35}
+.mifi-footer-wordmark .mifi-footer-period{color:#fffefa}
+.mifi-footer-brand>p,.mifi-footer-action>p{max-width:340px;color:#c7c2bc;font-size:14px;line-height:1.8;margin:15px 0}
+.mifi-footer-contact{display:grid;gap:9px;margin-top:22px}
+.mifi-footer-contact a{color:#f1c6b8;text-decoration:none;font-size:13px}
+.mifi-footer-contact a:hover,.mifi-footer-navigation a:hover,.mifi-footer-bottom a:hover{color:#ff9b7e}
+.mifi-footer-label{margin:7px 0 20px;color:#ff9b7e;font-size:10px;font-weight:800;letter-spacing:1.7px}
+.mifi-footer-navigation nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 20px}
+.mifi-footer-navigation nav a{color:#f4eee8;text-decoration:none;font-size:13px;line-height:1.5}
+.mifi-footer-action h2{max-width:280px;margin:0;color:#fffefa;font-size:clamp(23px,2.4vw,31px);line-height:1.15;letter-spacing:-.8px}
+.mifi-footer-cta{display:inline-flex;align-items:center;justify-content:center;gap:22px;margin-top:10px;padding:13px 17px;border-radius:9px;background:#e75b35;color:#fff;text-decoration:none;font-size:13px;font-weight:750}
+.mifi-footer-cta:hover{background:#c94a2b}
+.mifi-footer-cta span{font-size:18px}
+.mifi-footer-bottom{width:min(1240px,100%);margin:0 auto;padding-top:20px;border-top:1px solid #45413d;display:flex;justify-content:space-between;gap:18px;color:#aaa49e;font-size:11px;line-height:1.7}
+.mifi-footer-bottom>span:last-child{display:flex;align-items:center;gap:12px}
+.mifi-footer-bottom a{color:#f1c6b8;text-decoration:none}
+.mifi-footer-dot{color:#e75b35}
+@media(max-width:850px){.mifi-footer-main{grid-template-columns:1fr 1fr;gap:35px}.mifi-footer-action{grid-column:1/-1}}
+@media(max-width:560px){.mifi-footer-main{grid-template-columns:1fr;gap:28px;padding-bottom:34px}.mifi-footer-action{grid-column:auto}.mifi-footer-navigation nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.mifi-footer-bottom{flex-direction:column;gap:8px}.mifi-footer-bottom>span:last-child{flex-wrap:wrap}}
