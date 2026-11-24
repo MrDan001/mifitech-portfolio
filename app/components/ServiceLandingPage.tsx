@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { projectPath } from '@/lib/project-slug';
+import type { ProjectItem } from '@/lib/site-content-defaults';
 
 export type ServicePageContent = {
   eyebrow: string;
@@ -13,7 +15,7 @@ export type ServicePageContent = {
   related: Array<{ label: string; href: string; description: string }>;
 };
 
-export default function ServiceLandingPage({ page }: { page: ServicePageContent }) {
+export default function ServiceLandingPage({ page, projects = [] }: { page: ServicePageContent; projects?: ProjectItem[] }) {
   return (
     <div className="studio-shell">
       <main className="case wrap service-landing">
@@ -63,6 +65,24 @@ export default function ServiceLandingPage({ page }: { page: ServicePageContent 
             ))}
           </div>
         </section>
+
+        {projects.length > 0 && (
+          <section className="case-section service-proof" aria-labelledby="service-proof-title">
+            <p className="section-label">RELATED MIFITECH PROJECTS</p>
+            <h2 id="service-proof-title">See the work behind the approach.</h2>
+            <p className="service-proof-intro">Explore selected products and platforms that demonstrate relevant implementation experience.</p>
+            <div className="service-proof-grid">
+              {projects.map((project) => (
+                <Link className="service-proof-card" href={projectPath(project.slug)} key={project.slug}>
+                  <span>{project.type}</span>
+                  <strong>{project.name}</strong>
+                  <p>{project.text}</p>
+                  <small>Explore project <b aria-hidden="true">↗</b></small>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="case-section service-faqs">
           <p className="section-label">COMMON QUESTIONS</p>
