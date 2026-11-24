@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import ThemeToggle from '../components/ThemeToggle';
 import { getSiteContent } from '@/lib/site-content';
 import { SITE_URL } from '@/lib/contact';
 
@@ -29,10 +28,6 @@ export default async function Guide() {
 
   return (
     <main className="guide-page">
-      <header>
-        <Link href="/" className="admin-brand">MifiTech<span>.</span></Link>
-        <div className="guide-header-actions"><ThemeToggle /><Link href="/#contact">Build my website</Link></div>
-      </header>
       <article>
         <p className="admin-kicker">{article.eyebrow}</p>
         <h1>{article.title}</h1>
@@ -47,7 +42,6 @@ export default async function Guide() {
         <p>{article.closingText} <Link href="/#demos">Explore our website demos</Link> or <Link href="/#contact">tell us about your project</Link>.</p>
       </article>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <footer>© {new Date().getFullYear()} MifiTech · <Link href="/privacy">Privacy policy</Link></footer>
     </main>
   );
 }
