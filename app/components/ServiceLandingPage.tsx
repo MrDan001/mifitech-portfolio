@@ -19,7 +19,7 @@ export default function ServiceLandingPage({ page, projects = [] }: { page: Serv
   return (
     <div className="studio-shell">
       <main className="case wrap service-landing">
-        <Link href="/#services" className="back-link">Back to services</Link>
+        <nav className="case-breadcrumbs" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/#services">Services</Link><span aria-hidden="true">/</span><span aria-current="page">{page.title}</span></nav>
         <section className="case-hero">
           <div>
             <p className="section-label">{page.eyebrow}</p>
