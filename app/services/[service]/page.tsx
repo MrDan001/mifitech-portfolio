@@ -157,7 +157,6 @@ const services: Record<string, Service> = {
       ],
     },
   },
-,
   'seo-growth': {
     title: 'SEO & Search Visibility',
     description: 'MifiTech improves the technical and content foundations that help businesses become easier to discover through search engines.',
