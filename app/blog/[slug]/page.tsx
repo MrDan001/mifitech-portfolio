@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import SiteNav from '../../components/SiteNav';
 import { blogPosts, getBlogPost } from '@/lib/blog-posts';
 import { SITE_URL } from '@/lib/contact';
 
@@ -61,7 +60,6 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
 
   return (
     <div className="studio-shell wonders-shell">
-      <SiteNav />
       <main className="wonders-article">
         <div className="wonders-article-top"><Link href="/blog">← BACK TO WONDERS</Link><span>{post.category.toUpperCase()} &nbsp; / &nbsp; {post.readTime.toUpperCase()}</span></div>
         <header className="wonders-article-head">
@@ -90,7 +88,6 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
           <Link className="wonders-read-link" href="/blog">Discover more from Wonders <span>↗</span></Link>
         </section>
       </main>
-      <footer className="footer"><div className="wrap footer-bottom"><span>© {new Date().getFullYear()} MifiTech. All rights reserved.</span><span><Link href="/blog">Wonders</Link> · <Link href="/">Home</Link></span></div></footer>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
     </div>
   );
