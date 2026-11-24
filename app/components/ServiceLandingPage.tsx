@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import SiteNav from './SiteNav';
 
 export type ServicePageContent = {
   eyebrow: string;
@@ -17,7 +16,6 @@ export type ServicePageContent = {
 export default function ServiceLandingPage({ page }: { page: ServicePageContent }) {
   return (
     <div className="studio-shell">
-      <SiteNav />
       <main className="case wrap service-landing">
         <Link href="/#services" className="back-link">Back to services</Link>
         <section className="case-hero">
