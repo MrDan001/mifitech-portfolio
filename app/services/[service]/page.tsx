@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import ServiceLandingPage, { type ServicePageContent } from '../../components/ServiceLandingPage';
 import { getSiteContent } from '@/lib/site-content';
+import type { ProjectItem } from '@/lib/site-content-defaults';
 import { projectPath } from '@/lib/project-slug';
 import { SITE_URL } from '@/lib/contact';
 
@@ -186,7 +187,7 @@ export default async function GlobalServicePage({ params }: { params: Promise<{ 
   };
   const projects = (relatedSlugs[service] || [])
     .map((slug) => content.projects.find((project) => project.visible !== false && project.slug === slug))
-    .filter((project): project is NonNullable<typeof project> => Boolean(project));
+    .filter((project): project is ProjectItem => Boolean(project));
   const url = new URL('/services/' + service, SITE_URL).toString();
   const serviceSchema = {
     '@context': 'https://schema.org',
