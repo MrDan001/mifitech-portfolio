@@ -4,9 +4,9 @@
 import { Badge, Icon, Empty, STATUS_COLORS, initials, leadStatuses, money, pretty, timeAgo } from './ui';
 
 type Row = Record<string, any>;
-type Props = { leads: Row[]; proposals: Row[]; content: any; seo: any; loading: boolean; go: (tab: string) => void };
+type Props = { leads: Row[]; proposals: Row[]; testimonials: Row[]; content: any; seo: any; loading: boolean; go: (tab: string) => void };
 
-export default function Overview({ leads, proposals, content, seo, loading, go }: Props) {
+export default function Overview({ leads, proposals, testimonials, content, seo, loading, go }: Props) {
   if (loading) return <div className="ad-stack"><div className="ad-skel" /><div className="ad-skel" /><div className="ad-skel" /></div>;
   const fresh = leads.filter((l) => l.status === 'new');
   const stale = fresh.filter((l) => Date.now() - new Date(l.created_at).getTime() > 48 * 3600 * 1000).length;
@@ -18,7 +18,7 @@ export default function Overview({ leads, proposals, content, seo, loading, go }
   const desc = String(seo?.description || '').length;
   const projects = content?.projects || [];
   const checklist = [
-    { done: (content?.testimonials || []).length > 0, t: 'Add a client testimonial', d: 'Reviews are the strongest trust signal for new visitors.', tab: 'content' },
+    { done: (content?.testimonials || []).length > 0 || testimonials.some((item) => item.status === 'approved' && item.displayed), t: 'Add a client testimonial', d: 'Reviews are the strongest trust signal for new visitors.', tab: 'testimonials' },
     { done: Boolean(content?.studioProfile?.name || content?.studioProfile?.bio), t: 'Fill in your founder profile', d: 'People hire people. A short story and photo helps.', tab: 'content' },
     { done: desc >= 70 && desc <= 160, t: 'Write a 70 to 160 character search description', d: desc ? 'Yours is ' + desc + ' characters.' : 'It is empty right now.', tab: 'seo' },
     { done: !/vercel\.app/.test(String(seo?.canonicalUrl || '')), t: 'Move to your own domain', d: 'A custom domain looks more professional and ranks better. Then update the canonical URL.', tab: 'seo' },
