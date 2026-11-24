@@ -1,6 +1,6 @@
 /* Path: app/home.css */
 /* MifiTech homepage. Every selector is scoped under .mh so nothing here touches the other pages. */
-.mh{--ink:#0f1a17;--ink2:#17261f;--lime:#d8e99a;--teal:#087f79;--chalk:#f1f4ea;--line:#d9dfcf;--mute:#5d6b63;--display:var(--mh-display),'Arial Black',sans-serif;--body:var(--mh-body),Arial,sans-serif;font:400 17px/1.6 var(--body);color:var(--ink);background:var(--chalk);overflow-x:clip}
+.mh{--ink:#171819;--ink2:#252626;--lime:#e75b35;--teal:#e75b35;--chalk:#fbf6ee;--line:#e6dcd0;--mute:#68635d;--display:var(--mh-display),'Arial Black',sans-serif;--body:var(--mh-body),Arial,sans-serif;font:400 17px/1.6 var(--body);color:var(--ink);background:var(--chalk);overflow-x:clip}
 .mh *{box-sizing:border-box}
 .mh h1,.mh h2,.mh h3,.mh p,.mh ul{margin:0}
 .mh a{color:inherit}
@@ -252,7 +252,7 @@
 .mh .mh-service-detail-links a span{margin-left:5px}
 
 /* MifiTech brand refresh: warm ivory, ink black and persimmon orange */
-.mh{--ink:#171819;--ink2:#252626;--lime:#f0643b;--teal:#e75b35;--chalk:#fbf6ee;--line:#e6dcd0;--mute:#68635d;background:var(--chalk);color:var(--ink)}
+.mh{--ink:#171819;--ink2:#252626;--lime:#e75b35;--teal:#e75b35;--chalk:#fbf6ee;--line:#e6dcd0;--mute:#68635d;background:var(--chalk);color:var(--ink)}
 .mh .mh-dark{background:#171819;color:#fff}.mh .mh-hero{background:#fbf6ee;padding:78px 0 70px}.mh .mh-hero h1{color:#171819}.mh .mh-lead{color:#68635d}
 .mh .mh-btn-lime{background:#e75b35;color:#fff}.mh .mh-btn-lime:hover,.mh .mh-form .form-submit:hover{background:#c94a2b}.mh .mh-btn-line{border-color:#171819;color:#171819}.mh .mh-btn-line:hover{background:#171819;color:#fff;border-color:#171819}.mh .mh-btn-ink{background:#171819;color:#fff}
 .mh .mh-phone{background:#171819;box-shadow:0 22px 50px #17181930}.mh .mh-note{color:#68635d}.mh .mh-proof{background:#fffefa}.mh .mh-dot{background:#e75b35}
