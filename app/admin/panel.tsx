@@ -10,6 +10,7 @@ import Media from './Media';
 import Overview from './Overview';
 import Proposals from './Proposals';
 import Seo from './Seo';
+import Testimonials from './Testimonials';
 import { Icon } from './ui';
 
 type Row = Record<string, any>;
@@ -23,6 +24,7 @@ const TITLES: Record<string, [string, string]> = {
   content: ['Website content', 'Edit your pages. Nothing goes live until you save.'],
   media: ['Media library', 'Upload and reuse the images on your website.'],
   seo: ['Search & sharing', 'Control how your site looks on Google and WhatsApp.'],
+  testimonials: ['Client testimonials', 'Review, approve and manage the ratings clients send to MifiTech.'],
 };
 
 export default function AdminPanel() {
@@ -32,6 +34,7 @@ export default function AdminPanel() {
   const [userOpen, setUserOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [leads, setLeads] = useState<Row[]>([]);
+  const [testimonials, setTestimonials] = useState<Row[]>([]);
   const [proposals, setProposals] = useState<Row[]>([]);
   const [seo, setSeo] = useState<Row>({});
   const [content, setContent] = useState<any>(defaultSiteContent);
@@ -56,14 +59,15 @@ export default function AdminPanel() {
 
   const load = useCallback(async () => {
     try {
-      const rs = await Promise.all(['leads', 'proposals', 'seo', 'content'].map((x) => fetch('/api/admin/' + x)));
-      const [a, b, c, d] = await Promise.all(rs.map((r) => r.json().catch(() => ({}))));
+      const rs = await Promise.all(['leads', 'proposals', 'seo', 'content', 'testimonials'].map((x) => fetch('/api/admin/' + x)));
+      const [a, b, c, d, e] = await Promise.all(rs.map((r) => r.json().catch(() => ({}))));
       if (rs[0].ok) setLeads(a.leads || []);
       if (rs[1].ok) setProposals(b.proposals || []);
       if (rs[2].ok) setSeo(c.settings || {});
       if (rs[3].ok) { const next = d.content || defaultSiteContent; setContent(next); setSaved(JSON.stringify(next)); }
+      if (rs[4].ok) setTestimonials(e.testimonials || []);
       const bad = rs.findIndex((r) => !r.ok);
-      if (bad >= 0) notify([a, b, c, d][bad].error || 'Could not load some admin records. Check the database setup.', 'err');
+      if (bad >= 0) notify([a, b, c, d, e][bad].error || 'Could not load some admin records. Check the database setup.', 'err');
     } catch { notify('The admin database could not be reached.', 'err'); }
     finally { setLoading(false); }
   }, [notify]);
@@ -122,6 +126,20 @@ export default function AdminPanel() {
     if (!r.ok) { notify(d.error || 'Could not delete enquiry.', 'err'); return; }
     setLeads((old) => old.filter((l) => l.id !== id)); notify('Enquiry deleted.');
   }
+  async function updateTestimonial(id: string, patch: Record<string, any>) {
+    const response = await fetch('/api/admin/testimonials', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id, ...patch }) });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) { notify(result.error || 'Could not update testimonial.', 'err'); return; }
+    setTestimonials((items) => items.map((item) => item.id === id ? { ...item, ...patch, ...(patch.status && patch.status !== 'approved' ? { displayed: false } : {}) } : item));
+    notify(patch.status === 'approved' ? 'Testimonial approved.' : patch.status === 'archived' ? 'Testimonial archived.' : patch.displayed === true ? 'Testimonial is now displayed.' : patch.displayed === false ? 'Testimonial hidden from the website.' : 'Testimonial updated.');
+  }
+  async function deleteTestimonial(id: string) {
+    if (!window.confirm('Delete this client testimony permanently? This cannot be undone.')) return;
+    const response = await fetch('/api/admin/testimonials', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) { notify(result.error || 'Could not delete testimonial.', 'err'); return; }
+    setTestimonials((items) => items.filter((item) => item.id !== id)); notify('Testimonial deleted.');
+  }
   async function createProposal(data: Record<string, string>) {
     const r = await fetch('/api/admin/proposals', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
     const d = await r.json().catch(() => ({}));
@@ -157,6 +175,7 @@ export default function AdminPanel() {
       { key: 'overview', label: 'Dashboard', icon: 'home', detail: 'Your studio at a glance' },
       { key: 'hunt', label: 'HUNT', icon: 'search', detail: 'Find businesses to reach' },
       { key: 'leads', label: 'Enquiries', icon: 'inbox', detail: 'Messages from potential clients', count: newCount },
+      { key: 'testimonials', label: 'Testimonials', icon: 'star', detail: 'Client ratings and published feedback', count: testimonials.filter((item) => item.status === 'pending').length },
       { key: 'proposals', label: 'Proposals & Payments', icon: 'doc', detail: 'Quotes, proposals and payment progress', count: openCount },
     ]},
     { label: 'WEBSITE CONTROL', items: [
@@ -228,6 +247,7 @@ export default function AdminPanel() {
             {tab === 'hunt' && <Hunt />}
             {tab === 'overview' && <Overview leads={leads} proposals={proposals} content={content} seo={seo} loading={loading} go={go} />}
             {tab === 'leads' && <Leads leads={leads} loading={loading} onStatus={(id, s) => setStatus('leads', id, s)} onDelete={deleteLead} onProposal={(l) => { setDraft(l); go('proposals'); }} notify={notify} />}
+            {tab === 'testimonials' && <Testimonials items={testimonials} loading={loading} onUpdate={updateTestimonial} onDelete={deleteTestimonial} />}
             {tab === 'proposals' && <Proposals proposals={proposals} loading={loading} draft={draft} onCreate={createProposal} onStatus={(id, s) => setStatus('proposals', id, s)} notify={notify} />}
             {tab === 'content' && <Content content={content} setContent={setContent} notify={notify} />}
             {tab === 'media' && <Media media={media} loading={loadingMedia} uploading={uploading} content={content} onRefresh={loadMedia} onUpload={uploadFiles} onDelete={deleteMedia} notify={notify} />}
