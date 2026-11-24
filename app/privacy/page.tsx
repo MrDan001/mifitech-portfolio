@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import ThemeToggle from '../components/ThemeToggle';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
@@ -12,10 +11,6 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <main className="guide-page">
-      <header>
-        <Link href="/" className="admin-brand">MifiTech<span>.</span></Link>
-        <div className="guide-header-actions"><ThemeToggle /><Link href="/#contact">Contact the studio</Link></div>
-      </header>
       <article>
         <p className="admin-kicker">WEBSITE INFORMATION</p>
         <h1>Privacy policy</h1>
@@ -43,7 +38,6 @@ export default function PrivacyPage() {
         <p>Questions about this policy can be sent to <a href="mailto:officialsafebase@gmail.com">officialsafebase@gmail.com</a>.</p>
         <p><Link href="/">← Back to MifiTech</Link></p>
       </article>
-      <footer>© {new Date().getFullYear()} MifiTech · <Link href="/">Home</Link></footer>
     </main>
   );
 }
