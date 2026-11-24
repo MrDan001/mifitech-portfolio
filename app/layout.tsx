@@ -61,5 +61,5 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     ],
   };
 
-  return <html lang="en" suppressHydrationWarning><head></head><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} /><SiteNav items={siteContent.navigation} />{children}<SiteFooter items={siteContent.navigation} tagline={siteContent.footer.tagline} /></body></html>;
+  return <html lang="en"><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} /><SiteNav items={siteContent.navigation} />{children}<SiteFooter items={siteContent.navigation} tagline={siteContent.footer.tagline} /></body></html>;
 }
