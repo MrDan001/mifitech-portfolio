@@ -157,6 +157,81 @@ const services: Record<string, Service> = {
       ],
     },
   },
+,
+  'seo-growth': {
+    title: 'SEO & Search Visibility',
+    description: 'MifiTech improves the technical and content foundations that help businesses become easier to discover through search engines.',
+    page: {
+      eyebrow: 'SEO & ORGANIC SEARCH FOUNDATIONS',
+      title: 'Make it easier for the right people to find your business.',
+      intro: 'Search visibility starts with a website that can be understood by people and search engines. MifiTech helps businesses strengthen technical SEO, page structure, useful content and internal links without promising overnight rankings or guaranteed positions.',
+      previewLabel: 'MIFITECH / SEARCH VISIBILITY',
+      previewTitle: 'A clearer path from search to enquiry.',
+      previewText: 'Technical foundations, useful pages and connected content.',
+      outcomes: [
+        { title: 'Technical SEO foundations', body: 'Review crawlability, indexation signals, page performance, canonical URLs and sitemap health.' },
+        { title: 'Clear page structure', body: 'Improve titles, descriptions, headings, internal links and page relationships.' },
+        { title: 'Useful search-led content', body: 'Plan content around the questions, needs and intent of the audiences you want to reach.' },
+        { title: 'Local and international targeting', body: 'Align page language, business details and location signals with the markets you actually serve.' },
+        { title: 'Measurement and review', body: 'Use available search performance data to identify issues and prioritise improvements.' },
+        { title: 'Sustainable expectations', body: 'Focus on clear improvements and ongoing learning; search positions and timing cannot be guaranteed.' },
+      ],
+      process: [
+        { title: 'Review the website', body: 'Assess technical setup, page content, indexing signals and the current search journey.' },
+        { title: 'Prioritise opportunities', body: 'Agree the highest-value fixes and content improvements for the target audience.' },
+        { title: 'Implement improvements', body: 'Update the agreed technical elements, page structure and content.' },
+        { title: 'Monitor and refine', body: 'Review available search data and adjust priorities as the site and market evolve.' },
+      ],
+      faqs: [
+        { question: 'Can you guarantee a first-page Google ranking?', answer: 'No. Search rankings depend on many factors outside any provider’s control. MifiTech focuses on sound technical foundations, useful content and measurable improvements.' },
+        { question: 'Can you help with Google Search Console?', answer: 'Yes. We can review verification, sitemap submission, indexing reports and available performance data where access is provided.' },
+        { question: 'Do you write SEO content?', answer: 'Content planning and agreed page or article writing can be included in the project scope.' },
+        { question: 'Can SEO support international audiences?', answer: 'Yes. Page structure, language, content and relevant regional signals can be planned around the countries and audiences you want to reach.' },
+      ],
+      related: [
+        { label: 'Website design and development', href: '/services/web-design', description: 'Build a clear, crawlable website foundation.' },
+        { label: 'Website planning guide', href: '/how-to-build-a-website-in-nigeria', description: 'Understand the key decisions behind a business website.' },
+        { label: 'Read the MifiTech journal', href: '/blog', description: 'Explore practical articles and digital insights.' },
+      ],
+    },
+  },
+  'website-care': {
+    title: 'Website Maintenance & Support',
+    description: 'MifiTech provides practical website maintenance and technical support to help businesses keep their digital services current and dependable.',
+    page: {
+      eyebrow: 'WEBSITE CARE & TECHNICAL SUPPORT',
+      title: 'Keep your website cared for as your business grows.',
+      intro: 'A website needs attention after launch too. MifiTech can help with agreed updates, technical checks, content changes and improvement work so your website continues to support the way your business operates.',
+      previewLabel: 'MIFITECH / WEBSITE CARE',
+      previewTitle: 'Reliable support beyond launch.',
+      previewText: 'Planned updates, careful checks and clear communication.',
+      outcomes: [
+        { title: 'Content and page updates', body: 'Keep service details, business information, images and key pages current.' },
+        { title: 'Technical health checks', body: 'Review key website journeys, forms, links and common issues at agreed intervals.' },
+        { title: 'Dependency and security updates', body: 'Plan updates to supported software and dependencies, with appropriate testing and backups.' },
+        { title: 'Performance improvements', body: 'Identify opportunities to improve loading, usability and the experience across devices.' },
+        { title: 'Issue investigation', body: 'Get help investigating errors, broken journeys and unexpected website behaviour.' },
+        { title: 'A clear support scope', body: 'Agree response expectations, included tasks and any out-of-scope development before work begins.' },
+      ],
+      process: [
+        { title: 'Understand the setup', body: 'Review the website, hosting, access, dependencies and current maintenance needs.' },
+        { title: 'Agree a care plan', body: 'Define the support scope, update frequency, response expectations and responsibilities.' },
+        { title: 'Carry out planned work', body: 'Complete agreed updates and checks, testing important journeys after changes.' },
+        { title: 'Report and improve', body: 'Share completed work, issues found and recommendations for the next cycle.' },
+      ],
+      faqs: [
+        { question: 'Can you maintain a website you did not build?', answer: 'Yes, subject to an initial review of the platform, codebase, hosting and access available.' },
+        { question: 'Do you provide emergency support?', answer: 'Urgent support arrangements depend on availability and the agreed service scope. Response times should be confirmed before a support plan begins.' },
+        { question: 'Will you update website content for us?', answer: 'Content changes can be included within an agreed maintenance allowance or quoted separately.' },
+        { question: 'Do I keep ownership of my website and accounts?', answer: 'Yes. The business should retain ownership and administrative access to its domain, hosting and essential third-party accounts.' },
+      ],
+      related: [
+        { label: 'Website design and development', href: '/services/web-design', description: 'Explore the website build process.' },
+        { label: 'Custom web applications', href: '/services/custom-web-applications', description: 'Get support for a tailored digital product.' },
+        { label: 'Contact MifiTech', href: '/#contact', description: 'Discuss the support your website needs.' },
+      ],
+    },
+  }
 };
 
 export function generateStaticParams() {
