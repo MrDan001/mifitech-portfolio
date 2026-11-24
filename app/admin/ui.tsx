@@ -25,6 +25,7 @@ const ICONS: Record<string, string> = {
   upload: 'M12 16V4M7 9l5-5 5 5M4 20h16',
   file: 'M7 3h7l5 5v13H7zM14 3v5h5',
   spark: 'M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z',
+  star: 'M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z',
   x: 'M6 6l12 12M18 6L6 18',
 };
 export const Icon = ({ n }: { n: string }) => <svg viewBox="0 0 24 24" aria-hidden="true"><path d={ICONS[n] || ICONS.spark} /></svg>;
