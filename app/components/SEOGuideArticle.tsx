@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import SiteNav from './SiteNav';
 
 export type GuideArticle = {
   path: string;
@@ -22,7 +21,6 @@ export default function SEOGuideArticle({ article }: { article: GuideArticle }) 
   };
   return (
     <div className="studio-shell">
-      <SiteNav />
       <main className="case wrap service-landing">
         <Link href="/how-to-build-a-website-in-nigeria" className="back-link">Website planning guide</Link>
         <article>
@@ -53,7 +51,6 @@ export default function SEOGuideArticle({ article }: { article: GuideArticle }) 
           </section>
         </article>
       </main>
-      <footer className="footer"><div className="wrap footer-bottom"><span>© {new Date().getFullYear()} MifiTech. All rights reserved.</span><span><Link href="/">Home</Link> · <Link href="/privacy">Privacy</Link></span></div></footer>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
     </div>
   );
