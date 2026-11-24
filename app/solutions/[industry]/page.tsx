@@ -178,7 +178,7 @@ export default async function IndustrySolutionPage({ params }: { params: Promise
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Industry solutions', item: SITE_URL + '/#industries' },
+      { '@type': 'ListItem', position: 2, name: 'Industry solutions', item: SITE_URL + '/#industry-solutions' },
       { '@type': 'ListItem', position: 3, name: page.title, item: url },
     ],
   };
@@ -194,7 +194,7 @@ export default async function IndustrySolutionPage({ params }: { params: Promise
   return (
     <div className="studio-shell">
       <main className="case wrap service-landing">
-        <nav className="case-breadcrumbs" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/#industries">Industries</Link><span aria-hidden="true">/</span><span aria-current="page">{page.title}</span></nav>
+        <nav className="case-breadcrumbs" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/#industry-solutions">Industries</Link><span aria-hidden="true">/</span><span aria-current="page">{page.title}</span></nav>
         <article>
           <header className="case-hero">
             <div>
