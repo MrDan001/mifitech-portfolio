@@ -247,7 +247,7 @@ export default function AdminPanel() {
         <main className="apd-content">
           <div className="ad-page">
             {tab === 'hunt' && <Hunt />}
-            {tab === 'overview' && <Overview leads={leads} proposals={proposals} content={content} seo={seo} loading={loading} go={go} />}
+            {tab === 'overview' && <Overview leads={leads} proposals={proposals} testimonials={testimonials} content={content} seo={seo} loading={loading} go={go} />}
             {tab === 'leads' && <Leads leads={leads} loading={loading} onStatus={(id, s) => setStatus('leads', id, s)} onDelete={deleteLead} onProposal={(l) => { setDraft(l); go('proposals'); }} notify={notify} />}
             {tab === 'testimonials' && <Testimonials items={testimonials} loading={loading} onUpdate={updateTestimonial} onDelete={deleteTestimonial} />}
             {tab === 'proposals' && <Proposals proposals={proposals} loading={loading} draft={draft} onCreate={createProposal} onStatus={(id, s) => setStatus('proposals', id, s)} notify={notify} />}
