@@ -90,6 +90,8 @@ export default async function Home() {
                 <Link href="/services/ecommerce-development">E-commerce development <span aria-hidden="true">↗</span></Link>
                 <Link href="/services/custom-web-applications">Custom web applications <span aria-hidden="true">↗</span></Link>
                 <Link href="/services/business-software">Business management software <span aria-hidden="true">↗</span></Link>
+                <Link href="/services/seo-growth">SEO &amp; search visibility <span aria-hidden="true">↗</span></Link>
+                <Link href="/services/website-care">Website maintenance &amp; support <span aria-hidden="true">↗</span></Link>
               </p>
               <p className="mh-demo-note">Looking for a local provider? <Link href="/website-design-nigeria">Explore our website design services in Nigeria</Link>.</p>
             </div>
