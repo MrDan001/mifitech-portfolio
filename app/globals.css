@@ -1097,3 +1097,7 @@ html[data-theme="dark"] .wonders-article-dropcap{color:var(--w-ink)!important}
 .mifi-floating-details>summary{min-height:44px;padding:0 22px;border-radius:10px;background:#e75b35;color:#fff;font-size:14px;font-weight:700;letter-spacing:.2px;box-shadow:0 8px 22px rgba(23,24,25,.14)}
 .mifi-floating-details nav{border-radius:12px}
 @media(max-width:600px){.mifi-floating-menu{padding:0}.mifi-floating-details>summary{min-height:42px;padding:0 18px;font-size:13px}}
+
+/* Menu button is mobile-only; desktop uses the regular site navigation */
+.mifi-floating-menu{display:none!important}
+@media(max-width:767px){.mifi-floating-menu{display:flex!important}}
