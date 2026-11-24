@@ -1404,3 +1404,25 @@ html[data-theme="dark"] .studio-mobile-nav a{color:#eef3f3;border-color:#304147}
 .wonders-shell .wonders-deck,.wonders-shell .wonders-summary{color:#68635d}
 .wonders-shell .wonders-byline,.wonders-shell .wonders-overline,.wonders-shell .wonders-rule{color:#68635d}
 .wonders-shell .wonders-lead-image{background-color:#e6dcd0}
+
+
+/* Service, industry and case-study proof sections */
+.studio-shell .case-breadcrumbs{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 0 18px;color:#898178;font-size:11px}
+.studio-shell .case-breadcrumbs a{color:#68635d;text-decoration:none}
+.studio-shell .case-breadcrumbs a:hover{color:#e75b35}
+.studio-shell .case-breadcrumbs [aria-current=page]{color:#171819;font-weight:700}
+.studio-shell .service-proof-intro{max-width:650px;margin:-8px 0 22px;color:#68635d;font-size:13px;line-height:1.8}
+.studio-shell .service-proof-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.studio-shell .service-proof-card{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-height:190px;padding:22px;border:1px solid #e6dcd0;border-radius:12px;background:#fffefa;text-decoration:none;transition:transform .2s,border-color .2s,box-shadow .2s}
+.studio-shell .service-proof-card:hover{transform:translateY(-3px);border-color:#e75b35;box-shadow:0 15px 34px #1718190d}
+.studio-shell .service-proof-card>span{color:#e75b35;font-size:9px;font-weight:800;letter-spacing:1.2px}
+.studio-shell .service-proof-card>strong{color:#171819;font-size:19px;letter-spacing:-.4px}
+.studio-shell .service-proof-card p{margin:0;color:#68635d;font-size:12px;line-height:1.75}
+.studio-shell .service-proof-card small{margin-top:auto;color:#e75b35;font-size:10px;font-weight:800}
+.studio-shell .service-proof-card small b{margin-left:5px}
+.studio-shell .service-related a{border-color:#e6dcd0;background:#fffefa}
+.studio-shell .service-related strong{color:#171819}
+.studio-shell .service-related span{color:#68635d}
+.studio-shell .fact strong{color:#171819}
+.studio-shell .tag-row-new span{border-color:#e6dcd0;color:#68635d}
+@media(max-width:760px){.studio-shell .service-proof-grid{grid-template-columns:1fr}.studio-shell .case-breadcrumbs{font-size:10px;gap:7px}}
