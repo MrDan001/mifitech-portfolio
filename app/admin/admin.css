@@ -194,3 +194,26 @@
 @media(max-width:960px){.apd-sidebar{display:none}.apd-main{padding:12px 14px calc(92px + env(safe-area-inset-bottom))}.apd-topbar{padding:8px 10px;background:transparent;border:0;backdrop-filter:none;margin-bottom:10px}.apd-menu-btn,.apd-top-brand{display:flex;align-items:center}.apd-search,.apd-user-name,.apd-user>svg{display:none}.apd-page-head{padding:2px 4px}.apd-page-head p{max-width:72vw}.apd-content .ad-page{padding-top:12px}.apd-bottom{position:fixed;left:0;right:0;bottom:0;z-index:100;display:grid;grid-template-columns:repeat(5,1fr);padding:8px 6px calc(8px + env(safe-area-inset-bottom));background:#fffffff2;backdrop-filter:blur(12px);border-top:1px solid var(--apd-line)}.apd-bottom button{position:relative;display:grid;justify-items:center;gap:3px;padding:4px 0;border:0;background:transparent;color:#89938b;font-size:10px;font-weight:600}.apd-bottom .is-active{color:#58752f}.apd-bottom svg{width:21px;height:21px}}
 @media(max-width:560px){.apd-page-head{align-items:flex-start}.apd-unsaved{font-size:10px;padding:7px 9px}.apd-sheet-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){.apd *,.apd-sheet{animation:none!important;transition:none!important}}
+
+
+/* Client testimonial moderation */
+.apd .ad-testimonial-toolbar{align-items:flex-start}
+.apd .ad-testimonial-toolbar h2{margin:0 0 5px}
+.apd .ad-testimonial-toolbar select{min-height:40px;padding:8px 12px;border:1px solid var(--apd-line);border-radius:10px;background:#fff;color:var(--apd-text)}
+.apd .ad-testimonial-list{display:grid;gap:12px}
+.apd .ad-testimonial{padding:18px;border:1px solid var(--apd-line);border-radius:14px;background:#fff}
+.apd .ad-testimonial-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.apd .ad-testimonial-top b,.apd .ad-testimonial-top small{display:block}
+.apd .ad-testimonial-top b{font-size:15px}
+.apd .ad-testimonial-top small{margin-top:4px;color:var(--apd-muted);font-size:12px}
+.apd .ad-testimonial-stars{display:flex;align-items:center;gap:2px;margin:14px 0 8px;color:#e75b35;font-size:18px;letter-spacing:1px}
+.apd .ad-testimonial-stars>span{color:#dedbd4}
+.apd .ad-testimonial-stars small{margin-left:8px;color:var(--apd-muted);font-size:11px;letter-spacing:0}
+.apd .ad-testimonial blockquote{margin:0;color:var(--apd-text);font-size:14px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere}
+.apd .ad-testimonial-email{margin-top:10px;color:var(--apd-muted);font-size:12px}
+.apd .ad-testimonial-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid var(--apd-line)}
+.apd .ad-testimonial-actions .ad-btn{min-height:36px}
+.apd .ad-testimonial-actions .ad-btn.danger{color:#9a2f27;border-color:#f0d0cd;background:#fff8f7}
+.apd .ad-badge.approved{background:#e5f4e9;color:#24643a}
+.apd .ad-badge.archived{background:#eef0ed;color:#667067}
+@media(max-width:600px){.apd .ad-testimonial{padding:14px}.apd .ad-testimonial-top{align-items:flex-start}.apd .ad-testimonial-actions .ad-btn{flex:1 1 auto}}
