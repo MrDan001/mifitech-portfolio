@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import SiteNav from '../components/SiteNav';
 import { blogPosts } from '@/lib/blog-posts';
 import { SITE_URL } from '@/lib/contact';
 
@@ -48,7 +47,6 @@ export default function BlogPage() {
 
   return (
     <div className="studio-shell wonders-shell">
-      <SiteNav />
       <main className="wonders-page">
         <section className="wonders-masthead">
           <div className="wonders-overline"><span>THE MIFITECH JOURNAL</span><span>EST. 2026&nbsp; · &nbsp;READ, THINK, BUILD</span></div>
@@ -104,7 +102,6 @@ export default function BlogPage() {
         </section>
         <section className="wonders-topics" aria-label="Journal topics"><span>EXPLORE THE JOURNAL</span><div><b>Web & Digital Experiences</b><i>✳</i><b>Commerce & Growth</b><i>✳</i><b>Software & Systems</b><i>✳</i><b>Ideas & Innovation</b></div></section>
       </main>
-      <footer className="footer"><div className="wrap footer-bottom"><span>© {new Date().getFullYear()} MifiTech. All rights reserved.</span><span><Link href="/">Home</Link> · <Link href="/about">About</Link> · <Link href="/privacy">Privacy</Link></span></div></footer>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
     </div>
   );
