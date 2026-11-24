@@ -48,7 +48,7 @@ export default function SiteNav({ items = defaultLinks }: { items?: NavItem[] })
         </Link>
         <nav className="studio-desktop-nav" aria-label="Main navigation">
           {links.map((item, index) => {
-            const active = item.href === '/blog' ? pathname === '/blog' || pathname.startsWith('/blog/') : item.href === '/about' ? pathname === '/about' : item.href.startsWith('/#') ? pathname === '/' : pathname === item.href || pathname.startsWith(item.href + '/');
+            const active = item.href === '/blog' ? pathname === '/blog' || pathname.startsWith('/blog/') : item.href === '/about' ? pathname === '/about' : item.href.startsWith('/#') ? false : pathname === item.href || pathname.startsWith(item.href + '/');
             return <Link href={item.href} key={item.label + index} className={active ? 'active' : undefined}>{item.label}</Link>;
           })}
         </nav>
