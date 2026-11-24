@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import ServiceLandingPage, { type ServicePageContent } from '../../components/ServiceLandingPage';
+import { getSiteContent } from '@/lib/site-content';
+import { projectPath } from '@/lib/project-slug';
+import { SITE_URL } from '@/lib/contact';
 
 type Service = { title: string; description: string; page: ServicePageContent };
 const services: Record<string, Service> = {
@@ -175,5 +178,39 @@ export default async function GlobalServicePage({ params }: { params: Promise<{ 
   const { service } = await params;
   const item = services[service];
   if (!item) notFound();
-  return <ServiceLandingPage page={item.page} />;
+  const content = await getSiteContent();
+  const relatedSlugs: Record<string, string[]> = {
+    'web-design': ['the-africa-plug'],
+    'custom-web-applications': ['ehealthcare', 'prestige-life-rp'],
+    'business-software': ['garrison-market'],
+  };
+  const projects = (relatedSlugs[service] || [])
+    .map((slug) => content.projects.find((project) => project.visible !== false && project.slug === slug))
+    .filter((project): project is NonNullable<typeof project> => Boolean(project));
+  const url = new URL('/services/' + service, SITE_URL).toString();
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: item.title,
+    serviceType: item.title,
+    description: item.description,
+    provider: { '@id': SITE_URL + '/#business' },
+    areaServed: 'Worldwide',
+    url,
+  };
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: SITE_URL + '/#services' },
+      { '@type': 'ListItem', position: 3, name: item.title, item: url },
+    ],
+  };
+  return (
+    <>
+      <ServiceLandingPage page={item.page} projects={projects} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, breadcrumbSchema]) }} />
+    </>
+  );
 }
