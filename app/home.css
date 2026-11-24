@@ -266,3 +266,35 @@
 .mh .mh-tabs button{color:#171819;background:#fffefa;border-color:#e6dcd0}
 .mh .mh-tabs button:hover{border-color:#e75b35;background:#fbf6ee}
 .mh .mh-tabs button[aria-selected=true]{background:#e75b35;color:#fff;border-color:#e75b35}
+
+
+/* Client testimony submission and verified public ratings */
+.mh .mh-testimonials-section{background:var(--paper)}
+.mh .mh-public-rating{color:var(--lime);font-size:18px;letter-spacing:2px;margin-bottom:10px}
+.mh .mh-public-rating span{color:#d8d0c4}
+.mh .mh-testimonial-empty{padding:22px 24px;border:1px dashed var(--line);border-radius:12px;color:var(--mute);margin-bottom:28px}
+.mh .mh-testimonial-form{max-width:780px;margin:38px auto 0;padding:clamp(22px,4vw,36px);background:var(--white);border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 50px #1718190b}
+.mh .mh-testimonial-form-head>span{font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--lime)}
+.mh .mh-testimonial-form-head h3{font-size:clamp(24px,3vw,32px);margin:8px 0}
+.mh .mh-testimonial-form-head p{max-width:58ch;color:var(--mute);font-size:14px;line-height:1.7}
+.mh .mh-testimonial-rating{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:24px 0}
+.mh .mh-testimonial-rating>span{font-weight:700;font-size:13px}
+.mh .mh-testimonial-rating>div{display:flex;gap:4px}
+.mh .mh-testimonial-rating button{border:0;background:transparent;color:#d8d0c4;font-size:27px;line-height:1;padding:2px;cursor:pointer}
+.mh .mh-testimonial-rating button.is-selected{color:var(--lime)}
+.mh .mh-testimonial-rating small{color:var(--mute);font-size:12px}
+.mh .mh-testimonial-fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.mh .mh-testimonial-fields label{display:grid;gap:7px;font-size:12px;font-weight:700}
+.mh .mh-testimonial-fields label>span{font-weight:400;color:var(--mute)}
+.mh .mh-testimonial-fields input,.mh .mh-testimonial-fields textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:9px;background:#fffefa;color:var(--ink);font:inherit;font-size:14px;outline:none}
+.mh .mh-testimonial-fields input:focus,.mh .mh-testimonial-fields textarea:focus{border-color:var(--lime);box-shadow:0 0 0 3px #e75b3520}
+.mh .mh-testimonial-fields textarea{resize:vertical;min-height:120px}
+.mh .mh-testimonial-fields .mh-testimonial-full{grid-column:1/-1}
+.mh .mh-testimonial-consent{display:flex;align-items:flex-start;gap:10px;margin:17px 0;color:var(--mute);font-size:12px;line-height:1.6}
+.mh .mh-testimonial-consent input{margin-top:3px;accent-color:var(--lime);flex:none}
+.mh .mh-testimonial-trap{position:absolute!important;left:-10000px!important;width:1px;height:1px;overflow:hidden}
+.mh .mh-testimonial-form button[type=submit]{border:0;cursor:pointer}
+.mh .mh-testimonial-form button[disabled]{opacity:.65;cursor:wait}
+.mh .mh-testimonial-success{margin-top:14px;color:#247444;font-size:13px;font-weight:700}
+.mh .mh-testimonial-error{margin-top:14px;color:#a52d24;font-size:13px;font-weight:700}
+@media(max-width:620px){.mh .mh-testimonial-fields{grid-template-columns:1fr}.mh .mh-testimonial-fields .mh-testimonial-full{grid-column:auto}.mh .mh-testimonial-form{padding:20px}}
