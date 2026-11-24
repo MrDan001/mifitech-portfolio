@@ -1101,3 +1101,11 @@ html[data-theme="dark"] .wonders-article-dropcap{color:var(--w-ink)!important}
 /* Menu button is mobile-only; desktop uses the regular site navigation */
 .mifi-floating-menu{display:none!important}
 @media(max-width:767px){.mifi-floating-menu{display:flex!important}}
+
+/* Desktop navigation: full-width brand header, clear page links and primary CTA */
+.mifi-desktop-nav{position:sticky;top:0;z-index:998;display:flex;align-items:center;justify-content:space-between;gap:clamp(18px,3vw,42px);width:100%;min-height:86px;padding:14px clamp(24px,5vw,76px);background:rgba(251,246,238,.97);border-bottom:1px solid #e6dcd0;box-shadow:0 4px 18px rgba(23,24,25,.035);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.mifi-desktop-brand{display:flex;align-items:center;flex:0 0 auto}.mifi-desktop-brand img{display:block;width:clamp(150px,16vw,215px);height:auto;max-height:52px;object-fit:contain}
+.mifi-desktop-links{display:flex;align-items:center;justify-content:center;gap:clamp(18px,2.7vw,42px);min-width:0}.mifi-desktop-links a{position:relative;padding:12px 0;color:#171819;text-decoration:none;font-size:15px;font-weight:650;white-space:nowrap;transition:color .18s ease}.mifi-desktop-links a:hover,.mifi-desktop-links a.active{color:#e75b35}.mifi-desktop-links a.active:after{position:absolute;right:0;bottom:3px;left:0;height:3px;border-radius:4px;background:#e75b35;content:''}
+.mifi-desktop-cta{display:inline-flex;align-items:center;justify-content:center;gap:13px;flex:0 0 auto;min-height:48px;padding:0 23px;border:1px solid #e75b35;border-radius:12px;background:#e75b35;color:#fff;text-decoration:none;font-size:14px;font-weight:750;white-space:nowrap;box-shadow:0 7px 18px rgba(231,91,53,.16);transition:background .18s ease,transform .18s ease}.mifi-desktop-cta:hover{background:#c94a2b;transform:translateY(-1px)}.mifi-desktop-cta span{font-size:20px;line-height:1}
+@media(max-width:1050px) and (min-width:768px){.mifi-desktop-nav{gap:18px;padding-right:24px;padding-left:24px}.mifi-desktop-brand img{width:150px}.mifi-desktop-links{gap:17px}.mifi-desktop-links a{font-size:13px}.mifi-desktop-cta{padding:0 15px;font-size:13px}}
+@media(max-width:767px){.mifi-desktop-nav{display:none!important}}
