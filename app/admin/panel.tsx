@@ -187,7 +187,8 @@ export default function AdminPanel() {
   const allItems = navGroups.flatMap((g) => g.items);
   const results = search.trim() ? allItems.filter((item) => (item.label + ' ' + item.detail).toLowerCase().includes(search.trim().toLowerCase())) : [];
   const [title, sub] = TITLES[tab];
-  const attention = newCount + proposals.filter((p) => ['draft', 'sent', 'awaiting_payment'].includes(p.status)).length;
+  const pendingTestimonials = testimonials.filter((item) => item.status === 'pending').length;
+  const attention = newCount + pendingTestimonials + proposals.filter((p) => ['draft', 'sent', 'awaiting_payment'].includes(p.status)).length;
 
   useEffect(() => {
     document.body.style.overflow = moreOpen ? 'hidden' : '';
@@ -229,6 +230,7 @@ export default function AdminPanel() {
               {noticeOpen && <div className="apd-pop"><p className="apd-pop-title">Needs your attention</p>
                 <button type="button" onClick={() => go('leads')}><span>New enquiries</span><b>{newCount}</b></button>
                 <button type="button" onClick={() => go('proposals')}><span>Open proposals</span><b>{openCount}</b></button>
+                <button type="button" onClick={() => go('testimonials')}><span>Testimonials to review</span><b>{pendingTestimonials}</b></button>
                 <button type="button" onClick={() => go('hunt')}><span>Prospecting workspace</span><b>HUNT</b></button>
               </div>}
             </div>
